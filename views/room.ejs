@@ -1,5 +1,9 @@
 <%- include('partials/head') %>
 <h1>Meeting Room</h1>
+<div class="meet-photos">
+  <figure><img src="/static/img/meeting-in-person.jpg" alt="Diverse team meeting in a conference room with NISMCAA logos on the walls" loading="lazy"><figcaption>In-person meetings</figcaption></figure>
+  <figure><img src="/static/img/meeting-virtual.jpg" alt="Diverse team in a virtual video meeting" loading="lazy"><figcaption>Virtual meetings</figcaption></figure>
+</div>
 <div class="welcome card">
   <span class="avatar" aria-hidden="true"><%= user.name.split(' ').map(function(p){ return p.charAt(0); }).slice(0, 2).join('').toUpperCase() %></span>
   <p>Welcome, <strong><%= user.name %></strong>. Country: <strong><%= user.country || 'All countries (administrator)' %></strong>. Status: <strong><%= access.statusLabel(user) %></strong>.</p>

@@ -298,3 +298,10 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
   .tabs { flex-wrap:nowrap; overflow-x:auto; margin-left:-16px; margin-right:-16px; padding:4px 16px 8px; scrollbar-width:none; } .tabs::-webkit-scrollbar { display:none; } .tabs a { white-space:nowrap; flex:none; }
 }
 @media print { .site-head, footer, .no-print, .lessonbar, .testbar { display:none; } body { background:#fff; } .js [data-reveal] { opacity:1; transform:none; } }
+
+.meet-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0 20px}
+.meet-photos figure{margin:0;position:relative;border-radius:16px;overflow:hidden;border:2px solid #c9a24a;box-shadow:0 8px 24px rgba(10,25,60,.25)}
+.meet-photos img{display:block;width:100%;height:auto;transition:transform .6s ease}
+.meet-photos figure:hover img{transform:scale(1.04)}
+.meet-photos figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 10px;color:#fff;font-weight:700;background:linear-gradient(transparent,rgba(8,20,50,.85))}
+@media(max-width:700px){.meet-photos{grid-template-columns:1fr}}
