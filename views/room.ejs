@@ -1,7 +1,12 @@
 <%- include('partials/head') %>
 <h1>Meeting Room</h1>
-<p>Welcome, <strong><%= user.name %></strong>. Country: <strong><%= user.country || 'All countries (administrator)' %></strong>. Status: <strong><%= access.statusLabel(user) %></strong>.</p>
-<div class="card gold">
+<div class="welcome card">
+  <span class="avatar" aria-hidden="true"><%= user.name.split(' ').map(function(p){ return p.charAt(0); }).slice(0, 2).join('').toUpperCase() %></span>
+  <p>Welcome, <strong><%= user.name %></strong>. Country: <strong><%= user.country || 'All countries (administrator)' %></strong>. Status: <strong><%= access.statusLabel(user) %></strong>.</p>
+</div>
+<div class="card gold call-card">
+  <span class="tile-ico gold"><%- include('partials/icon', { n: 'video', size: 30 }) %></span>
+  <div class="call-body">
   <h2 style="margin-top:0">Join the call</h2>
   <% if (callLink) { %>
     <p><a class="btn gold" href="<%= callLink %>" target="_blank" rel="noopener noreferrer">Join call</a> <span class="muted">Opens in a new tab (free video link set by the administrators).</span></p>
@@ -9,13 +14,14 @@
     <p><span class="btn gold" aria-disabled="true" style="opacity:.5">Join call</span> The call link has not been set yet. <% if (isAdmin) { %><a href="/admin/settings">Set it in Settings</a>.<% } else { %>An administrator will add it.<% } %></p>
   <% } %>
   <% links.forEach(function(l){ %><p class="muted"><%= l.country %>: <a href="<%= l.url %>" target="_blank" rel="noopener noreferrer">Join <%= l.country %> call</a></p><% }) %>
+  </div>
 </div>
-<div class="grid">
-  <div class="card"><h3>Chat</h3><p>Organizers' general chat and your country room. Adults only.</p><a class="btn" href="/meeting-room/chat/general">Open chat</a></div>
-  <div class="card"><h3>Meeting notes</h3><p>Write your own notes by hand. Keep them private or share with your country.</p><a class="btn" href="/meeting-room/notes">Open notes</a></div>
-  <div class="card"><h3>Action plan</h3><p>Tasks, owners, deadlines and flags for your country.</p><a class="btn" href="/meeting-room/plan">Open the plan</a></div>
-  <% if (user.volunteer_id) { %><div class="card"><h3>My volunteer ID</h3><p>Your ID card with QR code. ID: <strong><%= user.volunteer_id %></strong></p><a class="btn" href="/meeting-room/id-card">Open my ID card</a></div><% } %>
-  <% if (isAdmin) { %><div class="card"><h3>Admin</h3><p>Approve volunteers, issue IDs, manage settings.</p><a class="btn" href="/admin/pending">Waiting for approval<% if (pendingCount) { %><span class="badge"><%= pendingCount %></span><% } %></a></div><% } %>
+<div class="grid tiles">
+  <div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'chat', size: 28 }) %></span><h3>Chat</h3><p>Organizers' general chat and your country room. Adults only.</p><a class="btn" href="/meeting-room/chat/general">Open chat</a></div>
+  <div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'notes', size: 28 }) %></span><h3>Meeting notes</h3><p>Write your own notes by hand. Keep them private or share with your country.</p><a class="btn" href="/meeting-room/notes">Open notes</a></div>
+  <div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'plan', size: 28 }) %></span><h3>Action plan</h3><p>Tasks, owners, deadlines and flags for your country.</p><a class="btn" href="/meeting-room/plan">Open the plan</a></div>
+  <% if (user.volunteer_id) { %><div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'id', size: 28 }) %></span><h3>My volunteer ID</h3><p>Your ID card with QR code. ID: <strong><%= user.volunteer_id %></strong></p><a class="btn" href="/meeting-room/id-card">Open my ID card</a></div><% } %>
+  <% if (isAdmin) { %><div class="card tile admin-tile"><span class="tile-ico"><%- include('partials/icon', { n: 'admin', size: 28 }) %></span><h3>Admin</h3><p>Approve volunteers, issue IDs, manage settings.</p><a class="btn" href="/admin/pending">Waiting for approval<% if (pendingCount) { %><span class="badge"><%= pendingCount %></span><% } %></a></div><% } %>
 </div>
 <% if (!isAdmin) { %>
 <h2>Your country's departments</h2>

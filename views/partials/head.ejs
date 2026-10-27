@@ -5,14 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="<%= csrf %>">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B2559">
 <title><%= title ? title + ' | ' : '' %>NISMCAA Meeting Room</title>
 <link rel="icon" href="/static/img/logo.png">
 <link rel="stylesheet" href="/static/style.css">
+<script src="/static/app.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="site-head" id="sitehead">
 <header class="topbar"><div class="wrap">
-  <a class="brand" href="https://nismcaa.com" title="NISMCAA home (nismcaa.com)"><img src="/static/img/logo.png" alt="NISMCAA logo"><span><span class="t1">NISMCAA</span><br><span class="t2">Meeting Room</span></span></a>
+  <a class="brand" href="https://nismcaa.com" title="NISMCAA home (nismcaa.com)"><img src="/static/img/logo-sm.png" alt="NISMCAA logo" width="64" height="64"><span><span class="t1">NISMCAA</span><br><span class="t2">Meeting Room</span></span></a>
   <a class="back" href="https://nismcaa.com">&larr; Back to nismcaa.com</a>
 </div></header>
 <nav class="main" aria-label="Main"><div class="wrap">
@@ -25,7 +28,7 @@
       <a href="/meeting-room/notes" class="<%= path.startsWith('/meeting-room/notes') ? 'on' : '' %>">Notes</a>
       <a href="/meeting-room/plan" class="<%= path.startsWith('/meeting-room/plan') || path.startsWith('/meeting-room/task') ? 'on' : '' %>">Action plan</a>
     <% } %>
-    <% if (user.volunteer_id && user.status !== 'ended') { %><a href="/meeting-room/id-card">My ID card</a><% } %>
+    <% if (user.volunteer_id && user.status !== 'ended') { %><a href="/meeting-room/id-card" class="<%= path.startsWith('/meeting-room/id-card') ? 'on' : '' %>">My ID card</a><% } %>
     <% if (isAdmin) { %><a href="/admin/pending" class="<%= path.startsWith('/admin') ? 'on' : '' %>">Admin<% if (pendingCount) { %><span class="badge" title="Waiting for approval"><%= pendingCount %></span><% } %></a><% } %>
     <form method="post" action="/sign-out"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="linklike" type="submit">Sign out (<%= user.name.split(' ')[0] %>)</button></form>
   <% } else { %>
@@ -34,5 +37,6 @@
     <a href="/sign-up" class="<%= path === '/sign-up' ? 'on' : '' %>">Sign up</a>
   <% } %>
 </div></nav>
+</div>
 <main class="wrap" id="main">
 <% if (flash) { %><div class="flash <%= flash.type %>" role="status"><%= flash.msg %></div><% } %>

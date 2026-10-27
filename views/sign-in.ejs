@@ -1,4 +1,11 @@
 <%- include('partials/head') %>
+<div class="auth">
+  <aside class="auth-panel" aria-hidden="true">
+    <img src="/static/img/logo-sm.png" alt="" width="72" height="72">
+    <p class="auth-quote">Volunteers make the music and the learning happen.</p>
+    <p class="auth-sub">Sign in to join your country team.</p>
+  </aside>
+  <div class="auth-main">
 <h1>Sign in</h1>
 <% if (error) { %><div class="flash err" role="alert"><%= error %></div><% } %>
 <form class="card stack" method="post" action="/sign-in">
@@ -7,9 +14,11 @@
   <label for="email">E-mail (your sign-in ID)</label>
   <input id="email" name="email" type="email" required autocomplete="username" value="<%= email %>">
   <label for="password">Password</label>
-  <input id="password" name="password" type="password" required autocomplete="current-password">
+  <input id="password" name="password" type="password" required autocomplete="current-password" data-toggle-pw>
   <p><button class="btn gold" type="submit">Sign in</button></p>
   <p class="muted">Forgot your password? We do not send e-mail from this site. Ask a NISMCAA administrator to reset it for you.</p>
 </form>
 <p>New here? <a href="/sign-up">Sign up to volunteer</a>.</p>
+  </div>
+</div>
 <%- include('partials/foot') %>

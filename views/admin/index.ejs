@@ -1,14 +1,14 @@
 <%- include('../partials/head') %>
 <h1>Admin</h1>
 <%- include('../partials/adminnav') %>
-<div class="grid">
-  <div class="card gold"><h3>Waiting for approval</h3><p style="font-size:2rem;margin:0"><strong><%= counts.waiting %></strong></p><a class="btn" href="/admin/pending">Review</a></div>
-  <div class="card"><h3>Applicants (not passed yet)</h3><p style="font-size:2rem;margin:0"><strong><%= counts.applicant %></strong></p></div>
-  <div class="card"><h3>Interest list (country not listed)</h3><p style="font-size:2rem;margin:0"><strong><%= counts.interest %></strong></p><a class="btn ghost" href="/admin/people?status=interest">Open</a></div>
-  <div class="card"><h3>Approved volunteers</h3><p style="font-size:2rem;margin:0"><strong><%= counts.approved %></strong></p><a class="btn ghost" href="/admin/people?status=approved">Open</a></div>
+<div class="grid stats">
+  <div class="card gold stat"><span class="tile-ico gold"><%- include('../partials/icon', { n: 'inbox', size: 26 }) %></span><h3>Waiting for approval</h3><p class="stat-num"><strong><%= counts.waiting %></strong></p><a class="btn" href="/admin/pending">Review</a></div>
+  <div class="card stat"><span class="tile-ico"><%- include('../partials/icon', { n: 'list', size: 26 }) %></span><h3>Applicants (not passed yet)</h3><p class="stat-num"><strong><%= counts.applicant %></strong></p></div>
+  <div class="card stat"><span class="tile-ico"><%- include('../partials/icon', { n: 'globe', size: 26 }) %></span><h3>Interest list (country not listed)</h3><p class="stat-num"><strong><%= counts.interest %></strong></p><a class="btn ghost" href="/admin/people?status=interest">Open</a></div>
+  <div class="card stat"><span class="tile-ico"><%- include('../partials/icon', { n: 'users', size: 26 }) %></span><h3>Approved volunteers</h3><p class="stat-num"><strong><%= counts.approved %></strong></p><a class="btn ghost" href="/admin/people?status=approved">Open</a></div>
 </div>
 <div class="card <%= keyReady ? '' : 'gold' %>">
-  <h3>Final test answer key</h3>
+  <h3><%- include('../partials/icon', { n: 'key', size: 22 }) %> Final test answer key</h3>
   <% if (keyReady) { %><p>The answer key is complete (50 of 50).</p>
   <% } else { %><p><strong>The answer key is not complete (<%= keyCount %> of 50 entered).</strong> Until it is, test results show "pending key" and nobody can pass. <% if (pendingAttempts) { %><%= pendingAttempts %> attempt(s) are waiting to be graded.<% } %></p><a class="btn gold" href="/admin/key">Enter the answer key</a><% } %>
 </div>

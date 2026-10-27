@@ -1,13 +1,15 @@
 <%- include('partials/head') %>
 <h1>Meeting Room</h1>
-<div class="card gold">
+<%- include('partials/journey', { step: user.status === 'applicant' ? 2 : (user.status === 'waiting' ? 3 : (user.status === 'approved' && state !== 'EXPIRED' ? 4 : 0)) }) %>
+<div class="card gold welcome">
+  <span class="avatar" aria-hidden="true"><%= user.name.split(' ').map(function(p){ return p.charAt(0); }).slice(0, 2).join('').toUpperCase() %></span><div>
   <p style="font-size:1.2rem">Welcome, <strong><%= user.name %></strong>.</p>
   <dl class="kv">
     <dt>Country</dt><dd><%= user.country || user.country_chosen || '-' %></dd>
     <dt>Status</dt><dd><strong><%= access.statusLabel(user) %></strong></dd>
     <% if (user.volunteer_id) { %><dt>Volunteer ID</dt><dd><%= user.volunteer_id %></dd><% } %>
   </dl>
-</div>
+</div></div>
 <div class="card">
 <% if (user.status === 'applicant') { %>
   <h3>Next step</h3><p>Read the course, then take the 50-question final test. You need 80% overall and 9 of 10 on the child-protection questions.</p>

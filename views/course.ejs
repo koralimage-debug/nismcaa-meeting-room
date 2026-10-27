@@ -1,6 +1,6 @@
 <%- include('partials/head') %>
 <h1>NISMCAA Volunteer Course</h1>
-<div class="card gold">
+<div class="card gold course-intro">
   <p>Read all twelve orientation lessons and the seven Child Care &amp; Protection lessons. The course is open to everyone. Then take the final test.</p>
   <p>
     <% if (user && user.status === 'applicant') { %><a class="btn gold" href="/course/test">Take the final test</a>
@@ -13,6 +13,7 @@
     <div><h3>Child Care &amp; Protection (7)</h3><ol style="padding-left:20px"><% course.ccpLessons.forEach(function(l,i){ %><li><a href="#c<%= i+1 %>"><%= l.replace(/^Lesson \d+:\s*/,'') %></a></li><% }) %></ol></div></div>
   </details>
 </div>
+<div class="lessonbar" id="lessonbar" hidden aria-live="off"><div class="lessonbar-in"><span class="lessonbar-label" id="lessonbar-label"></span><span class="lessonbar-pct" id="lessonbar-pct"></span></div><div class="bar" role="progressbar" aria-label="Course reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="lessonbar-fill"></span></div></div>
 <div id="course-text" class="course-text">
 <%
 function renderEls(els, prefix) { var n = 0;

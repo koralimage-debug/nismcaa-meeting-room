@@ -1,19 +1,20 @@
 <%- include('partials/head') %>
 <h1>Final test</h1>
-<div class="card gold">
+<div class="card gold test-intro">
   <p>50 multiple-choice questions. Pass mark: <strong>40 of 50 (80%)</strong> and <strong>at least 9 of the 10 child-protection questions</strong> (41 to 50). You see your score after each try but not which answers were wrong. You can retake it as often as you need. Every attempt is saved.</p>
   <% if (!keyReady) { %><p class="note">Note: the official answer key has not been entered yet. Your answers will be saved and marked as "pending key". They will be marked later.</p><% } %>
   <% if (last) { %><p class="muted">Your last attempt: <%= last.result === 'pending' ? 'pending key' : (last.score + ' of 50, ' + (last.passed ? 'passed' : 'not passed')) %> (<a href="/course/test/result">see result</a>).</p><% } %>
 </div>
 <form method="post" action="/course/test">
   <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <div class="testbar" id="testbar"><div class="testbar-in"><span id="testbar-label">0 of 50 answered</span><span id="testbar-cp" class="muted"></span></div><div class="bar" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0"><span id="testbar-fill"></span></div></div>
   <% questions.forEach(function(q){ %>
     <% if (q.num === 41) { %><div class="cp-banner">Child Protection questions (41 to 50): you need 9 of 10</div><% } %>
-    <fieldset class="question" style="border:1px solid var(--line)">
+    <fieldset class="question" id="question-<%= q.num %>">
       <legend><strong><%= q.num %>.</strong> <%= q.text %></legend>
-      <% q.options.forEach(function(o){ %><label><input type="radio" name="q<%= q.num %>" value="<%= o.letter %>" required> <strong><%= o.letter %>)</strong> <%= o.text %></label><% }) %>
+      <% q.options.forEach(function(o){ %><label class="opt"><input type="radio" name="q<%= q.num %>" value="<%= o.letter %>" required> <strong><%= o.letter %>)</strong> <%= o.text %></label><% }) %>
     </fieldset>
   <% }) %>
-  <p><button class="btn gold" type="submit">Submit my answers</button></p>
+  <p><button class="btn gold big" type="submit">Submit my answers <%- include('partials/icon', { n: 'send', size: 20 }) %></button></p>
 </form>
 <%- include('partials/foot') %>

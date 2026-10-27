@@ -1,20 +1,20 @@
 <%- include('partials/head') %>
 <h1>Chat: <%= name %></h1>
 <div class="tabs"><% rooms.forEach(function(r){ %><a href="/meeting-room/chat/<%= r.key %>" class="<%= r.key === key ? 'on' : '' %>"><%= r.name %></a><% }) %></div>
-<p class="note"><strong>Conduct reminder:</strong> this is an adults-only space. Be respectful and kind. Text only: no files, no personal contact details of children, no collections of money. Administrators can read all messages and delete any message.</p>
-<div id="chatbox" class="chatbox" data-room="<%= key %>" data-admin="<%= isAdmin ? '1' : '0' %>" aria-live="polite">
+<p class="note"><%- include('partials/icon', { n: 'lock', size: 20 }) %> <span><strong>Conduct reminder:</strong> this is an adults-only space. Be respectful and kind. Text only: no files, no personal contact details of children, no collections of money. Administrators can read all messages and delete any message.</span></p>
+<div id="chatbox" class="chatbox" data-room="<%= key %>" data-admin="<%= isAdmin ? '1' : '0' %>" data-me="<%= user.name %>" aria-live="polite">
 <% messages.forEach(function(m){ %>
-  <div class="msg <%= m.deleted ? 'deleted' : '' %>"><span class="who"><%= m.name %></span><% if (m.admin) { %><span class="tag">Admin</span><% } %><span class="when"><%= m.time %></span>
+  <div class="msg <%= m.deleted ? 'deleted' : '' %> <%= m.name === user.name ? 'mine' : '' %>"><span class="avatar sm" aria-hidden="true"><%= m.name.charAt(0).toUpperCase() %></span><div class="bubble"><span class="who"><%= m.name %></span><% if (m.admin) { %><span class="tag">Admin</span><% } %><span class="when"><%= m.time %></span>
     <% if (isAdmin && !m.deleted) { %><form class="inline-form" method="post" action="/meeting-room/chat/<%= key %>/delete/<%= m.id %>"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn small red" type="submit">Delete</button></form><% } %>
-    <div><%= m.deleted ? 'Message removed by an administrator.' : m.body %></div></div>
+    <div class="body"><%= m.deleted ? 'Message removed by an administrator.' : m.body %></div></div></div>
 <% }) %>
 <% if (!messages.length) { %><p class="muted" id="empty">No messages yet. Say hello.</p><% } %>
 </div>
-<form id="chatform" class="card stack" method="post" action="/meeting-room/chat/<%= key %>" autocomplete="off">
+<form id="chatform" class="card stack composer" method="post" action="/meeting-room/chat/<%= key %>" autocomplete="off">
   <input type="hidden" name="_csrf" value="<%= csrf %>">
   <label for="body">Your message <span class="hint">(up to 1000 characters; 5 messages per 10 seconds)</span></label>
-  <input id="body" name="body" type="text" maxlength="1000" required>
-  <p><button class="btn gold" type="submit">Send</button> <span id="chaterr" class="muted"></span></p>
+  <div class="composer-row"><input id="body" name="body" type="text" maxlength="1000" required><button class="btn gold" type="submit"><%- include('partials/icon', { n: 'send', size: 20 }) %> Send</button></div>
+  <p><span id="chaterr" class="muted"></span></p>
 </form>
 <p class="muted">The chat refreshes by itself every 10 seconds.</p>
 <script src="/static/chat.js"></script>

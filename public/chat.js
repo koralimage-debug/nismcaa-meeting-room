@@ -4,6 +4,7 @@
   if (!box) return;
   var room = box.getAttribute('data-room');
   var isAdmin = box.getAttribute('data-admin') === '1';
+  var me = box.getAttribute('data-me') || '';
   var csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   var err = document.getElementById('chaterr');
 
@@ -14,16 +15,19 @@
     box.textContent = '';
     if (!list.length) box.appendChild(el('p', 'muted', 'No messages yet. Say hello.'));
     list.forEach(function (m) {
-      var d = el('div', 'msg' + (m.deleted ? ' deleted' : ''));
-      d.appendChild(el('span', 'who', m.name));
-      if (m.admin) d.appendChild(el('span', 'tag', 'Admin'));
-      d.appendChild(el('span', 'when', m.time));
+      var d = el('div', 'msg' + (m.deleted ? ' deleted' : '') + (m.name === me ? ' mine' : ''));
+      d.appendChild(el('span', 'avatar sm', (m.name || '?').charAt(0).toUpperCase()));
+      var bub = el('div', 'bubble');
+      bub.appendChild(el('span', 'who', m.name));
+      if (m.admin) bub.appendChild(el('span', 'tag', 'Admin'));
+      bub.appendChild(el('span', 'when', m.time));
       if (isAdmin && !m.deleted) {
         var f = el('form', 'inline-form'); f.method = 'post'; f.action = '/meeting-room/chat/' + room + '/delete/' + m.id;
         var h = el('input'); h.type = 'hidden'; h.name = '_csrf'; h.value = csrf; f.appendChild(h);
-        var b = el('button', 'btn small red', 'Delete'); b.type = 'submit'; f.appendChild(b); d.appendChild(document.createTextNode(' ')); d.appendChild(f);
+        var b = el('button', 'btn small red', 'Delete'); b.type = 'submit'; f.appendChild(b); bub.appendChild(document.createTextNode(' ')); bub.appendChild(f);
       }
-      d.appendChild(el('div', '', m.deleted ? 'Message removed by an administrator.' : m.body));
+      bub.appendChild(el('div', 'body', m.deleted ? 'Message removed by an administrator.' : m.body));
+      d.appendChild(bub);
       box.appendChild(d);
     });
     if (atBottom) box.scrollTop = box.scrollHeight;

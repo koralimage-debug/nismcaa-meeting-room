@@ -1,6 +1,7 @@
 <%- include('partials/head') %>
 <h1>Your test result</h1>
-<div class="card gold">
+<%- include('partials/journey', { step: last.passed ? 3 : 2 }) %>
+<div class="card gold result <%= last.result === 'pending' ? 'pending' : (last.passed ? 'passed' : 'failed') %>">
 <% if (last.result === 'pending') { %>
   <p><strong>Result pending key.</strong> Your answers are saved. The official answer key has not been entered yet, so your test cannot be marked yet. You do not need to do anything. Come back later: you will see your result here.</p>
 <% } else if (last.passed) { %>

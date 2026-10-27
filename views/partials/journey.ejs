@@ -1,0 +1,8 @@
+<%
+var cur = locals.step || 0;
+var steps = [['learn','Learn','Read the course'],['test','Test','50 questions'],['approval','Approval','Administrator review'],['join','Join','Your country team']];
+%><ol class="journey" aria-label="Volunteer journey">
+<% steps.forEach(function(s, i){ var n = i + 1; var st = cur === 0 ? '' : (n < cur ? 'done' : (n === cur ? 'now' : 'todo')); %>
+  <li class="jstep <%= st %>"<% if (st === 'now') { %> aria-current="step"<% } %>><span class="jdot"><% if (st === 'done') { %><%- include('icon', { n: 'check', size: 20 }) %><% } else { %><%- include('icon', { n: s[0], size: 22 }) %><% } %></span><span class="jtxt"><strong><%= s[1] %></strong><small><%= s[2] %></small></span></li>
+<% }) %>
+</ol>
