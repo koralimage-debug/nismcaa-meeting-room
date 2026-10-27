@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+<h1>Sign in</h1>
+<% if (error) { %><div class="flash err" role="alert"><%= error %></div><% } %>
+<form class="card stack" method="post" action="/sign-in">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <input type="hidden" name="next" value="<%= next %>">
+  <label for="email">E-mail (your sign-in ID)</label>
+  <input id="email" name="email" type="email" required autocomplete="username" value="<%= email %>">
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" required autocomplete="current-password">
+  <p><button class="btn gold" type="submit">Sign in</button></p>
+  <p class="muted">Forgot your password? We do not send e-mail from this site. Ask a NISMCAA administrator to reset it for you.</p>
+</form>
+<p>New here? <a href="/sign-up">Sign up to volunteer</a>.</p>
+<%- include('partials/foot') %>

@@ -1,0 +1,57 @@
+<%- include('../partials/head') %>
+<h1><%= p.name %></h1>
+<%- include('../partials/adminnav') %>
+<% if (temp) { %>
+<div class="card gold"><h3>Temporary password (shown once)</h3>
+  <p style="font-size:1.4rem;font-family:monospace;user-select:all"><strong><%= temp %></strong></p>
+  <p>Give this to <%= p.name %> privately (for example by phone). They must choose their own password at their next sign-in. It is not stored anywhere readable and will not be shown again.</p></div>
+<% } %>
+<div class="two">
+<div class="card">
+  <img class="thumb" style="width:110px;height:110px" src="/photos/<%= p.id %>" alt="Photo of <%= p.name %>">
+  <dl class="kv"><dt>E-mail</dt><dd><%= p.email %></dd><dt>Phone</dt><dd><%= p.phone %></dd><dt>Status</dt><dd><strong><%= access.statusLabel(p) %></strong></dd>
+  <dt>Country chosen</dt><dd><%= p.country_chosen %></dd><dt>Country (final)</dt><dd><%= p.country || 'not set yet' %></dd><dt>Department</dt><dd><%= p.department || 'not set yet' %></dd>
+  <dt>Signed up</dt><dd><%= fmtDateTime(p.created_at) %></dd>
+  <% if (p.volunteer_id) { %><dt>Volunteer ID</dt><dd><%= p.volunteer_id %></dd><dt>Issued</dt><dd><%= fmtDate(p.id_issued_at) %></dd><dt>Valid until</dt><dd><%= fmtDate(p.id_expires_at) %> (<%= access.idState(p) %>)</dd><% } %>
+  <% if (p.decline_reason) { %><dt>Decline reason</dt><dd><%= p.decline_reason %></dd><% } %></dl>
+</div>
+<div class="card"><h3>Test attempts</h3>
+  <table class="tight"><tr><th>Date</th><th>Score</th><th>Child prot.</th><th>Result</th></tr>
+  <% attempts.forEach(function(a){ %><tr><td><%= fmtDateTime(a.created_at) %></td><td><%= a.score === null ? '-' : a.score + '/50' %></td><td><%= a.child_correct === null ? '-' : a.child_correct + '/10' %></td><td><%= a.result === 'pending' ? 'pending key' : a.result %></td></tr><% }) %></table>
+  <% if (!attempts.length) { %><p class="muted">No attempts yet.</p><% } %>
+</div></div>
+
+<% if (p.status === 'interest') { %>
+<div class="card"><h3>Interest list: assign a supported country</h3>
+  <form class="stack" method="post" action="/admin/people/<%= p.id %>/assign-country"><input type="hidden" name="_csrf" value="<%= csrf %>">
+  <select name="country"><% COUNTRIES.forEach(function(c){ %><option><%= c %></option><% }) %></select>
+  <p><button class="btn gold" type="submit">Assign country (they can then take the test)</button></p></form></div>
+<% } %>
+<% if (['approved','ended'].includes(p.status)) { %>
+<div class="card"><h3>Country and department (admins only)</h3>
+  <form class="stack" method="post" action="/admin/people/<%= p.id %>/placement"><input type="hidden" name="_csrf" value="<%= csrf %>">
+  <div class="two"><div><label>Country</label><select name="country"><% COUNTRIES.forEach(function(c){ %><option <%= c === p.country ? 'selected' : '' %>><%= c %></option><% }) %></select></div>
+  <div><label>Department</label><select name="department"><% DEPARTMENTS.forEach(function(d){ %><option <%= d === p.department ? 'selected' : '' %>><%= d %></option><% }) %></select></div></div>
+  <p><button class="btn" type="submit">Save placement</button></p></form></div>
+<% } %>
+<% if (p.volunteer_id) { %>
+<div class="card"><h3>ID renewal (subject to performance)</h3>
+  <p class="muted">Check the department head's remarks and the work log before renewing. <a href="/meeting-room/member/<%= p.id %>">Open work log and remarks</a>.</p>
+  <% if (p.id_status !== 'ended') { %>
+  <form class="inline-form" method="post" action="/admin/people/<%= p.id %>/renew"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn gold" type="submit">Renew 1 year</button></form>
+  <form class="inline-form" method="post" action="/admin/people/<%= p.id %>/decline-renewal"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn ghost" type="submit">Decline renewal</button></form>
+  <form class="inline-form" method="post" action="/admin/people/<%= p.id %>/end-id"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn red" type="submit">End ID</button></form>
+  <% } else { %><p>This ID has ended.</p><% } %>
+</div>
+<% } %>
+<% if (['waiting','applicant','interest'].includes(p.status)) { %>
+<div class="card"><h3>Decline</h3>
+  <form class="stack" method="post" action="/admin/pending/<%= p.id %>/decline"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="from" value="/admin/people">
+  <label>Private reason (only administrators see it)</label><input type="text" name="reason" required maxlength="500">
+  <p><button class="btn red small" type="submit">Decline</button></p></form></div>
+<% } %>
+<div class="card"><h3>Reset password</h3>
+  <p class="muted">Creates a one-time temporary password, shown to you on screen only. The volunteer must change it at the next sign-in.</p>
+  <form class="inline-form" method="post" action="/admin/people/<%= p.id %>/reset-password"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn" type="submit">Reset password</button></form></div>
+<% if (log.length) { %><div class="card"><h3>History</h3><table class="tight"><% log.forEach(function(l){ %><tr><td><%= fmtDateTime(l.created_at) %></td><td><%= l.kind %></td><td><%= l.detail %></td></tr><% }) %></table></div><% } %>
+<%- include('../partials/foot') %>

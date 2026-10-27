@@ -1,0 +1,18 @@
+<%- include('../partials/head') %>
+<h1>Admin</h1>
+<%- include('../partials/adminnav') %>
+<div class="grid">
+  <div class="card gold"><h3>Waiting for approval</h3><p style="font-size:2rem;margin:0"><strong><%= counts.waiting %></strong></p><a class="btn" href="/admin/pending">Review</a></div>
+  <div class="card"><h3>Applicants (not passed yet)</h3><p style="font-size:2rem;margin:0"><strong><%= counts.applicant %></strong></p></div>
+  <div class="card"><h3>Interest list (country not listed)</h3><p style="font-size:2rem;margin:0"><strong><%= counts.interest %></strong></p><a class="btn ghost" href="/admin/people?status=interest">Open</a></div>
+  <div class="card"><h3>Approved volunteers</h3><p style="font-size:2rem;margin:0"><strong><%= counts.approved %></strong></p><a class="btn ghost" href="/admin/people?status=approved">Open</a></div>
+</div>
+<div class="card <%= keyReady ? '' : 'gold' %>">
+  <h3>Final test answer key</h3>
+  <% if (keyReady) { %><p>The answer key is complete (50 of 50).</p>
+  <% } else { %><p><strong>The answer key is not complete (<%= keyCount %> of 50 entered).</strong> Until it is, test results show "pending key" and nobody can pass. <% if (pendingAttempts) { %><%= pendingAttempts %> attempt(s) are waiting to be graded.<% } %></p><a class="btn gold" href="/admin/key">Enter the answer key</a><% } %>
+</div>
+<% if (claimOpen) { %><div class="card"><h3>Admin set-up</h3><p><%= claimOpen %> administrator account(s) have not set a password yet (<a href="/admin/claim">/admin/claim</a>).</p></div><% } %>
+<div class="card"><h3>Export records</h3><p><a href="/admin/export/users.csv">People (CSV)</a> &middot; <a href="/admin/export/attempts.csv">Test attempts (CSV)</a> &middot; <a href="/admin/export/log.csv">Change log (CSV)</a></p>
+<p class="muted">CSV files open in Excel. They contain personal data: keep them private.</p></div>
+<%- include('../partials/foot') %>

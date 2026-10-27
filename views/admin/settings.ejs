@@ -1,0 +1,18 @@
+<%- include('../partials/head') %>
+<h1>Settings</h1>
+<%- include('../partials/adminnav') %>
+<form class="card stack" method="post" action="/admin/settings">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <h3>Join call links</h3>
+  <p class="muted">Use a free video link (for example Google Meet or Jitsi). It must start with https://. Nothing is paid for or connected by this site.</p>
+  <label for="main">Main call link</label><input id="main" name="main" type="url" value="<%= main %>" placeholder="https://meet.google.com/...">
+  <p class="muted">Optional: a different link per country. If empty, the country uses the main link.</p>
+  <% COUNTRIES.forEach(function(c){ var k = 'link_' + c.replace(/ /g, '_'); %>
+    <label for="<%= k %>"><%= c %></label><input id="<%= k %>" name="<%= k %>" type="url" value="<%= links[c] || '' %>">
+  <% }) %>
+  <h3>ID card QR address</h3>
+  <p class="muted">The QR code on each ID card is this address plus the ID number. Keep the default for this site, or change it later to https://nismcaa.com/id/ once the main site can look up these IDs.</p>
+  <label for="qr">QR base address</label><input id="qr" name="qr" type="text" value="<%= qr %>" placeholder="https://meeting.nismcaa.com/verify/">
+  <p><button class="btn gold" type="submit">Save settings</button></p>
+</form>
+<%- include('../partials/foot') %>

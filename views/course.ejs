@@ -1,0 +1,37 @@
+<%- include('partials/head') %>
+<h1>NISMCAA Volunteer Course</h1>
+<div class="card gold">
+  <p>Read all twelve orientation lessons and the seven Child Care &amp; Protection lessons. The course is open to everyone. Then take the final test.</p>
+  <p>
+    <% if (user && user.status === 'applicant') { %><a class="btn gold" href="/course/test">Take the final test</a>
+    <% } else if (!user) { %><a class="btn gold" href="/sign-up">Sign up to take the final test</a> <a class="btn ghost" href="/sign-in">Sign in</a>
+    <% } else if (user.status === 'waiting') { %><span class="note">You passed. An NISMCAA administrator will review your application.</span>
+    <% } else { %><a class="btn ghost" href="/course/test">Final test</a><% } %>
+  </p>
+  <details><summary><strong>All lessons</strong></summary>
+    <div class="two"><div><h3>Orientation (12)</h3><ol style="padding-left:20px"><% course.orientLessons.forEach(function(l,i){ %><li><a href="#o<%= i+1 %>"><%= l.replace(/^Lesson \d+:\s*/,'') %></a></li><% }) %></ol></div>
+    <div><h3>Child Care &amp; Protection (7)</h3><ol style="padding-left:20px"><% course.ccpLessons.forEach(function(l,i){ %><li><a href="#c<%= i+1 %>"><%= l.replace(/^Lesson \d+:\s*/,'') %></a></li><% }) %></ol></div></div>
+  </details>
+</div>
+<div id="course-text" class="course-text">
+<%
+function renderEls(els, prefix) { var n = 0;
+  els.forEach(function(e){
+    if (e.type === 'lesson') { n++; %><h3 class="lesson" id="<%= prefix %><%= n %>"><%= e.text %></h3><% }
+    else if (e.type === 'h') { %><h4><%= e.text %></h4><% }
+    else if (e.type === 'p') { %><p><%= e.text %></p><% }
+    else if (e.type === 'ul') { %><ul><% e.items.forEach(function(i){ %><li><%= i %></li><% }) %></ul><% }
+    else if (e.type === 'table') { %><div class="table-wrap"><table><thead><tr><% e.header.forEach(function(h){ %><th><%= h %></th><% }) %></tr></thead><tbody><% e.rows.forEach(function(r){ %><tr><% r.forEach(function(c){ %><td><%= c %></td><% }) %></tr><% }) %></tbody></table></div><% }
+  });
+}
+%>
+<section aria-label="Volunteer information"><% renderEls(course.part1, 'p') %></section>
+<section aria-label="Orientation lessons"><% renderEls(course.orient, 'o') %></section>
+<section aria-label="Child Care and Protection lessons"><% renderEls(course.ccp, 'c') %></section>
+</div>
+<div class="card gold">
+  <h3>Ready for the final test?</h3>
+  <p>50 multiple-choice questions. To pass you need <strong>at least 40 of 50 (80%)</strong> and <strong>at least 9 of the 10 child-protection questions</strong> (questions 41 to 50). You can retake the test as often as you need.</p>
+  <% if (user && user.status === 'applicant') { %><a class="btn gold" href="/course/test">Take the final test</a><% } else if (!user) { %><a class="btn gold" href="/sign-up">Sign up first</a><% } %>
+</div>
+<%- include('partials/foot') %>

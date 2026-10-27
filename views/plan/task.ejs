@@ -1,0 +1,56 @@
+<%- include('../partials/head') %>
+<p><a href="<%= tabUrl %>">&larr; Back to <%= t.department %> (<%= t.country %>)</a></p>
+<% if (t.row_type === 'phase') { %><h1><%= t.title %></h1>
+<% } else { %>
+<h1>Task <%= t.seq %>: <%= t.title %></h1>
+<div class="card">
+<dl class="kv">
+  <dt>Country</dt><dd><%= t.country %></dd><dt>Department</dt><dd><%= t.department %></dd>
+  <dt>Owner</dt><dd><%= t.owner %><% if (t.owner_name) { %> (<%= t.owner_name %>)<% } %></dd>
+  <dt>Start</dt><dd><%= fmtDate(t.start_date) %></dd><dt>Deadline</dt><dd><%= fmtDate(t.deadline) %></dd><dt>Hard limit</dt><dd><%= fmtDate(t.hard_limit) %></dd>
+  <dt>Status</dt><dd><%= t.status %> (<%= t.progress %>%)</dd>
+  <dt>Flag</dt><dd><%- include('../partials/flag', { f: t.f }) %><% if (t.f.points !== null && t.status !== 'Done') { %> <span class="muted">(time used <%= Math.round(t.f.timeUsed * 100) %>%, <%= t.f.points %> points behind)</span><% } %></dd>
+  <dt>Notes</dt><dd><%= t.notes %></dd>
+</dl>
+</div>
+<% if (isAdmin) { %>
+<details class="card"><summary><strong>Edit this task</strong> (administrators)</summary>
+<form class="stack" method="post" action="/meeting-room/task/<%= t.id %>/update"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="back" value="task">
+  <label>Task</label><input type="text" name="title" value="<%= t.title %>">
+  <div class="two"><div><label>Owner (text)</label><input type="text" name="owner" value="<%= t.owner %>"></div>
+  <div><label>Owner is this volunteer (can update status and %)</label><select name="owner_user_id"><option value="">Nobody linked</option><% ownerChoices.forEach(function(m){ %><option value="<%= m.id %>" <%= m.id === t.owner_user_id ? 'selected' : '' %>><%= m.name %> (<%= m.department %>)</option><% }) %></select></div></div>
+  <div class="two"><div><label>Start</label><input type="date" name="start_date" value="<%= t.start_date || '' %>"></div><div><label>Deadline</label><input type="date" name="deadline" value="<%= t.deadline || '' %>"></div></div>
+  <div class="two"><div><label>Hard limit</label><input type="date" name="hard_limit" value="<%= t.hard_limit || '' %>"></div><div></div></div>
+  <div class="two"><div><label>Status</label><select name="status"><% statuses.forEach(function(s){ %><option <%= s === t.status ? 'selected' : '' %>><%= s %></option><% }) %></select></div>
+  <div><label>% progress</label><input type="number" name="progress" min="0" max="100" value="<%= t.progress %>"></div></div>
+  <label>Notes</label><textarea name="notes"><%= t.notes %></textarea>
+  <p><button class="btn gold" type="submit">Save changes</button></p>
+</form></details>
+<% } else if (isOwner) { %>
+<form class="card stack" method="post" action="/meeting-room/task/<%= t.id %>/update"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="back" value="task">
+  <h3 style="margin-top:0">Update your task</h3>
+  <div class="two"><div><label>Status</label><select name="status"><% statuses.forEach(function(s){ %><option <%= s === t.status ? 'selected' : '' %>><%= s %></option><% }) %></select></div>
+  <div><label>% progress</label><input type="number" name="progress" min="0" max="100" value="<%= t.progress %>"></div></div>
+  <p><button class="btn gold" type="submit">Save</button></p></form>
+<% } %>
+
+<h2>Work log</h2>
+<p class="muted"><%= seeAllLogs ? 'You can see all entries for this task.' : 'You see your own entries. The department head and administrators see all entries.' %></p>
+<% if (canLogHere) { %>
+<form class="card stack" method="post" action="/meeting-room/task/<%= t.id %>/log"><input type="hidden" name="_csrf" value="<%= csrf %>">
+  <div class="two"><div><label>Date</label><input type="date" name="entry_date" value="<%= today %>"></div><div></div></div>
+  <label>What did you do? <span class="hint">(short entry, saved with your name)</span></label><textarea name="body" maxlength="1000" required style="min-height:70px"></textarea>
+  <p><button class="btn gold" type="submit">Add entry</button></p></form>
+<% } else { %><p class="note">Only members of the <%= t.department %> department can add entries.</p><% } %>
+<% entries.forEach(function(w){ %>
+<div class="card"><p class="muted"><%= fmtDate(w.entry_date) %> &middot; <%= w.name %></p><div style="white-space:pre-wrap"><%= w.body %></div>
+<% if (w.user_id === user.id) { %>
+  <details><summary class="muted">Edit or delete my entry</summary>
+  <form class="stack" method="post" action="/meeting-room/log/<%= w.id %>/edit"><input type="hidden" name="_csrf" value="<%= csrf %>"><textarea name="body" maxlength="1000"><%= w.body %></textarea><p><button class="btn small" type="submit">Save edit</button></p></form>
+  <form class="inline-form" method="post" action="/meeting-room/log/<%= w.id %>/delete"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn small red" type="submit">Delete entry</button></form></details>
+<% } %></div>
+<% }) %>
+<% if (!entries.length) { %><p>No entries yet.</p><% } %>
+<% if (isAdmin) { %><form method="post" action="/meeting-room/task/<%= t.id %>/delete"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn small red" type="submit">Delete this task (administrators)</button></form><% } %>
+<% } %>
+<%- include('../partials/foot') %>

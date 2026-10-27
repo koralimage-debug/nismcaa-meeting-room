@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+<h1>Sign up to volunteer</h1>
+<p>This form tells us who is taking the test. Your e-mail is your sign-in ID. We never send e-mail from this site, so keep your password safe: an administrator can reset it if you forget it.</p>
+<% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
+<form class="card stack" method="post" action="/sign-up" enctype="multipart/form-data" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <label for="name">Full name</label>
+  <input id="name" name="name" type="text" required autocomplete="name" value="<%= v.name || '' %>">
+  <label for="email">E-mail (this is your sign-in ID)</label>
+  <input id="email" name="email" type="email" required autocomplete="email" value="<%= v.email || '' %>">
+  <label for="password">Password <span class="hint">(10 or more characters)</span></label>
+  <input id="password" name="password" type="password" required minlength="10" autocomplete="new-password">
+  <label for="password2">Confirm password</label>
+  <input id="password2" name="password2" type="password" required minlength="10" autocomplete="new-password">
+  <label for="phone">Phone number</label>
+  <input id="phone" name="phone" type="tel" required autocomplete="tel" value="<%= v.phone || '' %>">
+  <label for="country">Country where you live</label>
+  <select id="country" name="country" required>
+    <option value="">Choose your country</option>
+    <% COUNTRIES.forEach(function(c){ %><option <%= v.country === c ? 'selected' : '' %>><%= c %></option><% }) %>
+    <option value="<%= NOT_LISTED %>" <%= v.country === NOT_LISTED ? 'selected' : '' %>><%= NOT_LISTED %></option>
+  </select>
+  <p class="muted">An administrator checks your country when approving you and may correct it. After approval you cannot change it. If your country is not listed, we only record your interest and you will not get access yet.</p>
+  <label for="photo">Photo of yourself <span class="hint">(JPG or PNG, up to 2 MB, for your ID card. Only you and NISMCAA administrators can see it.)</span></label>
+  <input id="photo" name="photo" type="file" accept="image/jpeg,image/png" required>
+  <label style="font-weight:normal"><input type="checkbox" name="age18" value="yes" required> I confirm that I am 18 years old or older.</label>
+  <p><button class="btn gold" type="submit">Create my account</button></p>
+</form>
+<p>Already have an account? <a href="/sign-in">Sign in</a>.</p>
+<%- include('partials/foot') %>

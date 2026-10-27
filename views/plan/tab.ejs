@@ -1,0 +1,93 @@
+<%- include('../partials/head') %>
+<h1>Action plan: <%= country %></h1>
+<% if (proposed) { %><p class="note"><strong><%= proposed %></strong></p><% } %>
+<% if (isAdmin) { %><div class="tabs"><a href="/meeting-room/plan/global">Global roll-up</a><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all" class="<%= c === country ? 'on' : '' %>"><%= c %></a><% }) %></div><% } %>
+<div class="tabs" aria-label="Departments">
+  <a href="/meeting-room/plan/<%= cslug %>/all" class="<%= !dept ? 'on' : '' %>">All departments</a>
+  <% DEPARTMENTS.forEach(function(d){ %><a href="/meeting-room/plan/<%= cslug %>/<%= slug(d) %>" class="<%= d === dept ? 'on' : '' %>"><%= d %></a><% }) %>
+</div>
+<p class="no-print"><a class="btn small gold" href="/meeting-room/plan/<%= cslug %>/<%= dept ? slug(dept) : 'all' %>/export.csv">Export to Excel/CSV</a>
+  <a class="btn small ghost" href="/meeting-room/plan/about">About this plan</a>
+  <% if (isAdmin) { %><a class="btn small ghost" href="/meeting-room/plan/log">Change log</a><% } %></p>
+<h2 style="margin-top:.4em"><%= dept || 'All departments' %></h2>
+
+<div class="behind <%= summary.red ? 'bad' : (summary.amber ? 'warn' : '') %>" id="behind-box">
+  <strong>Behind schedule</strong> (as of <%= fmtDate(today) %>):
+  <% if (!summary.red && !summary.amber) { %> nothing behind schedule.
+  <% } else { %> <span class="flagword red"><span class="dot red"></span><%= summary.red %> red</span>, <span class="flagword amber"><span class="dot amber"></span><%= summary.amber %> amber</span>.
+    Owners behind: <strong><%= summary.owners.join(', ') %></strong>.<% } %>
+  <span class="muted"> &middot; <%= summary.total %> tasks, <%= summary.done %> done, <%= summary.green %> green, <%= summary.grey %> not flagged.</span>
+</div>
+
+<% if (!dept) { %>
+<div class="card"><h3 style="margin-top:0">Overall summary by department</h3>
+<div class="table-wrap"><table class="tight"><tr><th>Department</th><th>Tasks</th><th>Done</th><th>Red</th><th>Amber</th><th>Owners behind</th></tr>
+<% byDept.forEach(function(b){ %><tr><td><a href="/meeting-room/plan/<%= cslug %>/<%= b.slug %>"><%= b.dept %></a></td><td><%= b.s.total %></td><td><%= b.s.done %></td><td><%= b.s.red %></td><td><%= b.s.amber %></td><td><%= b.s.owners.join(', ') %></td></tr><% }) %></table></div></div>
+<% } else { %>
+<div class="card">
+  <strong>Head seat:</strong> <%= head.user_id ? head.head_name : 'Empty. The administrators act as head until one is assigned.' %>
+  <% if (isAdmin) { %> <a href="/admin/heads#<%= encodeURIComponent(country) %>">Manage head seats</a><% } %>
+  <br><span class="muted">Members of this department: <%= members.length ? members.map(function(m){ return m.name; }).join(', ') : 'none yet' %></span>
+</div>
+<% } %>
+
+<% if (!tasks.filter(function(t){ return t.row_type === 'task'; }).length) { %>
+<div class="card"><p>No tasks have been added for this tab yet.<% if (isAdmin && dept) { %> Use "Add a task" below.<% } %></p></div>
+<% } else { %>
+<div class="table-wrap"><table>
+<thead><tr><th>No.</th><th>Task</th><th>Owner</th><th>Start</th><th>Deadline (planned finish)</th><th>Hard limit</th><th>Status</th><th>% progress</th><th>Flag</th><th>Notes</th></tr></thead>
+<tbody>
+<% var prevDept = null; tasks.forEach(function(t){
+  if (!dept && t.department !== prevDept) { prevDept = t.department; %><tr class="dept"><td colspan="10"><%= t.department %></td></tr><% }
+  if (t.row_type === 'phase') { %><tr class="phase"><td colspan="10"><%= t.title %></td></tr><% return; }
+  var mine = canEditAll || t.owner_user_id === me.id; %>
+<tr id="task-<%= t.id %>" class="<%= t.final4 ? 'final4' : '' %>">
+  <td><%= t.seq %></td>
+  <td><%= t.title %><% if (t.final4) { %><br><span class="tag">Final 4 weeks: review only</span><% } %><br><a class="muted" href="/meeting-room/task/<%= t.id %>">Details and work log</a></td>
+  <td><%= t.owner %><% if (t.owner_name) { %><br><span class="muted">(<%= t.owner_name %>)</span><% } %></td>
+  <td><%= fmtDate(t.start_date) %></td><td><%= fmtDate(t.deadline) %></td><td><%= fmtDate(t.hard_limit) %></td>
+  <% if (mine) { %>
+    <td><form id="u<%= t.id %>" method="post" action="/meeting-room/task/<%= t.id %>/update"><input type="hidden" name="_csrf" value="<%= csrf %>"></form>
+      <select form="u<%= t.id %>" name="status" aria-label="Status"><% statuses.forEach(function(s){ %><option <%= s === t.status ? 'selected' : '' %>><%= s %></option><% }) %></select></td>
+    <td><input form="u<%= t.id %>" type="number" name="progress" min="0" max="100" value="<%= t.progress %>" style="width:70px" aria-label="Percent progress"> <button form="u<%= t.id %>" class="btn small" type="submit">Save</button></td>
+  <% } else { %><td><%= t.status %></td><td><%= t.progress %>%</td><% } %>
+  <td title="<%= t.f.points === null ? '' : t.f.points + ' points behind' %>"><%- include('../partials/flag', { f: t.f }) %></td>
+  <td><%= t.notes %></td>
+</tr>
+<% }) %>
+</tbody></table></div>
+<% } %>
+
+<% if (dept && isAdmin) { %>
+<details class="card"><summary><strong>Add a task</strong> (administrators)</summary>
+<form class="stack" method="post" action="/meeting-room/plan/<%= cslug %>/<%= slug(dept) %>/add">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <label>Task</label><input type="text" name="title" required maxlength="500">
+  <div class="two"><div><label>Owner (text)</label><input type="text" name="owner" value="To be appointed"></div><div><label>Notes</label><input type="text" name="notes"></div></div>
+  <div class="two"><div><label>Start</label><input type="date" name="start_date"></div><div><label>Deadline</label><input type="date" name="deadline"></div></div>
+  <label>Hard limit</label><input type="date" name="hard_limit">
+  <p><button class="btn gold" type="submit">Add task</button></p>
+</form></details>
+<% } %>
+
+<% if (dept) { %>
+<h2>Head remarks</h2>
+<% if (remarkers) { %>
+  <div class="card">
+    <p class="muted">You can write a dated remark about each volunteer member's contribution. A member sees only their own remarks. Remarks help decide ID renewals.</p>
+    <% if (noRemark.length) { %><p><strong>Members with no remark yet:</strong> <%= noRemark.map(function(m){ return m.name; }).join(', ') %></p><% } else if (members.length) { %><p>Every member has at least one remark.</p><% } %>
+    <% if (members.length) { %>
+    <form class="stack" method="post" action="/meeting-room/plan/<%= cslug %>/<%= slug(dept) %>/remark">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <label>Member</label><select name="member_id"><% members.forEach(function(m){ %><option value="<%= m.id %>"><%= m.name %></option><% }) %></select>
+      <label>Remark</label><textarea name="body" required maxlength="1500"></textarea>
+      <p><button class="btn gold" type="submit">Save remark</button></p>
+    </form>
+    <% } else { %><p class="muted">There are no approved members in this department yet.</p><% } %>
+  </div>
+<% } %>
+<% remarks.forEach(function(r){ %><div class="card"><p class="muted"><%= fmtDate(r.created_at) %> &middot; <%= remarkers ? 'About ' + r.member + ' &middot; ' : '' %>by <%= r.author %></p><div style="white-space:pre-wrap"><%= r.body %></div></div><% }) %>
+<% if (!remarks.length && !remarkers) { %><p class="muted">No remarks about you yet.</p><% } %>
+<% if (members.length && remarkers) { %><p class="muted">Member pages: <% members.forEach(function(m){ %><a href="/meeting-room/member/<%= m.id %>"><%= m.name %></a> <% }) %></p><% } %>
+<% } %>
+<%- include('../partials/foot') %>

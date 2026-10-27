@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+<h1>Meeting Room</h1>
+<p>Welcome, <strong><%= user.name %></strong>. Country: <strong><%= user.country || 'All countries (administrator)' %></strong>. Status: <strong><%= access.statusLabel(user) %></strong>.</p>
+<div class="card gold">
+  <h2 style="margin-top:0">Join the call</h2>
+  <% if (callLink) { %>
+    <p><a class="btn gold" href="<%= callLink %>" target="_blank" rel="noopener noreferrer">Join call</a> <span class="muted">Opens in a new tab (free video link set by the administrators).</span></p>
+  <% } else { %>
+    <p><span class="btn gold" aria-disabled="true" style="opacity:.5">Join call</span> The call link has not been set yet. <% if (isAdmin) { %><a href="/admin/settings">Set it in Settings</a>.<% } else { %>An administrator will add it.<% } %></p>
+  <% } %>
+  <% links.forEach(function(l){ %><p class="muted"><%= l.country %>: <a href="<%= l.url %>" target="_blank" rel="noopener noreferrer">Join <%= l.country %> call</a></p><% }) %>
+</div>
+<div class="grid">
+  <div class="card"><h3>Chat</h3><p>Organizers' general chat and your country room. Adults only.</p><a class="btn" href="/meeting-room/chat/general">Open chat</a></div>
+  <div class="card"><h3>Meeting notes</h3><p>Write your own notes by hand. Keep them private or share with your country.</p><a class="btn" href="/meeting-room/notes">Open notes</a></div>
+  <div class="card"><h3>Action plan</h3><p>Tasks, owners, deadlines and flags for your country.</p><a class="btn" href="/meeting-room/plan">Open the plan</a></div>
+  <% if (user.volunteer_id) { %><div class="card"><h3>My volunteer ID</h3><p>Your ID card with QR code. ID: <strong><%= user.volunteer_id %></strong></p><a class="btn" href="/meeting-room/id-card">Open my ID card</a></div><% } %>
+  <% if (isAdmin) { %><div class="card"><h3>Admin</h3><p>Approve volunteers, issue IDs, manage settings.</p><a class="btn" href="/admin/pending">Waiting for approval<% if (pendingCount) { %><span class="badge"><%= pendingCount %></span><% } %></a></div><% } %>
+</div>
+<% if (!isAdmin) { %>
+<h2>Your country's departments</h2>
+<p class="muted">Your department: <strong><%= user.department %></strong>. You can read every department of <%= user.country %>.</p>
+<div class="tabs"><a href="/meeting-room/plan/<%= slug(user.country) %>/all">All departments</a>
+<% DEPARTMENTS.forEach(function(d){ %><a href="/meeting-room/plan/<%= slug(user.country) %>/<%= slug(d) %>" class="<%= d === user.department ? 'on' : '' %>"><%= d %></a><% }) %></div>
+<p><a href="/meeting-room/member/<%= user.id %>">My work log and remarks</a></p>
+<% } else { %>
+<h2>Plans by country</h2>
+<div class="tabs"><a href="/meeting-room/plan/global">Global roll-up</a><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all"><%= c %></a><% }) %></div>
+<% } %>
+<p class="muted">Questions? info@nismcaa.com &middot; <%= PHONE %></p>
+<%- include('partials/foot') %>

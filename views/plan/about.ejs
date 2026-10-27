@@ -1,0 +1,11 @@
+<%- include('../partials/head') %>
+<h1>About this plan</h1>
+<% if (proposed) { %><p class="note"><strong><%= proposed %></strong></p><% } %>
+<div class="card">
+<% about.slice(2).forEach(function(line, i){ if (!line) return; var head = !/^[0-9]\./.test(line) && line.length < 60 && !/[.]$/.test(line); %>
+  <% if (head) { %><h3><%= line %></h3><% } else { %><p><%= line %></p><% } %>
+<% }) %>
+</div>
+<p class="muted">This is the "Read me" sheet of the 10th Edition action plan workbook, shown as written. The flags on this site follow the same rule and are calculated every time a page opens.</p>
+<p><a class="btn" href="/meeting-room/plan">Back to the plan</a></p>
+<%- include('../partials/foot') %>

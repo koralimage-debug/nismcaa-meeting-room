@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+<h1>My volunteer ID card</h1>
+<div class="card gold">
+  <p>ID number: <strong><%= user.volunteer_id %></strong> &middot; Status: <strong><%= state %></strong> &middot; Issued <%= fmtDate(issued) %> &middot; Valid until <strong><%= fmtDate(expires) %></strong></p>
+  <p class="muted">The card is valid for 1 year and is renewable subject to performance (your department head's remarks and an administrator's review). <% if (renewalDeclined) { %>Renewal has been declined: the card stays valid until its end date.<% } %></p>
+  <% if (state === 'VALID') { %>
+    <img class="idcard-img" src="/meeting-room/id-card.png?view=1" alt="Your NISMCAA volunteer ID card">
+    <p><a class="btn gold" href="/meeting-room/id-card.png">Download PNG</a> <a class="btn" href="/meeting-room/id-card.pdf">Download PDF</a></p>
+  <% } else { %>
+    <p class="note">This ID is <strong><%= state %></strong>, so the card cannot be downloaded. Ask an administrator about renewal.</p>
+  <% } %>
+  <p class="muted">The QR code opens the public check page, which shows only your name, role, country and validity. Your photo and e-mail are never shown there. An ID card does not give unsupervised access to children.</p>
+</div>
+<%- include('partials/foot') %>

@@ -1,0 +1,36 @@
+<%- include('../partials/head') %>
+<h1>Waiting for approval <% if (rows.length) { %><span class="badge" style="font-size:1rem"><%= rows.length %></span><% } %></h1>
+<%- include('../partials/adminnav') %>
+<p class="muted">Private list. People here passed the final test (80% overall and 9 of 10 on child protection). Check the country they chose, correct it if needed, choose a department, then approve. After approval the volunteer cannot change the country.</p>
+<% rows.forEach(function(r){ %>
+<div class="card gold" id="p<%= r.id %>">
+  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+    <img class="thumb" src="/photos/<%= r.id %>" alt="Photo of <%= r.name %>" width="64" height="64">
+    <div style="flex:1;min-width:230px">
+      <h3 style="margin:0"><a href="/admin/people/<%= r.id %>"><%= r.name %></a></h3>
+      <dl class="kv"><dt>E-mail</dt><dd><%= r.email %></dd><dt>Phone</dt><dd><%= r.phone %></dd>
+      <dt>Country chosen</dt><dd><%= r.country_chosen %></dd>
+      <dt>Best score</dt><dd><%= r.best %> of 50 (child protection <%= r.child %> of 10)</dd>
+      <dt>Date passed</dt><dd><%= fmtDateTime(r.passed_at) %></dd></dl>
+    </div>
+  </div>
+  <form class="stack" method="post" action="/admin/pending/<%= r.id %>/approve">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <div class="two">
+      <div><label>Country (check and correct if needed)</label><select name="country" required>
+        <% COUNTRIES.forEach(function(c){ %><option <%= c === r.country_chosen ? 'selected' : '' %>><%= c %></option><% }) %></select></div>
+      <div><label>Department</label><select name="department" required><option value="">Choose a department</option>
+        <% DEPARTMENTS.forEach(function(d){ %><option><%= d %></option><% }) %></select></div>
+    </div>
+    <p><button class="btn gold" type="submit">Approve and issue ID</button></p>
+  </form>
+  <form class="stack" method="post" action="/admin/pending/<%= r.id %>/decline">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <label>Decline: private reason (only administrators see it; the volunteer sees "Not approved at this time.")</label>
+    <input type="text" name="reason" maxlength="500" required>
+    <p><button class="btn red small" type="submit">Decline</button></p>
+  </form>
+</div>
+<% }) %>
+<% if (!rows.length) { %><div class="card"><p>Nobody is waiting for approval right now.</p></div><% } %>
+<%- include('../partials/foot') %>

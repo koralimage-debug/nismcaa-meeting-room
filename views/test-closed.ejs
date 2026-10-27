@@ -1,0 +1,11 @@
+<%- include('partials/head') %>
+<h1>Final test</h1>
+<div class="card">
+<% if (state === 'waiting') { %><p><strong>You passed.</strong> An NISMCAA administrator will review your application.</p>
+<% } else if (state === 'approved') { %><p>You are already an approved volunteer. You do not need to take the test again.</p>
+<% } else if (state === 'interest') { %><p>Your country is not on our list yet, so we have recorded your interest. You will be able to take the test when your country opens.</p>
+<% } else if (state === 'declined') { %><p>Not approved at this time.</p>
+<% } else if (state === 'admin') { %><p>Administrators do not take the final test.</p>
+<% } else { %><p>The final test is not available for your account.</p><% } %>
+<p><a class="btn" href="/meeting-room">Back to the Meeting Room page</a></p></div>
+<%- include('partials/foot') %>

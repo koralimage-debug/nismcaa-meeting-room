@@ -1,0 +1,7 @@
+node_modules/
+data_local/
+demo-data/
+.env
+*.sqlite*
+DEMO_LOGINS.txt
+screenshots/

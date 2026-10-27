@@ -1,0 +1,23 @@
+<%- include('partials/head') %>
+<h1>Meeting notes</h1>
+<p class="muted">Type your notes by hand. There are no automatic transcripts or summaries. Private notes are only seen by you and the administrators. Notes shared with your country are seen by members of that country.</p>
+<form class="card stack" method="post" action="/meeting-room/notes">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <div class="two"><div><label for="title">Title</label><input id="title" name="title" type="text" required maxlength="120"></div>
+  <div><label for="note_date">Date</label><input id="note_date" name="note_date" type="date" value="<%= today %>"></div></div>
+  <label for="text">Notes</label><textarea id="text" name="text" required maxlength="8000"></textarea>
+  <div class="two"><div><label for="visibility">Who can see it</label>
+    <select id="visibility" name="visibility"><option value="private">Private (only me and administrators)</option><option value="country">Share with my country</option></select></div>
+  <% if (isAdmin) { %><div><label for="country">Country (if sharing)</label><select id="country" name="country"><% COUNTRIES.forEach(function(c){ %><option><%= c %></option><% }) %></select></div><% } %></div>
+  <p><button class="btn gold" type="submit">Save note</button></p>
+</form>
+<% rows.forEach(function(n){ %>
+<div class="card">
+  <h3 style="margin:0"><%= n.title %></h3>
+  <p class="muted"><%= fmtDate(n.note_date) %> &middot; by <%= n.author %> &middot; <%= n.visibility === 'country' ? 'Shared with ' + n.country : 'Private' %></p>
+  <div style="white-space:pre-wrap"><%= n.body %></div>
+  <% if (n.user_id === user.id || isAdmin) { %><form class="inline-form" method="post" action="/meeting-room/notes/<%= n.id %>/delete"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn small red" type="submit">Delete</button></form><% } %>
+</div>
+<% }) %>
+<% if (!rows.length) { %><p>No notes yet.</p><% } %>
+<%- include('partials/foot') %>

@@ -1,0 +1,12 @@
+<%- include('../partials/head') %>
+<h1><%= self ? 'My work log and remarks' : m.name %></h1>
+<div class="card"><dl class="kv"><dt>Name</dt><dd><%= m.name %></dd><dt>Volunteer ID</dt><dd><%= m.volunteer_id %></dd><dt>Country</dt><dd><%= m.country %></dd><dt>Department</dt><dd><%= m.department %></dd><dt>ID valid until</dt><dd><%= fmtDate(m.id_expires_at) %></dd></dl>
+<p class="muted">This page supports ID renewal decisions. Visible to the member, the department head and administrators only.</p></div>
+<h2>Head remarks</h2>
+<% remarks.forEach(function(r){ %><div class="card"><p class="muted"><%= fmtDate(r.created_at) %> &middot; <%= r.department %> &middot; by <%= r.author %></p><div style="white-space:pre-wrap"><%= r.body %></div></div><% }) %>
+<% if (!remarks.length) { %><p>No remarks yet.</p><% } %>
+<h2>Work log</h2>
+<div class="table-wrap"><table class="tight"><tr><th>Date</th><th>Task</th><th>Entry</th></tr>
+<% entries.forEach(function(w){ %><tr><td><%= fmtDate(w.entry_date) %></td><td><a href="/meeting-room/task/<%= w.task_id %>"><%= w.department %> #<%= w.seq %>: <%= w.title %></a></td><td><%= w.body %></td></tr><% }) %></table></div>
+<% if (!entries.length) { %><p>No entries yet.</p><% } %>
+<%- include('../partials/foot') %>

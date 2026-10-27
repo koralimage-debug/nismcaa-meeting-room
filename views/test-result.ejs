@@ -1,0 +1,18 @@
+<%- include('partials/head') %>
+<h1>Your test result</h1>
+<div class="card gold">
+<% if (last.result === 'pending') { %>
+  <p><strong>Result pending key.</strong> Your answers are saved. The official answer key has not been entered yet, so your test cannot be marked yet. You do not need to do anything. Come back later: you will see your result here.</p>
+<% } else if (last.passed) { %>
+  <p style="font-size:1.3rem"><strong>You passed.</strong> An NISMCAA administrator will review your application.</p>
+  <p>Score: <strong><%= last.score %> of 50</strong> (<%= Math.round(last.score * 2) %>%). Child protection: <strong><%= last.child_correct %> of 10</strong>.</p>
+  <p>Your status is now <strong>Waiting for approval</strong>. No e-mail is sent: sign in again later to check.</p>
+<% } else { %>
+  <p style="font-size:1.3rem"><strong>Not yet passed.</strong> You can retake the test.</p>
+  <p>Score: <strong><%= last.score %> of 50</strong> (<%= Math.round(last.score * 2) %>%). Child protection: <strong><%= last.child_correct %> of 10</strong>.</p>
+  <p>To pass you need at least 40 of 50 and at least 9 of 10 on the child-protection questions. We do not show which answers were wrong. Read the course again and retry.</p>
+  <p><a class="btn gold" href="/course/test">Retake the test</a> <a class="btn ghost" href="/course">Read the course</a></p>
+<% } %>
+<p class="muted">Attempt saved <%= fmtDateTime(last.created_at) %>.</p>
+</div>
+<%- include('partials/foot') %>

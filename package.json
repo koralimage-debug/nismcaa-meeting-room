@@ -1,0 +1,33 @@
+{
+  "name": "nismcaa-meeting-room",
+  "version": "1.0.0",
+  "description": "NISMCAA Meeting Room: private members area for volunteers (sign-up, course, final test, approval, ID card, chat, notes, action plan).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/",
+    "demo:seed": "node scripts/demo_seed.js",
+    "demo:start": "DATA_DIR=./demo-data PORT=3500 node server.js",
+    "screenshots": "python3 scripts/screenshots.py"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "jsqr": "^1.4.0",
+    "playwright-core": "^1.64.1"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.13",
+    "better-sqlite3": "12.4.1",
+    "ejs": "^7.0.2",
+    "exceljs": "^4.4.0",
+    "express": "^5.3.0",
+    "multer": "^2.5.0",
+    "pdfkit": "^0.20.2",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.5"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+<h1>NISMCAA ID Verification</h1>
+<div class="card verify-box">
+<% if (!found) { %>
+  <p class="verify-state ENDED">ID not found</p>
+  <p>No volunteer ID matches <strong><%= vid %></strong>. Check the number and try again.</p>
+<% } else { %>
+  <p class="muted"><%= vid %></p>
+  <p class="verify-state <%= v.state %>"><%= v.state %></p>
+  <dl class="kv" style="max-width:420px;margin:0 auto;text-align:left">
+    <dt>Name</dt><dd><%= v.name %></dd>
+    <dt>Role</dt><dd><%= v.role %></dd>
+    <dt>Country</dt><dd><%= v.country %></dd>
+    <dt><%= v.state === 'VALID' ? 'Valid until' : (v.state === 'EXPIRED' ? 'Expired on' : 'Valid until') %></dt><dd><%= fmtDate(v.until) %></dd>
+  </dl>
+  <p class="muted" style="margin-top:18px">This card identifies a NISMCAA volunteer. It does not give unsupervised access to children. Questions: info@nismcaa.com or <%= PHONE %>.</p>
+<% } %>
+</div>
+<%- include('partials/foot') %>

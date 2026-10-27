@@ -1,0 +1,27 @@
+<%- include('partials/head') %>
+<h1>Meeting Room</h1>
+<div class="card gold">
+  <p style="font-size:1.2rem">Welcome, <strong><%= user.name %></strong>.</p>
+  <dl class="kv">
+    <dt>Country</dt><dd><%= user.country || user.country_chosen || '-' %></dd>
+    <dt>Status</dt><dd><strong><%= access.statusLabel(user) %></strong></dd>
+    <% if (user.volunteer_id) { %><dt>Volunteer ID</dt><dd><%= user.volunteer_id %></dd><% } %>
+  </dl>
+</div>
+<div class="card">
+<% if (user.status === 'applicant') { %>
+  <h3>Next step</h3><p>Read the course, then take the 50-question final test. You need 80% overall and 9 of 10 on the child-protection questions.</p>
+  <p><a class="btn" href="/course">Read the course</a> <a class="btn gold" href="/course/test">Take the final test</a></p>
+<% } else if (user.status === 'waiting') { %>
+  <p><strong>You passed.</strong> An NISMCAA administrator will review your application. We do not send e-mail, so please sign in again later to see your status.</p>
+<% } else if (user.status === 'interest') { %>
+  <p>Thank you. Your country is not on our list yet, so we have recorded your interest only. An administrator will contact you through the details you gave when your country opens. You do not have access to the Meeting Room yet.</p>
+<% } else if (user.status === 'declined') { %>
+  <p><strong>Not approved at this time.</strong></p>
+<% } else if (user.status === 'approved' && state === 'EXPIRED') { %>
+  <p>Your volunteer ID has expired. IDs are renewable subject to performance. Please ask your department head or an administrator about renewal. <a href="/meeting-room/id-card">See your ID card</a>.</p>
+<% } else { %>
+  <p>Your ID has ended, so the Meeting Room is closed for your account. Questions: info@nismcaa.com.</p>
+<% } %>
+</div>
+<%- include('partials/foot') %>

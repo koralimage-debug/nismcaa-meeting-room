@@ -1,0 +1,41 @@
+# Render Blueprint for the NISMCAA Meeting Room.
+# NOTHING IS DEPLOYED YET. This file only describes how it could be, later, after John says yes.
+#
+# ---- TEST VERSION: $0 ----------------------------------------------------------------------------
+# The free web service sleeps after 15 minutes without visitors and wakes in about a minute.
+# Its disk is temporary: the SQLite file and the photos are ERASED on every restart/redeploy.
+# Use it ONLY with fake test data. Never with real volunteers.
+#
+# ---- REAL USE (costs money, John must approve first) ------------------------------------------------
+# Option A (recommended for now, about $7.25 a month): keep SQLite on a persistent disk.
+#   1. change   plan: free   ->   plan: starter      (web service, $7 a month, always on)
+#   2. un-comment the "disk:" block below            (1 GB disk, $0.25 per GB per month)
+#   3. change DATA_DIR to /var/data
+# Option B (about $13 a month: web $7 + Postgres $6): needs the database code to be ported from
+#   SQLite to Postgres first. That port is NOT done (see README, "Moving to Postgres").
+# Prices are what Render showed on Oct 27, 2026. Check https://render.com/pricing before upgrading.
+# Custom domain meeting.nismcaa.com: $0 extra on Render's Hobby plan; Render shows the exact DNS record
+# to add at the domain host (Namecheap) when the domain is added in the Render dashboard.
+
+services:
+  - type: web
+    name: nismcaa-meeting-room
+    runtime: node
+    plan: free                      # TEST ONLY. See above for real use.
+    buildCommand: npm ci
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    autoDeploy: false               # nothing changes online until someone clicks Deploy
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production           # secure cookies, trust Render's proxy
+      - key: DATA_DIR
+        value: /tmp/nismcaa-data    # TEMPORARY on the free plan. Use /var/data with a disk.
+      - key: PUBLIC_URL
+        sync: false                 # type it in the Render dashboard, e.g. https://meeting.nismcaa.com
+    # disk:                         # <-- un-comment for real use (paid)
+    #   name: meeting-room-data
+    #   mountPath: /var/data
+    #   sizeGB: 1

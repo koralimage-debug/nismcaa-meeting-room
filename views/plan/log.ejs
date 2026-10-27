@@ -1,0 +1,8 @@
+<%- include('../partials/head') %>
+<h1>Action plan change log</h1>
+<p class="muted">Who changed what, the old and new value, and when. Administrators only.</p>
+<div class="table-wrap"><table class="tight"><tr><th>When</th><th>Who</th><th>Task</th><th>Change (old to new)</th></tr>
+<% rows.forEach(function(l){ %><tr><td><%= fmtDateTime(l.created_at) %></td><td><%= l.actor %></td><td><%= l.target %></td><td><%= l.detail %></td></tr><% }) %></table></div>
+<% if (!rows.length) { %><p>No changes have been made yet.</p><% } %>
+<p><a class="btn" href="/meeting-room/plan">Back to the plan</a></p>
+<%- include('../partials/foot') %>

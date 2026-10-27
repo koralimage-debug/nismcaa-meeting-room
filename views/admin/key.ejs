@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+<h1>Final test answer key</h1>
+<%- include('../partials/adminnav') %>
+<div class="card <%= keyReady ? '' : 'gold' %>">
+  <% if (keyReady) { %><p><strong>The key is complete.</strong> New results are marked automatically.</p>
+  <% } else { %><p><strong>The key is not complete.</strong> Until all 50 answers are entered, every test shows "pending key" and nobody can pass. The key is never sent to volunteers' browsers.</p><% } %>
+  <form class="stack" method="post" action="/admin/key">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <label for="key">Paste the key <span class="hint">One answer per line or separated by spaces, like <code>1:B</code> <code>2:A</code> ... <code>50:C</code>. You can paste only some; they are added to what is saved.</span></label>
+    <textarea id="key" name="key" rows="8" placeholder="1:B&#10;2:B&#10;3:A"></textarea>
+    <p><button class="btn gold" type="submit">Save answers</button></p>
+  </form>
+  <% if (pendingAttempts) { %>
+  <form method="post" action="/admin/key/regrade"><input type="hidden" name="_csrf" value="<%= csrf %>">
+    <p><%= pendingAttempts %> test attempt(s) were saved while the key was missing. <button class="btn" type="submit" <%= keyReady ? '' : 'disabled' %>>Grade the saved attempts now</button></p></form>
+  <% } %>
+</div>
+<div class="table-wrap"><table class="tight"><tr><th>#</th><th>Question</th><th>Options</th><th>Saved answer</th></tr>
+<% qs.forEach(function(q){ %><tr><td><%= q.num %></td><td><%= q.text %><% if (q.child_protection) { %> <span class="tag">Child protection</span><% } %></td>
+<td><% q.options.forEach(function(o){ %><%= o.letter %>) <%= o.text %><br><% }) %></td><td><strong><%= q.answer_key || '(empty)' %></strong></td></tr><% }) %></table></div>
+<%- include('../partials/foot') %>
