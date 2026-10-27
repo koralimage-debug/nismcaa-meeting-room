@@ -305,3 +305,8 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
 .meet-photos figure:hover img{transform:scale(1.04)}
 .meet-photos figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 10px;color:#fff;font-weight:700;background:linear-gradient(transparent,rgba(8,20,50,.85))}
 @media(max-width:700px){.meet-photos{grid-template-columns:1fr}}
+
+.banner{margin:10px 0 18px;position:relative;border-radius:16px;overflow:hidden;border:2px solid #c9a24a;box-shadow:0 8px 24px rgba(10,25,60,.25);max-height:300px}
+.banner img{display:block;width:100%;height:300px;object-fit:cover}
+.banner figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 10px;color:#fff;font-weight:700;font-size:1.1rem;background:linear-gradient(transparent,rgba(8,20,50,.88))}
+@media(max-width:700px){.banner img{height:190px}}
