@@ -1,5 +1,6 @@
 <%- include('partials/head') %>
 <h1>Meeting Room</h1>
+<%- include('partials/banner', { img: 'meeting-room-top.jpg', alt: 'NISMCAA team in front of a world map', cap: 'Your journey to the Meeting Room' }) %>
 <%- include('partials/journey', { step: user.status === 'applicant' ? 2 : (user.status === 'waiting' ? 3 : (user.status === 'approved' && state !== 'EXPIRED' ? 4 : 0)) }) %>
 <div class="card gold welcome">
   <span class="avatar" aria-hidden="true"><%= user.name.split(' ').map(function(p){ return p.charAt(0); }).slice(0, 2).join('').toUpperCase() %></span><div>

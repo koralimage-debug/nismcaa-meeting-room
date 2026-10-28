@@ -17,9 +17,17 @@
 <div class="lessonbar" id="lessonbar" hidden aria-live="off"><div class="lessonbar-in"><span class="lessonbar-label" id="lessonbar-label"></span><span class="lessonbar-pct" id="lessonbar-pct"></span></div><div class="bar" role="progressbar" aria-label="Course reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="lessonbar-fill"></span></div></div>
 <div id="course-text" class="course-text">
 <%
+var BANDS = {
+  o4: ['volunteers-teaching.jpg', 'A volunteer teaching music to a class', 'Music in every classroom', 'center 35%'],
+  o7: ['meeting-virtual.jpg', 'Team in a virtual video meeting', 'Teams that meet online and in person'],
+  o10: ['meeting-in-person.jpg', 'Team meeting in a conference room', 'Organizing events together'],
+  c3: ['volunteers-seating.jpg', 'Volunteers welcoming students at an event', 'Children come first, every time'],
+  c6: ['banner-id.jpg', 'Smiling volunteer with her NISMCAA ID card', 'Trained, trusted and ready to serve']
+};
+function band(key) { var b = BANDS[key]; if (b) { %><%- include('partials/photoband', { img: b[0], alt: b[1], cap: b[2], pos: b[3] }) %><% } }
 function renderEls(els, prefix) { var n = 0;
   els.forEach(function(e){
-    if (e.type === 'lesson') { n++; %><h3 class="lesson" id="<%= prefix %><%= n %>"><%= e.text %></h3><% }
+    if (e.type === 'lesson') { n++; band(prefix + n); %><h3 class="lesson" id="<%= prefix %><%= n %>"><%= e.text %></h3><% }
     else if (e.type === 'h') { %><h4><%= e.text %></h4><% }
     else if (e.type === 'p') { %><p><%= e.text %></p><% }
     else if (e.type === 'ul') { %><ul><% e.items.forEach(function(i){ %><li><%= i %></li><% }) %></ul><% }
@@ -28,7 +36,9 @@ function renderEls(els, prefix) { var n = 0;
 }
 %>
 <section aria-label="Volunteer information"><% renderEls(course.part1, 'p') %></section>
+<%- include('partials/photoband', { img: 'panel-trophies.jpg', alt: 'Gold award plaques and trophies', cap: 'Music and learning, together' }) %>
 <section aria-label="Orientation lessons"><% renderEls(course.orient, 'o') %></section>
+<%- include('partials/photoband', { img: 'volunteers-teaching.jpg', alt: 'A volunteer teaching music to a class', cap: 'Keeping every child safe and cared for', pos: 'center 30%' }) %>
 <section aria-label="Child Care and Protection lessons"><% renderEls(course.ccp, 'c') %></section>
 </div>
 <div class="card gold">
@@ -36,4 +46,4 @@ function renderEls(els, prefix) { var n = 0;
   <p>50 multiple-choice questions. To pass you need <strong>at least 40 of 50 (80%)</strong> and <strong>at least 9 of the 10 child-protection questions</strong> (questions 41 to 50). You can retake the test as often as you need.</p>
   <% if (user && user.status === 'applicant') { %><a class="btn gold" href="/course/test">Take the final test</a><% } else if (!user) { %><a class="btn gold" href="/sign-up">Sign up first</a><% } %>
 </div>
-<%- include('partials/foot') %>
+<%- include('partials/foot', { footBand: true }) %>

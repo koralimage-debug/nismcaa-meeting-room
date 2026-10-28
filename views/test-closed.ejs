@@ -1,5 +1,6 @@
 <%- include('partials/head') %>
 <h1>Final test</h1>
+<%- include('partials/banner', { img: 'banner-course.jpg', alt: 'Volunteers studying together', cap: 'Keep learning together' }) %>
 <div class="card">
 <% if (state === 'waiting') { %><p><strong>You passed.</strong> An NISMCAA administrator will review your application.</p>
 <% } else if (state === 'approved') { %><p>You are already an approved volunteer. You do not need to take the test again.</p>

@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Settings</h1>
+<%- include('../partials/banner', { img: 'meeting-virtual.jpg', alt: 'Team in a video meeting', cap: 'Set the call links for every team' }) %>
 <%- include('../partials/adminnav') %>
 <form class="card stack" method="post" action="/admin/settings">
   <input type="hidden" name="_csrf" value="<%= csrf %>">

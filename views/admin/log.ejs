@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Change log</h1>
+<%- include('../partials/banner', { img: 'panel-trophies.jpg', alt: 'Gold award plaques', cap: 'A clear record of every change' }) %>
 <%- include('../partials/adminnav') %>
 <form class="card" method="get" action="/admin/log" style="display:flex;gap:10px"><select name="kind" style="max-width:260px"><option value="">All types</option><% kinds.forEach(function(k){ %><option <%= k === kind ? 'selected' : '' %>><%= k %></option><% }) %></select><button class="btn" type="submit">Filter</button> <a class="btn ghost" href="/admin/export/log.csv">Export CSV</a></form>
 <div class="table-wrap"><table class="tight"><tr><th>When</th><th>Type</th><th>By</th><th>About</th><th>Detail</th></tr>

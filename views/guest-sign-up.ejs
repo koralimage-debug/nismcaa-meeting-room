@@ -1,4 +1,5 @@
 <%- include('partials/head') %>
+<%- include('partials/authband', { img: 'meeting-in-person.jpg', alt: 'Business meeting with NISMCAA logos on the walls', line: 'Welcome, sponsors and vendors' }) %>
 <h1>Guest sign up</h1>
 <p>For sponsors and vendors. It takes one minute. Your e-mail is your sign-in ID. We never send e-mail from this site, so keep your password safe.</p>
 <% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
@@ -22,4 +23,5 @@
   <p><button class="btn gold big" type="submit">Send my request</button></p>
 </form>
 <p>Already approved? <a href="/guests/sign-in">Guest sign in</a>.</p>
-<%- include('partials/foot') %>
+<%- include('partials/authfoot', { img: 'meeting-virtual.jpg', alt: 'Team in an online meeting', text: 'We look forward to meeting you online.' }) %>
+<%- include('partials/foot', { footBand: true }) %>

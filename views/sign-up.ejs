@@ -1,4 +1,5 @@
 <%- include('partials/head') %>
+<%- include('partials/authband', { img: 'volunteers-seating.jpg', alt: 'NISMCAA volunteers welcoming students at an event', line: 'Join our volunteer team' }) %>
 <h1>Sign up to volunteer</h1>
 <p>This form tells us who is taking the test. Your e-mail is your sign-in ID. We never send e-mail from this site, so keep your password safe: an administrator can reset it if you forget it.</p>
 <% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
@@ -14,12 +15,12 @@
   <input id="password2" name="password2" type="password" required minlength="10" autocomplete="new-password">
   <label for="phone">Phone number</label>
   <input id="phone" name="phone" type="tel" required autocomplete="tel" value="<%= v.phone || '' %>">
-  <label for="country">Country where you live</label>
-  <select id="country" name="country" required>
-    <option value="">Choose your country</option>
-    <% COUNTRIES.forEach(function(c){ %><option <%= v.country === c ? 'selected' : '' %>><%= c %></option><% }) %>
-    <option value="<%= NOT_LISTED %>" <%= v.country === NOT_LISTED ? 'selected' : '' %>><%= NOT_LISTED %></option>
-  </select>
+  <label id="country-label">Country where you live (pick your country team)</label>
+  <%- anthemHint() %>
+  <div class="country-pick" role="radiogroup" aria-labelledby="country-label">
+    <% COUNTRIES.forEach(function(c){ %><label class="country-opt"><input type="radio" name="country" value="<%= c %>" <%= v.country === c ? 'checked' : '' %> required><%- cflagPlay(c) %><span><%= c %></span></label><% }) %>
+    <label class="country-opt other"><input type="radio" name="country" value="<%= NOT_LISTED %>" <%= v.country === NOT_LISTED ? 'checked' : '' %>><%- include('partials/icon', { n: 'globe', size: 24 }) %><span><%= NOT_LISTED %></span></label>
+  </div>
   <p class="muted">An administrator checks your country when approving you and may correct it. After approval you cannot change it. If your country is not listed, we only record your interest and you will not get access yet.</p>
   <label for="photo">Photo of yourself <span class="hint">(JPG or PNG, up to 2 MB, for your ID card. Only you and NISMCAA administrators can see it.)</span></label>
   <input id="photo" name="photo" type="file" accept="image/jpeg,image/png" required>
@@ -27,4 +28,5 @@
   <p><button class="btn gold" type="submit">Create my account</button></p>
 </form>
 <p>Already have an account? <a href="/sign-in">Sign in</a>.</p>
-<%- include('partials/foot') %>
+<%- include('partials/authfoot', { img: 'volunteers-teaching.jpg', alt: 'A NISMCAA volunteer teaching music to a class', text: 'Thank you for giving your time to children\'s music education.' }) %>
+<%- include('partials/foot', { footBand: true }) %>

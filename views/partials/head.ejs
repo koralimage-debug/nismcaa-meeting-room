@@ -37,12 +37,12 @@
     <form method="post" action="/sign-out"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="linklike" type="submit">Sign out (<%= user.name.split(' ')[0] %>)</button></form>
   <% } else { %>
     <a href="/meeting-room">Meeting Room</a>
-    <a href="/guests" class="<%= path.startsWith('/guests') ? 'on' : '' %>">Sponsors &amp; Vendors</a>
     <a href="/sign-in" class="<%= path === '/sign-in' ? 'on' : '' %>">Sign in</a>
     <a href="/sign-up" class="<%= path === '/sign-up' ? 'on' : '' %>">Sign up</a>
   <% } %>
 <% } %>
 </div></nav>
+<% if (!user) { %><div class="entry-strip"><div class="wrap"><a class="btn gold entry-btn" href="/enter">Access the Meeting Room <span>(sign up or sign in)</span></a></div></div><% } %>
 </div>
 <main class="wrap" id="main">
 <% if (flash) { %><div class="flash <%= flash.type %>" role="status"><%= flash.msg %></div><% } %>

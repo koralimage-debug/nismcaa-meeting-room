@@ -1,5 +1,6 @@
 <%- include('partials/head') %>
 <h1>Final test</h1>
+<%- include('partials/banner', { img: 'banner-course.jpg', alt: 'Volunteers studying together', cap: 'You have learned it. Show it.' }) %>
 <div class="card gold test-intro">
   <p>50 multiple-choice questions. Pass mark: <strong>40 of 50 (80%)</strong> and <strong>at least 9 of the 10 child-protection questions</strong> (41 to 50). You see your score after each try but not which answers were wrong. You can retake it as often as you need. Every attempt is saved.</p>
   <% if (!keyReady) { %><p class="note">Note: the official answer key has not been entered yet. Your answers will be saved and marked as "pending key". They will be marked later.</p><% } %>

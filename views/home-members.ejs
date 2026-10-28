@@ -1,0 +1,37 @@
+<%- include('partials/head') %>
+<section class="hero hero-photo" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <span class="spark s1" aria-hidden="true"></span><span class="spark s2" aria-hidden="true"></span><span class="spark s3" aria-hidden="true"></span><span class="spark s4" aria-hidden="true"></span><span class="spark s5" aria-hidden="true"></span><span class="spark s6" aria-hidden="true"></span>
+  <div class="hero-inner">
+    <img class="hero-logo" src="/static/img/logo-md.png" alt="NISMCAA logo" width="150" height="150">
+    <h1 id="hero-title" class="shimmer">NISMCAA Meeting Room</h1>
+    <p class="lead">A private members area for NISMCAA volunteers in the United States, Nigeria, Canada, the United Arab Emirates, the United Kingdom and Australia.</p>
+    <p>Volunteer, take the course, pass the final test, get approved by an administrator, and join your country team.</p>
+    <p class="cta">
+      <% if (user) { %><a class="btn gold" href="/meeting-room">Open the Meeting Room</a>
+      <% } else { %><a class="btn gold" href="/meeting-room">Meeting Room (members sign in)</a> <a class="btn gold" href="/sign-up">Sign up to volunteer</a> <a class="btn ghost on-dark" href="/sign-in">Sign in</a><% } %>
+    </p>
+    <ul class="hero-chips" aria-label="At a glance"><li>6 countries</li><li>7 child-protection lessons</li><li>Free to volunteer</li><li>18 volunteer benefits</li></ul>
+  </div>
+</section>
+<% if (!user || user.role === 'guest' || isAdmin) { %>
+<section class="guest-band" aria-labelledby="guest-title">
+  <img src="/static/img/meeting-in-person.jpg" alt="Business meeting in a conference room with NISMCAA logos on the walls">
+  <div class="guest-band-text">
+    <h2 id="guest-title">Sponsors and Vendors</h2>
+    <p>Working with NISMCAA as a sponsor or a vendor? Join our meetings online as a guest.</p>
+    <p class="cta"><% if (user && user.role === 'guest') { %><a class="btn gold big" href="/guest">Open the Guest Meeting Room</a>
+      <% } else { %><a class="btn gold big" href="/guests/sign-up">Guest sign up</a> <a class="btn ghost big on-dark" href="/guests/sign-in">Guest sign in</a><% } %></p>
+  </div>
+</section>
+<% } %>
+<%- include('partials/rewards') %>
+<%- include('partials/benefits') %>
+<%- include('partials/split', { img: 'meeting-in-person.jpg', alt: 'Team meeting in a conference room with NISMCAA logos on the walls', icon: 'users', kicker: 'Meet in person', title: 'Organizers meet in person', body: 'Our organizers gather in conference rooms and at events, so every country team stays connected.' }) %>
+<%- include('partials/steps') %>
+<%- include('partials/split', { img: 'meeting-virtual.jpg', alt: 'Team in a virtual video meeting', icon: 'video', flip: true, kicker: 'Or meet online', title: 'And online, from any country', body: 'Join your team call from home with a free video link set by the administrators.' }) %>
+<%- include('partials/split', { img: 'volunteers-seating.jpg', alt: 'NISMCAA volunteers guiding students to their seats at an event', icon: 'heart', kicker: 'What volunteers do', title: 'Welcoming students at our events', body: 'Volunteers guide students and families, help the day run smoothly and make every child feel welcome.' }) %>
+<p class="note"><%- include('partials/icon', { n: 'heart', size: 20 }) %> <span>This is a volunteer role. There is no salary and there are no fees. NISMCAA never asks volunteers to pay anything.</span></p>
+<%- include('partials/split', { img: 'volunteers-teaching.jpg', alt: 'A NISMCAA volunteer teaching music to a class', icon: 'learn', flip: true, kicker: 'What volunteers do', title: 'Teaching music in the classroom', body: 'Share your time and skills in music classes and see children grow in confidence.' }) %>
+<%- include('partials/foot', { footBand: true }) %>

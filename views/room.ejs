@@ -6,7 +6,7 @@
 </div>
 <div class="welcome card">
   <span class="avatar" aria-hidden="true"><%= user.name.split(' ').map(function(p){ return p.charAt(0); }).slice(0, 2).join('').toUpperCase() %></span>
-  <p>Welcome, <strong><%= user.name %></strong>. Country: <strong><%= user.country || 'All countries (administrator)' %></strong>. Status: <strong><%= access.statusLabel(user) %></strong>.</p>
+  <p>Welcome, <strong><%= user.name %></strong>. Country: <strong><%- cflagPlay(user.country) %><%= user.country || 'All countries (administrator)' %></strong>. Status: <strong><%= access.statusLabel(user) %></strong>.</p>
 </div>
 <div class="card gold call-card">
   <span class="tile-ico gold"><%- include('partials/icon', { n: 'video', size: 30 }) %></span>
@@ -17,12 +17,12 @@
   <% } else { %>
     <p><span class="btn gold" aria-disabled="true" style="opacity:.5">Join call</span> The call link has not been set yet. <% if (isAdmin) { %><a href="/admin/settings">Set it in Settings</a>.<% } else { %>An administrator will add it.<% } %></p>
   <% } %>
-  <% links.forEach(function(l){ %><p class="muted"><%= l.country %>: <a href="<%= l.url %>" target="_blank" rel="noopener noreferrer">Join <%= l.country %> call</a></p><% }) %>
+  <% links.forEach(function(l){ %><p class="muted"><%- cflagPlay(l.country) %><%= l.country %>: <a href="<%= l.url %>" target="_blank" rel="noopener noreferrer">Join <%= l.country %> call</a></p><% }) %>
   </div>
 </div>
 <% if (scheduled && scheduled.length) { %>
 <div class="card"><h2 style="margin-top:0">Scheduled meetings</h2>
-<% scheduled.forEach(function(m){ %><div class="sched"><h3><%= m.title %></h3><p><strong><%= m.when %></strong><% if (m.country) { %> <span class="muted">&middot; <%= m.country %> team</span><% } %></p><% if (m.agenda) { %><p class="agenda"><%= m.agenda %></p><% } %><p><a class="btn small" href="<%= m.link %>" target="_blank" rel="noopener noreferrer">Join meeting</a></p></div><% }) %></div>
+<% scheduled.forEach(function(m){ %><div class="sched"><h3><%= m.title %></h3><p><strong><%= m.when %></strong><% if (m.country) { %> <span class="muted">&middot; <%- cflag(m.country) %><%= m.country %> team</span><% } %></p><% if (m.agenda) { %><p class="agenda"><%= m.agenda %></p><% } %><p><a class="btn small" href="<%= m.link %>" target="_blank" rel="noopener noreferrer">Join meeting</a></p></div><% }) %></div>
 <% } %>
 <div class="grid tiles">
   <div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'chat', size: 28 }) %></span><h3>Chat</h3><p>Organizers' general chat and your country room. Adults only.</p><a class="btn" href="/meeting-room/chat/general">Open chat</a></div>
@@ -33,13 +33,13 @@
 </div>
 <% if (!isAdmin) { %>
 <h2>Your country's departments</h2>
-<p class="muted">Your department: <strong><%= user.department %></strong>. You can read every department of <%= user.country %>.</p>
+<p class="muted">Your department: <strong><%= user.department %></strong>. You can read every department of <%- cflag(user.country) %><%= user.country %>.</p>
 <div class="tabs"><a href="/meeting-room/plan/<%= slug(user.country) %>/all">All departments</a>
 <% DEPARTMENTS.forEach(function(d){ %><a href="/meeting-room/plan/<%= slug(user.country) %>/<%= slug(d) %>" class="<%= d === user.department ? 'on' : '' %>"><%= d %></a><% }) %></div>
 <p><a href="/meeting-room/member/<%= user.id %>">My work log and remarks</a></p>
 <% } else { %>
 <h2>Plans by country</h2>
-<div class="tabs"><a href="/meeting-room/plan/global">Global roll-up</a><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all"><%= c %></a><% }) %></div>
+<div class="tabs"><a href="/meeting-room/plan/global">Global roll-up</a><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all"><%- cflag(c) %><%= c %></a><% }) %></div>
 <% } %>
 <p class="muted">Questions? info@nismcaa.com &middot; <%= PHONE %></p>
 <%- include('partials/foot') %>

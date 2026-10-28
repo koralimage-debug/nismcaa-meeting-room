@@ -1,0 +1,20 @@
+from playwright.sync_api import sync_playwright
+BASE='http://localhost:3500'; OUT='/workspace/meeting_room_paste'
+with sync_playwright() as p:
+    b=p.chromium.launch(executable_path='/usr/bin/google-chrome', args=['--no-sandbox','--autoplay-policy=no-user-gesture-required'])
+    ctx=b.new_context(viewport={'width':390,'height':844}, is_mobile=True, device_scale_factor=2, has_touch=True)
+    m=ctx.new_page(); m.goto(BASE+'/'); m.wait_for_load_state('networkidle')
+    fs=m.locator('.flag-strip'); fs.scroll_into_view_if_needed(); m.wait_for_timeout(1500)
+    m.screenshot(path=OUT+'/anthem_mobile_1_flags_idle.png')
+    m.locator('.flag-wave.playable').nth(1).click(force=True); m.wait_for_timeout(1200)
+    print('playing', m.evaluate("document.querySelectorAll('.flag-wave.playing').length"), 'paused?', m.evaluate("(function(){var a=document.querySelectorAll('audio');return 'n/a'})()"))
+    m.screenshot(path=OUT+'/anthem_mobile_2_flag_playing.png')
+    m.locator('.flag-wave.playable').nth(2).click(force=True); m.wait_for_timeout(600)
+    print('after 2nd flag playing count', m.evaluate("document.querySelectorAll('.flag-wave.playing').length"))
+    m.locator('.flag-wave.playable').nth(2).click(force=True); m.wait_for_timeout(400)
+    print('after tap again', m.evaluate("document.querySelectorAll('.flag-wave.playing').length"), m.evaluate("document.querySelector('.anthem-bar').hidden"))
+    m.goto(BASE+'/sign-up'); m.wait_for_load_state('networkidle')
+    m.locator('.country-pick').scroll_into_view_if_needed(); m.locator('.cflag.playable').nth(0).click(force=True); m.wait_for_timeout(800)
+    print('radio checked', m.evaluate("document.querySelector('input[name=country]:checked').value"))
+    m.screenshot(path=OUT+'/anthem_mobile_3_signup_picker.png')
+    b.close()

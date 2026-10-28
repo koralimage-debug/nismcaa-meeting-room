@@ -1,0 +1,8 @@
+<%- include('partials/head') %>
+<h1>Access the Meeting Room</h1>
+<%- include('partials/door', { open: true, heading: 'The door is open', line: 'Welcome in. Choose what fits you.' }) %>
+<%- include('partials/split', { img: 'banner-id.jpg', alt: 'Smiling volunteer holding her NISMCAA ID card', icon: 'lock', kicker: 'I already have an account', title: 'Sign in', body: 'Volunteers, sponsors, vendors and administrators sign in here.', extra: '<p class="cta"><a class="btn gold big" href="/sign-in">Sign in</a> <a class="btn ghost big" href="/guests/sign-in">Guest sign in</a></p>' }) %>
+<p class="muted center-line">New here? Choose the sign-up that fits you.</p>
+<%- include('partials/split', { img: 'volunteers-seating.jpg', alt: 'NISMCAA volunteers welcoming students at an event', icon: 'heart', flip: true, kicker: 'Sign up', title: 'I want to volunteer', body: 'Read the free course, pass the final test and join your country team.', extra: '<p><a class="btn gold big" href="/sign-up">Volunteer sign-up</a></p>' }) %>
+<%- include('partials/split', { img: 'meeting-in-person.jpg', alt: 'Business meeting in a conference room with NISMCAA logos on the walls', icon: 'users', kicker: 'Sign up', title: 'I am a sponsor or vendor', body: 'Ask for guest access to join the meetings meant for you.', extra: '<p><a class="btn gold big" href="/guests/sign-up">Guest sign-up (sponsor or vendor)</a></p>' }) %>
+<%- include('partials/foot', { footBand: true }) %>

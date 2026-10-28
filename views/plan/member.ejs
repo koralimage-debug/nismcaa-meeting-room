@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1><%= self ? 'My work log and remarks' : m.name %></h1>
+<%- include('../partials/banner', { img: 'volunteers-seating.jpg', alt: 'Volunteers welcoming students', cap: 'Work and remarks of a team member' }) %>
 <div class="card"><dl class="kv"><dt>Name</dt><dd><%= m.name %></dd><dt>Volunteer ID</dt><dd><%= m.volunteer_id %></dd><dt>Country</dt><dd><%= m.country %></dd><dt>Department</dt><dd><%= m.department %></dd><dt>ID valid until</dt><dd><%= fmtDate(m.id_expires_at) %></dd></dl>
 <p class="muted">This page supports ID renewal decisions. Visible to the member, the department head and administrators only.</p></div>
 <h2>Head remarks</h2>

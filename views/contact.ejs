@@ -1,0 +1,11 @@
+<%- include('partials/head') %>
+<h1>Contact us</h1>
+<%- include('partials/split', { img: 'meeting-room-top.jpg', alt: 'NISMCAA team meeting in front of a world map', icon: 'send', kicker: 'We would love to hear from you', title: 'Get in touch', body: 'Write to <a href="mailto:info@nismcaa.com">info@nismcaa.com</a> or call ' + PHONE + '.' }) %>
+<div class="card gold"><dl class="kv">
+  <dt>E-mail</dt><dd><a href="mailto:info@nismcaa.com">info@nismcaa.com</a></dd>
+  <dt>Phone</dt><dd><%= PHONE %></dd>
+  <dt>Address</dt><dd>4764 Hammermill Road, Tucker, GA 30084, United States</dd>
+  <dt>Website</dt><dd><a href="https://nismcaa.com">nismcaa.com</a></dd>
+</dl></div>
+<%- include('partials/split', { img: 'meeting-in-person.jpg', alt: 'Business meeting in a conference room', icon: 'users', flip: true, kicker: 'Sponsors and vendors', title: 'Working with us?', body: 'Ask for guest access to join meetings online.', href: '/guests', label: 'For sponsors and vendors' }) %>
+<%- include('partials/foot', { footBand: true }) %>

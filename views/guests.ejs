@@ -1,8 +1,6 @@
 <%- include('partials/head') %>
-<div class="room-hero"><img src="/static/img/meeting-in-person.jpg" alt="Business meeting in a conference room with NISMCAA logos on the walls"><div class="room-hero-text"><h1>Sponsors and Vendors</h1><p>Welcome, guests of NISMCAA.</p></div></div>
-<div class="card guest-card">
-  <p class="lead">Are you a sponsor or a vendor working with NISMCAA? Ask for guest access to join our meetings online. It is quick and free.</p>
-  <p class="cta"><a class="btn gold big" href="/guests/sign-up">Ask for guest access</a> <a class="btn ghost big" href="/guests/sign-in">Guest sign in</a></p>
-  <p class="muted">An NISMCAA administrator approves each request. You will only see the meetings that are for you.</p>
-</div>
-<%- include('partials/foot') %>
+<h1>Sponsors and Vendors</h1>
+<%- include('partials/split', { img: 'meeting-in-person.jpg', alt: 'Business meeting in a conference room with NISMCAA logos on the walls', icon: 'users', kicker: 'Welcome, guests of NISMCAA', title: 'Join our meetings online', body: 'Are you a sponsor or a vendor working with NISMCAA? Ask for guest access to join our meetings. It is quick and free.', href: '/guests/sign-up', label: 'Ask for guest access', gold: true }) %>
+<p class="cta"><a class="btn ghost big" href="/guests/sign-in">Guest sign in</a></p>
+<%- include('partials/split', { img: 'meeting-virtual.jpg', alt: 'Team in a virtual video meeting', icon: 'video', flip: true, kicker: 'Simple for you', title: 'Only the meetings meant for you', body: 'An NISMCAA administrator approves each request. You will see your meetings, the agenda and one big Join button, nothing else.' }) %>
+<%- include('partials/foot', { footBand: true }) %>

@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Guests</h1>
+<%- include('../partials/banner', { img: 'meeting-in-person.jpg', alt: 'Business meeting with NISMCAA logos', cap: 'Welcome our sponsors and vendors' }) %>
 <%- include('../partials/adminnav') %>
 <p class="muted">Sponsors and vendors who asked for guest access. Guests only see the meetings you address to them.</p>
 <% if (temp) { %><div class="card gold"><h3>Temporary password for <%= tempFor %></h3><p>Shown once. Give it to them privately. They must choose a new one at sign-in.</p><p><code><%= temp %></code></p></div><% } %>

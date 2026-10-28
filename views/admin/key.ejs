@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Final test answer key</h1>
+<%- include('../partials/banner', { img: 'banner-course.jpg', alt: 'Volunteers studying together', cap: 'Keep the final test fair' }) %>
 <%- include('../partials/adminnav') %>
 <div class="card <%= keyReady ? '' : 'gold' %>">
   <% if (keyReady) { %><p><strong>The key is complete.</strong> New results are marked automatically.</p>

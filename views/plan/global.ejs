@@ -5,7 +5,7 @@
 <div class="tabs"><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all"><%= c %></a><% }) %><a href="/meeting-room/plan/global.csv">Export totals (CSV)</a><a href="/meeting-room/plan/log">Change log</a></div>
 <div class="table-wrap"><table>
 <tr><th>Country</th><th>Tasks</th><th>Done</th><th><span class="dot red"></span>Red</th><th><span class="dot amber"></span>Amber</th><th><span class="dot green"></span>Green</th><th><span class="dot grey"></span>Not flagged</th><th>Owners behind</th></tr>
-<% perCountry.forEach(function(p){ %><tr><td><a href="/meeting-room/plan/<%= p.slug %>/all"><%= p.country %></a></td><td><%= p.s.total %></td><td><%= p.s.done %></td><td><%= p.s.red %></td><td><%= p.s.amber %></td><td><%= p.s.green %></td><td><%= p.s.grey %></td><td><%= p.s.owners.join(', ') %></td></tr><% }) %>
+<% perCountry.forEach(function(p){ %><tr><td><a href="/meeting-room/plan/<%= p.slug %>/all"><%- cflag(p.country) %><%= p.country %></a></td><td><%= p.s.total %></td><td><%= p.s.done %></td><td><%= p.s.red %></td><td><%= p.s.amber %></td><td><%= p.s.green %></td><td><%= p.s.grey %></td><td><%= p.s.owners.join(', ') %></td></tr><% }) %>
 <tr><th>Total</th><th><%= total.total %></th><th><%= total.done %></th><th><%= total.red %></th><th><%= total.amber %></th><th><%= total.green %></th><th><%= total.grey %></th><th></th></tr>
 </table></div>
 <%- include('../partials/foot') %>

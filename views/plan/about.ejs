@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>About this plan</h1>
+<%- include('../partials/banner', { img: 'meeting-in-person.jpg', alt: 'Team in a conference room', cap: 'How the action plan works' }) %>
 <% if (proposed) { %><p class="note"><strong><%= proposed %></strong></p><% } %>
 <div class="card">
 <% about.slice(2).forEach(function(line, i){ if (!line) return; var head = !/^[0-9]\./.test(line) && line.length < 60 && !/[.]$/.test(line); %>

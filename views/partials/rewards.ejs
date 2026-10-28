@@ -1,0 +1,9 @@
+<div class="gain-banner"><h2>Volunteer with NISMCAA and gain a lot</h2><p>Real rewards for your time: a certificate, scholarship and travel opportunities, training, references and priority for paid roles.</p></div>
+<div class="reward-grid">
+<% [['banner-id.jpg','Smiling volunteer holding her NISMCAA ID card','Certificate','of volunteering','id'],
+    ['volunteers-teaching.jpg','A NISMCAA volunteer teaching music to a class','Scholarships','for you and your children','learn'],
+    ['meeting-room-top.jpg','NISMCAA team in front of a world map','Travel','on international programs','send'],
+    ['meeting-in-person.jpg','Business meeting in a conference room','Paid roles','priority when they open','approval']].forEach(function(r){ %>
+  <div class="reward"><span class="reward-pic"><img src="/static/img/<%= r[0] %>" alt="<%= r[1] %>" loading="lazy"><span class="split-ico"><%- include('icon', { n: r[4], size: 26 }) %></span></span><span class="reward-text"><strong><%= r[2] %></strong><span><%= r[3] %></span></span></div>
+<% }) %>
+</div>

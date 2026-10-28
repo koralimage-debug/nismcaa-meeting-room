@@ -1,10 +1,11 @@
 </main>
+<% if (locals.footBand) { %><div class="foot-band"><img src="/static/img/volunteers-seating.jpg" alt="" loading="lazy"><div class="foot-band-text"><strong>Thank you for supporting children's music and learning.</strong><span>NISMCAA &middot; <a href="/contact">Contact us</a></span></div></div><% } %>
 <footer><div class="wrap foot-grid">
   <div><img class="foot-logo" src="/static/img/logo-sm.png" alt="" width="48" height="48"></div>
   <div>
   <strong>NISMCAA</strong> &middot; 4764 Hammermill Road, Tucker, GA 30084, United States<br>
   <a href="mailto:info@nismcaa.com">info@nismcaa.com</a> &middot; <%= PHONE %><br>
-  <span class="foot-sub">National Inter-School Music Competition &amp; Academic Award &middot; <a href="https://nismcaa.com">nismcaa.com</a></span>
+  <% if (locals.anthemCredits) { %><span class="foot-sub"><a href="/anthem-credits">Anthem credits</a></span><br><% } %><span class="foot-sub">National Inter-School Music Competition &amp; Academic Award &middot; <a href="https://nismcaa.com">nismcaa.com</a></span>
   </div>
 </div></footer>
 </body></html>

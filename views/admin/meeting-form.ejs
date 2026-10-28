@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1><%= v.id ? 'Edit meeting' : 'New meeting' %></h1>
+<%- include('../partials/banner', { img: 'meeting-room-top.jpg', alt: 'Team in front of a world map', cap: 'Invite the right people' }) %>
 <%- include('../partials/adminnav') %>
 <% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
 <form class="card stack" method="post" action="<%= v.id ? '/admin/meetings/' + v.id : '/admin/meetings' %>" novalidate>

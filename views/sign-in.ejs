@@ -8,6 +8,7 @@
     <p class="auth-sub">Sign in to join your country team.</p><% } %>
   </aside>
   <div class="auth-main">
+<%- include('partials/authband', { mobileOnly: true, img: guest ? 'meeting-in-person.jpg' : 'meeting-room-top.jpg', alt: guest ? 'Business meeting with NISMCAA logos on the walls' : 'NISMCAA team in front of a world map', line: guest ? 'Welcome, guests of NISMCAA' : 'Welcome back to the Meeting Room' }) %>
 <h1><%= guest ? 'Guest sign in' : 'Sign in' %></h1>
 <% if (error) { %><div class="flash err" role="alert"><%= error %></div><% } %>
 <form class="card stack" method="post" action="/sign-in">
@@ -23,6 +24,7 @@
 </form>
 <% if (guest) { %><p>New guest? <a href="/guests/sign-up">Ask for access</a>. Volunteer? <a href="/sign-in">Volunteer sign in</a>.</p>
 <% } else { %><p>New here? <a href="/sign-up">Sign up to volunteer</a>. Sponsor or vendor? <a href="/guests">Guest page</a>.</p><% } %>
+<%- include('partials/authfoot', { mobileOnly: true, img: guest ? 'meeting-virtual.jpg' : 'volunteers-seating.jpg', alt: guest ? 'Team in an online meeting' : 'Volunteers welcoming students at an event', text: guest ? 'Your meetings are waiting for you.' : 'Your team is waiting for you.' }) %>
   </div>
 </div>
-<%- include('partials/foot') %>
+<%- include('partials/foot', { footBand: true }) %>

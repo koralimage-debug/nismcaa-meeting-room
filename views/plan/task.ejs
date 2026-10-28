@@ -1,6 +1,7 @@
 <%- include('../partials/head') %>
 <p><a href="<%= tabUrl %>">&larr; Back to <%= t.department %> (<%= t.country %>)</a></p>
 <% if (t.row_type === 'phase') { %><h1><%= t.title %></h1>
+<%- include('../partials/banner', { img: 'volunteers-teaching.jpg', alt: 'A volunteer teaching music', cap: 'One task, done well' }) %>
 <% } else { %>
 <h1>Task <%= t.seq %>: <%= t.title %></h1>
 <div class="card">

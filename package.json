@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node --test test/",
-    "demo:seed": "node scripts/demo_seed.js",
+    "demo:seed": "DATA_DIR=./demo-data node scripts/demo_seed.js",
     "demo:start": "DATA_DIR=./demo-data PORT=3500 node server.js",
     "screenshots": "python3 scripts/screenshots.py"
   },

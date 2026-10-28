@@ -1,83 +1,62 @@
+<% if (user) { %><%- include('home-members') %><% } else { %>
 <%- include('partials/head') %>
-<section class="hero hero-photo" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-glow" aria-hidden="true"></div>
+<section class="reception" aria-labelledby="welcome-title">
+  <div class="slides" aria-hidden="true"><span class="slide sl1"></span><span class="slide sl2"></span><span class="slide sl3"></span><span class="slide sl4"></span><span class="slide sl5"></span></div>
+  <div class="reception-shade" aria-hidden="true"></div>
   <span class="spark s1" aria-hidden="true"></span><span class="spark s2" aria-hidden="true"></span><span class="spark s3" aria-hidden="true"></span><span class="spark s4" aria-hidden="true"></span><span class="spark s5" aria-hidden="true"></span><span class="spark s6" aria-hidden="true"></span>
-  <div class="hero-inner">
-    <img class="hero-logo" src="/static/img/logo-md.png" alt="NISMCAA logo" width="150" height="150">
-    <h1 id="hero-title" class="shimmer">NISMCAA Meeting Room</h1>
-    <p class="lead">A private members area for NISMCAA volunteers in the United States, Nigeria, Canada, the United Arab Emirates, the United Kingdom and Australia.</p>
-    <p>Volunteer, take the course, pass the final test, get approved by an administrator, and join your country team.</p>
-    <p class="cta">
-      <% if (user) { %><a class="btn gold" href="/meeting-room">Open the Meeting Room</a>
-      <% } else { %><a class="btn gold" href="/meeting-room">Meeting Room (members sign in)</a> <a class="btn gold" href="/sign-up">Sign up to volunteer</a> <a class="btn ghost on-dark" href="/sign-in">Sign in</a><% } %>
-    </p>
-    <ul class="hero-chips" aria-label="At a glance"><li>6 countries</li><li>7 child-protection lessons</li><li>Free to volunteer</li><li>18 volunteer benefits</li></ul>
+  <div class="reception-text">
+    <img class="hero-logo" src="/static/img/logo-md.png" alt="NISMCAA logo" width="120" height="120">
+    <h1 id="welcome-title"><span class="w" style="--i:0">Welcome</span> <span class="w" style="--i:1">to</span> <span class="w" style="--i:2">the</span> <span class="w" style="--i:3">NISMCAA</span> <span class="w" style="--i:4">Meeting</span> <span class="w" style="--i:5">Room</span></h1>
+    <span class="gold-line" aria-hidden="true"></span>
+    <p class="lead">A friendly place where volunteers, sponsors and vendors meet to support children's music and learning.</p>
+  </div>
+  <a class="look-cue" href="#look-around"><span>Take a look around</span><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+</section>
+
+<div class="count-strip" aria-label="NISMCAA at a glance">
+  <div class="count-item"><%- include('partials/icon', { n: 'globe', size: 30 }) %><strong data-count="6">6</strong><span>countries</span></div>
+  <div class="count-item"><%- include('partials/icon', { n: 'approval', size: 30 }) %><strong data-count="18">18</strong><span>volunteer benefits</span></div>
+  <div class="count-item"><%- include('partials/icon', { n: 'learn', size: 30 }) %><strong data-count="19">19</strong><span>course lessons</span></div>
+  <div class="count-item"><%- include('partials/icon', { n: 'test', size: 30 }) %><strong data-count="50">50</strong><span>test questions</span></div>
+</div>
+
+<section id="look-around" class="tour" aria-labelledby="tour-title">
+  <div class="photo-band" style="--bg:url(/static/img/meeting-room-top.jpg)">
+    <h2 id="tour-title">Look around</h2>
+    <p>Everything here is open to you. No sign-in needed. Tap any picture to explore.</p>
+  </div>
+  <div class="tour-grid">
+    <a class="tour-card" href="/about"><span class="tour-pic"><img src="/static/img/panel-trophies.jpg" alt="Award plaques and trophies on a table" loading="lazy"><span class="tour-ico"><%- include('partials/icon', { n: 'heart', size: 28 }) %></span></span><span class="tour-body"><strong>What NISMCAA does</strong><span>Music competition and academic awards for schools.</span><em>Open &rarr;</em></span></a>
+    <a class="tour-card" href="/course"><span class="tour-pic"><img src="/static/img/volunteers-teaching.jpg" alt="A NISMCAA volunteer teaching music to a class" loading="lazy"><span class="tour-ico"><%- include('partials/icon', { n: 'learn', size: 28 }) %></span></span><span class="tour-body"><strong>The volunteer course</strong><span>Read the lessons, free and open to everyone.</span><em>Open &rarr;</em></span></a>
+    <a class="tour-card" href="/benefits"><span class="tour-pic"><img src="/static/img/banner-id.jpg" alt="Smiling volunteer holding her NISMCAA ID card" loading="lazy"><span class="tour-ico"><%- include('partials/icon', { n: 'id', size: 28 }) %></span></span><span class="tour-body"><strong>Volunteer benefits</strong><span>Certificates, training, references and more.</span><em>Open &rarr;</em></span></a>
+    <a class="tour-card" href="/about#meet"><span class="tour-pic"><img src="/static/img/meeting-virtual.jpg" alt="Team in a virtual video meeting" loading="lazy"><span class="tour-ico"><%- include('partials/icon', { n: 'video', size: 28 }) %></span></span><span class="tour-body"><strong>Meet in person or online</strong><span>See how our teams come together.</span><em>Open &rarr;</em></span></a>
+    <a class="tour-card" href="/guests"><span class="tour-pic"><img src="/static/img/meeting-in-person.jpg" alt="Business meeting in a conference room" loading="lazy"><span class="tour-ico"><%- include('partials/icon', { n: 'users', size: 28 }) %></span></span><span class="tour-body"><strong>For sponsors and vendors</strong><span>Our guest area for partners and suppliers.</span><em>Open &rarr;</em></span></a>
+    <a class="tour-card" href="/contact"><span class="tour-pic"><img src="/static/img/meeting-room-top.jpg" alt="NISMCAA team meeting in front of a world map" loading="lazy"><span class="tour-ico"><%- include('partials/icon', { n: 'send', size: 28 }) %></span></span><span class="tour-body"><strong>Contact us</strong><span>We would love to hear from you.</span><em>Open &rarr;</em></span></a>
   </div>
 </section>
-<% if (!user || user.role === 'guest' || isAdmin) { %>
-<section class="guest-band" aria-labelledby="guest-title">
-  <img src="/static/img/meeting-in-person.jpg" alt="Business meeting in a conference room with NISMCAA logos on the walls">
-  <div class="guest-band-text">
-    <h2 id="guest-title">Sponsors and Vendors</h2>
-    <p>Working with NISMCAA as a sponsor or a vendor? Join our meetings online as a guest.</p>
-    <p class="cta"><% if (user && user.role === 'guest') { %><a class="btn gold big" href="/guest">Open the Guest Meeting Room</a>
-      <% } else { %><a class="btn gold big" href="/guests/sign-up">Guest sign up</a> <a class="btn ghost big on-dark" href="/guests/sign-in">Guest sign in</a><% } %></p>
-  </div>
+
+<%- include('partials/split', { img: 'panel-trophies.jpg', alt: 'Gold award plaques and trophies on a table', icon: 'heart', kicker: 'What NISMCAA does', title: 'Music and learning, together', body: 'A music competition for students and academic awards that recognize educational achievement, for schools in many countries.', href: '/about', label: 'Learn more' }) %>
+<section class="flag-strip" aria-labelledby="flags-title">
+  <h2 id="flags-title">Volunteers in 6 countries</h2>
+  <p>Join the team in your country.</p>
+  <%- anthemHint() %>
+  <div class="flag-row"><% COUNTRIES.forEach(function(c, i){ var code = FLAG[c]; %><div class="wave-flag" style="--i:<%= i %>"><% var pa = anthemAttrs(c); %><div class="flag-wave<%= pa ? ' playable' : '' %>"<%- pa %>><img src="/static/img/flags/<%= code %>.svg" alt="Flag of <%= c %>" width="150" height="100"></div><span><%= c %></span></div><% }) %></div>
 </section>
+<%- include('partials/rewards') %>
+<%- include('partials/split', { img: 'meeting-in-person.jpg', alt: 'Team meeting in a conference room with NISMCAA logos on the walls', icon: 'users', flip: true, kicker: 'Meet in person', title: 'Organizers meet in person', body: 'Our teams gather in conference rooms and at events, and also meet online from any country.', href: '/about#meet', label: 'See how we meet' }) %>
+<%- include('partials/steps') %>
+<%- include('partials/split', { img: 'volunteers-seating.jpg', alt: 'NISMCAA volunteers guiding students to their seats at an event', icon: 'heart', kicker: 'What volunteers do', title: 'Welcoming students at our events', body: 'Volunteers guide students and families, help the day run smoothly and make every child feel welcome.', href: '/benefits', label: 'See the volunteer benefits' }) %>
+<div class="photo-band" style="--bg:url(/static/img/hero-trophies.jpg)">
+  <h2>Moments from NISMCAA</h2>
+  <p>Music, learning and community, from our events and meetings.</p>
+</div>
+<div class="marquee" aria-label="Photos from NISMCAA events and meetings"><div class="marquee-track">
+<figure><img src="/static/img/hero-trophies.jpg" alt="Award plaques and trophies at a NISMCAA event" loading="lazy"><figcaption>Awards and trophies</figcaption></figure><figure><img src="/static/img/volunteers-seating.jpg" alt="NISMCAA volunteers guiding students to their seats" loading="lazy"><figcaption>Welcoming students</figcaption></figure><figure><img src="/static/img/meeting-in-person.jpg" alt="Team meeting in a conference room with NISMCAA logos" loading="lazy"><figcaption>Meeting in person</figcaption></figure><figure><img src="/static/img/volunteers-teaching.jpg" alt="A NISMCAA volunteer teaching music to a class" loading="lazy"><figcaption>Teaching music</figcaption></figure><figure><img src="/static/img/meeting-virtual.jpg" alt="Team in a virtual video meeting" loading="lazy"><figcaption>Meeting online</figcaption></figure><figure><img src="/static/img/banner-course.jpg" alt="Volunteers learning together at laptops" loading="lazy"><figcaption>Learning together</figcaption></figure><figure><img src="/static/img/banner-id.jpg" alt="Smiling volunteer holding her NISMCAA ID card" loading="lazy"><figcaption>Our volunteers</figcaption></figure><figure><img src="/static/img/panel-trophies.jpg" alt="Gold award plaques on a table" loading="lazy"><figcaption>Recognizing achievement</figcaption></figure><figure><img src="/static/img/meeting-room-top.jpg" alt="NISMCAA team meeting in front of a world map" loading="lazy"><figcaption>Teams in every country</figcaption></figure>
+<figure aria-hidden="true"><img src="/static/img/hero-trophies.jpg" alt="" loading="lazy"><figcaption>Awards and trophies</figcaption></figure><figure aria-hidden="true"><img src="/static/img/volunteers-seating.jpg" alt="" loading="lazy"><figcaption>Welcoming students</figcaption></figure><figure aria-hidden="true"><img src="/static/img/meeting-in-person.jpg" alt="" loading="lazy"><figcaption>Meeting in person</figcaption></figure><figure aria-hidden="true"><img src="/static/img/volunteers-teaching.jpg" alt="" loading="lazy"><figcaption>Teaching music</figcaption></figure><figure aria-hidden="true"><img src="/static/img/meeting-virtual.jpg" alt="" loading="lazy"><figcaption>Meeting online</figcaption></figure><figure aria-hidden="true"><img src="/static/img/banner-course.jpg" alt="" loading="lazy"><figcaption>Learning together</figcaption></figure><figure aria-hidden="true"><img src="/static/img/banner-id.jpg" alt="" loading="lazy"><figcaption>Our volunteers</figcaption></figure><figure aria-hidden="true"><img src="/static/img/panel-trophies.jpg" alt="" loading="lazy"><figcaption>Recognizing achievement</figcaption></figure><figure aria-hidden="true"><img src="/static/img/meeting-room-top.jpg" alt="" loading="lazy"><figcaption>Teams in every country</figcaption></figure>
+</div></div>
+
+<%- include('partials/split', { img: 'meeting-virtual.jpg', alt: 'Team in a virtual video meeting', icon: 'video', flip: true, kicker: 'For sponsors and vendors', title: 'Join our meetings as a guest', body: 'Working with NISMCAA as a sponsor or a vendor? Ask for guest access and join meetings online.', href: '/guests', label: 'Open the guest area' }) %>
+<%- include('partials/split', { img: 'meeting-room-top.jpg', alt: 'NISMCAA team meeting in front of a world map', icon: 'send', kicker: 'Contact us', title: 'We would love to hear from you', body: 'Write to <a href="mailto:info@nismcaa.com">info@nismcaa.com</a> or call ' + PHONE + '.', href: '/contact', label: 'Contact details' }) %>
+<%- include('partials/door') %>
+<%- include('partials/foot', { footBand: true }) %>
 <% } %>
-<%
-var BENEFITS = [
- ['id','Certificate of volunteering','An official NISMCAA certificate recognizing your service.'],
- ['heart','Motivation opportunities','Cash motivation opportunities for active and outstanding volunteers.'],
- ['globe','Data gifts','Data gift opportunities to keep you connected while you serve.'],
- ['send','Travel opportunities','As NISMCAA expands, selected outstanding volunteers may join our international programs.'],
- ['learn','Scholarship opportunities','Scholarship opportunities for selected volunteers and their children, where available.'],
- ['test','Knowledge and training','Training in child protection, event management and leadership.'],
- ['notes','Reference letters','Recommendation and reference letters for committed volunteers.'],
- ['id','Official ID and kit','Your NISMCAA digital ID, plus a branded T-shirt or kit where available.'],
- ['users','Networking','Meet musicians, celebrities, dignitaries and sponsors.'],
- ['video','Events and awards night','Access to NISMCAA events and the awards night.'],
- ['inbox','Event-day support','Meals and transport support on event days.'],
- ['arrow','Leadership path','Strong contributors can grow into department lead roles.'],
- ['heart','Recognition','Volunteer of the Year awards and shout-outs on our social media.'],
- ['approval','Priority for paid roles','Priority consideration when paid NISMCAA roles open up.'],
- ['learn','Music academy access','Opportunities to join academy sessions and masterclasses.'],
- ['plan','CV and portfolio','Real experience for your CV. Media volunteers can earn credits for their work.'],
- ['join','Community service','Meaningful service that strengthens your CV, including for recent graduates.'],
- ['admin','Children\'s safety first','Every volunteer is trained in child care and protection.']
-]; %>
-<div class="gain-banner" data-reveal><h2>Volunteer with NISMCAA and gain a lot</h2><p>Real rewards for your time: a certificate, scholarship and travel opportunities, training, references and priority for paid roles.</p></div>
-<div class="gain-strip" data-reveal>
-  <div><strong>Certificate</strong><span>of volunteering</span></div>
-  <div><strong>Scholarships</strong><span>for you and your children</span></div>
-  <div><strong>Travel</strong><span>on international programs</span></div>
-  <div><strong>Paid roles</strong><span>priority when they open</span></div>
-</div>
-<h2 class="section-title" data-reveal>Everything waiting for you</h2>
-<p class="muted" data-reveal>Give your time to children's music education, and grow with us. Here's what's waiting for you.</p>
-<div class="benefit-grid">
-<% BENEFITS.forEach(function(b, i){ %>
-  <div class="benefit<%= i === BENEFITS.length - 1 ? ' benefit-safe' : '' %>" data-reveal><span class="tile-ico<%= i % 2 ? ' gold' : '' %>"><%- include('partials/icon', { n: b[0], size: 24 }) %></span><div><h3><%= b[1] %></h3><p><%= b[2] %></p></div></div>
-<% }) %>
-</div>
-<p class="muted small" data-reveal>Some benefits depend on role, performance, attendance and available sponsorship.</p>
-<h2 class="section-title" data-reveal>Meet in person or online</h2>
-<div class="meet-photos" data-reveal>
-  <figure><img src="/static/img/meeting-in-person.jpg" alt="Team meeting in a conference room with NISMCAA logos on the walls" loading="lazy"><figcaption>Organizers meet in person</figcaption></figure>
-  <figure><img src="/static/img/meeting-virtual.jpg" alt="Team in a virtual video meeting" loading="lazy"><figcaption>And online, from any country</figcaption></figure>
-</div>
-<h2 class="section-title" data-reveal>What volunteers do</h2>
-<div class="meet-photos" data-reveal>
-  <figure><img src="/static/img/volunteers-seating.jpg" alt="NISMCAA volunteers guiding students to their seats at an event" loading="lazy"><figcaption>Welcoming students at our events</figcaption></figure>
-  <figure><img src="/static/img/volunteers-teaching.jpg" alt="A NISMCAA volunteer teaching music to a class" loading="lazy"><figcaption>Teaching music in the classroom</figcaption></figure>
-</div>
-<h2 class="section-title" data-reveal>Your volunteer journey</h2>
-<div class="grid steps">
-  <div class="card step"><span class="step-ico"><%- include('partials/icon', { n: 'learn', size: 28 }) %></span><h3>1. Learn</h3><p>Read the volunteer course. It is open to everyone, no sign-in needed. <a href="/course">Open the course</a>.</p></div>
-  <div class="card step"><span class="step-ico"><%- include('partials/icon', { n: 'test', size: 28 }) %></span><h3>2. Take the final test</h3><p>50 questions. To pass you need 80% overall and at least 9 of 10 on the child-protection questions.</p></div>
-  <div class="card step"><span class="step-ico"><%- include('partials/icon', { n: 'approval', size: 28 }) %></span><h3>3. Get approved</h3><p>An administrator reviews your application, confirms your country and department, and issues your volunteer ID card.</p></div>
-  <div class="card step"><span class="step-ico"><%- include('partials/icon', { n: 'join', size: 28 }) %></span><h3>4. Join the team</h3><p>Approved volunteers use the call link, chat, notes and the action plan for their country.</p></div>
-</div>
-<p class="note"><%- include('partials/icon', { n: 'heart', size: 20 }) %> <span>This is a volunteer role. There is no salary and there are no fees. NISMCAA never asks volunteers to pay anything.</span></p>
-<%- include('partials/foot') %>

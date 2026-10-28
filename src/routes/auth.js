@@ -20,6 +20,15 @@ module.exports = function (app, ctx) {
   const home = (user) => (user ? '/meeting-room' : '/sign-in');
 
   app.get('/', (req, res) => res.render('home', { title: 'Welcome' }));
+  // Public "look around" pages (no sign-in needed)
+  app.get('/enter', (req, res) => {
+    if (req.user) return res.redirect(req.user.role === 'guest' ? '/guest' : '/meeting-room');
+    res.render('enter', { title: 'Access the Meeting Room' });
+  });
+  app.get('/about', (req, res) => res.render('about', { title: 'What NISMCAA does' }));
+  app.get('/benefits', (req, res) => res.render('benefits', { title: 'Volunteer benefits' }));
+  app.get('/anthem-credits', (req, res) => { const text = require('../anthems').credits(); if (!text) return res.redirect('/'); res.render('anthem-credits', { title: 'Anthem credits', text }); });
+  app.get('/contact', (req, res) => res.render('contact', { title: 'Contact us' }));
 
   // ---------------- sign up ----------------
   app.get('/sign-up', (req, res) => {

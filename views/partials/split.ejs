@@ -1,0 +1,10 @@
+<section class="split<%= locals.flip ? ' flip' : '' %>"<% if (locals.id) { %> id="<%= id %>"<% } %>>
+  <figure class="split-pic"><img src="/static/img/<%= img %>" alt="<%= alt %>" loading="lazy"><% if (locals.icon) { %><span class="split-ico"><%- include('icon', { n: icon, size: 28 }) %></span><% } %></figure>
+  <div class="split-text">
+    <% if (locals.kicker) { %><span class="kicker"><%= kicker %></span><% } %>
+    <h2><%= title %></h2>
+    <p><%- body %></p>
+    <% if (locals.extra) { %><%- extra %><% } %>
+    <% if (locals.href) { %><p><a class="btn<%= locals.gold ? ' gold' : '' %>" href="<%= href %>"><%= label %></a></p><% } %>
+  </div>
+</section>

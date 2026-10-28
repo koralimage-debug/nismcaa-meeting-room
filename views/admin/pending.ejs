@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Waiting for approval <% if (rows.length) { %><span class="badge" style="font-size:1rem"><%= rows.length %></span><% } %></h1>
+<%- include('../partials/banner', { img: 'banner-id.jpg', alt: 'Smiling volunteer with her ID card', cap: 'Welcome new volunteers' }) %>
 <%- include('../partials/adminnav') %>
 <p class="muted">Private list. People here passed the final test (80% overall and 9 of 10 on child protection). Check the country they chose, correct it if needed, choose a department, then approve. After approval the volunteer cannot change the country.</p>
 <% rows.forEach(function(r){ %>
@@ -9,7 +10,7 @@
     <div style="flex:1;min-width:230px">
       <h3 style="margin:0"><a href="/admin/people/<%= r.id %>"><%= r.name %></a></h3>
       <dl class="kv"><dt>E-mail</dt><dd><%= r.email %></dd><dt>Phone</dt><dd><%= r.phone %></dd>
-      <dt>Country chosen</dt><dd><%= r.country_chosen %></dd>
+      <dt>Country chosen</dt><dd><%- cflag(r.country_chosen) %><%= r.country_chosen %></dd>
       <dt>Best score</dt><dd><%= r.best %> of 50 (child protection <%= r.child %> of 10)</dd>
       <dt>Date passed</dt><dd><%= fmtDateTime(r.passed_at) %></dd></dl>
     </div>

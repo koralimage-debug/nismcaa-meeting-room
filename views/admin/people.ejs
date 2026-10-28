@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>People</h1>
+<%- include('../partials/banner', { img: 'volunteers-seating.jpg', alt: 'Volunteers welcoming students', cap: 'Our volunteers, country by country' }) %>
 <%- include('../partials/adminnav') %>
 <form class="card" method="get" action="/admin/people" style="display:flex;gap:10px;flex-wrap:wrap">
   <select name="status" style="max-width:240px"><option value="">All statuses</option>
@@ -11,7 +12,7 @@
 <tr><th>Name</th><th>E-mail</th><th>Status</th><th>Country</th><th>Department</th><th>ID</th><th>Valid until</th></tr>
 <% rows.forEach(function(r){ %><tr>
   <td><a href="/admin/people/<%= r.id %>"><%= r.name %></a></td><td><%= r.email %></td><td><%= access.statusLabel(r) %></td>
-  <td><%= r.country || (r.country_chosen + ' (chosen)') %></td><td><%= r.department || '' %></td><td><%= r.volunteer_id || '' %></td><td><%= fmtDate(r.id_expires_at) %></td></tr>
+  <td><%- cflag(r.country || r.country_chosen) %><%= r.country || (r.country_chosen + ' (chosen)') %></td><td><%= r.department || '' %></td><td><%= r.volunteer_id || '' %></td><td><%= fmtDate(r.id_expires_at) %></td></tr>
 <% }) %>
 </table></div>
 <% if (!rows.length) { %><p>No people match.</p><% } %>

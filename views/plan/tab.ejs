@@ -1,8 +1,8 @@
 <%- include('../partials/head') %>
-<h1>Action plan: <%= country %></h1>
+<h1>Action plan: <%- cflag(country) %><%= country %></h1>
 <%- include('../partials/banner', { img: 'meeting-in-person.jpg', alt: 'Team meeting in a conference room', cap: 'Plan together, deliver together' }) %>
 <% if (proposed) { %><p class="note"><strong><%= proposed %></strong></p><% } %>
-<% if (isAdmin) { %><div class="tabs"><a href="/meeting-room/plan/global">Global roll-up</a><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all" class="<%= c === country ? 'on' : '' %>"><%= c %></a><% }) %></div><% } %>
+<% if (isAdmin) { %><div class="tabs"><a href="/meeting-room/plan/global">Global roll-up</a><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all" class="<%= c === country ? 'on' : '' %>"><%- cflag(c) %><%= c %></a><% }) %></div><% } %>
 <div class="tabs" aria-label="Departments">
   <a href="/meeting-room/plan/<%= cslug %>/all" class="<%= !dept ? 'on' : '' %>">All departments</a>
   <% DEPARTMENTS.forEach(function(d){ %><a href="/meeting-room/plan/<%= cslug %>/<%= slug(d) %>" class="<%= d === dept ? 'on' : '' %>"><%= d %></a><% }) %>

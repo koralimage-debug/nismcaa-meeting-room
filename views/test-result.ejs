@@ -1,5 +1,6 @@
 <%- include('partials/head') %>
 <h1>Your test result</h1>
+<%- include('partials/banner', { img: 'panel-trophies.jpg', alt: 'Gold award plaques', cap: 'Every step counts' }) %>
 <%- include('partials/journey', { step: last.passed ? 3 : 2 }) %>
 <div class="card gold result <%= last.result === 'pending' ? 'pending' : (last.passed ? 'passed' : 'failed') %>">
 <% if (last.result === 'pending') { %>

@@ -1,4 +1,5 @@
 'use strict';
+const anthems = require('./anthems');
 /**
  * Builds the Express app. createApp(config) returns { app, db, ... } so tests can
  * start many isolated copies (each with its own DATA_DIR).
@@ -51,6 +52,7 @@ async function createApp(config) {
     next();
   });
   app.get('/healthz', (req, res) => res.type('text/plain').send('ok')); // for the host's health check (no session, no database)
+  if (process.env.ANTHEM_DIR) app.use('/static/audio', express.static(process.env.ANTHEM_DIR)); // demo/testing override
   app.use('/static', express.static(path.join(config.root, 'public'), { maxAge: config.production ? '1h' : 0 }));
   app.get('/favicon.ico', (req, res) => res.redirect(301, '/static/img/logo.png'));
   app.use(express.urlencoded({ extended: false, limit: '200kb' }));
@@ -66,6 +68,13 @@ async function createApp(config) {
     L.PHONE = cfg.BUSINESS_PHONE; L.access = access; L.isAdmin = access.isAdmin(req.user);
     L.fmtDate = (s) => (s ? new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(String(s).length === 10 ? s + 'T00:00:00Z' : s)) : '');
     L.fmtDateTime = (s) => (s ? new Intl.DateTimeFormat('en-US', { timeZone: tz, year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(s)) : '');
+    const FLAG = { 'United States': 'us', 'Nigeria': 'ng', 'Canada': 'ca', 'United Arab Emirates': 'ae', 'United Kingdom': 'gb', 'Australia': 'au' };
+    L.cflag = (c) => (FLAG[c] ? `<img class="cflag" src="/static/img/flags/${FLAG[c]}.svg" alt="" width="24" height="16"> ` : '');
+    L.FLAG = FLAG;
+    L.anthemAttrs = (c) => anthems.attrs(c, FLAG);
+    L.cflagPlay = (c) => anthems.flag(c, FLAG);
+    L.anthemHint = () => anthems.hint();
+    L.anthemCredits = !!anthems.credits();
     L.pendingCount = 0;
     if (L.isAdmin) L.pendingCount = db.prepare("SELECT COUNT(*) c FROM users WHERE status='waiting'").get().c;
     L.guestPending = 0;

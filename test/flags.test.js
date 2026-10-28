@@ -84,8 +84,8 @@ test('"Behind schedule" box: right counts and owner names; all-departments summa
   assert.match(all.match(/id="behind-box">(.*?)<\/div>/s)[1], /2 red/); assert.match(all, /Overall summary by department/);
   assert.match(all, /<td><a href="\/meeting-room\/plan\/canada\/technology">Technology<\/a><\/td><td>6<\/td><td>1<\/td><td>2<\/td><td>1<\/td><td>Tech Alpha, Tech Bravo<\/td>/);
   const g = (await adm.john.get('/meeting-room/plan/global')).text;
-  assert.match(g, /<td><a href="\/meeting-room\/plan\/canada\/all">Canada<\/a><\/td><td>7<\/td><td>1<\/td><td>2<\/td><td>1<\/td><td>2<\/td><td>2<\/td>/);
-  assert.match(g, /<td><a href="\/meeting-room\/plan\/australia\/all">Australia<\/a><\/td><td>0<\/td>/);
+  assert.match(g, /<td><a href="\/meeting-room\/plan\/canada\/all"><img class="cflag"[^>]*> Canada<\/a><\/td><td>7<\/td><td>1<\/td><td>2<\/td><td>1<\/td><td>2<\/td><td>2<\/td>/);
+  assert.match(g, /<td><a href="\/meeting-room\/plan\/australia\/all"><img class="cflag"[^>]*> Australia<\/a><\/td><td>0<\/td>/);
   assert.match(g, /<th>Total<\/th><th>229<\/th><th>1<\/th>/);
   assert.equal((await techA.c.get('/meeting-room/plan/global')).status, 403);
   assert.equal((await other.c.get('/meeting-room/plan/canada/all')).status, 403);

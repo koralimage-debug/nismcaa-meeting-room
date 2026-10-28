@@ -1,0 +1,21 @@
+<section class="door-scene" aria-labelledby="door-title">
+  <h2 id="door-title"><%= locals.heading || 'Ready to join us?' %></h2>
+  <p class="door-line"><%= locals.line || 'Tap the lock to open the door.' %></p>
+  <div class="door-frame<%= locals.open ? ' open' : '' %>" data-door>
+    <img class="door-wall" src="/static/img/door-closed.jpg" alt="Double doors of the NISMCAA Conference Room under a brass plaque with the NISMCAA logo" width="864" height="1152" loading="lazy">
+    <div class="door-room"><img src="/static/img/door-room.jpg" alt="Inside the conference room: a long table, navy chairs and a lit chandelier" loading="lazy"></div>
+    <div class="door-leaf left" aria-hidden="true"><img src="/static/img/door-closed.jpg" alt="" loading="lazy"></div>
+    <div class="door-leaf right" aria-hidden="true"><img src="/static/img/door-closed.jpg" alt="" loading="lazy"></div>
+    <% if (!locals.open) { %>
+    <svg class="door-lock" viewBox="0 0 64 80" width="48" height="60" aria-hidden="true" focusable="false">
+      <defs><linearGradient id="gold-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e4a0"/><stop offset=".5" stop-color="#d4a62c"/><stop offset="1" stop-color="#8a6a0a"/></linearGradient></defs>
+      <path class="shackle" d="M18 36V24a14 14 0 0 1 28 0v12" fill="none" stroke="url(#gold-g)" stroke-width="7" stroke-linecap="round"/>
+      <rect x="8" y="34" width="48" height="40" rx="9" fill="url(#gold-g)" stroke="#5c4506" stroke-width="2"/>
+      <circle cx="32" cy="52" r="5.5" fill="#2a1a08"/><rect x="29.5" y="54" width="5" height="12" rx="2" fill="#2a1a08"/>
+    </svg>
+    <a class="btn gold door-btn" href="/enter" data-door-open>Open the door</a>
+    <% } %>
+  </div>
+  <% if (!locals.open) { %><p class="door-links"><a href="/enter">Access the Meeting Room (sign up or sign in)</a><br><a href="/sign-up">Volunteer sign-up</a> &middot; <a href="/guests/sign-up">Guest sign-up (sponsors and vendors)</a> &middot; <a href="/sign-in">Sign in</a></p>
+  <p class="small door-note">Volunteering is free. NISMCAA never asks volunteers to pay anything.</p><% } %>
+</section>

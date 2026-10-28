@@ -1,9 +1,10 @@
 <%- include('../partials/head') %>
 <h1>Head seats</h1>
+<%- include('../partials/banner', { img: 'meeting-in-person.jpg', alt: 'Team in a conference room', cap: 'Leaders for every department' }) %>
 <%- include('../partials/adminnav') %>
 <p class="muted">Every department in every country starts with an empty Head seat. Until a head is assigned, the administrators act as head. A head must be an approved volunteer of that country who passed the course.</p>
 <% COUNTRIES.forEach(function(c){ %>
-<h2 id="<%= encodeURIComponent(c) %>"><%= c %></h2>
+<h2 id="<%= encodeURIComponent(c) %>"><%- cflag(c) %><%= c %></h2>
 <div class="table-wrap"><table><tr><th>Department</th><th>Head</th><th>Assign or change</th></tr>
 <% DEPARTMENTS.forEach(function(d){ var s = seats.find(function(x){ return x.country === c && x.department === d; }); %>
 <tr><td><%= d %></td><td><%= s && s.head_name ? s.head_name : 'Empty seat (admins act as head)' %></td>

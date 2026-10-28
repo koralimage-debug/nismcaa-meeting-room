@@ -1,0 +1,9 @@
+<h2 class="section-title">Your volunteer journey</h2>
+<div class="step-rows">
+<% [['banner-course.jpg','Volunteers studying the course together','learn','1. Learn','Read the volunteer course. It is open to everyone, no sign-in needed. <a href="/course">Open the course</a>.'],
+    ['meeting-virtual.jpg','Team taking part in an online meeting','test','2. Take the final test','50 questions. To pass you need 80% overall and at least 9 of 10 on the child-protection questions.'],
+    ['banner-id.jpg','Smiling volunteer with her NISMCAA ID card','approval','3. Get approved','An administrator reviews your application, confirms your country and department, and issues your volunteer ID card.'],
+    ['volunteers-seating.jpg','NISMCAA volunteers welcoming students at an event','join','4. Join the team','Approved volunteers use the call link, chat, notes and the action plan for their country.']].forEach(function(s, i){ %>
+  <div class="step-row<%= i % 2 ? ' flip' : '' %>"><span class="step-photo"><img src="/static/img/<%= s[0] %>" alt="<%= s[1] %>" loading="lazy"></span><div class="step-text"><span class="step-ico"><%- include('icon', { n: s[2], size: 26 }) %></span><h3><%= s[3] %></h3><p><%- s[4] %></p></div></div>
+<% }) %>
+</div>

@@ -66,6 +66,25 @@ const ADMIN_PASSWORD = 'Demo-Admin-Password-1';
   u.ap = await person({ name: 'Test Hana Ibrahim', email: 'hana.app@example.test', status: 'applicant', chosen: 'United Arab Emirates', score: 31, child: 6, ago: 5000 });
   u.in = await person({ name: 'Test Ian Novak', email: 'ian.interest@example.test', status: 'interest', chosen: "My country isn't listed" });
 
+  // guests (sponsors and vendors) and sample meetings
+  const guest = async (name, org, kind, email, status, note) => {
+    const r = db.prepare("INSERT INTO users(email,name,pw_hash,role,status,age_confirmed,created_at) VALUES (?,?,?, 'guest', ?, 1, ?)").run(email, name, await hash(PASSWORD), status, now());
+    db.prepare('INSERT INTO guests(user_id,organization,kind,country,offer_note) VALUES (?,?,?,?,?)').run(r.lastInsertRowid, org, kind, '', note);
+    return Number(r.lastInsertRowid);
+  };
+  const g = {};
+  g.sponsor = await guest('Test Sam Rivera', 'Rivera Family Foundation (TEST)', 'sponsor', 'sponsor.demo@example.test', 'guest_approved', 'We fund trophies and scholarships for young musicians.');
+  g.vendor = await guest('Test Vera Chen', 'Bright Stage Rentals (TEST)', 'vendor', 'vendor.demo@example.test', 'guest_approved', 'Stage, sound and lighting for school events.');
+  g.pending = await guest('Test Paul Okafor', 'Okafor Print Shop (TEST)', 'vendor', 'pending.guest@example.test', 'guest_pending', 'We print programs and certificates.');
+  const { localToUtcIso } = require('../src/meetings');
+  const when = (days, time) => { const d = new Date(Date.now() + days * 86400e3).toISOString().slice(0, 10); return localToUtcIso(d, time, 'America/New_York'); };
+  const meet = db.prepare('INSERT INTO meetings(title,audience,country,starts_at,tz,duration_min,agenda,link,created_by,created_at) VALUES (?,?,?,?,?,60,?,?,?,?)');
+  meet.run('Sponsor briefing: awards night (TEST)', 'sponsors', null, when(4, '14:00'), 'America/New_York', '1. Welcome and thank you\n2. Awards night plan and dates\n3. Sponsor recognition options\n4. Questions', 'https://meet.jit.si/NISMCAA-TEST-SPONSORS', admin, now());
+  meet.run('Vendor planning call: stage and sound (TEST)', 'vendors', null, when(6, '11:00'), 'America/New_York', '1. Event dates and venues\n2. Equipment needs\n3. Quotes and deadlines', 'https://meet.jit.si/NISMCAA-TEST-VENDORS', admin, now());
+  const inv = meet.run('One-on-one: partnership check-in (TEST)', 'invited', null, when(9, '16:30'), 'America/New_York', 'A short check-in about next steps.', 'https://meet.jit.si/NISMCAA-TEST-ONE-ON-ONE', admin, now());
+  db.prepare('INSERT INTO meeting_invites(meeting_id,user_id) VALUES (?,?)').run(inv.lastInsertRowid, g.sponsor);
+  meet.run('US volunteer team call (TEST)', 'volunteers', 'United States', when(3, '19:00'), 'America/New_York', 'Weekly check-in for the US team.', 'https://meet.jit.si/NISMCAA-TEST-US-VOLUNTEERS', admin, now());
+
   // chat
   const msg = db.prepare('INSERT INTO messages(room,user_id,body,created_at) VALUES (?,?,?,?)');
   const t = (m) => new Date(Date.now() - m * 60000).toISOString();
@@ -101,5 +120,6 @@ const ADMIN_PASSWORD = 'Demo-Admin-Password-1';
   console.log('Demo data loaded into', config.dataDir);
   console.log(`Admin sign-in (demo only): interschoolmusic@gmail.com / ${ADMIN_PASSWORD}`);
   console.log(`Fake volunteers (demo only): e.g. ada.us@example.test / ${PASSWORD}`);
+  console.log(`Fake guests (demo only): sponsor.demo@example.test and vendor.demo@example.test / ${PASSWORD}`);
   close();
 })().catch((e) => { console.error(e); process.exit(1); });

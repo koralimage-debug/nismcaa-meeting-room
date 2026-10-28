@@ -18,7 +18,7 @@ module.exports = function (app, ctx) {
   };
 
   // ---------------- Guests ----------------
-  const guestRows = () => db.prepare(`SELECT u.id, u.name, u.email, u.status, u.created_at, g.organization, g.kind, g.offer_note
+  const guestRows = () => db.prepare(`SELECT u.id, u.name, u.email, u.status, u.role, u.created_at, g.organization, g.kind, g.offer_note
     FROM users u JOIN guests g ON g.user_id=u.id WHERE u.role='guest'
     ORDER BY CASE u.status WHEN 'guest_pending' THEN 0 ELSE 1 END, u.created_at DESC`).all();
   const guestPage = (res, extra = {}) => res.render('admin/guests', { title: 'Guests', rows: guestRows(), temp: null, tempFor: null, ...extra });
