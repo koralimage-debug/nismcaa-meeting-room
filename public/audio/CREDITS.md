@@ -18,4 +18,10 @@ Australia - "Advance Australia Fair"
 Recording: United States Navy Band (public domain). Music: Peter Dodds McCormick, public domain.
 Source: https://commons.wikimedia.org/wiki/File:U.S._Navy_Band,_Advance_Australia_Fair_(instrumental).ogg
 
-Anthems for Nigeria and the United Arab Emirates will be added when recordings are ready.
+Nigeria - "Nigeria, We Hail Thee"
+Recording: original instrumental arrangement made for NISMCAA (brass, strings and piano, no vocals), created with our own synthesized instruments. No recording was used. The tune follows the published notation of the anthem (1960).
+Reference: https://commons.wikimedia.org/wiki/File:Nigeria_We_Hail_Thee_Sheet_Music.gif
+
+United Arab Emirates - "Ishy Bilady"
+Recording: United States Navy Band (instrumental, public domain performance).
+Source: https://commons.wikimedia.org/wiki/File:UAE_national_anthem.ogg
