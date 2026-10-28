@@ -12,7 +12,7 @@
   ready(function () {
     /* 1. Fade/slide in on scroll */
     if (!reduce && 'IntersectionObserver' in window) {
-      var targets = $$('main .card, main .grid > *, main .journey .jstep, main .section-title, main .question, main .behind, main .tabs, main .table-wrap, main .note, main .cp-banner, main .course-text h3.lesson');
+      var targets = $$('main .card, main .grid > *, main .journey .jstep, main .section-title, main .question, main .behind, main .tabs, main .table-wrap, main .note, main .cp-banner, main .course-text h3.lesson, main [data-reveal]');
       targets = targets.filter(function (t, i) { return targets.indexOf(t) === i && !t.closest('.hero'); });
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -26,6 +26,9 @@
         io.observe(t);
       });
     }
+
+    /* Safety net: never leave anything hidden if the observer is slow or misses an element */
+    setTimeout(function () { $$('[data-reveal]').forEach(function (t) { t.classList.add('in'); }); }, 3500);
 
     /* 2. Header gets compact once you scroll */
     var head = $('#sitehead');
