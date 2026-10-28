@@ -1,5 +1,6 @@
 <%- include('partials/head') %>
 <h1>Meeting notes</h1>
+<%- include('partials/banner', { img: 'meeting-in-person.jpg', alt: 'Team meeting in a conference room', cap: 'Your notes, from every meeting' }) %>
 <p class="muted">Type your notes by hand. There are no automatic transcripts or summaries. Private notes are only seen by you and the administrators. Notes shared with your country are seen by members of that country.</p>
 <form class="card stack" method="post" action="/meeting-room/notes">
   <input type="hidden" name="_csrf" value="<%= csrf %>">

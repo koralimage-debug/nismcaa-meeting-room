@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Global roll-up</h1>
+<%- include('../partials/banner', { img: 'meeting-room-top.jpg', alt: 'Global team in front of a world map', cap: 'One plan across every country' }) %>
 <p class="muted">All six countries, as of <%= fmtDate(today) %>. Administrators only.</p>
 <div class="tabs"><% COUNTRIES.forEach(function(c){ %><a href="/meeting-room/plan/<%= slug(c) %>/all"><%= c %></a><% }) %><a href="/meeting-room/plan/global.csv">Export totals (CSV)</a><a href="/meeting-room/plan/log">Change log</a></div>
 <div class="table-wrap"><table>

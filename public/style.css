@@ -247,7 +247,7 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
 
 /* ---------- Sign in layout ---------- */
 .auth { display:grid; gap:24px; grid-template-columns:1fr; align-items:start; }
-.auth-panel { display:none; border-radius:24px; padding:34px 28px; color:#fff; min-height:380px; position:relative; overflow:hidden; isolation:isolate; background:linear-gradient(180deg,rgba(7,26,64,.7),rgba(7,26,64,.92)), url(/static/img/panel-trophies.jpg) center/cover; box-shadow:var(--shadow-lg); border-bottom:5px solid var(--gold); }
+.auth-panel { display:none; border-radius:24px; padding:34px 28px; color:#fff; min-height:380px; position:relative; overflow:hidden; isolation:isolate; background:linear-gradient(180deg,rgba(7,26,64,.7),rgba(7,26,64,.92)), url(/static/img/meeting-room-top.jpg) center/cover; box-shadow:var(--shadow-lg); border-bottom:5px solid var(--gold); }
 .auth-panel img { filter:drop-shadow(0 6px 14px rgba(0,0,0,.5)); animation:floaty 6s ease-in-out infinite; }
 .auth-quote { font-family:Georgia,serif; font-size:1.6rem; line-height:1.25; color:var(--gold-light); margin:1em 0 .4em; } .auth-sub { color:#dfe6f5; }
 @media (min-width:860px) { .auth { grid-template-columns:5fr 6fr; } .auth-panel { display:block; position:sticky; top:150px; } }
@@ -338,3 +338,6 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
 .gain-strip strong{display:block;font-size:1.25rem;font-family:Georgia,serif}
 .gain-strip span{font-size:.9rem}
 @media(max-width:700px){.gain-strip{grid-template-columns:repeat(2,1fr)}.gain-banner h2{font-size:1.35rem}}
+
+.banner-slim{max-height:190px}.banner-slim img{height:190px}
+@media(max-width:700px){.banner-slim img{height:130px}}

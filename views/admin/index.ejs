@@ -1,5 +1,6 @@
 <%- include('../partials/head') %>
 <h1>Admin</h1>
+<%- include('../partials/banner', { img: 'meeting-room-top.jpg', alt: 'Global team in front of a world map', cap: 'Leading NISMCAA teams in every country' }) %>
 <%- include('../partials/adminnav') %>
 <div class="grid stats">
   <div class="card gold stat"><span class="tile-ico gold"><%- include('../partials/icon', { n: 'inbox', size: 26 }) %></span><h3>Waiting for approval</h3><p class="stat-num"><strong><%= counts.waiting %></strong></p><a class="btn" href="/admin/pending">Review</a></div>
