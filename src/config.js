@@ -54,7 +54,7 @@ function loadConfig(env = process.env) {
     production: env.NODE_ENV === 'production',
     adminEmails: (env.ADMIN_EMAILS || 'interschoolmusic@gmail.com,abisade@nismcaa.com')
       .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean),
-    adminNames: { 'interschoolmusic@gmail.com': 'John Adebowale', 'abisade@nismcaa.com': 'Abisade Adebowale' },
+    adminNames: { 'interschoolmusic@gmail.com': 'John Adebowale', 'abisade@nismcaa.com': 'Abisade Adebowale', 'adebowaleabisolami@gmail.com': 'Abisolami Adebowale' },
     todayOverride: env.TODAY_OVERRIDE || '',
     displayTz: env.DISPLAY_TZ || 'America/New_York',
     courseFile: path.join(root, 'content', 'COURSE_TEXT.txt'),
