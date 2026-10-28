@@ -15,6 +15,17 @@
     <ul class="hero-chips" aria-label="At a glance"><li>6 countries</li><li>7 child-protection lessons</li><li>Free to volunteer</li><li>18 volunteer benefits</li></ul>
   </div>
 </section>
+<% if (!user || user.role === 'guest' || isAdmin) { %>
+<section class="guest-band" aria-labelledby="guest-title">
+  <img src="/static/img/meeting-in-person.jpg" alt="Business meeting in a conference room with NISMCAA logos on the walls">
+  <div class="guest-band-text">
+    <h2 id="guest-title">Sponsors and Vendors</h2>
+    <p>Working with NISMCAA as a sponsor or a vendor? Join our meetings online as a guest.</p>
+    <p class="cta"><% if (user && user.role === 'guest') { %><a class="btn gold big" href="/guest">Open the Guest Meeting Room</a>
+      <% } else { %><a class="btn gold big" href="/guests/sign-up">Guest sign up</a> <a class="btn ghost big on-dark" href="/guests/sign-in">Guest sign in</a><% } %></p>
+  </div>
+</section>
+<% } %>
 <%
 var BENEFITS = [
  ['id','Certificate of volunteering','An official NISMCAA certificate recognizing your service.'],

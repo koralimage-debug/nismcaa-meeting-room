@@ -1,0 +1,23 @@
+<%- include('../partials/head') %>
+<h1>Guests</h1>
+<%- include('../partials/adminnav') %>
+<p class="muted">Sponsors and vendors who asked for guest access. Guests only see the meetings you address to them.</p>
+<% if (temp) { %><div class="card gold"><h3>Temporary password for <%= tempFor %></h3><p>Shown once. Give it to them privately. They must choose a new one at sign-in.</p><p><code><%= temp %></code></p></div><% } %>
+<% if (!rows.length) { %><div class="card"><p>No guests yet.</p></div><% } %>
+<% rows.forEach(function(r){ %>
+<div class="card guest-row <%= r.status === 'guest_pending' ? 'gold' : '' %>">
+  <div class="guest-info">
+    <h3><%= r.organization %> <span class="pill <%= r.kind %>"><%= r.kind === 'sponsor' ? 'Sponsor' : 'Vendor' %></span></h3>
+    <p><strong><%= r.name %></strong> &middot; <%= r.email %> &middot; <span class="muted">signed up <%= fmtDate(r.created_at) %></span></p>
+    <% if (r.offer_note) { %><p class="muted">&ldquo;<%= r.offer_note %>&rdquo;</p><% } %>
+    <p>Status: <strong><%= access.statusLabel(r) %></strong></p>
+  </div>
+  <div class="guest-actions">
+    <% [['approve', 'gold', r.status !== 'guest_approved', r.status === 'guest_pending' ? 'Approve' : 'Approve again'], ['reject', 'red', r.status === 'guest_pending', 'Reject'], ['suspend', 'red', r.status === 'guest_approved', 'Suspend']].forEach(function(a){ if (a[2]) { %>
+      <form method="post" action="/admin/guests/<%= r.id %>/<%= a[0] %>"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn <%= a[1] %>" type="submit"><%= a[3] %></button></form>
+    <% } }) %>
+    <form method="post" action="/admin/guests/<%= r.id %>/reset-password"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn ghost small" type="submit">Reset password</button></form>
+  </div>
+</div>
+<% }) %>
+<%- include('../partials/foot') %>

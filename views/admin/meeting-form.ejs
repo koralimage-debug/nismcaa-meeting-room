@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+<h1><%= v.id ? 'Edit meeting' : 'New meeting' %></h1>
+<%- include('../partials/adminnav') %>
+<% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
+<form class="card stack" method="post" action="<%= v.id ? '/admin/meetings/' + v.id : '/admin/meetings' %>" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <label for="title">Meeting title</label>
+  <input id="title" name="title" type="text" required maxlength="120" value="<%= v.title %>">
+  <label for="audience">Who is it for?</label>
+  <select id="audience" name="audience" data-audience>
+    <% Object.keys(AUDIENCES).forEach(function(k){ %><option value="<%= k %>" <%= v.audience === k ? 'selected' : '' %>><%= AUDIENCES[k] %></option><% }) %>
+  </select>
+  <div data-show-for="volunteers">
+    <label for="country">Volunteer team</label>
+    <select id="country" name="country"><option value="">All country teams</option>
+      <% COUNTRIES.forEach(function(c){ %><option <%= v.country === c ? 'selected' : '' %>><%= c %></option><% }) %></select>
+  </div>
+  <div data-show-for="invited">
+    <label>Which guests?</label>
+    <% if (!guests.length) { %><p class="muted">No approved guests yet. Approve guests on the Guests page first.</p><% } %>
+    <% guests.forEach(function(g){ %><label class="choice-opt"><input type="checkbox" name="invitees" value="<%= g.id %>" <%= v.invitees.indexOf(g.id) >= 0 ? 'checked' : '' %>> <%= g.organization %> <span class="muted">(<%= g.name %>, <%= g.kind %>)</span></label><% }) %>
+  </div>
+  <div class="two">
+    <div><label for="date">Date</label><input id="date" name="date" type="date" required value="<%= v.date %>"></div>
+    <div><label for="time">Time</label><input id="time" name="time" type="time" required value="<%= v.time %>"></div>
+  </div>
+  <label for="tz">Time zone</label>
+  <select id="tz" name="tz"><% zones.forEach(function(z){ %><option value="<%= z[0] %>" <%= v.tz === z[0] ? 'selected' : '' %>><%= z[1] %></option><% }) %></select>
+  <label for="agenda">Agenda <span class="hint">(optional)</span></label>
+  <textarea id="agenda" name="agenda" rows="5" maxlength="4000"><%= v.agenda %></textarea>
+  <label for="link">Call link <span class="hint">(Zoom, Google Meet or Jitsi; starts with https://)</span></label>
+  <input id="link" name="link" type="url" required value="<%= v.link %>" placeholder="https://meet.google.com/...">
+  <p><button class="btn gold big" type="submit">Save meeting</button> <a class="btn ghost big" href="/admin/meetings">Cancel</a></p>
+</form>
+<%- include('../partials/foot') %>

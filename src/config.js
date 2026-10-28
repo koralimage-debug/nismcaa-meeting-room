@@ -25,6 +25,16 @@ const DEPARTMENTS = [
   'Academy & Education', 'Finance & Admin', 'Technology', 'International & Diplomacy',
 ];
 
+// Guests (sponsors and vendors): separate from volunteers.
+const GUEST_KINDS = { sponsor: 'Sponsor', vendor: 'Vendor' };
+const AUDIENCES = { volunteers: 'Volunteers', sponsors: 'All sponsors', vendors: 'All vendors', invited: 'Specific guests' };
+// Time zones offered when scheduling a meeting (US first; Eastern is the default).
+const MEETING_ZONES = [
+  ['America/New_York', 'Eastern Time (US)'], ['America/Chicago', 'Central Time (US)'], ['America/Denver', 'Mountain Time (US)'],
+  ['America/Los_Angeles', 'Pacific Time (US)'], ['America/Anchorage', 'Alaska Time (US)'], ['Pacific/Honolulu', 'Hawaii Time (US)'],
+  ['UTC', 'UTC'], ['Africa/Lagos', 'West Africa Time (Lagos)'], ['Europe/London', 'London'], ['Asia/Dubai', 'Dubai'], ['Australia/Sydney', 'Sydney'],
+];
+
 const PLAN_STATUSES = ['Not started', 'In progress', 'Blocked', 'On hold', 'Done'];
 
 // The one business phone number (never use any other).
@@ -60,4 +70,6 @@ function loadConfig(env = process.env) {
   };
 }
 
-module.exports = { loadConfig, COUNTRIES, NOT_LISTED, DEPARTMENTS, PLAN_STATUSES, BUSINESS_PHONE, slug };
+module.exports = {
+  GUEST_KINDS, AUDIENCES, MEETING_ZONES,
+  loadConfig, COUNTRIES, NOT_LISTED, DEPARTMENTS, PLAN_STATUSES, BUSINESS_PHONE, slug };

@@ -1,0 +1,23 @@
+<%- include('../partials/head') %>
+<h1>Meetings</h1>
+<%- include('../partials/adminnav') %>
+<p><a class="btn gold big" href="/admin/meetings/new">New meeting</a></p>
+<% function list(items){ items.forEach(function(m){ %>
+<div class="card guest-row">
+  <div class="guest-info">
+    <h3><%= m.title %> <span class="pill aud-<%= m.audience %>"><%= m.label %></span></h3>
+    <p><strong><%= m.when %></strong> <span class="muted">(<%= m.utc %>)</span></p>
+    <% if (m.invited.length) { %><p class="muted">Invited: <%= m.invited.map(function(i){ return i.organization; }).join(', ') %></p><% } %>
+    <% if (m.agenda) { %><p class="agenda muted"><%= m.agenda %></p><% } %>
+  </div>
+  <div class="guest-actions">
+    <a class="btn small" href="<%= m.link %>" target="_blank" rel="noopener noreferrer">Open call link</a>
+    <a class="btn ghost small" href="/admin/meetings/<%= m.id %>/edit">Edit</a>
+    <form method="post" action="/admin/meetings/<%= m.id %>/delete"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn red small" type="submit">Delete</button></form>
+  </div>
+</div>
+<% }) } %>
+<h2>Upcoming</h2>
+<% if (!upcoming.length) { %><div class="card"><p>No upcoming meetings. Tap New meeting to add one.</p></div><% } list(upcoming); %>
+<% if (past.length) { %><h2>Earlier</h2><% list(past); } %>
+<%- include('../partials/foot') %>

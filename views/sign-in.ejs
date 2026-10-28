@@ -2,15 +2,18 @@
 <div class="auth">
   <aside class="auth-panel" aria-hidden="true">
     <img src="/static/img/logo-sm.png" alt="" width="72" height="72">
-    <p class="auth-quote">Volunteers make the music and the learning happen.</p>
-    <p class="auth-sub">Sign in to join your country team.</p>
+    <% if (guest) { %><p class="auth-quote">Thank you for supporting children's music education.</p>
+    <p class="auth-sub">Sign in to see your meetings.</p>
+    <% } else { %><p class="auth-quote">Volunteers make the music and the learning happen.</p>
+    <p class="auth-sub">Sign in to join your country team.</p><% } %>
   </aside>
   <div class="auth-main">
-<h1>Sign in</h1>
+<h1><%= guest ? 'Guest sign in' : 'Sign in' %></h1>
 <% if (error) { %><div class="flash err" role="alert"><%= error %></div><% } %>
 <form class="card stack" method="post" action="/sign-in">
   <input type="hidden" name="_csrf" value="<%= csrf %>">
   <input type="hidden" name="next" value="<%= next %>">
+  <% if (guest) { %><input type="hidden" name="guest" value="1"><% } %>
   <label for="email">E-mail (your sign-in ID)</label>
   <input id="email" name="email" type="email" required autocomplete="username" value="<%= email %>">
   <label for="password">Password</label>
@@ -18,7 +21,8 @@
   <p><button class="btn gold" type="submit">Sign in</button></p>
   <p class="muted">Forgot your password? We do not send e-mail from this site. Ask a NISMCAA administrator to reset it for you.</p>
 </form>
-<p>New here? <a href="/sign-up">Sign up to volunteer</a>.</p>
+<% if (guest) { %><p>New guest? <a href="/guests/sign-up">Ask for access</a>. Volunteer? <a href="/sign-in">Volunteer sign in</a>.</p>
+<% } else { %><p>New here? <a href="/sign-up">Sign up to volunteer</a>. Sponsor or vendor? <a href="/guests">Guest page</a>.</p><% } %>
   </div>
 </div>
 <%- include('partials/foot') %>

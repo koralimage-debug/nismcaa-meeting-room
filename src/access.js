@@ -4,6 +4,10 @@ const { COUNTRIES } = require('./config');
 
 const isAdmin = (u) => !!u && u.role === 'admin';
 
+const isGuest = (u) => !!u && u.role === 'guest';
+/** An approved sponsor or vendor (may open the Guest Meeting Room). */
+const hasGuestAccess = (u) => isGuest(u) && u.status === 'guest_approved';
+
 /** VALID | EXPIRED | ENDED | null (no ID yet) */
 function idState(u, nowMs = Date.now()) {
   if (!u || !u.volunteer_id) return null;
@@ -21,6 +25,7 @@ function hasRoomAccess(u) {
 
 function statusLabel(u) {
   if (isAdmin(u)) return 'Administrator';
+  if (isGuest(u)) return ({ guest_pending: 'Waiting for approval', guest_approved: 'Approved guest', guest_rejected: 'Not approved at this time', guest_suspended: 'Suspended' })[u.status] || u.status;
   switch (u.status) {
     case 'applicant': return 'Applicant (final test not passed yet)';
     case 'interest': return 'Interest only (your country is not listed yet)';
@@ -41,4 +46,4 @@ function allowedCountries(u) {
   return u && u.country ? [u.country] : [];
 }
 
-module.exports = { isAdmin, idState, hasRoomAccess, statusLabel, allowedCountries };
+module.exports = { isGuest, hasGuestAccess, isAdmin, idState, hasRoomAccess, statusLabel, allowedCountries };

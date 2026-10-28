@@ -4,6 +4,8 @@ const path = require('path');
 const { now, audit, getSetting } = require('../db');
 const { COUNTRIES, slug } = require('../config');
 const { idState, hasRoomAccess, isAdmin } = require('../access');
+const { meetingsFor } = require('../meetings');
+const access = require('../access');
 const { renderCardPng, pngToPdf } = require('../idcard');
 
 const COUNTRY_BY_SLUG = Object.fromEntries(COUNTRIES.map((c) => [slug(c), c]));
@@ -31,10 +33,11 @@ module.exports = function (app, ctx) {
   // ---------------- landing ----------------
   app.get('/meeting-room', needLogin, (req, res) => {
     const u = req.user;
+    if (access.isGuest(u)) return res.redirect('/guest'); // sponsors and vendors have their own, simpler page
     if (!hasRoomAccess(u)) return res.render('room-status', { title: 'Meeting Room', state: idState(u) });
     res.locals.mainTab = 'room';
     const links = isAdmin(u) ? COUNTRIES.map((c) => ({ country: c, url: callLinkFor(u, c) })).filter((l) => l.url) : [];
-    res.render('room', { title: 'Meeting Room', callLink: isAdmin(u) ? getSetting(db, 'call_link_main') : callLinkFor(u), links });
+    res.render('room', { title: 'Meeting Room', scheduled: meetingsFor(db, u, access).upcoming, callLink: isAdmin(u) ? getSetting(db, 'call_link_main') : callLinkFor(u), links });
   });
 
   // ---------------- chat ----------------

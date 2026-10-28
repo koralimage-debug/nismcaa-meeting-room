@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+<h1>Guest Meeting Room</h1>
+<% if (!approved) { %>
+<div class="card gold guest-card">
+  <% if (user.status === 'guest_pending') { %><h2>Waiting for approval</h2><p>Thank you, <%= user.name.split(' ')[0] %>. An NISMCAA administrator will approve your request soon. Please sign in again later.</p>
+  <% } else if (user.status === 'guest_suspended') { %><h2>Access paused</h2><p>Your guest access is paused. Please contact info@nismcaa.com.</p>
+  <% } else { %><h2>Not approved at this time</h2><p>Questions? info@nismcaa.com.</p><% } %>
+</div>
+<% } else if (!meetings.length) { %>
+<div class="card guest-card"><h2>No meetings yet</h2><p>You have no upcoming meetings. When NISMCAA schedules one for you, it will show here.</p></div>
+<% } else { meetings.forEach(function(m){ %>
+<div class="card guest-meeting">
+  <h2><%= m.title %></h2>
+  <p class="when"><%- include('partials/icon', { n: 'clock', size: 22 }) %> <strong><%= m.when %></strong><br><span class="muted"><%= m.zoneName %> &middot; <%= m.utc %></span></p>
+  <% if (m.agenda) { %><h3>Agenda</h3><p class="agenda"><%= m.agenda %></p><% } %>
+  <p><a class="btn gold big" href="<%= m.link %>" target="_blank" rel="noopener noreferrer">Join the meeting</a></p>
+</div>
+<% }) } %>
+<%- include('partials/foot') %>

@@ -20,6 +20,10 @@
 </div></header>
 <nav class="main" aria-label="Main"><div class="wrap">
   <a href="/" class="<%= path === '/' ? 'on' : '' %>">Home</a>
+<% if (user && user.role === 'guest') { %>
+  <a href="/guest" class="<%= path === '/guest' ? 'on' : '' %>">Meeting Room</a>
+  <form method="post" action="/sign-out"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="linklike" type="submit">Sign out</button></form>
+<% } else { %>
   <a href="/course" class="<%= path.startsWith('/course') ? 'on' : '' %>">Volunteer course</a>
   <% if (user) { %>
     <a href="/meeting-room" class="<%= path === '/meeting-room' ? 'on' : '' %>">Meeting Room</a>
@@ -29,13 +33,15 @@
       <a href="/meeting-room/plan" class="<%= path.startsWith('/meeting-room/plan') || path.startsWith('/meeting-room/task') ? 'on' : '' %>">Action plan</a>
     <% } %>
     <% if (user.volunteer_id && user.status !== 'ended') { %><a href="/meeting-room/id-card" class="<%= path.startsWith('/meeting-room/id-card') ? 'on' : '' %>">My ID card</a><% } %>
-    <% if (isAdmin) { %><a href="/admin/pending" class="<%= path.startsWith('/admin') ? 'on' : '' %>">Admin<% if (pendingCount) { %><span class="badge" title="Waiting for approval"><%= pendingCount %></span><% } %></a><% } %>
+    <% if (isAdmin) { %><a href="/admin/pending" class="<%= path.startsWith('/admin') ? 'on' : '' %>">Admin<% if (pendingCount + guestPending) { %><span class="badge" title="Waiting for approval"><%= pendingCount + guestPending %></span><% } %></a><% } %>
     <form method="post" action="/sign-out"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="linklike" type="submit">Sign out (<%= user.name.split(' ')[0] %>)</button></form>
   <% } else { %>
     <a href="/meeting-room">Meeting Room</a>
+    <a href="/guests" class="<%= path.startsWith('/guests') ? 'on' : '' %>">Sponsors &amp; Vendors</a>
     <a href="/sign-in" class="<%= path === '/sign-in' ? 'on' : '' %>">Sign in</a>
     <a href="/sign-up" class="<%= path === '/sign-up' ? 'on' : '' %>">Sign up</a>
   <% } %>
+<% } %>
 </div></nav>
 </div>
 <main class="wrap" id="main">

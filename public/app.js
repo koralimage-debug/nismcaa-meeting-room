@@ -35,6 +35,13 @@
       onScroll(); setH(); window.addEventListener('scroll', function () { onScroll(); setH(); }, { passive: true }); window.addEventListener('resize', setH);
     }
 
+    /* Meeting form: show only the fields that fit the chosen audience */
+    var aud = $('[data-audience]');
+    if (aud) {
+      var sync = function () { $$('[data-show-for]').forEach(function (el) { el.hidden = el.getAttribute('data-show-for') !== aud.value; }); };
+      aud.addEventListener('change', sync); sync();
+    }
+
     /* 3. Show / hide password */
     $$('input[type=password]').forEach(function (inp) {
       var wrap = document.createElement('span'); wrap.className = 'pw';

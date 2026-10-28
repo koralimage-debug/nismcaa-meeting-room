@@ -342,3 +342,28 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
 .banner-slim{max-height:190px}.banner-slim img{height:190px}
 @media(max-width:700px){.banner-slim img{height:130px}}
 .banner-slim img{object-position:center 28%}
+
+/* ---- Guests (sponsors and vendors): kept simple ---- */
+.guest-band{display:grid;grid-template-columns:1fr 1fr;margin:22px 0;border-radius:20px;overflow:hidden;border:2px solid #c9a24a;box-shadow:0 10px 30px rgba(10,25,60,.25);background:linear-gradient(135deg,#0b2559,#071a40);color:#fff}
+.guest-band img{display:block;width:100%;height:100%;min-height:240px;object-fit:cover}
+.guest-band-text{padding:26px 28px;display:flex;flex-direction:column;justify-content:center}
+.guest-band-text h2{color:#ebcb63;margin:0 0 6px;font-size:1.8rem}.guest-band-text p{color:#eef2fb;margin:.4em 0}
+.guest-band .btn{margin:4px 6px 4px 0}
+@media(max-width:700px){.guest-band{grid-template-columns:1fr}.guest-band img{min-height:0;height:190px}.guest-band-text{padding:20px 18px}}
+.guest-card .lead{font-size:1.15rem}
+.guest-meeting h2{margin-top:0}
+.guest-meeting .when{font-size:1.15rem;display:flex;gap:10px;align-items:flex-start}.guest-meeting .when .ico{flex:none;margin-top:3px;color:#c9a24a}
+.agenda{white-space:pre-wrap}
+.guest-meeting .btn.big{width:100%;font-size:1.25rem;padding:18px 24px}
+.choice{display:flex;gap:12px;flex-wrap:wrap}
+.choice-opt{display:flex!important;align-items:center;gap:10px;font-weight:600;border:2px solid var(--line);border-radius:12px;padding:12px 18px;background:#fff;cursor:pointer;margin:4px 0!important}
+form.stack .choice-opt input{width:22px;height:22px;flex:none}
+.guest-row{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.guest-row h3{margin-top:0}.guest-info{flex:1;min-width:240px}.guest-info p{margin:.3em 0}
+.guest-actions{display:flex;gap:8px;flex-wrap:wrap}.guest-actions form{margin:0}
+.pill{display:inline-block;font-size:.78rem;font-weight:700;border-radius:999px;padding:2px 12px;margin-left:6px;vertical-align:middle;background:#e6ecf8;color:#0b2559;border:1px solid #b8c6e6}
+.pill.sponsor,.pill.aud-sponsors{background:#fbf1cf;color:#6b5008;border-color:#e6d58e}
+.pill.aud-volunteers{background:#e6f4ea;color:#145c28;border-color:#9fd0ad}
+.sched{border-top:1px solid var(--line);padding-top:6px}.sched:first-of-type{border-top:0}
+[data-show-for][hidden]{display:none}
+@media(max-width:700px){.guest-actions{width:100%}.guest-actions .btn{width:100%}.guest-actions form{flex:1 1 100%}}

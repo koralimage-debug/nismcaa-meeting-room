@@ -1,0 +1,25 @@
+<%- include('partials/head') %>
+<h1>Guest sign up</h1>
+<p>For sponsors and vendors. It takes one minute. Your e-mail is your sign-in ID. We never send e-mail from this site, so keep your password safe.</p>
+<% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
+<form class="card stack" method="post" action="/guests/sign-up" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <label for="name">Your name</label>
+  <input id="name" name="name" type="text" required autocomplete="name" value="<%= v.name || '' %>">
+  <label for="organization">Organization</label>
+  <input id="organization" name="organization" type="text" required autocomplete="organization" value="<%= v.organization || '' %>">
+  <label>I am a</label>
+  <div class="choice">
+    <label class="choice-opt"><input type="radio" name="kind" value="sponsor" <%= v.kind === 'sponsor' ? 'checked' : '' %> required> Sponsor</label>
+    <label class="choice-opt"><input type="radio" name="kind" value="vendor" <%= v.kind === 'vendor' ? 'checked' : '' %>> Vendor</label>
+  </div>
+  <label for="email">E-mail (your sign-in ID)</label>
+  <input id="email" name="email" type="email" required autocomplete="email" value="<%= v.email || '' %>">
+  <label for="password">Password <span class="hint">(10 or more characters)</span></label>
+  <input id="password" name="password" type="password" required minlength="10" autocomplete="new-password">
+  <label for="note">One line about what you offer or support <span class="hint">(optional)</span></label>
+  <input id="note" name="note" type="text" maxlength="300" value="<%= v.note || '' %>">
+  <p><button class="btn gold big" type="submit">Send my request</button></p>
+</form>
+<p>Already approved? <a href="/guests/sign-in">Guest sign in</a>.</p>
+<%- include('partials/foot') %>

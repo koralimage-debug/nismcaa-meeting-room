@@ -68,6 +68,8 @@ async function createApp(config) {
     L.fmtDateTime = (s) => (s ? new Intl.DateTimeFormat('en-US', { timeZone: tz, year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(s)) : '');
     L.pendingCount = 0;
     if (L.isAdmin) L.pendingCount = db.prepare("SELECT COUNT(*) c FROM users WHERE status='waiting'").get().c;
+    L.guestPending = 0;
+    if (L.isAdmin) L.guestPending = db.prepare("SELECT COUNT(*) c FROM users WHERE status='guest_pending'").get().c;
     L.title = ''; L.mainTab = '';
     next();
   });
@@ -80,7 +82,7 @@ async function createApp(config) {
     next();
   });
 
-  for (const r of ['auth', 'course', 'room', 'plan', 'admin']) require('./routes/' + r)(app, ctx);
+  for (const r of ['auth', 'course', 'room', 'plan', 'admin', 'guests', 'guest_admin']) require('./routes/' + r)(app, ctx);
 
   app.use((req, res) => res.status(404).render('error', { title: 'Page not found', message: 'We could not find that page.' }));
   // eslint-disable-next-line no-unused-vars

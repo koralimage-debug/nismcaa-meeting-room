@@ -83,6 +83,18 @@ CREATE TABLE IF NOT EXISTS remarks (
 CREATE TABLE IF NOT EXISTS audit_log (
   id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, actor_id INTEGER, target TEXT, detail TEXT, created_at TEXT NOT NULL
 );
+-- Guests (sponsors and vendors). Their login lives in users (role='guest'); these are their extra details.
+CREATE TABLE IF NOT EXISTS guests (
+  user_id INTEGER PRIMARY KEY, organization TEXT NOT NULL, kind TEXT NOT NULL,   -- sponsor | vendor
+  country TEXT NOT NULL DEFAULT '', offer_note TEXT NOT NULL DEFAULT '', admin_note TEXT, decided_by INTEGER, decided_at TEXT
+);
+-- Scheduled meetings with an audience: volunteers | sponsors | vendors | invited (see meeting_invites)
+CREATE TABLE IF NOT EXISTS meetings (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, audience TEXT NOT NULL, country TEXT,   -- country only for audience=volunteers (NULL = every country team)
+  starts_at TEXT NOT NULL, tz TEXT NOT NULL, duration_min INTEGER NOT NULL DEFAULT 60,
+  agenda TEXT NOT NULL DEFAULT '', link TEXT NOT NULL, created_by INTEGER, created_at TEXT NOT NULL, updated_at TEXT
+);
+CREATE TABLE IF NOT EXISTS meeting_invites (meeting_id INTEGER NOT NULL, user_id INTEGER NOT NULL, PRIMARY KEY (meeting_id, user_id));
 -- never-reused volunteer numbers (AUTOINCREMENT guarantees a number is not handed out twice)
 CREATE TABLE IF NOT EXISTS id_seq (n INTEGER PRIMARY KEY AUTOINCREMENT, issued_at TEXT);
 `;

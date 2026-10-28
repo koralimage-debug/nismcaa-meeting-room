@@ -89,13 +89,14 @@ module.exports = function (app, ctx) {
   // ---------------- sign in ----------------
   app.get('/sign-in', (req, res) => {
     if (req.user) return res.redirect('/meeting-room');
-    res.render('sign-in', { title: 'Sign in', error: null, email: '', next: safeNext(req.query.next) || '' });
+    res.render('sign-in', { title: 'Sign in', error: null, email: '', next: safeNext(req.query.next) || '', guest: false });
   });
 
   app.post('/sign-in', async (req, res) => {
     const email = String(req.body.email || '').trim().toLowerCase().slice(0, 200);
     const next = safeNext(req.body.next) || '';
-    const fail = (msg, code = 401) => res.status(code).render('sign-in', { title: 'Sign in', error: msg, email, next });
+    const guest = req.body.guest === '1';
+    const fail = (msg, code = 401) => res.status(code).render('sign-in', { title: 'Sign in', error: msg, email, next, guest });
     if (ctx.limiters.login.hit(req.ip || 'x')) return fail('Too many attempts from this device. Please wait 15 minutes.', 429);
     const mins = lockout.check(email);
     if (mins) return fail(`Too many wrong tries. This account is locked for about ${mins} more minute(s).`, 429);
@@ -110,7 +111,9 @@ module.exports = function (app, ctx) {
     lockout.clear(email);
     sessions.login(req, res, u.id);
     if (u.must_change_pw) return res.redirect('/account/password');
-    res.redirect(next || '/meeting-room');
+    // Sponsors and vendors land in the Guest Meeting Room; everyone else is unchanged.
+    if (u.role === 'guest') return res.redirect(next.startsWith('/guest') || next === '/account/password' ? next : '/guest');
+    res.redirect(next && !next.startsWith('/guest') ? next : '/meeting-room');
   });
 
   app.post('/sign-out', (req, res) => { sessions.logout(req, res); res.redirect('/'); });

@@ -1,6 +1,8 @@
 <div class="tabs no-print">
   <a href="/admin" class="<%= path === '/admin' ? 'on' : '' %>">Dashboard</a>
   <a href="/admin/pending" class="<%= path === '/admin/pending' ? 'on' : '' %>">Waiting for approval<% if (pendingCount) { %><span class="badge"><%= pendingCount %></span><% } %></a>
+  <a href="/admin/guests" class="<%= path.startsWith('/admin/guests') ? 'on' : '' %>">Guests<% if (guestPending) { %><span class="badge"><%= guestPending %></span><% } %></a>
+  <a href="/admin/meetings" class="<%= path.startsWith('/admin/meetings') ? 'on' : '' %>">Meetings</a>
   <a href="/admin/people" class="<%= path.startsWith('/admin/people') ? 'on' : '' %>">People</a>
   <a href="/admin/heads" class="<%= path === '/admin/heads' ? 'on' : '' %>">Head seats</a>
   <a href="/admin/key" class="<%= path === '/admin/key' ? 'on' : '' %>">Answer key</a>

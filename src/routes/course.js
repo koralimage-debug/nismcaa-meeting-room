@@ -64,6 +64,10 @@ function regradePending(db) {
 module.exports = function (app, ctx) {
   const { db, course } = ctx;
 
+  // Guests (sponsors and vendors) do not take the course or the test, and do not see child-protection material.
+  app.use('/course', (req, res, next) => (req.user && req.user.role === 'guest'
+    ? res.status(403).render('error', { title: 'Volunteers only', message: 'The course and final test are for volunteers. Your page is the Guest Meeting Room.' }) : next()));
+
   app.get('/course', (req, res) => res.render('course', { title: 'Volunteer course', course }));
 
   const testState = (u) => {

@@ -20,6 +20,10 @@
   <% links.forEach(function(l){ %><p class="muted"><%= l.country %>: <a href="<%= l.url %>" target="_blank" rel="noopener noreferrer">Join <%= l.country %> call</a></p><% }) %>
   </div>
 </div>
+<% if (scheduled && scheduled.length) { %>
+<div class="card"><h2 style="margin-top:0">Scheduled meetings</h2>
+<% scheduled.forEach(function(m){ %><div class="sched"><h3><%= m.title %></h3><p><strong><%= m.when %></strong><% if (m.country) { %> <span class="muted">&middot; <%= m.country %> team</span><% } %></p><% if (m.agenda) { %><p class="agenda"><%= m.agenda %></p><% } %><p><a class="btn small" href="<%= m.link %>" target="_blank" rel="noopener noreferrer">Join meeting</a></p></div><% }) %></div>
+<% } %>
 <div class="grid tiles">
   <div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'chat', size: 28 }) %></span><h3>Chat</h3><p>Organizers' general chat and your country room. Adults only.</p><a class="btn" href="/meeting-room/chat/general">Open chat</a></div>
   <div class="card tile"><span class="tile-ico"><%- include('partials/icon', { n: 'notes', size: 28 }) %></span><h3>Meeting notes</h3><p>Write your own notes by hand. Keep them private or share with your country.</p><a class="btn" href="/meeting-room/notes">Open notes</a></div>
