@@ -12,14 +12,9 @@
       <% if (user) { %><a class="btn gold" href="/meeting-room">Open the Meeting Room</a>
       <% } else { %><a class="btn gold" href="/meeting-room">Meeting Room (members sign in)</a> <a class="btn gold" href="/sign-up">Sign up to volunteer</a> <a class="btn ghost on-dark" href="/sign-in">Sign in</a><% } %>
     </p>
-    <ul class="hero-chips" aria-label="At a glance"><li>6 countries</li><li>7 child-protection lessons</li><li>Free to volunteer</li></ul>
+    <ul class="hero-chips" aria-label="At a glance"><li>6 countries</li><li>7 child-protection lessons</li><li>Free to volunteer</li><li>18 volunteer benefits</li></ul>
   </div>
 </section>
-<h2 class="section-title" data-reveal>What volunteers do</h2>
-<div class="meet-photos" data-reveal>
-  <figure><img src="/static/img/volunteers-seating.jpg" alt="NISMCAA volunteers guiding students to their seats at an event" loading="lazy"><figcaption>Welcoming students at our events</figcaption></figure>
-  <figure><img src="/static/img/volunteers-teaching.jpg" alt="A NISMCAA volunteer teaching music to a class" loading="lazy"><figcaption>Teaching music in the classroom</figcaption></figure>
-</div>
 <%
 var BENEFITS = [
  ['id','Certificate of volunteering','An official NISMCAA certificate recognizing your service.'],
@@ -41,7 +36,14 @@ var BENEFITS = [
  ['join','Community service','Meaningful service that strengthens your CV, including for recent graduates.'],
  ['admin','Children\'s safety first','Every volunteer is trained in child care and protection.']
 ]; %>
-<h2 class="section-title" data-reveal>Why volunteer with NISMCAA?</h2>
+<div class="gain-banner" data-reveal><h2>Volunteer with NISMCAA and gain a lot</h2><p>Real rewards for your time: a certificate, scholarship and travel opportunities, training, references and priority for paid roles.</p></div>
+<div class="gain-strip" data-reveal>
+  <div><strong>Certificate</strong><span>of volunteering</span></div>
+  <div><strong>Scholarships</strong><span>for you and your children</span></div>
+  <div><strong>Travel</strong><span>on international programs</span></div>
+  <div><strong>Paid roles</strong><span>priority when they open</span></div>
+</div>
+<h2 class="section-title" data-reveal>Everything waiting for you</h2>
 <p class="muted" data-reveal>Give your time to children's music education, and grow with us. Here's what's waiting for you.</p>
 <div class="benefit-grid">
 <% BENEFITS.forEach(function(b, i){ %>
@@ -49,6 +51,11 @@ var BENEFITS = [
 <% }) %>
 </div>
 <p class="muted small" data-reveal>Some benefits depend on role, performance, attendance and available sponsorship.</p>
+<h2 class="section-title" data-reveal>What volunteers do</h2>
+<div class="meet-photos" data-reveal>
+  <figure><img src="/static/img/volunteers-seating.jpg" alt="NISMCAA volunteers guiding students to their seats at an event" loading="lazy"><figcaption>Welcoming students at our events</figcaption></figure>
+  <figure><img src="/static/img/volunteers-teaching.jpg" alt="A NISMCAA volunteer teaching music to a class" loading="lazy"><figcaption>Teaching music in the classroom</figcaption></figure>
+</div>
 <h2 class="section-title" data-reveal>Your volunteer journey</h2>
 <div class="grid steps">
   <div class="card step"><span class="step-ico"><%- include('partials/icon', { n: 'learn', size: 28 }) %></span><h3>1. Learn</h3><p>Read the volunteer course. It is open to everyone, no sign-in needed. <a href="/course">Open the course</a>.</p></div>
