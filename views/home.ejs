@@ -20,6 +20,35 @@
   <figure><img src="/static/img/volunteers-seating.jpg" alt="NISMCAA volunteers guiding students to their seats at an event" loading="lazy"><figcaption>Welcoming students at our events</figcaption></figure>
   <figure><img src="/static/img/volunteers-teaching.jpg" alt="A NISMCAA volunteer teaching music to a class" loading="lazy"><figcaption>Teaching music in the classroom</figcaption></figure>
 </div>
+<%
+var BENEFITS = [
+ ['id','Certificate of volunteering','An official NISMCAA certificate recognizing your service.'],
+ ['heart','Motivation opportunities','Cash motivation opportunities for active and outstanding volunteers.'],
+ ['globe','Data gifts','Data gift opportunities to keep you connected while you serve.'],
+ ['send','Travel opportunities','As NISMCAA expands, selected outstanding volunteers may join our international programs.'],
+ ['learn','Scholarship opportunities','Scholarship opportunities for selected volunteers and their children, where available.'],
+ ['test','Knowledge and training','Training in child protection, event management and leadership.'],
+ ['notes','Reference letters','Recommendation and reference letters for committed volunteers.'],
+ ['id','Official ID and kit','Your NISMCAA digital ID, plus a branded T-shirt or kit where available.'],
+ ['users','Networking','Meet musicians, celebrities, dignitaries and sponsors.'],
+ ['video','Events and awards night','Access to NISMCAA events and the awards night.'],
+ ['inbox','Event-day support','Meals and transport support on event days.'],
+ ['arrow','Leadership path','Strong contributors can grow into department lead roles.'],
+ ['heart','Recognition','Volunteer of the Year awards and shout-outs on our social media.'],
+ ['approval','Priority for paid roles','Priority consideration when paid NISMCAA roles open up.'],
+ ['learn','Music academy access','Opportunities to join academy sessions and masterclasses.'],
+ ['plan','CV and portfolio','Real experience for your CV. Media volunteers can earn credits for their work.'],
+ ['join','Community service','Meaningful service that strengthens your CV, including for recent graduates.'],
+ ['admin','Children\'s safety first','Every volunteer is trained in child care and protection.']
+]; %>
+<h2 class="section-title" data-reveal>Why volunteer with NISMCAA?</h2>
+<p class="muted" data-reveal>Give your time to children's music education, and grow with us. Here's what's waiting for you.</p>
+<div class="benefit-grid">
+<% BENEFITS.forEach(function(b, i){ %>
+  <div class="benefit<%= i === BENEFITS.length - 1 ? ' benefit-safe' : '' %>" data-reveal><span class="tile-ico<%= i % 2 ? ' gold' : '' %>"><%- include('partials/icon', { n: b[0], size: 24 }) %></span><div><h3><%= b[1] %></h3><p><%= b[2] %></p></div></div>
+<% }) %>
+</div>
+<p class="muted small" data-reveal>Some benefits depend on role, performance, attendance and available sponsorship.</p>
 <h2 class="section-title" data-reveal>Your volunteer journey</h2>
 <div class="grid steps">
   <div class="card step"><span class="step-ico"><%- include('partials/icon', { n: 'learn', size: 28 }) %></span><h3>1. Learn</h3><p>Read the volunteer course. It is open to everyone, no sign-in needed. <a href="/course">Open the course</a>.</p></div>
