@@ -341,3 +341,4 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
 
 .banner-slim{max-height:190px}.banner-slim img{height:190px}
 @media(max-width:700px){.banner-slim img{height:130px}}
+.banner-slim img{object-position:center 28%}
