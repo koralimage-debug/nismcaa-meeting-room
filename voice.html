@@ -33,7 +33,7 @@ button{font:inherit;cursor:pointer}
 .tab.on{background:linear-gradient(#f4c25a,#c98b1f);color:#1a1205}
 .pane[hidden]{display:none}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .modes{grid-template-columns:repeat(3,1fr)}
-h3{font-size:.92rem;color:#ffdb67;margin:12px 2px 6px}
+h3,h2.h3{font-size:.92rem;color:#ffdb67;margin:12px 2px 6px}
 .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px}
 .acts2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 .lyr{height:150px;overflow:hidden;position:relative;border-radius:10px;background:linear-gradient(#07090f,#0d1220);box-shadow:inset 0 2px 10px #000;margin-top:8px}
@@ -66,9 +66,9 @@ ol.steps{margin:6px 0 0;padding-left:22px;font-size:.82rem;color:#bbb;line-heigh
 .transport{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .tb{min-height:50px;border-radius:10px;border:1px solid #444;background:linear-gradient(#3a3a3a,#202020);color:#eee;font-weight:800;font-size:.95rem;box-shadow:0 2px 0 #000}.tb:disabled{opacity:.4}
 .tb.rec{background:linear-gradient(#d23a30,#8f1d16);color:#fff;border-color:#ff8a80}
-.lanes{margin-top:6px}.lane{display:flex;height:76px;margin-top:4px;border-radius:6px;overflow:hidden;background:#121212;box-shadow:inset 0 0 0 1px #2a2a2a}
-.lh{flex:0 0 78px;background:linear-gradient(#2e2e2e,#222);padding:4px;font-size:.72rem;display:flex;flex-direction:column;justify-content:space-between;border-left:4px solid var(--c)}
-.lh span{display:flex;gap:3px}.ms{flex:1;min-height:44px;border-radius:4px;border:1px solid #444;background:#1a1a1a;color:#bbb;font-size:.72rem;font-weight:800}
+.lanes{margin-top:6px}.lane{display:flex;height:80px;margin-top:4px;border-radius:6px;overflow:hidden;background:#121212;box-shadow:inset 0 0 0 1px #2a2a2a}
+.lh{flex:0 0 104px;background:linear-gradient(#2e2e2e,#222);padding:4px;font-size:.72rem;display:flex;flex-direction:column;justify-content:space-between;border-left:4px solid var(--c)}
+.lh span{display:flex;gap:3px}.ms{flex:1;min-height:44px;min-width:44px;border-radius:4px;border:1px solid #444;background:#1a1a1a;color:#bbb;font-size:.72rem;font-weight:800}
 .ms.on[data-x=m]{background:#e0a400;color:#000}.ms.on[data-x=s]{background:#2fa84f;color:#000}
 .lane canvas{flex:1;min-width:0;height:100%;display:block}
 .take{display:flex;gap:6px;align-items:center;padding:6px;border-radius:8px;background:#1d1d1d;margin-top:4px;font-size:.82rem;border:1px solid #2a2a2a}.take.best{border-color:#ffd77a}
@@ -140,23 +140,24 @@ ol.steps{margin:6px 0 0;padding-left:22px;font-size:.82rem;color:#bbb;line-heigh
 </div></section>
 <section class="pane" id="p-studio" hidden><div class="daw">
  <div class="dhead"><b>Recording Studio</b><span class="lcd2" id="dTime">0:00.0</span><span class="lcd2" id="dBpm">104 BPM</span></div>
- <h3>1. Pick a beat</h3>
+ <h2 class="h3">1. Pick a beat</h2>
  <div class="beats" id="beats"></div>
  <div class="bpmrow"><span>Tempo</span><input type="range" id="bpm" min="60" max="160" step="1" value="104" aria-label="Tempo in beats per minute"><b id="bpmv">104</b></div>
- <h3>2. Record your vocals</h3>
+ <h2 class="h3">2. Record your vocals</h2>
  <div class="transport"><button class="tb" id="tPlay">▶ Play</button><button class="tb" id="tRec">● Record</button><button class="tb" id="tStop">■ Stop</button></div>
  <div class="lanes" id="lanes"></div>
  <div id="takes"></div>
- <h3>3. Mix</h3>
+ <h2 class="h3">3. Mix</h2>
  <div class="mixer" id="mixer"></div>
  <p class="small">Drag a knob or fader up or down. Double-tap to reset it.</p>
- <h3>4. Master and export</h3>
+ <h2 class="h3">4. Master and export</h2>
  <div class="mrow"><button id="mst">✨ Master my song</button><button id="abB" disabled>Before</button><button id="abA" disabled>After</button></div>
  <div class="exp"><button id="exp">⬇ Make WAV file</button><a id="dl" hidden download="my-nismcaa-song.wav">💾 Save my song</a></div>
  <div class="msg" id="dMsg" aria-live="polite">Pick a beat and tap Play to hear it. Then put on headphones, tap Record and sing. Each recording is a new take, and you choose the best one.</div>
 </div></section>
 <p class="credit">Microphone picture made for NISMCAA. Guide voice, backing music and all beats are original and made in the browser. Songs are public domain: Twinkle Twinkle Little Star (traditional), Amazing Grace (John Newton, 1779) and Row, Row, Row Your Boat (1852).</p>
 </main><script>
+function pm(d){if(parent!==window&&location.origin!=="null")try{parent.postMessage(d,location.origin)}catch(e){}}
 const $=id=>document.getElementById(id);const NN=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 const nm=m=>NN[((Math.round(m)%12)+12)%12]+(Math.floor(Math.round(m)/12)-1);
 let base=60,mode='free',calm=false,muted=false,ctx,an,stream,live=false,task=null,hist=[],cur=null,rangeLo=null,rangeHi=null,sd=[];
@@ -209,12 +210,12 @@ async function startMic(){if(!navigator.mediaDevices||!navigator.mediaDevices.ge
  catch(e){micOK=false;msg('<b>The microphone is turned off for this app.</b> You can still tap Hear it and sing along out loud. To see your pitch line, allow the microphone in your phone Settings, then tap Sing again.');return false}}
 function stopMic(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}an=null;live=false;$('mic').classList.remove('live')}
 function stopAll(){run=null;if(live)stopMic();$('sing').textContent='🎙 Sing';$('sing').classList.remove('rec');vu(0)}
-$('sing').onclick=async()=>{parent.postMessage({type:'nma-sound-on'},location.origin);if(live){finish(true);return}
+$('sing').onclick=async()=>{pm({type:'nma-sound-on'});if(live){finish(true);return}
  getCtx();if(!await startMic())return;live=true;$('mic').classList.add('live');$('sing').textContent='■ Stop';$('sing').classList.add('rec');hist=[];sd=[];
  if(mode==='free'){msg('Listening… sing any note.')}
  else if(mode==='range'){rangeLo=rangeHi=null;run={kind:'range',t0:ctx.currentTime,s:[]};msg('Sing your lowest comfy "ah", then slide up high. Tap Stop when you are done.')}
  else{if(mode!=='echo'||!task||!task.length)task=makeTask(mode);const c=ctx;tone(task[0].m,c.currentTime+.05,.6);run={kind:'sing',s:task,t0:c.currentTime+1.6,score:[0,0]};msg('Here is your first note… 3, 2, 1, sing!')}};
-$('hear').onclick=()=>{parent.postMessage({type:'nma-sound-on'},location.origin);if(mode==='free'||mode==='range')return;if(mode==='echo'&&(!run||run.kind!=='sing'))task=makeTask('echo');
+$('hear').onclick=()=>{pm({type:'nma-sound-on'});if(mode==='free'||mode==='range')return;if(mode==='echo'&&(!run||run.kind!=='sing'))task=makeTask('echo');
  if(live)stopAll();const t0=play(task);run={kind:'hear',s:task,t0};msg(mode==='echo'?'Listen… then tap Sing and sing it back.':'Listen to the tune and watch the glowing line.')};
 $('calm').onclick=()=>{calm=!calm;document.body.classList.toggle('calm',calm);$('calm').setAttribute('aria-pressed',calm);$('calm').textContent=calm?'🌙 Calm on':'🌙 Calm';if(!run)task=makeTask(mode);msg(calm?'Calm mode: softer colors, quieter sound, slower tunes and a kinder pitch check. Take your time.':INFO[mode])};
 $('modes').onclick=e=>{const b=e.target.closest('.chip');if(b)setMode(b.dataset.m)};
@@ -257,7 +258,7 @@ function loop(){requestAnimationFrame(loop);const now=ctx?ctx.currentTime:0;
 setMode('free');if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){micOK=false;msg(INFO.free+' '+NOMIC)}
 addEventListener('resize',draw);loop();
 addEventListener('message',e=>{if(e.origin!==location.origin||!e.data)return;if(e.data.type==='nma-sound')muted=!e.data.on&&e.data.chosen});
-const post=()=>{try{parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)}catch(e){}};addEventListener('load',post);addEventListener('resize',post);setTimeout(post,300);
+const post=()=>{try{pm({type:'nma-explorer-height',height:document.documentElement.scrollHeight})}catch(e){}};addEventListener('load',post);addEventListener('resize',post);setTimeout(post,300);
 
 const D1=["Twin", "kle,", " twin", "kle,", " lit", "tle", " star,", " how", " I", " won", "der", " what", " you", " are."],D2=['Up', ' a', 'bove', ' the', ' world', ' so', ' high,', ' like', ' a', ' dia', 'mond', ' in', ' the', ' sky.'];
 // ===== v2: tabs, songs, warm-up, lessons, harmony, recording studio =====
@@ -329,10 +330,16 @@ const S={
 // --- recorder (raw PCM via AudioWorklet) ---
 async function micStream(){if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('nomic');return navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:false,autoGainControl:false}})}
 const WK='class R extends AudioWorkletProcessor{process(i){const c=i[0]&&i[0][0];if(c)this.port.postMessage(c.slice(0));return true}}registerProcessor("nma-rec",R)';
-async function capture(c,src){if(!c.__wk){c.__wk=c.audioWorklet.addModule(URL.createObjectURL(new Blob([WK],{type:'text/javascript'})))}await c.__wk;
- const nd=new AudioWorkletNode(c,'nma-rec',{numberOfInputs:1,numberOfOutputs:1,channelCount:1}),z=c.createGain();z.gain.value=0;const ch=[],t0=c.currentTime;nd.port.onmessage=e=>ch.push(e.data);src.connect(nd);nd.connect(z);z.connect(c.destination);
- return{stop(alignT){try{src.disconnect(nd);nd.disconnect();nd.port.close()}catch(e){}const n=ch.reduce((a,b)=>a+b.length,0),all=new Float32Array(n);let o=0;for(const b of ch){all.set(b,o);o+=b.length}
-  const lat=(c.outputLatency||c.baseLatency||0)+.02,skip=clamp(Math.round((alignT-t0+lat)*c.sampleRate),0,n),out=all.subarray(skip),b=c.createBuffer(1,Math.max(1,out.length),c.sampleRate);b.getChannelData(0).set(out);return b}}}
+function loadWk(c){if(!c.__wk)c.__wk=(async()=>{const tries=[()=>URL.createObjectURL(new Blob([WK],{type:'text/javascript'})),()=>'data:text/javascript;charset=utf-8,'+encodeURIComponent(WK)];
+ if(!c.audioWorklet)return false;for(const u of tries){try{await c.audioWorklet.addModule(u());return true}catch(e){}}return false})();return c.__wk}
+function collect(c,ch,t0){return alignT=>{const n=ch.reduce((a,b)=>a+b.length,0),all=new Float32Array(n);let o=0;for(const b of ch){all.set(b,o);o+=b.length}
+  const lat=(c.outputLatency||c.baseLatency||0)+.02,skip=clamp(Math.round((alignT-t0+lat)*c.sampleRate),0,n),out=all.subarray(skip),b=c.createBuffer(1,Math.max(1,out.length),c.sampleRate);b.getChannelData(0).set(out);return b}}
+async function capture(c,src){const z=c.createGain();z.gain.value=0;z.connect(c.destination);const ch=[];
+ if(await loadWk(c)){const nd=new AudioWorkletNode(c,'nma-rec',{numberOfInputs:1,numberOfOutputs:1,channelCount:1}),t0=c.currentTime,get=collect(c,ch,t0);nd.port.onmessage=e=>ch.push(e.data);src.connect(nd);nd.connect(z);window.__recPath='worklet';
+  return{stop(a){try{src.disconnect(nd);nd.disconnect();nd.port.close()}catch(e){}return get(a)}}}
+ // last-resort fallback for hosts that block worklet modules
+ const sp=c[['create','Script','Processor'].join('')](4096,1,1),t0=c.currentTime,get=collect(c,ch,t0);sp.onaudioprocess=e=>ch.push(new Float32Array(e.inputBuffer.getChannelData(0)));src.connect(sp);sp.connect(z);window.__recPath='fallback';
+ return{stop(a){try{src.disconnect(sp);sp.disconnect()}catch(e){}return get(a)}}}
 const CEIL=0.7079;// -3 dBFS
 function ceilCurve(){const n=2048,k=new Float32Array(n);for(let i=0;i<n;i++){const x=i/(n-1)*2-1;k[i]=CEIL*Math.tanh(x*1.4/CEIL)/Math.tanh(1.4/CEIL)*Math.min(1,Math.abs(x)*1.4/CEIL>0?1:1)}return k}
 function ceiling(c){const w=c.createWaveShaper();w.curve=ceilCurve();w.oversample='2x';return w}
@@ -364,7 +371,7 @@ async function songBacking(s,tr){const k=s.id+tr;if(sgCache[k])return sgCache[k]
 function micFx(c,src,kind){const out=c.createGain(),dry=c.createGain();dry.gain.value=.55;src.connect(dry);dry.connect(out);
  if(kind==='echo'){const d=c.createDelay(1),fb=c.createGain(),w=c.createGain();d.delayTime.value=.3;fb.gain.value=.38;w.gain.value=.5;src.connect(d);d.connect(fb);fb.connect(d);d.connect(w);w.connect(out)}
  else{const cv=c.createConvolver();cv.buffer=impulse(c,2.4);const w=c.createGain();w.gain.value=.7;src.connect(cv);cv.connect(w);w.connect(out)}out.connect(c.destination);return out}
-async function songStart(){parent.postMessage({type:'nma-sound-on'},location.origin);const c=getCtx(),tr=base-60,useRec=$('sgRec').classList.contains('on'),needMic=useRec||sgFx!=='off';
+async function songStart(){pm({type:'nma-sound-on'});const c=getCtx(),tr=base-60,useRec=$('sgRec').classList.contains('on'),needMic=useRec||sgFx!=='off';
  $('sgGo').disabled=true;$('sgMsg').textContent='Getting the band ready…';const bk=await songBacking(song,tr);$('sgGo').disabled=false;
  let stream=null,src=null,cap=null,fx=null;if(needMic){try{stream=await micStream();src=c.createMediaStreamSource(stream)}catch(e){$('sgMsg').innerHTML='<b>The microphone is off,</b> so we will play the song without recording. Allow the microphone in your phone Settings to record.'}}
  const T=c.currentTime+.25,spb=60/song.bpm,intro=song.meter*spb,ns=songTimes(song);
@@ -373,7 +380,7 @@ async function songStart(){parent.postMessage({type:'nma-sound-on'},location.ori
  if(src){if(sgFx!=='off')fx=micFx(c,src,sgFx);if(useRec)cap=await capture(c,src)}
  sg={T,spb,intro,ns,srcs,stream,cap,fx,end:T+intro+tEnd(ns)*spb+.6,last:-1,ln:-1};$('sgGo').textContent='■ Stop';$('sgGo').classList.add('rec');$('sgMsg').innerHTML=src&&useRec?'<b>Recording.</b> Count-in… then sing!':'Count-in… then sing!';window.__songOn=true}
 function songStop(){if(!sg)return;const s=sg;sg=null;s.srcs.forEach(x=>{try{x.stop()}catch(e){}});cutGuide();if(s.fx)try{s.fx.disconnect()}catch(e){}
- if(s.cap){sgTake={buf:s.cap.stop(s.T),T:s.T};scheduleWipe();$('sgPlay').disabled=false;$('sgMsg').innerHTML='<b>Nice singing!</b> Tap Play my take to hear yourself with the music. For your privacy, your recording is deleted after 5 minutes.';window.__songTake=sgTake.buf.duration}else $('sgMsg').textContent='Song finished. Tap Start song to sing again.';
+ if(s.cap){sgTake={buf:s.cap.stop(s.T),T:s.T,exp:Date.now()+KEEP()};$('sgPlay').disabled=false;$('sgMsg').innerHTML='<b>Nice singing!</b> Tap Play my take to hear yourself with the music. For your privacy, your recording is deleted after 5 minutes.';window.__songTake=sgTake.buf.duration}else $('sgMsg').textContent='Song finished. Tap Start song to sing again.';
  if(s.stream)s.stream.getTracks().forEach(t=>t.stop());$('sgGo').textContent='▶ Start song';$('sgGo').classList.remove('rec');window.__songOn=false;document.querySelectorAll('#lyrin span').forEach(x=>x.className='')}
 $('sgGo').onclick=()=>sg?songStop():songStart();
 let sgPb=[];$('sgPlay').onclick=async()=>{if(!sgTake)return;sgPb.forEach(x=>{try{x.stop()}catch(e){}});const c=getCtx(),T=c.currentTime+.15,bk=await songBacking(song,base-60);sgPb=[playBuf(sgTake.buf,null,T,1)];if($('sgBack').classList.contains('on'))sgPb.push(playBuf(bk,null,T,.7));$('sgMsg').textContent='Playing your take…'};
@@ -399,7 +406,7 @@ function warmStep(i){cutGuide();if(i>=WU.length){warmStop(false);return}wu.i=i;w
 function warmStop(silent){if(!wu)return;const done=wu.i>=WU.length-1&&!silent&&wu.fin;wu=null;cutGuide();$('wGo').textContent='▶ Start warm-up';$('wSkip').disabled=true;$('orb').style.transform='scale(.5)';
  if(!silent){if(done){WU.forEach((_,j)=>$('ws'+j).className='done');const ok=passLesson(0,100);$('wMsg').innerHTML='<b>Warm-up done!</b> Your voice is ready to sing.'+(ok?' Level 1 passed: Level 2 is now open in Lessons.':'');$('bc').textContent='✓';$('bl').textContent='Ready to sing';window.__warmDone=true}
   else{$('wMsg').textContent='Warm-up stopped. Tap Start warm-up to begin again.';$('bc').textContent=fmtT(WTOT).slice(0,-2);$('bl').textContent='Ready'}}}
-$('wGo').onclick=()=>{if(wu){warmStop(false);return}parent.postMessage({type:'nma-sound-on'},location.origin);getCtx();wu={i:0,st:0,fin:false};$('wGo').textContent='■ Stop';$('wSkip').disabled=false;warmStep(0)};
+$('wGo').onclick=()=>{if(wu){warmStop(false);return}pm({type:'nma-sound-on'});getCtx();wu={i:0,st:0,fin:false};$('wGo').textContent='■ Stop';$('wSkip').disabled=false;warmStep(0)};
 $('wSkip').onclick=()=>{if(wu){if(wu.i>=WU.length-1){wu.fin=true;warmStop(false)}else warmStep(wu.i+1)}};
 function warmTick(){if(!wu)return;const w=WU[wu.i],el=(performance.now()-wu.st)/1000;if(window.__warmFast)wu.st-=1000*window.__warmFast;
  const before=WU.slice(0,wu.i).reduce((a,x)=>a+x.d,0);$('wbar').style.width=Math.min(100,100*(before+el)/WTOT)+'%';
@@ -429,7 +436,7 @@ async function renderBeat(def,bpm,bars=8){const sr=getCtx().sampleRate,spb=60/bp
  const [d,m]=await Promise.all([dc.startRendering(),mc.startRendering()]);return{d,m}}
 async function loadBeat(i,keepBpm){if(rendering)return;dawStop();rendering=true;beat=BEATS[i];if(!keepBpm){bpm=beat.bpm;$('bpm').value=bpm}$('bpmv').textContent=bpm;$('dBpm').textContent=bpm+' BPM';document.querySelectorAll('.beat').forEach(b=>b.classList.toggle('on',+b.dataset.b===i));
  $('dMsg').textContent='Building the '+beat.genre+' beat…';const r=await renderBeat(beat,bpm);TR[0].buf=r.d;TR[1].buf=r.m;TR[0].pk=TR[1].pk=null;rendering=false;drawLanes();$('dMsg').innerHTML=`<b>${beat.name}</b> (${beat.genre}, ${bpm} BPM, 8 bars) is loaded. Tap Play to listen, or Record to sing over it.`;window.__beat=beat.name}
-$('beats').onclick=e=>{const b=e.target.closest('.beat');if(b){parent.postMessage({type:'nma-sound-on'},location.origin);loadBeat(+b.dataset.b)}};
+$('beats').onclick=e=>{const b=e.target.closest('.beat');if(b){pm({type:'nma-sound-on'});loadBeat(+b.dataset.b)}};
 let bpmT;$('bpm').oninput=()=>{bpm=+$('bpm').value;$('bpmv').textContent=bpm;$('dBpm').textContent=bpm+' BPM';clearTimeout(bpmT);if(beat)bpmT=setTimeout(()=>loadBeat(BEATS.indexOf(beat),true),350)};
 function bq(c,ty,f){const b=c.createBiquadFilter();b.type=ty;b.frequency.value=f;return b}
 function buildMix(c,dest,opt={}){const mIn=c.createGain(),rv=c.createConvolver();rv.buffer=impulse(c,2.2);rv.connect(mIn);const dl=c.createDelay(2),fb=c.createGain();dl.delayTime.value=Math.min(1.9,60/bpm*.75);fb.gain.value=.35;dl.connect(fb);fb.connect(dl);dl.connect(mIn);
@@ -445,11 +452,11 @@ const mixLen=()=>Math.max(0,...TR.map(t=>t.buf?t.buf.duration:0));
 function onMix(){if(mix)mix.apply();updDb()}
 function dawPlay(rec){if(!TR[0].buf&&!TR[2].buf){$('dMsg').textContent='Pick a beat first.';return false}dawStop();const c=getCtx();mix=buildMix(c,c.destination,{recording:rec});dawT0=c.currentTime+.15;mix.start(dawT0);$('tPlay').textContent='❚❚ Playing';return true}
 function dawStop(){if(recCap){const b=recCap.stop(dawT0);recCap=null;if(recStream)recStream.getTracks().forEach(t=>t.stop());recStream=null;$('tRec').classList.remove('rec');$('tRec').textContent='● Record';
-  if(b.duration>.5){takes.push({buf:b,n:takes.length+1,beat:beat?beat.name:''});scheduleWipe();useTake(takes.length-1);$('dMsg').innerHTML=`<b>Take ${takes.length} saved.</b> Listen to each take below and tap ★ Use on your best one. Record again for another take.`}else $('dMsg').textContent='That take was too short. Tap Record and sing a bit longer.';renderTakes()}
+  if(b.duration>.5){takes.push({buf:b,n:takes.length+1,beat:beat?beat.name:'',exp:Date.now()+KEEP()});useTake(takes.length-1);$('dMsg').innerHTML=`<b>Take ${takes.length} saved.</b> Listen to each take below and tap ★ Use on your best one. Record again for another take.`}else $('dMsg').textContent='That take was too short. Tap Record and sing a bit longer.';renderTakes()}
  if(mix){mix.stop();mix=null}if(tkSrc){try{tkSrc.stop()}catch(e){}tkSrc=null}$('tPlay').textContent='▶ Play';drawLanes()}
-$('tPlay').onclick=()=>{parent.postMessage({type:'nma-sound-on'},location.origin);if(mix&&!recCap){dawStop();return}if(dawPlay(false))$('dMsg').textContent='Playing the mix. Move the faders and knobs to change the sound.'};
+$('tPlay').onclick=()=>{pm({type:'nma-sound-on'});if(mix&&!recCap){dawStop();return}if(dawPlay(false))$('dMsg').textContent='Playing the mix. Move the faders and knobs to change the sound.'};
 $('tStop').onclick=()=>{dawStop();$('dTime').textContent='0:00.0'};
-$('tRec').onclick=async()=>{parent.postMessage({type:'nma-sound-on'},location.origin);if(recCap){dawStop();return}if(!TR[0].buf){$('dMsg').textContent='Pick a beat first, then tap Record.';return}
+$('tRec').onclick=async()=>{pm({type:'nma-sound-on'});if(recCap){dawStop();return}if(!TR[0].buf){$('dMsg').textContent='Pick a beat first, then tap Record.';return}
  const c=getCtx();try{recStream=await micStream()}catch(e){$('dMsg').innerHTML='<b>The microphone is off for this app.</b> Allow the microphone in your phone Settings, then tap Record again.';return}
  const src=c.createMediaStreamSource(recStream);if(!dawPlay(true))return;recCap=await capture(c,src);$('tRec').classList.add('rec');$('tRec').textContent='■ Stop rec';$('dMsg').innerHTML='<b>Recording take '+(takes.length+1)+'.</b> Sing over the beat. Tap Stop rec when you are done.'};
 let tkSrc=null;function useTake(i){best=i;TR[2].buf=takes[i].buf;TR[2].pk=null;renderTakes();drawLanes()}
@@ -494,9 +501,9 @@ function wav(buf){const n=buf.length,ch=buf.numberOfChannels,sr=buf.sampleRate,a
  w(0,'RIFF');v.setUint32(4,36+n*ch*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,ch,true);v.setUint32(24,sr,true);v.setUint32(28,sr*ch*2,true);v.setUint16(32,ch*2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*ch*2,true);
  const cs=[...Array(ch)].map((_,i)=>buf.getChannelData(i));let o=44;for(let i=0;i<n;i++)for(let c=0;c<ch;c++){const s=clamp(cs[c][i],-1,1);v.setInt16(o,s<0?s*32768:s*32767,true);o+=2}return new Blob([ab],{type:'audio/wav'})}
 let dlUrl=null;$('exp').onclick=async()=>{const L=mixLen();if(!L){$('dMsg').textContent='Pick a beat and record a take first.';return}$('exp').disabled=true;$('dMsg').textContent='Mixing your song into a WAV file…';
- const sr=getCtx().sampleRate,oc=new OfflineAudioContext(2,Math.ceil((L+1.5)*sr),sr),m=buildMix(oc,oc.destination,{offline:true});m.start(0);const out=await oc.startRendering();loud(out);const blob=wav(out);scheduleWipe();
- if(dlUrl)URL.revokeObjectURL(dlUrl);dlUrl=URL.createObjectURL(blob);const a=$('dl');a.href=dlUrl;a.hidden=false;$('exp').disabled=false;$('exp').textContent='⬇ Make WAV again';
- $('dMsg').innerHTML=`<b>Your song is ready:</b> ${out.duration.toFixed(1)} seconds, ${(blob.size/1048576).toFixed(1)} MB WAV${MS.on?', mastered':''}. Tap Save my song to download it. For your privacy, it is deleted from this page after 5 minutes.`;window.__wav=blob.size;post()};
+ const sr=getCtx().sampleRate,oc=new OfflineAudioContext(2,Math.ceil((L+1.5)*sr),sr),m=buildMix(oc,oc.destination,{offline:true});m.start(0);const out=await oc.startRendering(),pkdb=loud(out),blob=wav(out);
+ if(dlUrl)URL.revokeObjectURL(dlUrl);dlUrl=URL.createObjectURL(blob);dlExp=Date.now()+KEEP();const a=$('dl');a.href=dlUrl;a.hidden=false;$('exp').disabled=false;$('exp').textContent='⬇ Make WAV again';
+ $('dMsg').innerHTML=`<b>Your song is ready:</b> ${out.duration.toFixed(1)} seconds, ${(blob.size/1048576).toFixed(1)} MB WAV${MS.on?', mastered':''}, loudest point ${pkdb.toFixed(1)} dB. Tap Save my song to download it. For your privacy, it is deleted from this page after 5 minutes.`;window.__wav=blob.size;window.__pk=pkdb;post()};
 // main loop add-on
 (function tick(){requestAnimationFrame(tick);songTick();warmTick();if(mix||recCap){const t=getCtx().currentTime-dawT0;$('dTime').textContent=fmtT(Math.max(0,t));drawLanes();if(t>mixLen()+.3&&!recCap)dawStop();if(recCap&&t>(TR[0].buf?TR[0].buf.duration:60))dawStop()}vuTick()})();
 renderLyrics();renderLessons();addEventListener('resize',()=>{drawLanes();post()});
@@ -504,11 +511,14 @@ renderLyrics();renderLessons();addEventListener('resize',()=>{drawLanes();post()
 
 // --- privacy: delete recordings after 5 minutes; release the mic when the app is hidden ---
 function loud(b){const ch=[...Array(b.numberOfChannels)].map((_,i)=>b.getChannelData(i));let ss=0,n=0;ch.forEach(d=>{for(let i=0;i<d.length;i++){ss+=d[i]*d[i]}n+=d.length});const rms=Math.sqrt(ss/n)||1e-9,tgt=Math.pow(10,-14/20),g=rms>tgt?tgt/rms:1;
- ch.forEach(d=>{for(let i=0;i<d.length;i++){const x=d[i]*g;d[i]=Math.abs(x)<=CEIL*.85?x:Math.sign(x)*(CEIL*.85+CEIL*.15*Math.tanh((Math.abs(x)-CEIL*.85)/(CEIL*.15)))}})}
-let wipeT=null;function scheduleWipe(){clearTimeout(wipeT);wipeT=setTimeout(wipeRecordings,window.__wipeMs||300000)}
-function wipeRecordings(){if(recCap||(sg&&sg.cap)){scheduleWipe();return}const had=!!(sgTake||takes.length||dlUrl);dawStop();sgPb.forEach(x=>{try{x.stop()}catch(e){}});sgPb=[];sgTake=null;takes=[];best=-1;TR[2].buf=null;TR[2].pk=null;
- if(dlUrl){URL.revokeObjectURL(dlUrl);dlUrl=null}const a=$('dl');a.hidden=true;a.removeAttribute('href');$('exp').textContent='⬇ Make WAV file';$('sgPlay').disabled=true;renderTakes();drawLanes();
- if(had){const m='<b>Your recording was deleted.</b> To keep your voice private, recordings are only kept for 5 minutes. Record a new one any time.';$('dMsg').innerHTML=m;$('sgMsg').innerHTML=m}window.__wiped=(window.__wiped||0)+1}
+ let pk=0;ch.forEach(d=>{for(let i=0;i<d.length;i++){const x=d[i]*g;d[i]=Math.abs(x)<=CEIL*.85?x:Math.sign(x)*(CEIL*.85+CEIL*.15*Math.tanh((Math.abs(x)-CEIL*.85)/(CEIL*.15)));const q=Math.round(clamp(d[i],-1,1)*32767)/32768,a=Math.abs(q);if(a>pk)pk=a}});return 20*Math.log10(pk||1e-9)}
+const KEEP=()=>window.__wipeMs||300000;let dlExp=0;
+function wipeRecordings(){const now=Date.now();let gone=0;
+ const keep=takes.filter(t=>t.exp>now);if(keep.length!==takes.length){gone+=takes.length-keep.length;const cur=takes[best];if(tkSrc){try{tkSrc.stop()}catch(e){}tkSrc=null}takes=keep;best=takes.indexOf(cur);if(best<0){best=takes.length-1;TR[2].buf=best>=0?takes[best].buf:null;TR[2].pk=null;if(mix&&!recCap)dawStop()}renderTakes();drawLanes()}
+ if(sgTake&&sgTake.exp<=now){gone++;sgPb.forEach(x=>{try{x.stop()}catch(e){}});sgPb=[];sgTake=null;$('sgPlay').disabled=true}
+ if(dlUrl&&dlExp<=now){gone++;URL.revokeObjectURL(dlUrl);dlUrl=null;const a=$('dl');a.hidden=true;a.removeAttribute('href');$('exp').textContent='⬇ Make WAV file'}
+ if(gone){const m='<b>Your recording was deleted.</b> To keep your voice private, each recording is only kept for 5 minutes. Record a new one any time.';$('dMsg').innerHTML=m;$('sgMsg').innerHTML=m;window.__wiped=(window.__wiped||0)+gone}}
+setInterval(wipeRecordings,1000);
 const LIVE=new Set();if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){const gum=navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);navigator.mediaDevices.getUserMedia=async o=>{const st=await gum(o);LIVE.add(st);return st}}
 function releaseMic(){try{stopEverything()}catch(e){}LIVE.forEach(st=>st.getTracks().forEach(t=>t.stop()));LIVE.clear();if(recStream){recStream.getTracks().forEach(t=>t.stop());recStream=null}}
 addEventListener('blur',releaseMic);addEventListener('pagehide',releaseMic);document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseMic()});
