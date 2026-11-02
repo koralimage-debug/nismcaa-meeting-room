@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Voice Studio</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#0d1424;color:#f3f4f7;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:8px}
+.studio{background:radial-gradient(120% 80% at 20% 0%,#2a2117 0%,#141110 55%,#0b0a0a 100%);border-radius:16px;padding:8px;box-shadow:0 8px 24px #000a,inset 0 1px 0 #ffffff14}
+.top{display:flex;gap:8px;height:140px}
+.mic{flex:0 0 108px;border-radius:12px;background:#000 url(data:image/jpeg;base64,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) center/cover;box-shadow:inset 0 0 18px #000,0 0 0 1px #3a2d20;position:relative;overflow:hidden}
+.mic .tally{position:absolute;top:8px;right:8px;width:10px;height:10px;border-radius:50%;background:#3b1111;box-shadow:inset 0 1px 2px #000}
+.mic.live .tally{background:#ff3b30;box-shadow:0 0 8px #ff3b30,0 0 2px #fff}
+.rack{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.vu{position:relative;height:76px;border-radius:8px;background:linear-gradient(#2b2416,#14110b);padding:4px;box-shadow:inset 0 2px 6px #000,0 1px 0 #ffffff18}
+.vu svg{width:100%;height:100%;display:block;border-radius:5px;background:radial-gradient(90% 120% at 50% 110%,#ffd27a 0%,#f0b24a 45%,#a86a1c 100%)}
+.calm .vu svg{background:radial-gradient(90% 120% at 50% 110%,#e9e4d2,#c9c1a6 60%,#8f8770)}
+.lcd{flex:1;display:flex;align-items:center;gap:8px;border-radius:8px;background:linear-gradient(#071a12,#03100b);box-shadow:inset 0 2px 6px #000;padding:4px 10px;font-family:ui-monospace,Menlo,monospace;color:#8dffb8}
+.lcd b{font-size:1.9rem;min-width:62px;text-shadow:0 0 8px #3dff8f88}
+.lcd .st{font-size:.85rem;line-height:1.2}
+.st.flat{color:#7cc4ff}.st.sharp{color:#ffb35c}.st.on{color:#8dffb8}
+canvas#line{display:block;width:100%;height:160px;margin-top:8px;border-radius:10px;background:#07090f;box-shadow:inset 0 2px 10px #000}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+button{font:inherit;cursor:pointer}
+.chip{min-height:44px;border-radius:10px;border:1px solid #3a2f22;background:linear-gradient(#2e2924,#1b1815);color:#eee;font-weight:700;font-size:.85rem;box-shadow:0 2px 0 #000}
+.chip.on{background:linear-gradient(#f4c25a,#c98b1f);color:#1a1205;border-color:#ffd77a}
+.acts{display:grid;grid-template-columns:1.4fr 1fr .9fr;gap:6px;margin-top:8px}
+.big{min-height:50px;border-radius:12px;border:2px solid #ffdb67;background:#1b2a4a;color:#ffdb67;font-weight:800;font-size:1rem}
+.big:disabled{opacity:.4}.big.rec{background:#b3261e;border-color:#ff8a80;color:#fff}
+.keyrow{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:4px;font-size:.8rem;color:#cbb}
+.keyrow button{min-width:44px;min-height:44px;border-radius:8px;border:1px solid #3a2f22;background:#221d18;color:#eee;font-weight:800}
+.msg{margin-top:6px;min-height:40px;font-size:.88rem;line-height:1.3;color:#ffe6a8;background:#ffffff0d;border-radius:8px;padding:6px 8px}
+.credit{font-size:.7rem;opacity:.7;margin:8px 2px 0}
+.calm .studio{background:linear-gradient(#1d2530,#141a22)}.calm .chip.on{background:linear-gradient(#bcd3c6,#8fb3a1);border-color:#cfe6da}
+</style></head><body><main>
+<div class="studio">
+ <div class="top">
+  <div class="mic" id="mic" role="img" aria-label="Studio condenser microphone with pop filter"><span class="tally"></span></div>
+  <div class="rack">
+   <div class="vu"><svg viewBox="0 0 200 70" aria-label="Level meter"><g fill="none" stroke="#3a2608" stroke-width="1.2"><path d="M30 52 A80 80 0 0 1 170 52"/></g><g id="ticks" stroke="#3a2608"></g><path d="M130 31 A80 80 0 0 1 170 52" stroke="#b3261e" stroke-width="3" fill="none"/><text x="100" y="64" text-anchor="middle" font-size="8" fill="#3a2608" font-family="Georgia,serif" letter-spacing="2">VU</text><line id="needle" x1="100" y1="120" x2="100" y2="22" stroke="#161008" stroke-width="1.6"/><circle cx="100" cy="120" r="56" fill="#1b140a" opacity=".0"/></svg></div>
+   <div class="lcd"><b id="nn">—</b><div class="st" id="st">Tap <i>Sing</i> to start</div></div>
+  </div>
+ </div>
+ <canvas id="line" aria-label="Pitch line: follow the glowing line with your voice"></canvas>
+ <div class="modes" id="modes">
+  <button class="chip on" data-m="free">Free sing</button><button class="chip" data-m="siren">Sirens</button><button class="chip" data-m="echo">Echo me</button>
+  <button class="chip" data-m="scale">Scale climb</button><button class="chip" data-m="twinkle">Twinkle</button><button class="chip" data-m="range">Range finder</button>
+ </div>
+ <div class="acts"><button class="big" id="sing">🎙 Sing</button><button class="big" id="hear">🔊 Hear it</button><button class="big" id="calm" aria-pressed="false">🌙 Calm</button></div>
+ <div class="keyrow"><span>Starting note</span><button id="kd" aria-label="Lower">−</button><b id="kn">C4</b><button id="ku" aria-label="Higher">+</button><span id="vt">Voice: not found yet</span></div>
+ <div class="msg" id="msg" aria-live="polite">Free sing: tap Sing, allow the microphone, and sing any note. The screen shows your note and whether you are flat, sharp or on pitch.</div>
+</div>
+<p class="credit">Microphone picture made for NISMCAA. Guide voice made in the browser. Twinkle Twinkle Little Star is a traditional song (public domain).</p>
+</main><script>
+const $=id=>document.getElementById(id);const NN=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const nm=m=>NN[((Math.round(m)%12)+12)%12]+(Math.floor(Math.round(m)/12)-1);
+let base=60,mode='free',calm=false,muted=false,ctx,an,stream,live=false,task=null,hist=[],cur=null,rangeLo=null,rangeHi=null,sd=[];
+window.__plays=[];
+// ticks
+(()=>{let g='';for(let i=0;i<=10;i++){const a=(-60+i*12)*Math.PI/180,x1=100+80*Math.sin(a),y1=120-80*Math.cos(a)*1,x2=100+72*Math.sin(a),y2=120-72*Math.cos(a);g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${i%5?1:1.8}"/>`}$('ticks').innerHTML=g;
+ document.querySelector('.vu path').setAttribute('d','M30 52 A80 80 0 0 1 170 52')})();
+function vu(level){const a=-50+Math.min(1,level)*100;$('needle').setAttribute('transform',`rotate(${a} 100 120)`)}vu(0);
+function getCtx(){if(!ctx){const AC=window.AudioContext||window.webkitAudioContext;ctx=new AC()}if(ctx.state==='suspended')ctx.resume();return ctx}
+const hz=m=>440*Math.pow(2,(m-69)/12);
+// soft "oo" guide voice
+function tone(m,t0,d,glideTo){const c=getCtx(),o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain(),f=c.createBiquadFilter();f.type='lowpass';f.frequency.value=1400;o.type='triangle';o2.type='sine';
+ const lfo=c.createOscillator(),lg=c.createGain();lfo.frequency.value=5.2;lg.gain.value=hz(m)*0.006;lfo.connect(lg);lg.connect(o.frequency);lg.connect(o2.frequency);
+ o.frequency.setValueAtTime(hz(m),t0);o2.frequency.setValueAtTime(hz(m)*2,t0);if(glideTo!=null){o.frequency.exponentialRampToValueAtTime(hz(glideTo),t0+d);o2.frequency.exponentialRampToValueAtTime(hz(glideTo)*2,t0+d)}
+ const v=muted?0:(calm?.16:.26);g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(v,t0+.06);g.gain.setValueAtTime(v,t0+Math.max(.07,d-.12));g.gain.linearRampToValueAtTime(0,t0+d);
+ const g2=c.createGain();g2.gain.value=.18;o.connect(f);o2.connect(g2);g2.connect(f);f.connect(g);g.connect(c.destination);[o,o2,lfo].forEach(x=>{x.start(t0);x.stop(t0+d+.05)});window.__plays.push(Math.round(m))}
+// tasks: list of segments {m,t,d,to?,w?}
+const TW=[[0,1,'Twin'],[0,1,'kle'],[7,1,'twin'],[7,1,'kle'],[9,1,'lit'],[9,1,'tle'],[7,2,'star'],[5,1,'how'],[5,1,'I'],[4,1,'won'],[4,1,'der'],[2,1,'what'],[2,1,'you'],[0,2,'are'],
+ [7,1,'Up'],[7,1,'a'],[5,1,'bove'],[5,1,'the'],[4,1,'world'],[4,1,'so'],[2,2,'high'],[7,1,'like'],[7,1,'a'],[5,1,'dia'],[5,1,'mond'],[4,1,'in'],[4,1,'the'],[2,2,'sky'],
+ [0,1,'Twin'],[0,1,'kle'],[7,1,'twin'],[7,1,'kle'],[9,1,'lit'],[9,1,'tle'],[7,2,'star'],[5,1,'how'],[5,1,'I'],[4,1,'won'],[4,1,'der'],[2,1,'what'],[2,1,'you'],[0,2,'are']];
+function makeTask(md){const sp=calm?1.35:1,s=[];let t=0;
+ if(md==='siren'){for(let r=0;r<2;r++){s.push({m:base,t,d:3*sp,to:base+12});t+=3*sp;s.push({m:base+12,t,d:3*sp,to:base});t+=3*sp+.4}}
+ else if(md==='scale'){const sc=[0,2,4,5,7,9,11,12,11,9,7,5,4,2,0],w='Do Re Mi Fa So La Ti Do Ti La So Fa Mi Re Do'.split(' ');sc.forEach((x,i)=>{s.push({m:base+x,t,d:.7*sp,w:w[i]});t+=.7*sp})}
+ else if(md==='twinkle'){const b=.5*sp;TW.forEach(([x,n,w])=>{s.push({m:base+x,t,d:n*b-.04,w});t+=n*b})}
+ else if(md==='echo'){const pool=[0,2,4,5,7];let p=[0];for(let i=0;i<3;i++)p.push(pool[Math.floor(Math.random()*pool.length)]);p.forEach(x=>{s.push({m:base+x,t,d:.6*sp});t+=.6*sp})}
+ return s}
+const tEnd=s=>s.length?s[s.length-1].t+s[s.length-1].d:0;
+function targetAt(s,t){for(const g of s)if(t>=g.t&&t<g.t+g.d)return g.to!=null?g.m+(g.to-g.m)*(t-g.t)/g.d:g.m;return null}
+function play(s,at){const c=getCtx(),t0=(at||c.currentTime)+.05;s.forEach(g=>tone(g.m,t0+g.t,g.d,g.to));return t0}
+// pitch detection (autocorrelation)
+let buf;function detect(){if(window.__fakeHz!==undefined)return window.__fakeHz?{f:window.__fakeHz,r:.2}:{f:0,r:0};an.getFloatTimeDomainData(buf);let r=0;for(const v of buf)r+=v*v;r=Math.sqrt(r/buf.length);if(r<.012)return{f:0,r};
+ const n=buf.length,sr=ctx.sampleRate,minL=Math.floor(sr/1100),maxL=Math.floor(sr/70);let best=0,bl=0;const c=new Float32Array(maxL+2);
+ for(let l=minL;l<=maxL+1;l++){let s=0;for(let i=0;i<n-l;i++)s+=buf[i]*buf[i+l];c[l]=s}
+ let e0=0;for(let i=0;i<n;i++)e0+=buf[i]*buf[i];for(let l=minL+1;l<=maxL;l++){if(c[l]>c[l-1]&&c[l]>=c[l+1]&&c[l]>best){best=c[l];bl=l}}
+ if(!bl||best/e0<.35)return{f:0,r};const a=c[bl-1],b=c[bl],d=c[bl+1],sh=(a-d)/(2*(a-2*b+d))||0;return{f:sr/(bl+sh),r}}
+// UI state
+let run=null;// {s,t0,kind:'sing'|'hear',score:[hit,n]}
+function msg(t){$('msg').innerHTML=t}
+const INFO={free:'Free sing: tap Sing and hold any note. You will see your note name and whether you are flat, sharp or on pitch.',
+ siren:'Sirens: slide smoothly up and down on "oo", like a fire engine. Tap Hear it first, then Sing and follow the glowing line.',
+ echo:'Echo me: tap Hear it to hear a short tune, then tap Sing and sing it back. You get a score out of 100.',
+ scale:'Scale climb: sing Do Re Mi up to the top Do and back down. Follow the glowing steps.',
+ twinkle:'Twinkle Twinkle Little Star: tap Sing and sing the words on the glowing line. Tap Hear it to listen first.',
+ range:'Range finder: tap Sing, then sing your lowest comfy "ah" and slide up to your highest comfy note. Tap Stop when you are done.'};
+function setMode(m){stopAll();mode=m;document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',b.dataset.m===m));task=makeTask(m);hist=[];msg(INFO[m]+(micOK===false?' '+NOMIC:''));$('hear').disabled=m==='free'||m==='range';draw()}
+const NOMIC='<br><b>No microphone?</b> You can still tap Hear it and sing along out loud. To see your pitch line, allow the microphone for this app in your phone Settings.';
+let micOK=null;
+async function startMic(){if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){micOK=false;msg('<b>This device has no microphone we can use.</b> You can still tap Hear it and sing along out loud. The pitch line needs a microphone.');return false}
+ try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:false,autoGainControl:false}});const c=getCtx(),src=c.createMediaStreamSource(stream);an=c.createAnalyser();an.fftSize=2048;buf=new Float32Array(an.fftSize);src.connect(an);micOK=true;return true}
+ catch(e){micOK=false;msg('<b>The microphone is turned off for this app.</b> You can still tap Hear it and sing along out loud. To see your pitch line, allow the microphone in your phone Settings, then tap Sing again.');return false}}
+function stopMic(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}an=null;live=false;$('mic').classList.remove('live')}
+function stopAll(){run=null;if(live)stopMic();$('sing').textContent='🎙 Sing';$('sing').classList.remove('rec');vu(0)}
+$('sing').onclick=async()=>{parent.postMessage({type:'nma-sound-on'},location.origin);if(live){finish(true);return}
+ getCtx();if(!await startMic())return;live=true;$('mic').classList.add('live');$('sing').textContent='■ Stop';$('sing').classList.add('rec');hist=[];sd=[];
+ if(mode==='free'){msg('Listening… sing any note.')}
+ else if(mode==='range'){rangeLo=rangeHi=null;run={kind:'range',t0:ctx.currentTime,s:[]};msg('Sing your lowest comfy "ah", then slide up high. Tap Stop when you are done.')}
+ else{if(mode!=='echo'||!task||!task.length)task=makeTask(mode);const c=ctx;tone(task[0].m,c.currentTime+.05,.6);run={kind:'sing',s:task,t0:c.currentTime+1.6,score:[0,0]};msg('Here is your first note… 3, 2, 1, sing!')}};
+$('hear').onclick=()=>{parent.postMessage({type:'nma-sound-on'},location.origin);if(mode==='free'||mode==='range')return;if(mode==='echo'&&(!run||run.kind!=='sing'))task=makeTask('echo');
+ if(live)stopAll();const t0=play(task);run={kind:'hear',s:task,t0};msg(mode==='echo'?'Listen… then tap Sing and sing it back.':'Listen to the tune and watch the glowing line.')};
+$('calm').onclick=()=>{calm=!calm;document.body.classList.toggle('calm',calm);$('calm').setAttribute('aria-pressed',calm);$('calm').textContent=calm?'🌙 Calm on':'🌙 Calm';if(!run)task=makeTask(mode);msg(calm?'Calm mode: softer colours, quieter sound, slower tunes and a kinder pitch check. Take your time.':INFO[mode])};
+$('modes').onclick=e=>{const b=e.target.closest('.chip');if(b)setMode(b.dataset.m)};
+$('kd').onclick=()=>{if(base>43){base--;$('kn').textContent=nm(base);if(!run)task=makeTask(mode);draw()}};$('ku').onclick=()=>{if(base<74){base++;$('kn').textContent=nm(base);if(!run)task=makeTask(mode);draw()}};
+function classify(lo,hi){const mid=(lo+hi)/2;return mid<52?'Bass':mid<57?'Tenor':mid<63?'Alto':'Soprano'}
+function finish(user){const was=run;if(was&&was.kind==='sing'){const sc=was.score[1]?Math.round(100*was.score[0]/was.score[1]):0;
+  msg(`<b>Score: ${sc} / 100.</b> `+(sc>=80?'Brilliant, right on pitch!':sc>=50?'Good singing! Try again to get even closer to the line.':'Nice try! Tap Hear it, listen again, then sing along.'));window.__score=sc}
+ if(was&&was.kind==='range'){if(rangeLo!=null&&rangeHi-rangeLo>=3){const v=classify(rangeLo,rangeHi);$('vt').textContent='Voice: '+v;base=Math.max(43,Math.min(74,Math.round(rangeLo+3)));$('kn').textContent=nm(base);task=makeTask(mode);
+  msg(`<b>Your range: ${nm(rangeLo)} to ${nm(rangeHi)}.</b> That sounds like a <b>${v}</b> voice right now. Voices change as you grow, so try again any time. Your starting note is now ${nm(base)}.`);window.__range=[rangeLo,rangeHi,v]}
+  else msg('We did not hear enough notes. Tap Sing and slide from low to high on "ah".')}
+ else if(user&&mode==='free')msg(INFO.free);
+ run=null;stopMic();$('sing').textContent='🎙 Sing';$('sing').classList.remove('rec');vu(0)}
+// drawing
+const cv=$('line'),g=cv.getContext('2d');
+function draw(){const W=cv.clientWidth,H=cv.clientHeight,dp=devicePixelRatio||1;if(cv.width!==W*dp){cv.width=W*dp;cv.height=H*dp}g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,W,H);
+ const now=ctx?ctx.currentTime:0,s=run&&run.s||task||[],t=run&&run.s?now-run.t0:-1;
+ let lo=base-3,hi=base+15;if(mode==='free'||mode==='range'){const c=cur||base+5;lo=Math.min(lo,c-8);hi=Math.max(hi,c+8);if(mode==='free'){lo=c-9;hi=c+9}}
+ const y=m=>H-10-(m-lo)/(hi-lo)*(H-20),PX=W*.3,pps=70,x=tt=>PX+(tt-Math.max(t,0))*pps;
+ g.font='10px system-ui';for(let m=Math.ceil(lo);m<=hi;m++){const blk=NN[((m%12)+12)%12].includes('#');g.fillStyle=blk?'#0b0e16':'#10141f';g.fillRect(0,y(m+.5),W,y(m-.5)-y(m+.5));if(m%12===0||m===Math.round(base)){g.fillStyle='#6b7390';g.fillText(nm(m),3,y(m)+3)}}
+ if(s.length&&mode!=='free'&&mode!=='range'){g.save();g.lineCap='round';g.lineWidth=calm?8:10;g.shadowColor=calm?'#cfe6da':'#ffcf5a';g.shadowBlur=calm?6:16;g.strokeStyle=calm?'#cfe6daaa':'#ffcf5acc';
+  for(const q of s){g.beginPath();g.moveTo(x(q.t),y(q.m));g.lineTo(x(q.t+q.d),y(q.to!=null?q.to:q.m));g.stroke()}g.restore();
+  g.fillStyle='#fff';g.font='bold 12px system-ui';g.textAlign='center';for(const q of s)if(q.w){const xx=x(q.t+q.d/2);if(xx>-20&&xx<W+20)g.fillText(q.w,xx,Math.min(H-4,y(q.m)+20))}g.textAlign='left'}
+ g.strokeStyle='#ffffff55';g.lineWidth=1;g.beginPath();g.moveTo(PX,0);g.lineTo(PX,H);g.stroke();
+ for(const p of hist){const xx=PX+(p.t-now)*pps;if(xx<0)continue;g.fillStyle=p.c;g.beginPath();g.arc(xx,y(p.m),3.2,0,7);g.fill()}
+ if(cur!=null&&live){g.fillStyle='#fff';g.shadowColor='#8dffb8';g.shadowBlur=12;g.beginPath();g.arc(PX,y(cur),6,0,7);g.fill();g.shadowBlur=0}}
+function loop(){requestAnimationFrame(loop);const now=ctx?ctx.currentTime:0;
+ if(run&&run.kind==='hear'&&now-run.t0>tEnd(run.s)+.3){run=null;msg(mode==='echo'?'Your turn! Tap Sing and sing it back.':'Now tap Sing and follow the line.')}
+ if(live&&an){const d=detect();vu(Math.min(1,d.r*6));const t=run&&run.s?now-run.t0:0,tg=run&&run.kind==='sing'?targetAt(run.s,t):null;
+  if(d.f){const m=69+12*Math.log2(d.f/440);cur=cur==null?m:cur*.6+m*.4;const ref=tg!=null?tg:Math.round(cur);let c=(cur-ref)*100;if(tg!=null){c=((c/100+6)%12+12)%12*100-600}
+   const tol=calm?40:25;const cls=Math.abs(c)<=tol?'on':c<0?'flat':'sharp';$('nn').textContent=nm(cur);$('st').className='st '+cls;
+   $('st').innerHTML=(cls==='on'?'✓ On pitch':cls==='flat'?'↑ A bit flat — go up':'↓ A bit sharp — go down')+`<br><small>${c>0?'+':''}${Math.round(c)} cents${tg!=null?' · target '+nm(tg):''}</small>`;
+   hist.push({t:now,m:cur,c:cls==='on'?'#8dffb8':cls==='flat'?'#7cc4ff':'#ffb35c'});
+   if(tg!=null){run.score[1]++;if(Math.abs(c)<=(calm?80:50))run.score[0]++}
+   if(run&&run.kind==='range'){sd.push(Math.round(cur));if(sd.length>12)sd.shift();if(sd.length===12&&sd.every(v=>v===sd[0])){const v=sd[0];rangeLo=rangeLo==null?v:Math.min(rangeLo,v);rangeHi=rangeHi==null?v:Math.max(rangeHi,v)}
+    msg(`Lowest so far: <b>${rangeLo!=null?nm(rangeLo):'—'}</b> · Highest so far: <b>${rangeHi!=null?nm(rangeHi):'—'}</b>. Tap Stop when you are done.`)}}
+  else{cur=null;$('nn').textContent='—';$('st').className='st';$('st').textContent=tg!=null?'Sing '+nm(tg)+'…':'Listening…';if(run&&run.kind==='sing'&&tg!=null)run.score[1]++}
+  if(hist.length>600)hist.splice(0,100);
+  if(run&&run.kind==='sing'&&t>tEnd(run.s)+.4)finish(false)}
+ if(live||run)draw()}
+setMode('free');if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){micOK=false;msg(INFO.free+' '+NOMIC)}
+addEventListener('resize',draw);loop();
+addEventListener('message',e=>{if(e.origin!==location.origin||!e.data)return;if(e.data.type==='nma-sound')muted=!e.data.on&&e.data.chosen});
+const post=()=>{try{parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)}catch(e){}};addEventListener('load',post);addEventListener('resize',post);setTimeout(post,300);
+</script></body></html>
