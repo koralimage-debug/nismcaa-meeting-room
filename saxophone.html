@@ -31,7 +31,7 @@ main{max-width:760px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-ins
 .kc{transition:fill .06s}.kc.down{fill:#3a2604}
 .air{opacity:0;transition:opacity .1s}body.playing .air{opacity:.9}body.calm .air{display:none}
 .tip{font-size:.75rem;opacity:.85;margin-top:10px;line-height:1.35}
-@media (max-width:480px){#grid{grid-template-columns:repeat(4,1fr)}#nn{font-size:1.4rem}#nd{min-width:60px;padding:1px 6px}.row{flex-direction:column}#blow{min-height:56px}}
+@media (max-width:480px){#grid{grid-template-columns:repeat(4,1fr)}#nn{font-size:1.4rem}#nd{min-width:52px;padding:0 5px;top:auto;bottom:8px;left:8px}#nn{font-size:1.15rem}#nf{font-size:.6rem}.row{flex-direction:column}#blow{min-height:56px}}
 .hand{font-size:.72rem;color:#dfe6f5;margin:6px 2px 2px}#rh{grid-template-columns:repeat(3,1fr)}@media (max-width:480px){.vb{font-size:1.05rem}}</style></head><body><header><h1>Alto Saxophone</h1></header><main>
 <div id="status" aria-live="polite">Hold keys, then hold Blow. Or press a note below to see its fingering.</div>
 <div class="stage"><div id="nd"><div id="nn">–</div><div id="nf">open</div></div>
@@ -59,7 +59,7 @@ main{max-width:760px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-ins
 <div class="lbl">Notes (written alto sax pitch). Press and hold to play:</div>
 <div id="grid"></div>
 <div class="ctl"><button class="t" id="song" type="button">⭐ Hot Cross Buns</button><button class="t" id="hear" type="button">▶ Hear it</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm</button></div>
-<p class="tip">On a saxophone, closing more keys makes the tube longer and the note lower. The octave key (thumb) jumps the same fingering up eight notes. The alto sax is an E♭ instrument: a written C sounds as the concert E♭ a major sixth lower.</p>
+<p class="tip">On a saxophone, closing more keys makes the tube longer and the note lower. The octave key (thumb) plays the same fingering one octave higher. The alto sax is an E♭ instrument: a written C sounds as the concert E♭ a major sixth lower. E♭ and G♯ need pinky or side keys that aren’t shown here, so they’re not in the note buttons yet.</p>
 </main><script>
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',st=$('status');
 function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
