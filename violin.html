@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Violin · NISMCAA Academy</title><style>
 :root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5}*{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--cream);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
@@ -27,6 +27,14 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 .ctl .wide{grid-column:1/-1}
 #vn.zoom{max-height:none}#vn.zoom .lab{display:none}
 #vn.zoom.zl{width:300px}
+#bow{pointer-events:none;opacity:0;transition:opacity .12s}#bow.on{opacity:1}
+#bowm{animation:bowing 1.6s ease-in-out infinite alternate;will-change:transform}
+@keyframes bowing{from{transform:translateX(-95px)}to{transform:translateX(95px)}}
+@media (prefers-reduced-motion:reduce){#bowm{animation-duration:3s}}
+#learn{margin-top:10px;background:#0f1c33;border:2px solid var(--gold);border-radius:14px;padding:8px 10px}
+#learn h3{margin:0 0 4px;color:var(--gold);font-size:1rem}#lt{font-size:.88rem;line-height:1.45;margin:0}#lt ul{margin:4px 0 0;padding-left:20px}
+#lf{min-height:2.8em;font-weight:800;color:#7cff8a;font-size:.88rem;margin-top:6px}.lrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+.dot.want{stroke:#7cff8a;stroke-width:4}
 .tip{font-size:.78rem;opacity:.88;margin-top:10px;line-height:1.4}
 @media (max-width:480px){#nn{font-size:1.2rem}#nd{min-width:56px;padding:0 6px}.lab text{font-size:24px}.lab text.sm{font-size:19px}}
 </style></head><body><header><h1>Violin</h1></header><main>
@@ -45,8 +53,16 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 <line x1="318" y1="830" x2="420" y2="840"/><circle cx="318" cy="830" r="4"/><text x="426" y="847">Tailpiece</text>
 <line x1="190" y1="900" x2="90" y2="990"/><circle cx="190" cy="900" r="4"/><text x="20" y="1015">Chinrest</text>
 <line x1="512" y1="520" x2="600" y2="520"/><circle cx="512" cy="520" r="4"/><text x="606" y="527">Bow</text>
-</g><g id="sl"></g></svg></div>
+</g><g id="sl"></g><g id="bow" aria-hidden="true"><g id="bowr"><g id="bowm">
+<defs><linearGradient id="stk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a4a22"/><stop offset=".5" stop-color="#5a2a10"/><stop offset="1" stop-color="#3a1806"/></linearGradient></defs>
+<rect x="-210" y="-2" width="420" height="4" rx="1" fill="#efe6cf" opacity=".95"/>
+<path d="M-205,-13 Q0,-9 212,-14 L214,-10 Q0,-5 -205,-9Z" fill="url(#stk)"/>
+<path d="M212,-14 q12,0 14,8 q0,8 -14,8 l0,-4z" fill="#f2efe6" stroke="#3a1806" stroke-width="1"/>
+<rect x="-232" y="-14" width="28" height="18" rx="3" fill="#151515"/><circle cx="-218" cy="-6" r="3.5" fill="#e8e2d2"/>
+<rect x="-246" y="-12" width="14" height="5" rx="2" fill="#c9b37a"/></g></g></g></svg></div>
 <div class="ctl"><button class="t" id="arco" type="button" aria-pressed="true">🎻 Bow (arco)</button><button class="t" id="pizz" type="button" aria-pressed="false">👆 Pluck (pizzicato)</button><button class="t" id="scale" type="button">▶ Play a scale (D major)</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm (softer)</button><button class="t wide" id="zoomb" type="button" aria-pressed="false">🔍 Zoom in on the strings</button></div>
+<section id="learn" aria-label="Learn to play"><h3 id="lh"></h3><div id="lt"></div><div id="lf" aria-live="polite"></div>
+<div class="lrow"><button class="t" id="lb" type="button">◀ Back</button><button class="t" id="ls" type="button">👀 Show me</button><button class="t" id="ly" type="button">🙋 Your turn</button><button class="t" id="ln" type="button">Next ▶</button></div></section>
 <h2>First position notes. Press and hold to play:</h2>
 <div class="hd"><span>String</span><span>Open</span><span>Finger 1</span><span>Finger 2 (high)</span><span>Finger 3</span><span>Finger 4</span></div>
 <div id="fb"></div>
@@ -97,12 +113,15 @@ function plucked(m){const t=ctx.currentTime,f=hz(m),L=lvl()*1.3;
  o.connect(lp);o2.connect(g2);g2.connect(lp);lp.connect(g);g.connect(bus);o.start(t);o2.start(t);o.stop(t+1.2);o2.stop(t+1.2);return{g,src:[o,o2],rel:0,pz:1}}
 const voices={};
 function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){st.textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
-function show(si,k,on){const b=btn[si+'_'+k];b&&b.classList.toggle('on',on);$('s'+si).classList.toggle('on',on);const d=$('d'+si+k);d&&d.classList.toggle('down',on)}
+const bowEl=document.getElementById('bow'),bowR=document.getElementById('bowr'),BANG=[11,4,-4,-11];let bowT=null;
+function bowTo(si){clearTimeout(bowT);const y=640,x=STR[si].x0+(STR[si].x1-STR[si].x0)*(y-NUT)/(BR-NUT);bowR.setAttribute('transform','translate('+x.toFixed(1)+' '+y+') rotate('+BANG[si]+')');bowEl.classList.add('on')}
+function bowCheck(){clearTimeout(bowT);bowT=setTimeout(()=>{if(!Object.values(voices).some(v=>!v.pz))bowEl.classList.remove('on')},140)}
+function show(si,k,on){if(on&&mode==='arco')bowTo(si);else if(!on)bowCheck();const b=btn[si+'_'+k];b&&b.classList.toggle('on',on);$('s'+si).classList.toggle('on',on);const d=$('d'+si+k);d&&d.classList.toggle('down',on)}
 function start(id,si,k){stop(id);const m=STR[si].m+FING[k];$('nn').textContent=nm(m);$('nf').textContent=STR[si].n+' string · '+FN[k].toLowerCase();show(si,k,true);judge(si,k);
- if(!permit())return;getCtx();window.__plays.push(m);const v=mode==='arco'?bowed(m):plucked(m);v.si=si;v.k=k;voices[id]=v;
+ if(!permit()){bowCheck();return}getCtx();window.__plays.push(m);const v=mode==='arco'?bowed(m):plucked(m);v.si=si;v.k=k;voices[id]=v;
  st.textContent=nm(m)+' on the '+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open string')+(mode==='arco'?'. Keep holding to keep bowing.':'. Plucked.')}
 function stop(id){const v=voices[id];if(!v)return;delete voices[id];show(v.si,v.k,false);if(v.pz)return;const t=ctx.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(0,t,v.rel/3);v.src.forEach(x=>{try{x.stop(t+.5)}catch(_){}})}
-function stopAll(){Object.keys(voices).forEach(stop);document.querySelectorAll('.on,.down').forEach(e=>e.classList.remove('on','down'))}
+function stopAll(){bowEl.classList.remove('on');Object.keys(voices).forEach(stop);document.querySelectorAll('.on,.down').forEach(e=>e.classList.remove('on','down'))}
 // ---- pointer handling (release handler deletes before stop; ignores synthetic events)
 const act={};
 function rel(e){if(!e.isTrusted)return;const id=act[e.pointerId];if(id===undefined)return;delete act[e.pointerId];stop(id)}
@@ -116,7 +135,7 @@ $('zone').addEventListener('pointerdown',e=>{const p=svgPt(e);let best=null,bd=1
 ['pointerup','pointercancel','pointerleave'].forEach(t=>{FB.addEventListener(t,rel,true);$('zone').addEventListener(t,rel)});
 addEventListener('pointerup',rel);
 function stopScale(){if(timer){clearTimeout(timer);timer=null}clearNext();$('scale').textContent='▶ Play a scale (D major)'}
-function quiet(){stopScale();stopAll()}
+function quiet(){stopScale();clearTimeout(lt);lt=null;stop('lesson');$('ls').textContent='👀 Show me';stopAll()}
 ['blur','pagehide'].forEach(t=>addEventListener(t,quiet));document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet()});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 // keyboard
@@ -130,7 +149,36 @@ $('arco').onclick=()=>setMode('arco');$('pizz').onclick=()=>setMode('pizz');
 $('calm').onclick=()=>{const on=document.body.classList.toggle('calm');$('calm').setAttribute('aria-pressed',on)};
 // D major scale demo: D4 E F# G A B C# D5 and back
 const SC=[[1,0],[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3]],SEQ=SC.concat(SC.slice(0,-1).reverse());let timer=null,want=null;
-function judge(si,k){}
+// ---- Learn to play
+const D=[1,0],E=[1,1],Fs=[1,2],A=[2,0];
+const LES=[
+ {h:'Step 1 of 5: Hold the violin',t:'<ul><li>Stand tall with your feet a little apart.</li><li>Rest the violin on your <b>left</b> shoulder, with the scroll pointing out to your left.</li><li>Let your jaw rest gently on the chinrest. No squeezing.</li><li>Curve your left hand under the neck like you are holding a small cup. Keep your wrist straight.</li></ul>',show:'Look at the picture: the chinrest (bottom) goes under your jaw, and the scroll (top) points away from you.',turn:'Hold your violin like this for 10 slow counts, then tap Your turn again to check it off.',check:1},
+ {h:'Step 2 of 5: Hold the bow',t:'<ul><li>Bend your <b>thumb</b> and put its tip against the stick, right next to the frog (the black part).</li><li>Drape your two middle fingers over the stick, across from your thumb.</li><li>Your first finger rests on the stick a little farther up.</li><li>Your pinky stands curved on top of the stick, like a little bridge.</li><li>Keep your hand soft and round, like holding a baby bird.</li></ul>',show:'The bow on the picture shows the stick (top), the hair (light part that touches the strings) and the frog (black end) where your hand goes.',bow:1,turn:'Make the bow hold and keep it soft for 10 counts, then tap Your turn again to check it off.',check:1},
+ {h:'Step 3 of 5: Bow the open strings',t:'Put the bow hair on the string between the bridge and the end of the fingerboard. Pull toward your right for a <b>down bow</b> (⟶) and push back for an <b>up bow</b> (⟵). Tilt your arm to reach each string: G (lowest), D, A, E (highest). Use Bow mode.',seq:[[0,0],[1,0],[2,0],[3,0]],dur:1700},
+ {h:'Step 4 of 5: Press fingers 1, 2 and 3',t:'On the A string, press with the tip of each finger, curved like a hammer. Each finger makes the note higher: open A, then finger 1 is B, finger 2 (high) is C♯, finger 3 is D. Keep fingers down as you add the next one.',seq:[[2,0],[2,1],[2,2],[2,3]],dur:900},
+ {h:'Step 5 of 5: Play a tune',t:'"Mary Had a Little Lamb" on the D and A strings. Follow the green note. F♯ is finger 2 (high) on the D string, E is finger 1, D is the open D string, and A is the open A string.',seq:[Fs,E,D,E,Fs,Fs,Fs,E,E,E,Fs,A,A,Fs,E,D,E,Fs,Fs,Fs,Fs,E,E,Fs,E,D],dur:480}];
+let L=0,lwant=-1,lt=null;const lf=$('lf');
+function lessonStop(){clearTimeout(lt);lt=null;stop('lesson');lwant=-1;clearWant();$('ls').textContent='👀 Show me'}
+function clearWant(){document.querySelectorAll('.lwant').forEach(e=>e.classList.remove('lwant'));clearNext()}
+function markWant(){clearWant();const q=LES[L].seq,[si,k]=q[lwant];btn[si+'_'+k].classList.add('next');const d=$('d'+si+k);d&&d.classList.add('lwant')}
+function lessonShow(){const x=LES[L];lessonStop();$('lb').disabled=L===0;$('ln').disabled=L===LES.length-1;$('lh').textContent=x.h;$('lt').innerHTML=x.t;lf.textContent='';}
+function nm2(si,k){return nm(STR[si].m+FING[k])}
+$('lb').onclick=()=>{if(L>0){L--;lessonShow()}};$('ln').onclick=()=>{if(L<LES.length-1){L++;lessonShow()}};
+$('ls').onclick=()=>{const x=LES[L];if(lt){lessonStop();lf.textContent='Stopped.';return}
+ if(!x.seq){lf.textContent=x.show;if(x.bow){bowTo(1);setTimeout(bowCheck,2500)}return}
+ if(mode!=='arco')setMode('arco');getCtx();let i=0;$('ls').textContent='■ Stop';
+ const step=()=>{stop('lesson');clearWant();if(i>=x.seq.length){lt=null;$('ls').textContent='👀 Show me';lf.textContent='Now tap Your turn and try it yourself.';return}
+  const[si,k]=x.seq[i];btn[si+'_'+k].classList.add('next');const d=$('d'+si+k);d&&d.classList.add('lwant');start('lesson',si,k);
+  lf.textContent=(L===2?(i%2?'Up bow ⟵ ':'Down bow ⟶ '):'')+nm2(si,k)+' ('+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open')+')';i++;
+  lt=setTimeout(()=>{stop('lesson');lt=setTimeout(step,80)},x.dur)};step()};
+$('ly').onclick=()=>{const x=LES[L];lessonStop();
+ if(x.check){lf.textContent=x.turn;if(x.done)lf.textContent='✓ Checked off! Tap Next when you are ready.';x.done=1;return}
+ lwant=0;markWant();lf.textContent='Your turn: play '+nm2(...x.seq[0])+' (green). Play each note, then let go.'};
+function judge(si,k){if(lwant<0)return;const x=LES[L],[ws,wk]=x.seq[lwant];
+ if(si===ws&&k===wk){lwant++;if(lwant>=x.seq.length){lwant=-1;clearWant();lf.textContent='✓ Great job! You played it all. '+(L<LES.length-1?'Tap Next for the next step.':'You finished all the lessons!');return}
+  markWant();const[ns,nk]=x.seq[lwant];lf.textContent='✓ Yes! Next: '+nm2(ns,nk)+' ('+STR[ns].n+' string, '+(nk?FN[nk].toLowerCase():'open')+'). '+(lwant+1)+' of '+x.seq.length}
+ else lf.textContent='Not quite. That was '+nm2(si,k)+'. Try '+nm2(ws,wk)+' on the '+STR[ws].n+' string (green).'}
+lessonShow();
 function clearNext(){document.querySelectorAll('.next').forEach(b=>b.classList.remove('next'))}
 $('scale').onclick=()=>{if(timer){clearTimeout(timer);timer=null;stop('demo');clearNext();$('scale').textContent='▶ Play a scale (D major)';st.textContent='Scale stopped.';return}
  getCtx();let i=0;$('scale').textContent='■ Stop the scale';
