@@ -28,11 +28,11 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 #vn.zoom{max-height:none}#vn.zoom .lab{display:none}
 #vn.zoom.zl{width:300px}
 #bow{pointer-events:none;opacity:0;transition:opacity .12s}#bow.on{opacity:1}
-#bowm{animation:bowing 1.6s ease-in-out infinite alternate;will-change:transform}
+#bowm{animation:bowing 1.6s ease-in-out infinite alternate;animation-play-state:paused}#bow.on #bowm{animation-play-state:running;will-change:transform}body.calm #bowm{animation:none}
 @keyframes bowing{from{transform:translateX(-95px)}to{transform:translateX(95px)}}
-@media (prefers-reduced-motion:reduce){#bowm{animation-duration:3s}}
+@media (prefers-reduced-motion:reduce){#bowm{animation:none!important}}
 #learn{margin-top:10px;background:#0f1c33;border:2px solid var(--gold);border-radius:14px;padding:8px 10px}
-#learn h3{margin:0 0 4px;color:var(--gold);font-size:1rem}#lt{font-size:.88rem;line-height:1.45;margin:0}#lt ul{margin:4px 0 0;padding-left:20px}
+#learn h2{margin:0 0 4px;color:var(--gold);font-size:1rem}#lt{font-size:.88rem;line-height:1.45;margin:0}#lt ul{margin:4px 0 0;padding-left:20px}
 #lf{min-height:2.8em;font-weight:800;color:#7cff8a;font-size:.88rem;margin-top:6px}.lrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
 .dot.want{stroke:#7cff8a;stroke-width:4}
 .tip{font-size:.78rem;opacity:.88;margin-top:10px;line-height:1.4}
@@ -61,7 +61,7 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 <rect x="-232" y="-14" width="28" height="18" rx="3" fill="#151515"/><circle cx="-218" cy="-6" r="3.5" fill="#e8e2d2"/>
 <rect x="-246" y="-12" width="14" height="5" rx="2" fill="#c9b37a"/></g></g></g></svg></div>
 <div class="ctl"><button class="t" id="arco" type="button" aria-pressed="true">🎻 Bow (arco)</button><button class="t" id="pizz" type="button" aria-pressed="false">👆 Pluck (pizzicato)</button><button class="t" id="scale" type="button">▶ Play a scale (D major)</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm (softer)</button><button class="t wide" id="zoomb" type="button" aria-pressed="false">🔍 Zoom in on the strings</button></div>
-<section id="learn" aria-label="Learn to play"><h3 id="lh"></h3><div id="lt"></div><div id="lf" aria-live="polite"></div>
+<section id="learn" aria-label="Learn to play"><h2 id="lh"></h2><div id="lt"></div><div id="lf" aria-live="polite"></div>
 <div class="lrow"><button class="t" id="lb" type="button">◀ Back</button><button class="t" id="ls" type="button">👀 Show me</button><button class="t" id="ly" type="button">🙋 Your turn</button><button class="t" id="ln" type="button">Next ▶</button></div></section>
 <h2>First position notes. Press and hold to play:</h2>
 <div class="hd"><span>String</span><span>Open</span><span>Finger 1</span><span>Finger 2 (high)</span><span>Finger 3</span><span>Finger 4</span></div>
@@ -153,7 +153,7 @@ const SC=[[1,0],[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3]],SEQ=SC.concat(SC.slic
 const D=[1,0],E=[1,1],Fs=[1,2],A=[2,0];
 const LES=[
  {h:'Step 1 of 5: Hold the violin',t:'<ul><li>Stand tall with your feet a little apart.</li><li>Rest the violin on your <b>left</b> shoulder, with the scroll pointing out to your left.</li><li>Let your jaw rest gently on the chinrest. No squeezing.</li><li>Curve your left hand under the neck like you are holding a small cup. Keep your wrist straight.</li></ul>',show:'Look at the picture: the chinrest (bottom) goes under your jaw, and the scroll (top) points away from you.',turn:'Hold your violin like this for 10 slow counts, then tap Your turn again to check it off.',check:1},
- {h:'Step 2 of 5: Hold the bow',t:'<ul><li>Bend your <b>thumb</b> and put its tip against the stick, right next to the frog (the black part).</li><li>Drape your two middle fingers over the stick, across from your thumb.</li><li>Your first finger rests on the stick a little farther up.</li><li>Your pinky stands curved on top of the stick, like a little bridge.</li><li>Keep your hand soft and round, like holding a baby bird.</li></ul>',show:'The bow on the picture shows the stick (top), the hair (light part that touches the strings) and the frog (black end) where your hand goes.',bow:1,turn:'Make the bow hold and keep it soft for 10 counts, then tap Your turn again to check it off.',check:1},
+ {h:'Step 2 of 5: Hold the bow',t:'<ul><li>Bend your <b>thumb</b> and put its tip against the stick, right next to the frog (the black part).</li><li>Drape your two middle fingers over the stick, across from your thumb.</li><li>Your first finger rests on the stick a little farther up.</li><li>Your pinky stands curved on top of the stick, like a little bridge.</li><li>Keep your hand soft and round, like holding a baby bird.</li></ul>',show:'The bow on the picture shows the stick (the wooden part), the hair (light part that touches the strings) and the frog (black end) where your hand goes.',bow:1,turn:'Make the bow hold and keep it soft for 10 counts, then tap Your turn again to check it off.',check:1},
  {h:'Step 3 of 5: Bow the open strings',t:'Put the bow hair on the string between the bridge and the end of the fingerboard. Pull toward your right for a <b>down bow</b> (⟶) and push back for an <b>up bow</b> (⟵). Tilt your arm to reach each string: G (lowest), D, A, E (highest). Use Bow mode.',seq:[[0,0],[1,0],[2,0],[3,0]],dur:1700},
  {h:'Step 4 of 5: Press fingers 1, 2 and 3',t:'On the A string, press with the tip of each finger, curved like a hammer. Each finger makes the note higher: open A, then finger 1 is B, finger 2 (high) is C♯, finger 3 is D. Keep fingers down as you add the next one.',seq:[[2,0],[2,1],[2,2],[2,3]],dur:900},
  {h:'Step 5 of 5: Play a tune',t:'"Mary Had a Little Lamb" on the D and A strings. Follow the green note. F♯ is finger 2 (high) on the D string, E is finger 1, D is the open D string, and A is the open A string.',seq:[Fs,E,D,E,Fs,Fs,Fs,E,E,E,Fs,A,A,Fs,E,D,E,Fs,Fs,Fs,Fs,E,E,Fs,E,D],dur:480}];
