@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alto Saxophone · NISMCAA Academy</title><style>
+:root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5}*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--cream);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+header{padding:6px 12px;border-bottom:3px solid var(--gold)}h1{margin:0;font-size:1.15rem;color:var(--gold)}
+main{max-width:760px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-inset-bottom))}
+#status{background:#0f1c33;border:2px solid var(--gold);border-radius:12px;padding:5px 10px;font-size:.82rem;font-weight:700;color:var(--gold);line-height:1.25;min-height:2.6em}
+.stage{margin-top:6px;background:radial-gradient(ellipse at 30% 10%,#3b4f80 0%,#1d2a4a 60%,#0c1326 100%);border-radius:18px;padding:6px;box-shadow:inset 0 -30px 50px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);position:relative}
+#sx{display:block;width:100%;height:auto}
+#nd{position:absolute;left:10px;top:8px;background:rgba(15,28,51,.85);border:2px solid var(--gold);border-radius:12px;padding:2px 10px;text-align:center;min-width:76px}
+#nn{font-size:1.9rem;font-weight:900;color:var(--gold);line-height:1.1}#nf{font-size:.66rem;color:#dfe6f5}
+.row{display:flex;gap:6px;margin-top:6px;align-items:stretch}
+#valves{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1.4;touch-action:none}
+.vb{min-height:64px;border-radius:50% 50% 14px 14px;border:0;background:radial-gradient(circle at 40% 30%,#fff7d6,#e8c062 45%,#9a6d18);color:#2a1a02;font:inherit;font-weight:900;font-size:1.25rem;box-shadow:0 6px 0 #6b4a0e,0 8px 14px rgba(0,0,0,.4);cursor:pointer;touch-action:none}
+.vb small{display:block;font-size:.6rem;font-weight:700}
+.vb.on{transform:translateY(5px);box-shadow:0 1px 0 #6b4a0e;background:radial-gradient(circle at 40% 30%,#fff,#ffd24a 45%,#c98a10)}
+#blow{flex:1;min-height:74px;border-radius:14px;border:2px dashed #9fd3ff;background:rgba(159,211,255,.12);color:#cfeaff;font:inherit;font-weight:800;font-size:1rem;touch-action:none;cursor:pointer}
+#blow.on{background:rgba(159,211,255,.5);color:#06223a}
+.lbl{font-size:.75rem;color:#dfe6f5;margin:8px 2px 3px}
+#lips{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+#lips button,button.t{font:inherit;font-weight:700;font-size:.78rem;min-height:44px;border-radius:12px;border:2px solid var(--gold);background:transparent;color:var(--gold);padding:2px 4px;cursor:pointer}
+#lips button[aria-pressed=true],button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
+#grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;touch-action:none}
+.nb{position:relative;min-height:46px;padding:0;border-radius:12px;border:0;background:linear-gradient(#f7f8fb,#c9ced8);color:#14213d;font:inherit;font-weight:800;font-size:.9rem;box-shadow:0 3px 0 #8d94a3,0 5px 10px rgba(0,0,0,.35);touch-action:none;cursor:pointer}
+.nb.sh{background:linear-gradient(#3a4566,#1b2440);color:#fff;box-shadow:0 3px 0 #0b1020}
+.nb small{display:block;font-size:.55rem;opacity:.7}
+.nb.on{transform:translateY(2px);background:linear-gradient(#ffe89a,#ffd24a);color:#14213d}
+.nb.next{outline:4px solid #7cff8a;outline-offset:-2px}
+.ctl{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:6px}
+.kc{transition:fill .06s}.kc.down{fill:#3a2604}
+.air{opacity:0;transition:opacity .1s}body.playing .air{opacity:.9}body.calm .air{display:none}
+.tip{font-size:.75rem;opacity:.85;margin-top:10px;line-height:1.35}
+@media (max-width:480px){#grid{grid-template-columns:repeat(4,1fr)}#nn{font-size:1.4rem}#nd{min-width:60px;padding:1px 6px}.row{flex-direction:column}#blow{min-height:56px}}
+.hand{font-size:.72rem;color:#dfe6f5;margin:6px 2px 2px}#rh{grid-template-columns:repeat(3,1fr)}@media (max-width:480px){.vb{font-size:1.05rem}}</style></head><body><header><h1>Alto Saxophone</h1></header><main>
+<div id="status" aria-live="polite">Hold keys, then hold Blow. Or press a note below to see its fingering.</div>
+<div class="stage"><div id="nd"><div id="nn">–</div><div id="nf">open</div></div>
+<svg id="sx" viewBox="0 0 640 300" role="img" aria-label="Brass alto saxophone with pearl keys"><defs>
+<linearGradient id="br" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset=".3" stop-color="#f3cf6a"/><stop offset=".6" stop-color="#c8951f"/><stop offset=".85" stop-color="#8a5f0c"/><stop offset="1" stop-color="#e9c35a"/></linearGradient>
+<radialGradient id="bell" cx=".4" cy=".4" r=".7"><stop offset="0" stop-color="#3a2604"/><stop offset=".55" stop-color="#8a5f0c"/><stop offset=".85" stop-color="#f3cf6a"/><stop offset="1" stop-color="#fff0b8"/></radialGradient>
+<radialGradient id="pearl" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#f1ece4"/><stop offset="1" stop-color="#c9c2d6"/></radialGradient>
+<filter id="sh"><feDropShadow dx="3" dy="6" stdDeviation="5" flood-opacity=".5"/></filter></defs>
+<g filter="url(#sh)">
+<path d="M70 70 Q120 40 180 62 L200 72" fill="none" stroke="url(#br)" stroke-width="12" stroke-linecap="round"/>
+<path d="M195 60 L470 205 Q520 240 560 215 L560 225 Q520 262 455 228 L188 86Z" fill="url(#br)"/>
+<path d="M440 205 Q500 270 560 225 Q590 200 585 140 L615 100 L640 130 Q615 160 610 200 Q600 270 520 275 Q450 270 420 220Z" fill="url(#br)"/>
+<ellipse cx="626" cy="113" rx="22" ry="12" transform="rotate(40 626 113)" fill="url(#bell)" stroke="#fff0b8" stroke-width="3"/>
+</g>
+<path d="M22 72 L58 64 Q70 64 72 72 Q70 80 58 80Z" fill="#1d1d22"/><rect x="50" y="62" width="10" height="20" rx="2" fill="#c0c4cc"/><path d="M22 74 L40 80" stroke="#c9a46a" stroke-width="3"/>
+<g class="air"><path d="M630 80 q8 -14 0 -26" stroke="#bfe3ff" stroke-width="3" fill="none"/><path d="M612 76 q4 -12 -4 -22" stroke="#bfe3ff" stroke-width="3" fill="none"/></g>
+<g id="cas"></g>
+<text x="40" y="104" font-size="11" fill="#dfe6f5" text-anchor="middle">mouthpiece</text><text x="130" y="36" font-size="11" fill="#dfe6f5" text-anchor="middle">neck</text><text x="575" y="290" font-size="11" fill="#dfe6f5" text-anchor="middle">bow</text><text x="600" y="168" font-size="11" fill="#dfe6f5" text-anchor="middle">bell</text>
+</svg></div>
+<div class="hand">Left hand (top): octave key, then keys 1, 2, 3</div>
+<div class="row"><div id="valves"><button class="vb" type="button" data-v="0">8va<small>thumb · Q</small></button><button class="vb" type="button" data-v="1">1<small>index · J</small></button><button class="vb" type="button" data-v="2">2<small>middle · K</small></button><button class="vb" type="button" data-v="3">3<small>ring · L</small></button></div></div>
+<div class="hand">Right hand (bottom): keys 4, 5, 6</div>
+<div class="row"><div id="rh" class="valves2" style="display:grid;gap:6px;flex:1.4;touch-action:none"><button class="vb" type="button" data-v="4">4<small>index · U</small></button><button class="vb" type="button" data-v="5">5<small>middle · I</small></button><button class="vb" type="button" data-v="6">6<small>ring · O</small></button></div>
+<button id="blow" type="button">🎷 Hold to blow<br><small>Space bar</small></button></div>
+<div class="lbl">Notes (written alto sax pitch). Press and hold to play:</div>
+<div id="grid"></div>
+<div class="ctl"><button class="t" id="song" type="button">⭐ Hot Cross Buns</button><button class="t" id="hear" type="button">▶ Hear it</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm</button></div>
+<p class="tip">On a saxophone, closing more keys makes the tube longer and the note lower. The octave key (thumb) jumps the same fingering up eight notes. The alto sax is an E♭ instrument: a written C sounds as the concert E♭ a major sixth lower.</p>
+</main><script>
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',st=$('status');
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+const NAMES=['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
+const nm=m=>NAMES[m%12]+(Math.floor(m/12)-1);
+// keys: 0=octave,1-3 left hand,4-6 right hand. Low fingerings (written):
+const LOWF={62:[1,2,3,4,5,6],64:[1,2,3,4,5],65:[1,2,3,4],66:[1,2,3,5],67:[1,2,3],69:[1,2],70:[1,4],71:[1],72:[2],73:[]};
+const FING={};for(const m in LOWF){FING[m]=LOWF[m];FING[+m+12]=[0,...LOWF[m]]}
+const KEY=v=>v.slice().sort().join(',');const REV={};for(const m in FING)REV[KEY(FING[m])]=+m;
+const fname=v=>{const w=v.filter(x=>x);return (v.includes(0)?'8va ':'')+(w.length?w.join(' '):'open')};
+// keys on the body
+(function(){const C=$('cas');const P=[[150,48,9],[235,92,13],[270,111,13],[305,129,13],[375,166,13],[410,184,13],[445,202,13]];
+ P.forEach(([x,y,r],i)=>{el('circle',{cx:x,cy:y,r:r+5,fill:'#d4a93a',stroke:'#6e4808','stroke-width':1.5},C);el('circle',{cx:x,cy:y,r,fill:'url(#pearl)',class:'kc',id:'k'+i,stroke:'#9aa0ad'},C);
+ el('text',{x,y:y+28,'text-anchor':'middle','font-size':12,'font-weight':900,fill:'#fff6cf',stroke:'#3a2604','stroke-width':.6},C).textContent=i?i:'8va'});
+ el('path',{d:'M215 95 L460 225',stroke:'#a37414','stroke-width':3,fill:'none'},C)})();
+const vb=[...document.querySelectorAll('.vb')],vdown=Array(7).fill(false);
+function showValves(v){for(let i=0;i<7;i++){const on=v.includes(i);$('k'+i).classList.toggle('down',on);vb[i].classList.toggle('on',on)}}
+function showNote(m,v){$('nn').textContent=m?nm(m):'–';$('nf').textContent='keys: '+fname(v)}
+const NOTES=Object.keys(FING).map(Number).sort((a,b)=>a-b),KEYB='zxcvbnm,./asdfghk;wertyp';
+const G=$('grid'),btn={};NOTES.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.className='nb'+(NAMES[m%12].length>1?' sh':'');b.dataset.m=m;b.innerHTML=nm(m)+'<small>'+fname(FING[m])+'</small>';b.setAttribute('aria-label',nm(m)+', keys '+fname(FING[m]));G.appendChild(b);btn[m]=b});
+// audio: synthesized E♭ alto sax (reedy odd+even harmonics, formants, breath, vibrato)
+let ctx,bus,noise,muted=false,soundChosen=false,parentOn=null;window.__plays=[];
+function getCtx(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();const comp=ctx.createDynamicsCompressor();bus=ctx.createGain();bus.gain.value=muted?0:.8;bus.connect(comp);comp.connect(ctx.destination);
+ noise=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);const d=noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+ if(ctx.state!='running')ctx.resume();return ctx}
+['touchstart','pointerdown','keydown'].forEach(t=>addEventListener(t,()=>getCtx(),{capture:true,passive:true}));
+addEventListener('message',e=>{if(e.origin!==location.origin||!e.data||e.data.type!=='nma-sound')return;muted=!e.data.on;soundChosen=!!e.data.chosen;parentOn=!!e.data.on;if(!soundChosen)muted=false;if(bus)bus.gain.value=muted?0:.8;if(muted)stopTone()});
+const wave=()=>{if(!ctx._pw){const N=20,re=new Float32Array(N),im=new Float32Array(N);for(let k=1;k<N;k++)im[k]=(k%2?1:.7)/Math.pow(k,.9)*(k<3?1:.85);ctx._pw=ctx.createPeriodicWave(re,im)}return ctx._pw};
+let V=null;
+const hz=m=>440*Math.pow(2,(m-9-69)/12);// written to concert (E♭ alto: down a major sixth)
+function startTone(m){getCtx();window.__plays.push(m);const T=ctx.currentTime,f=hz(m),lv=document.body.classList.contains('calm')?.3:.5;
+ if(V){V.o.frequency.setTargetAtTime(f,T,.015);return}
+ const o=ctx.createOscillator();o.setPeriodicWave(wave());o.frequency.setValueAtTime(f*.97,T);o.frequency.exponentialRampToValueAtTime(f,T+.06);
+ const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=5;lg.gain.setValueAtTime(0,T);lg.gain.linearRampToValueAtTime(f*.008,T+.7);lfo.connect(lg);lg.connect(o.frequency);
+ const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.Q.value=.7;lp.frequency.setValueAtTime(900,T);lp.frequency.exponentialRampToValueAtTime(3200,T+.08);
+ const f1=ctx.createBiquadFilter();f1.type='peaking';f1.frequency.value=550;f1.Q.value=1.2;f1.gain.value=7;
+ const f2=ctx.createBiquadFilter();f2.type='peaking';f2.frequency.value=1500;f2.Q.value=1.5;f2.gain.value=5;
+ const g=ctx.createGain();g.gain.setValueAtTime(0,T);g.gain.linearRampToValueAtTime(lv,T+.05);g.gain.linearRampToValueAtTime(lv*.85,T+.2);
+ o.connect(lp);lp.connect(f1);f1.connect(f2);f2.connect(g);g.connect(bus);
+ const ns=ctx.createBufferSource();ns.buffer=noise;ns.loop=true;const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2500;bp.Q.value=.8;const ng=ctx.createGain();ng.gain.setValueAtTime(lv*.35,T);ng.gain.exponentialRampToValueAtTime(lv*.06,T+.1);ns.connect(bp);bp.connect(ng);ng.connect(g);
+ o.start(T);lfo.start(T);ns.start(T);V={o,lfo,ns,g};document.body.classList.add('playing')}
+function stopTone(){if(!V)return;const v=V;V=null;const T=ctx.currentTime;v.g.gain.cancelScheduledValues(T);v.g.gain.setTargetAtTime(0,T,.04);[v.o,v.lfo,v.ns].forEach(x=>x.stop(T+.4));document.body.classList.remove('playing');Object.values(btn).forEach(b=>b.classList.remove('on'))}
+function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){st.textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
+let blowing=false;
+// key state -> note; unknown combos use the keys closed in a row from key 1
+function vNote(){const v=[0,1,2,3,4,5,6].filter(i=>vdown[i]);let m=REV[KEY(v)];if(m===undefined){const w=v.filter(x=>x);let n=0;while(w.includes(n+1))n++;m=[73,71,69,67,65,64,62][n]+(v.includes(0)?12:0)}return{m,v}}
+function retune(){const{m,v}=vNote();showValves(v);if(blowing){showNote(m,v);if(permit()){startTone(m);judge(m)}st.textContent='Playing '+nm(m)+' (keys '+fname(v)+').'}else showNote(m,v)}
+const vp={};
+document.querySelectorAll('#valves,#rh').forEach(P=>{P.addEventListener('pointerdown',e=>{const b=e.target.closest('.vb');if(!b)return;e.preventDefault();try{b.releasePointerCapture(e.pointerId)}catch(_){}vp[e.pointerId]=+b.dataset.v;vdown[+b.dataset.v]=true;retune()});
+ const vup=e=>{const i=vp[e.pointerId];if(i===undefined)return;delete vp[e.pointerId];vdown[i]=false;retune()};['pointerup','pointercancel'].forEach(t=>P.addEventListener(t,vup));P.addEventListener('pointerleave',vup,true)});
+const bl=$('blow');function blowOn(){if(blowing)return;getCtx();blowing=true;bl.classList.add('on');retune()}function blowOff(){if(!blowing)return;blowing=false;bl.classList.remove('on');stopTone();const{m,v}=vNote();showNote(m,v)}
+bl.addEventListener('pointerdown',e=>{e.preventDefault();blowOn()});['pointerup','pointercancel','pointerleave'].forEach(t=>bl.addEventListener(t,blowOff));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+const np={};function pressNote(m){btn[m].classList.add('on');const v=FING[m];showValves(v);showNote(m,v);if(!permit())return;startTone(m);st.textContent=nm(m)+': press keys '+fname(v)+'. Keep holding to keep the note going.';judge(m)}
+G.addEventListener('pointerdown',e=>{const b=e.target.closest('.nb');if(!b)return;e.preventDefault();getCtx();try{b.releasePointerCapture(e.pointerId)}catch(_){}np[e.pointerId]=+b.dataset.m;pressNote(+b.dataset.m)});
+const nup=e=>{if(np[e.pointerId]===undefined)return;delete np[e.pointerId];if(!Object.keys(np).length)stopTone()};['pointerup','pointercancel'].forEach(t=>G.addEventListener(t,nup));G.addEventListener('pointerleave',nup,true);
+// keyboard: Q octave, J K L left hand, U I O right hand, space blow
+const KK='qjkluio',KM={};NOTES.forEach((m,i)=>KM[KEYB[i]]=m);
+addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey)return;const k=e.key.toLowerCase(),vi=KK.indexOf(k);
+ if(vi>=0&&k){vdown[vi]=true;retune()}else if(k===' '){e.preventDefault();blowOn()}else if(KM[k]!==undefined){getCtx();pressNote(KM[k])}});
+addEventListener('keyup',e=>{const k=e.key.toLowerCase(),vi=KK.indexOf(k);if(vi>=0&&k){vdown[vi]=false;retune()}else if(k===' ')blowOff();else if(KM[k]!==undefined)stopTone()});
+$('calm').onclick=()=>{const b=$('calm'),on=b.getAttribute('aria-pressed')!='true';b.setAttribute('aria-pressed',on);document.body.classList.toggle('calm',on);b.textContent='🌙 Calm'+(on?' ✓':'')};
+// Hot Cross Buns (written B A G)
+const E=71,D=69,C=67,SONG=[E,D,C,E,D,C,C,C,C,C,D,D,D,D,E,D,C],DUR=[1,1,2,1,1,2,.5,.5,.5,.5,.5,.5,.5,.5,1,1,2];let songI=-1;
+function mark(){Object.values(btn).forEach(b=>b.classList.remove('next'));if(songI<0)return;if(songI>=SONG.length){st.textContent='🌟 You played Hot Cross Buns! Well done!';songI=-1;$('song').textContent='⭐ Hot Cross Buns';return}btn[SONG[songI]].classList.add('next')}
+function judge(m){if(songI<0)return;if(m==SONG[songI]){songI++;mark();if(songI>0&&songI<SONG.length)st.textContent='Hot Cross Buns: note '+(songI+1)+' of '+SONG.length+'. Play the green note.'}else st.textContent='Try the green note: '+nm(SONG[songI])+' (keys '+fname(FING[SONG[songI]])+').'}
+$('song').onclick=()=>{if(songI>=0){songI=-1;mark();$('song').textContent='⭐ Hot Cross Buns';return}songI=0;mark();$('song').textContent='■ Stop';st.textContent='Play the green notes one by one. The song starts on B (key 1).'};
+let hearT=[];$('hear').onclick=()=>{getCtx();if(!permit())return;hearT.forEach(clearTimeout);hearT=[];stopTone();let t=0;SONG.forEach((m,j)=>{const d=DUR[j]*480;hearT.push(setTimeout(()=>{startTone(m);btn[m].classList.add('on');showValves(FING[m]);showNote(m,FING[m])},t));hearT.push(setTimeout(()=>{stopTone()},t+d-60));t+=d})};
+const post=()=>{if(window.parent!==window)parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)};addEventListener('load',post);addEventListener('resize',post);
+function halt(){hearT.forEach(clearTimeout);hearT=[];blowing=false;bl.classList.remove('on');vdown.fill(false);for(const k in vp)delete vp[k];for(const k in np)delete np[k];stopTone();retune()}
+addEventListener('blur',halt);document.addEventListener('visibilitychange',()=>{if(document.hidden)halt()});
+retune();
+</script></body></html>

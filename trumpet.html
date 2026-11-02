@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Trumpet · NISMCAA Academy</title><style>
+:root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5}*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--cream);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+header{padding:6px 12px;border-bottom:3px solid var(--gold)}h1{margin:0;font-size:1.15rem;color:var(--gold)}
+main{max-width:760px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-inset-bottom))}
+#status{background:#0f1c33;border:2px solid var(--gold);border-radius:12px;padding:5px 10px;font-size:.82rem;font-weight:700;color:var(--gold);line-height:1.25;min-height:2.6em}
+.stage{margin-top:6px;background:radial-gradient(ellipse at 30% 10%,#3b4f80 0%,#1d2a4a 60%,#0c1326 100%);border-radius:18px;padding:6px;box-shadow:inset 0 -30px 50px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);position:relative}
+#tp{display:block;width:100%;height:auto}
+#nd{position:absolute;left:10px;top:8px;background:rgba(15,28,51,.85);border:2px solid var(--gold);border-radius:12px;padding:2px 10px;text-align:center;min-width:76px}
+#nn{font-size:1.9rem;font-weight:900;color:var(--gold);line-height:1.1}#nf{font-size:.66rem;color:#dfe6f5}
+.row{display:flex;gap:6px;margin-top:6px;align-items:stretch}
+#valves{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1.4;touch-action:none}
+.vb{min-height:74px;border-radius:50% 50% 14px 14px;border:0;background:radial-gradient(circle at 40% 30%,#fff7d6,#e8c062 45%,#9a6d18);color:#2a1a02;font:inherit;font-weight:900;font-size:1.25rem;box-shadow:0 6px 0 #6b4a0e,0 8px 14px rgba(0,0,0,.4);cursor:pointer;touch-action:none}
+.vb small{display:block;font-size:.6rem;font-weight:700}
+.vb.on{transform:translateY(5px);box-shadow:0 1px 0 #6b4a0e;background:radial-gradient(circle at 40% 30%,#fff,#ffd24a 45%,#c98a10)}
+#blow{flex:1;min-height:74px;border-radius:14px;border:2px dashed #9fd3ff;background:rgba(159,211,255,.12);color:#cfeaff;font:inherit;font-weight:800;font-size:1rem;touch-action:none;cursor:pointer}
+#blow.on{background:rgba(159,211,255,.5);color:#06223a}
+.lbl{font-size:.75rem;color:#dfe6f5;margin:8px 2px 3px}
+#lips{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+#lips button,button.t{font:inherit;font-weight:700;font-size:.78rem;min-height:44px;border-radius:12px;border:2px solid var(--gold);background:transparent;color:var(--gold);padding:2px 4px;cursor:pointer}
+#lips button[aria-pressed=true],button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
+#grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;touch-action:none}
+.nb{position:relative;min-height:46px;padding:0;border-radius:12px;border:0;background:linear-gradient(#f7f8fb,#c9ced8);color:#14213d;font:inherit;font-weight:800;font-size:.9rem;box-shadow:0 3px 0 #8d94a3,0 5px 10px rgba(0,0,0,.35);touch-action:none;cursor:pointer}
+.nb.sh{background:linear-gradient(#3a4566,#1b2440);color:#fff;box-shadow:0 3px 0 #0b1020}
+.nb small{display:block;font-size:.55rem;opacity:.7}
+.nb.on{transform:translateY(2px);background:linear-gradient(#ffe89a,#ffd24a);color:#14213d}
+.nb.next{outline:4px solid #7cff8a;outline-offset:-2px}
+.ctl{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:6px}
+.piston{transition:transform .06s}.piston.down{transform:translateY(14px)}
+.air{opacity:0;transition:opacity .1s}body.playing .air{opacity:.9}body.calm .air{display:none}
+.tip{font-size:.75rem;opacity:.85;margin-top:10px;line-height:1.35}
+@media (max-width:480px){#grid{grid-template-columns:repeat(4,1fr)}#nn{font-size:1.4rem}#nd{min-width:60px;padding:1px 6px}.row{flex-direction:column}#blow{min-height:56px}}
+</style></head><body><header><h1>Trumpet</h1></header><main>
+<div id="status" aria-live="polite">Hold valves, pick a lip setting, then hold Blow. Or press a note below to see its fingering.</div>
+<div class="stage">
+<div id="nd"><div id="nn">–</div><div id="nf">open</div></div>
+<svg id="tp" viewBox="0 0 640 250" role="img" aria-label="Brass trumpet with three valves"><defs>
+<linearGradient id="br" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset=".25" stop-color="#f3cf6a"/><stop offset=".55" stop-color="#c8951f"/><stop offset=".8" stop-color="#8a5f0c"/><stop offset="1" stop-color="#e9c35a"/></linearGradient>
+<linearGradient id="brv" x1="0" x2="1"><stop offset="0" stop-color="#7a520a"/><stop offset=".3" stop-color="#f7d873"/><stop offset=".5" stop-color="#fff6cf"/><stop offset=".75" stop-color="#c8951f"/><stop offset="1" stop-color="#6e4808"/></linearGradient>
+<radialGradient id="bell" cx=".35" cy=".4" r=".7"><stop offset="0" stop-color="#3a2604"/><stop offset=".55" stop-color="#8a5f0c"/><stop offset=".85" stop-color="#f3cf6a"/><stop offset="1" stop-color="#fff0b8"/></radialGradient>
+<linearGradient id="pearl" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfd3dc"/></linearGradient>
+<filter id="sh"><feDropShadow dx="3" dy="6" stdDeviation="5" flood-opacity=".5"/></filter></defs>
+<g filter="url(#sh)" fill="none" stroke-linecap="round">
+<path d="M395 112 H470 Q510 112 510 140 Q510 168 470 168 H395" stroke="url(#br)" stroke-width="12"/>
+<path d="M500 70 H140 Q96 70 96 95 Q96 120 140 120 H230" stroke="url(#br)" stroke-width="13"/>
+<path d="M44 152 L140 150 L230 151" stroke="url(#br)" stroke-width="9"/>
+<path d="M500 63 L600 30 Q615 72 600 108 L500 77Z" fill="url(#br)" stroke="none"/>
+<ellipse cx="603" cy="69" rx="14" ry="40" fill="url(#bell)" stroke="#fff0b8" stroke-width="3"/>
+<path d="M235 175 V200 Q235 214 250 214 Q265 214 265 200 V175" stroke="url(#br)" stroke-width="9"/>
+<path d="M300 175 V190 Q300 200 312 200 Q324 200 324 190 V175" stroke="url(#br)" stroke-width="8"/>
+<path d="M355 175 V222 Q355 238 375 238 Q395 238 395 222 V175" stroke="url(#br)" stroke-width="9"/>
+<path d="M180 70 V120 M450 70 V112" stroke="#a37414" stroke-width="4"/>
+</g>
+<path d="M8 140 Q26 144 28 148 V156 Q26 160 8 164Z" fill="#e8e8ee" stroke="#9aa0ad" stroke-width="1.5"/><rect x="26" y="147" width="18" height="10" rx="3" fill="#d7d9e0"/>
+<g class="air">
+<path d="M624 50 q14 -4 16 -14" stroke="#bfe3ff" stroke-width="3" fill="none"/><path d="M626 70 h14" stroke="#bfe3ff" stroke-width="3"/><path d="M624 90 q14 4 16 14" stroke="#bfe3ff" stroke-width="3" fill="none"/></g>
+<g id="cas"></g>
+<text x="40" y="182" font-size="11" fill="#dfe6f5" text-anchor="middle">mouthpiece</text><text x="590" y="128" font-size="11" fill="#dfe6f5" text-anchor="middle">bell</text>
+</svg></div>
+<div class="row"><div id="valves">
+<button class="vb" type="button" data-v="0">1<small>index · J</small></button><button class="vb" type="button" data-v="1">2<small>middle · K</small></button><button class="vb" type="button" data-v="2">3<small>ring · L</small></button></div>
+<button id="blow" type="button">🎺 Hold to blow<br><small>Space bar</small></button></div>
+<div class="lbl">Lip buzz (how tight your lips are), from 1st (lowest) to 5th (highest):</div>
+<div id="lips"></div>
+<div class="lbl">Notes (written trumpet pitch). Press and hold to play:</div>
+<div id="grid"></div>
+<div class="ctl"><button class="t" id="song" type="button">⭐ Hot Cross Buns</button><button class="t" id="hear" type="button">▶ Hear it</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm</button></div>
+<p class="tip">On a real trumpet the three valves only make the tube longer. The note you get also depends on your lip buzz, so the same fingering can play several notes. The trumpet is a B♭ instrument: a written C sounds as a concert B♭.</p>
+</main><script>
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',st=$('status');
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+const NAMES=['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
+const nm=m=>NAMES[m%12]+(Math.floor(m/12)-1);
+// open partials (written): C4 G4 C5 E5 G5 ; valve lowering in semitones: 1=2, 2=1, 3=3
+const PART=[60,67,72,76,79],PN=['1st','2nd','3rd','4th','5th'],LOW=[2,1,3];
+const FING={60:[],61:[0,1,2],62:[0,2],63:[1,2],64:[0,1],65:[0],66:[1],67:[],68:[1,2],69:[0,1],70:[0],71:[1],72:[],73:[0,1],74:[0],75:[1],76:[],77:[0],78:[1],79:[]};
+const PFOR=m=>PART.indexOf(m+FING[m].reduce((s,i)=>s+LOW[i],0));
+const fname=v=>v.length?v.map(x=>x+1).join('+'):'open';
+// valve casings and pistons
+(function(){const C=$('cas');[250,312,375].forEach((x,i)=>{
+ el('rect',{x:x-20,y:62,width:40,height:116,rx:6,fill:'url(#brv)',stroke:'#6e4808','stroke-width':1.5},C);
+ [70,170].forEach(y=>el('rect',{x:x-23,y:y-6,width:46,height:12,rx:3,fill:'url(#brv)',stroke:'#6e4808'},C));
+ const p=el('g',{class:'piston',id:'p'+i},C);
+ el('rect',{x:x-5,y:30,width:10,height:30,fill:'url(#brv)'},p);
+ el('rect',{x:x-18,y:22,width:36,height:12,rx:4,fill:'url(#brv)',stroke:'#6e4808'},p);
+ el('ellipse',{cx:x,cy:20,rx:16,ry:6,fill:'url(#pearl)',stroke:'#9aa0ad'},p);
+ el('text',{x,y:120,'text-anchor':'middle','font-size':18,'font-weight':900,fill:'#4a3005'},C).textContent=i+1})})();
+const vb=[...document.querySelectorAll('.vb')],vdown=[false,false,false];
+function showValves(v){for(let i=0;i<3;i++){const on=v.includes(i);$('p'+i).classList.toggle('down',on);vb[i].classList.toggle('on',on)}}
+function showNote(m,v){$('nn').textContent=m?nm(m):'–';$('nf').textContent='valves: '+fname(v)}
+let lip=2;const L=$('lips');PART.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.textContent=PN[i];b.setAttribute('aria-pressed',i==lip);b.onclick=()=>{lip=i;[...L.children].forEach((c,j)=>c.setAttribute('aria-pressed',j==i));retune()};L.appendChild(b)});
+const NOTES=Object.keys(FING).map(Number),KEYB='zxcvbnm,asdfghqwertyu';
+const G=$('grid'),btn={};NOTES.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.className='nb'+(NAMES[m%12].length>1?' sh':'');b.dataset.m=m;b.innerHTML=nm(m)+'<small>'+fname(FING[m])+'</small>';b.setAttribute('aria-label',nm(m)+', valves '+fname(FING[m]));G.appendChild(b);btn[m]=b});
+// audio: synthesized B♭ trumpet (bright brass harmonics, lip scoop, brightness swell, late vibrato)
+const AC=window.AudioContext||window.webkitAudioContext;let ctx,bus,noise,muted=false,soundChosen=true,parentOn=null;window.__plays=[];
+try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+function getCtx(){if(!ctx){ctx=new AC({latencyHint:'interactive'});const c=ctx.createDynamicsCompressor();c.threshold.value=-14;c.ratio.value=4;bus=ctx.createGain();bus.gain.value=muted?0:.8;
+ const rv=ctx.createConvolver(),n=Math.floor(ctx.sampleRate*1.6),ir=ctx.createBuffer(2,n,ctx.sampleRate);for(let ch=0;ch<2;ch++){const d=ir.getChannelData(ch);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3)}rv.buffer=ir;const wet=ctx.createGain();wet.gain.value=.2;
+ bus.connect(c);bus.connect(rv);rv.connect(wet);wet.connect(c);c.connect(ctx.destination);
+ noise=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);const d=noise.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+ if(ctx.state!='running')ctx.resume();return ctx}
+['touchstart','pointerdown','keydown'].forEach(t=>addEventListener(t,()=>getCtx(),{capture:true,passive:true}));
+addEventListener('message',e=>{if(e.origin!==location.origin||!e.data||e.data.type!=='nma-sound')return;muted=!e.data.on;soundChosen=!!e.data.chosen;parentOn=!!e.data.on;if(!soundChosen)muted=false;if(bus)bus.gain.value=muted?0:.8;if(muted)stopTone()});
+const wave=()=>{if(!ctx._pw){const N=16,re=new Float32Array(N),im=new Float32Array(N),A=[0,1,.95,.8,.7,.55,.42,.32,.24,.17,.12,.08,.06,.04,.03,.02];for(let k=1;k<N;k++)im[k]=A[k];ctx._pw=ctx.createPeriodicWave(re,im)}return ctx._pw};
+let V=null,curM=0;
+const hz=m=>440*Math.pow(2,(m-2-69)/12);// written to concert (B♭: down a whole step)
+function startTone(m){getCtx();window.__plays.push(m);const T=ctx.currentTime,f=hz(m),lv=document.body.classList.contains('calm')?.3:.5;
+ if(V){V.o.frequency.setTargetAtTime(f,T,.02);V.lp.frequency.setTargetAtTime(f*7,T,.04);curM=m;return}
+ const o=ctx.createOscillator();o.setPeriodicWave(wave());o.frequency.setValueAtTime(f*.94,T);o.frequency.exponentialRampToValueAtTime(f,T+.05);
+ const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=5.4;lg.gain.setValueAtTime(0,T);lg.gain.linearRampToValueAtTime(f*.006,T+.6);lfo.connect(lg);lg.connect(o.frequency);
+ const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.Q.value=2;lp.frequency.setValueAtTime(f*1.5,T);lp.frequency.exponentialRampToValueAtTime(f*9,T+.06);lp.frequency.exponentialRampToValueAtTime(f*6,T+.3);
+ const pk=ctx.createBiquadFilter();pk.type='peaking';pk.frequency.value=1300;pk.Q.value=1;pk.gain.value=6;
+ const g=ctx.createGain();g.gain.setValueAtTime(0,T);g.gain.linearRampToValueAtTime(lv*1.2,T+.04);g.gain.linearRampToValueAtTime(lv,T+.18);
+ o.connect(lp);lp.connect(pk);pk.connect(g);g.connect(bus);
+ const ns=ctx.createBufferSource();ns.buffer=noise;ns.loop=true;const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=f*3;bp.Q.value=2;const ng=ctx.createGain();ng.gain.setValueAtTime(lv*.5,T);ng.gain.exponentialRampToValueAtTime(lv*.02,T+.07);ns.connect(bp);bp.connect(ng);ng.connect(g);
+ o.start(T);lfo.start(T);ns.start(T);V={o,lfo,ns,g,lp};curM=m;document.body.classList.add('playing')}
+function stopTone(){if(!V)return;const v=V;V=null;const T=ctx.currentTime;v.g.gain.cancelScheduledValues(T);v.g.gain.setTargetAtTime(0,T,.04);[v.o,v.lfo,v.ns].forEach(x=>x.stop(T+.4));document.body.classList.remove('playing');Object.values(btn).forEach(b=>b.classList.remove('on'))}
+function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){st.textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
+// valve + lip mode
+let blowing=false;
+function vNote(){const v=[0,1,2].filter(i=>vdown[i]);return{m:PART[lip]-v.reduce((s,i)=>s+LOW[i],0),v}}
+function retune(){const{m,v}=vNote();showValves(v);if(blowing){showNote(m,v);if(permit()){startTone(m);judge(m)}st.textContent='Playing '+nm(m)+' (valves '+fname(v)+', '+PN[lip]+' lip buzz).'}else showNote(m,v)}
+const vp={};
+$('valves').addEventListener('pointerdown',e=>{const b=e.target.closest('.vb');if(!b)return;e.preventDefault();try{b.releasePointerCapture(e.pointerId)}catch(_){}vp[e.pointerId]=+b.dataset.v;vdown[+b.dataset.v]=true;retune()});
+const vup=e=>{const i=vp[e.pointerId];if(i===undefined)return;delete vp[e.pointerId];vdown[i]=false;retune()};['pointerup','pointercancel'].forEach(t=>$('valves').addEventListener(t,vup));$('valves').addEventListener('pointerleave',vup,true);
+const bl=$('blow');function blowOn(){if(blowing)return;getCtx();blowing=true;bl.classList.add('on');retune()}function blowOff(){if(!blowing)return;blowing=false;bl.classList.remove('on');stopTone();const{m,v}=vNote();showNote(m,v)}
+bl.addEventListener('pointerdown',e=>{e.preventDefault();blowOn()});['pointerup','pointercancel','pointerleave'].forEach(t=>bl.addEventListener(t,blowOff));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+// note buttons
+const np={};function pressNote(m){btn[m].classList.add('on');const v=FING[m];showValves(v);showNote(m,v);lip=PFOR(m);[...L.children].forEach((c,j)=>c.setAttribute('aria-pressed',j==lip));if(!permit())return;startTone(m);st.textContent=nm(m)+': press valves '+fname(v)+'. Keep holding to keep the note going.';judge(m)}
+G.addEventListener('pointerdown',e=>{const b=e.target.closest('.nb');if(!b)return;e.preventDefault();getCtx();try{b.releasePointerCapture(e.pointerId)}catch(_){}np[e.pointerId]=+b.dataset.m;pressNote(+b.dataset.m)});
+const nup=e=>{if(np[e.pointerId]===undefined)return;delete np[e.pointerId];if(!Object.keys(np).length)stopTone()};['pointerup','pointercancel'].forEach(t=>G.addEventListener(t,nup));G.addEventListener('pointerleave',nup,true);
+// keyboard: J K L valves, space blow, number keys 1-5 lip
+const KM={};NOTES.forEach((m,i)=>KM[KEYB[i]]=m);
+addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey)return;const k=e.key.toLowerCase(),vi='jkl'.indexOf(k);
+ if(vi>=0){vdown[vi]=true;retune()}else if(k===' '){e.preventDefault();blowOn()}else if('12345'.includes(k)&&k){L.children[+k-1].click()}else if(KM[k]!==undefined){getCtx();pressNote(KM[k])}});
+addEventListener('keyup',e=>{const k=e.key.toLowerCase(),vi='jkl'.indexOf(k);if(vi>=0){vdown[vi]=false;retune()}else if(k===' ')blowOff();else if(KM[k]!==undefined)stopTone()});
+$('calm').onclick=()=>{const b=$('calm'),on=b.getAttribute('aria-pressed')!='true';b.setAttribute('aria-pressed',on);document.body.classList.toggle('calm',on);b.textContent='🌙 Calm'+(on?' ✓':'')};
+// Hot Cross Buns (written E D C)
+const E=64,D=62,C=60,SONG=[E,D,C,E,D,C,C,C,C,C,D,D,D,D,E,D,C],DUR=[1,1,2,1,1,2,.5,.5,.5,.5,.5,.5,.5,.5,1,1,2];let songI=-1;
+function mark(){Object.values(btn).forEach(b=>b.classList.remove('next'));if(songI<0)return;if(songI>=SONG.length){st.textContent='🌟 You played Hot Cross Buns! Well done!';songI=-1;$('song').textContent='⭐ Hot Cross Buns';return}btn[SONG[songI]].classList.add('next')}
+function judge(m){if(songI<0)return;if(m==SONG[songI]){songI++;mark();if(songI>0&&songI<SONG.length)st.textContent='Hot Cross Buns: note '+(songI+1)+' of '+SONG.length+'. Play the green note.'}else st.textContent='Try the green note: '+nm(SONG[songI])+' (valves '+fname(FING[SONG[songI]])+').'}
+$('song').onclick=()=>{if(songI>=0){songI=-1;mark();$('song').textContent='⭐ Hot Cross Buns';return}songI=0;mark();$('song').textContent='■ Stop';st.textContent='Play the green notes one by one. The song starts on E (valves 1+2).'};
+let hearT=[];$('hear').onclick=()=>{getCtx();if(!permit())return;hearT.forEach(clearTimeout);hearT=[];stopTone();let t=0;SONG.forEach((m,j)=>{const d=DUR[j]*480;hearT.push(setTimeout(()=>{startTone(m);btn[m].classList.add('on');showValves(FING[m]);showNote(m,FING[m])},t));hearT.push(setTimeout(()=>{stopTone()},t+d-60));t+=d})};
+const post=()=>{if(window.parent!==window)parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)};addEventListener('load',post);addEventListener('resize',post);
+function halt(){hearT.forEach(clearTimeout);hearT=[];blowing=false;bl.classList.remove('on');vdown.fill(false);for(const k in vp)delete vp[k];for(const k in np)delete np[k];stopTone();retune()}
+addEventListener('blur',halt);document.addEventListener('visibilitychange',()=>{if(document.hidden)halt()});
+retune();
+</script></body></html>
