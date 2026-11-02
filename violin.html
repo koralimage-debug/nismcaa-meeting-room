@@ -1,10 +1,10 @@
-<!doctype html><html lang="en"><head><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Violin · NISMCAA Academy</title><style>
 :root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5}*{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--cream);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 header{padding:6px 12px;border-bottom:3px solid var(--gold)}h1{margin:0;font-size:1.15rem;color:var(--gold)}h2{font-size:.85rem;color:#dfe6f5;margin:10px 2px 4px;font-weight:700}
 main{max-width:760px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-inset-bottom))}
-#status{background:#0f1c33;border:2px solid var(--gold);border-radius:12px;padding:5px 10px;font-size:.82rem;font-weight:700;color:var(--gold);line-height:1.25;min-height:2.6em}
+#status{background:#0f1c33;border:2px solid var(--gold);border-radius:12px;padding:5px 10px;font-size:.82rem;font-weight:700;color:var(--gold);line-height:1.25;min-height:calc(3.75em + 14px);display:flex;align-items:center}
 .stage{margin-top:6px;background:#2b2b2b;border-radius:18px;padding:4px;position:relative}
 #vn{display:block;width:100%;height:auto;max-height:86vh;margin:0 auto;touch-action:pan-y}
 #nd{position:absolute;right:10px;top:8px;background:rgba(15,28,51,.85);border:2px solid var(--gold);border-radius:12px;padding:2px 10px;text-align:center;min-width:76px;pointer-events:none}
@@ -24,6 +24,9 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 .nb small{display:block;font-size:.6rem;opacity:.75}.nb.op{background:linear-gradient(#ffe9a8,#e8c062);}
 .nb.on{transform:translateY(2px);background:linear-gradient(#ffe89a,#ffd24a)}.nb.next{outline:4px solid #7cff8a;outline-offset:-2px}
 .hd{display:grid;grid-template-columns:44px repeat(5,1fr);gap:5px;font-size:.68rem;color:#dfe6f5;text-align:center;margin-bottom:3px}
+.ctl .wide{grid-column:1/-1}
+#vn.zoom{max-height:none}#vn.zoom .lab{display:none}
+#vn.zoom.zl{width:300px}
 .tip{font-size:.78rem;opacity:.88;margin-top:10px;line-height:1.4}
 @media (max-width:480px){#nn{font-size:1.2rem}#nd{min-width:56px;padding:0 6px}.lab text{font-size:24px}.lab text.sm{font-size:19px}}
 </style></head><body><header><h1>Violin</h1></header><main>
@@ -43,26 +46,26 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 <line x1="190" y1="900" x2="90" y2="990"/><circle cx="190" cy="900" r="4"/><text x="20" y="1015">Chinrest</text>
 <line x1="512" y1="520" x2="600" y2="520"/><circle cx="512" cy="520" r="4"/><text x="606" y="527">Bow</text>
 </g><g id="sl"></g></svg></div>
-<div class="ctl"><button class="t" id="arco" type="button" aria-pressed="true">🎻 Bow (arco)</button><button class="t" id="pizz" type="button" aria-pressed="false">👆 Pluck (pizzicato)</button><button class="t" id="scale" type="button">▶ Play a scale (D major)</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm (softer)</button></div>
+<div class="ctl"><button class="t" id="arco" type="button" aria-pressed="true">🎻 Bow (arco)</button><button class="t" id="pizz" type="button" aria-pressed="false">👆 Pluck (pizzicato)</button><button class="t" id="scale" type="button">▶ Play a scale (D major)</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm (softer)</button><button class="t wide" id="zoomb" type="button" aria-pressed="false">🔍 Zoom in on the strings</button></div>
 <h2>First position notes. Press and hold to play:</h2>
-<div class="hd"><span>String</span><span>Open</span><span>Finger 1</span><span>Finger 2</span><span>Finger 3</span><span>Finger 4</span></div>
+<div class="hd"><span>String</span><span>Open</span><span>Finger 1</span><span>Finger 2 (high)</span><span>Finger 3</span><span>Finger 4</span></div>
 <div id="fb"></div>
 <p class="tip">The violin has four strings: G, D, A and E, from lowest to highest. Pressing a finger on the fingerboard makes the string shorter, so the note goes higher. In Bow mode the note keeps sounding while you hold, just like drawing the bow across the string. In Pluck mode you pick the string with your finger.</p>
-<p class="tip">On the violin picture, tap the strings between the end of the fingerboard and the bridge to play them open, or tap a gold dot to play that finger. On a computer, use the keyboard: 1 Q W E R for the G string, 2 A S D F for the D string, 3 Z X C V for the A string and 4 U I O P for the E string (open, then fingers 1 to 4).</p>
+<p class="tip">On the violin picture, tap the strings between the end of the fingerboard and the bridge to play them open, or tap a gold dot to play that finger. On small screens the picture zooms in on the strings so they are easier to pick; tap Show the whole violin to see every part. Finger 2 here is high 2, the one used in the D major scale. On a computer, use the keyboard: 1 Q W E R for the G string, 2 A S D F for the D string, 3 Z X C V for the A string and 4 U I O P for the E string (open, then fingers 1 to 4).</p>
 </main>
 <script>
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',st=$('status');
 function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
 const NAMES=['C','C♯','D','E♭','E','F','F♯','G','G♯','A','B♭','B'];const nm=m=>NAMES[m%12]+(Math.floor(m/12)-1);
 const STR=[{n:'G',m:55,x0:280,x1:264},{n:'D',m:62,x0:291,x1:283},{n:'A',m:69,x0:301,x1:303},{n:'E',m:76,x0:311,x1:323}];
-const NUT=166,BR=674,FING=[0,2,4,5,7],FN=['Open','Finger 1','Finger 2','Finger 3','Finger 4'];
+const NUT=166,BR=674,FING=[0,2,4,5,7],FN=['Open','Finger 1','Finger 2 (high)','Finger 3','Finger 4'];
 const sx=(s,y)=>s.x0+(s.x1-s.x0)*(y-NUT)/(BR-NUT),fy=k=>NUT+(BR-NUT)*(1-Math.pow(2,-FING[k]/12));
 // picture targets: open (bow zone) + 4 finger dots per string
 const T=[];STR.forEach((s,si)=>{el('line',{class:'str',id:'s'+si,x1:s.x0,y1:NUT,x2:s.x1,y2:BR},$('strs'));
  el('text',{class:'dl',x:sx(s,628),y:600},$('sl')).textContent=s.n;
  for(let k=0;k<5;k++){const y=k?fy(k):630,x=sx(s,y);T.push({si,k,x,y,m:s.m+FING[k]});if(k)el('circle',{class:'dot',id:'d'+si+k,cx:x,cy:y,r:5},$('dots'))}});
 const FB=$('fb'),btn={};STR.slice().reverse().forEach(s=>{const si=STR.indexOf(s);const l=document.createElement('div');l.className='sn';l.textContent=s.n;FB.appendChild(l);
- for(let k=0;k<5;k++){const m=s.m+FING[k],b=document.createElement('button');b.type='button';b.className='nb'+(k?'':' op');b.dataset.s=si;b.dataset.k=k;b.innerHTML=nm(m)+'<small>'+(k?'finger '+k:'open')+'</small>';b.setAttribute('aria-label',nm(m)+', '+s.n+' string, '+FN[k].toLowerCase());FB.appendChild(b);btn[si+'_'+k]=b}});
+ for(let k=0;k<5;k++){const m=s.m+FING[k],b=document.createElement('button');b.type='button';b.className='nb'+(k?'':' op');b.dataset.s=si;b.dataset.k=k;b.innerHTML=nm(m)+'<small>'+(k?FN[k].toLowerCase():'open')+'</small>';b.setAttribute('aria-label',nm(m)+', '+s.n+' string, '+FN[k].toLowerCase());FB.appendChild(b);btn[si+'_'+k]=b}});
 // ---- audio
 let ctx,bus,noise,muted=false,soundChosen=false,parentOn=null,mode='arco';window.__plays=[];
 function getCtx(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();const comp=ctx.createDynamicsCompressor();bus=ctx.createGain();bus.gain.value=muted?0:.8;
@@ -97,7 +100,7 @@ function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){par
 function show(si,k,on){const b=btn[si+'_'+k];b&&b.classList.toggle('on',on);$('s'+si).classList.toggle('on',on);const d=$('d'+si+k);d&&d.classList.toggle('down',on)}
 function start(id,si,k){stop(id);const m=STR[si].m+FING[k];$('nn').textContent=nm(m);$('nf').textContent=STR[si].n+' string · '+FN[k].toLowerCase();show(si,k,true);judge(si,k);
  if(!permit())return;getCtx();window.__plays.push(m);const v=mode==='arco'?bowed(m):plucked(m);v.si=si;v.k=k;voices[id]=v;
- st.textContent=nm(m)+' on the '+STR[si].n+' string, '+(k?'finger '+k:'open string')+(mode==='arco'?'. Keep holding to keep bowing.':'. Plucked.')}
+ st.textContent=nm(m)+' on the '+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open string')+(mode==='arco'?'. Keep holding to keep bowing.':'. Plucked.')}
 function stop(id){const v=voices[id];if(!v)return;delete voices[id];show(v.si,v.k,false);if(v.pz)return;const t=ctx.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(0,t,v.rel/3);v.src.forEach(x=>{try{x.stop(t+.5)}catch(_){}})}
 function stopAll(){Object.keys(voices).forEach(stop);document.querySelectorAll('.on,.down').forEach(e=>e.classList.remove('on','down'))}
 // ---- pointer handling (release handler deletes before stop; ignores synthetic events)
@@ -112,7 +115,9 @@ $('zone').addEventListener('pointerdown',e=>{const p=svgPt(e);let best=null,bd=1
  if(!best)return;e.preventDefault();const id='p'+e.pointerId;act[e.pointerId]=id;start(id,best.si,best.k)});
 ['pointerup','pointercancel','pointerleave'].forEach(t=>{FB.addEventListener(t,rel,true);$('zone').addEventListener(t,rel)});
 addEventListener('pointerup',rel);
-['blur','pagehide'].forEach(t=>addEventListener(t,stopAll));document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll()});
+function stopScale(){if(timer){clearTimeout(timer);timer=null}clearNext();$('scale').textContent='▶ Play a scale (D major)'}
+function quiet(){stopScale();stopAll()}
+['blur','pagehide'].forEach(t=>addEventListener(t,quiet));document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet()});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 // keyboard
 const KM={};
@@ -130,7 +135,13 @@ function clearNext(){document.querySelectorAll('.next').forEach(b=>b.classList.r
 $('scale').onclick=()=>{if(timer){clearTimeout(timer);timer=null;stop('demo');clearNext();$('scale').textContent='▶ Play a scale (D major)';st.textContent='Scale stopped.';return}
  getCtx();let i=0;$('scale').textContent='■ Stop the scale';
  const step=()=>{stop('demo');clearNext();if(i>=SEQ.length){timer=null;$('scale').textContent='▶ Play a scale (D major)';st.textContent='That was the D major scale: D E F♯ G A B C♯ D. Now try it yourself on the D and A strings.';return}
-  const[si,k]=SEQ[i++];btn[si+'_'+k].classList.add('next');start('demo',si,k);st.textContent='D major scale, note '+i+' of '+SEQ.length+': '+nm(STR[si].m+FING[k])+' ('+STR[si].n+' string, '+(k?'finger '+k:'open')+')';timer=setTimeout(()=>{stop('demo');timer=setTimeout(step,60)},mode==='arco'?520:420)};step()};
+  const[si,k]=SEQ[i++];btn[si+'_'+k].classList.add('next');start('demo',si,k);st.textContent='D major scale, note '+i+' of '+SEQ.length+': '+nm(STR[si].m+FING[k])+' ('+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open')+')';timer=setTimeout(()=>{stop('demo');timer=setTimeout(step,60)},mode==='arco'?520:420)};step()};
+// zoomed fingerboard on narrow or short screens so strings are far enough apart to pick
+const ZQ=matchMedia('(max-width:374px),(max-height:500px)');let zoomUser=null;
+function setZoom(on){svg.classList.toggle('zoom',on);svg.setAttribute('viewBox',on?'190 140 220 560':'0 0 683 1024');const b=$('zoomb');b.setAttribute('aria-pressed',on);b.textContent=on?'🔭 Show the whole violin':'🔍 Zoom in on the strings';setTimeout(post,50)}
+$('zoomb').onclick=()=>{zoomUser=!svg.classList.contains('zoom');stopAll();setZoom(zoomUser)};
+const shortLand=()=>{let w=innerWidth,h=innerHeight;try{if(window.parent!==window){w=parent.innerWidth;h=parent.innerHeight}}catch(_){}return h<=500&&w>h};
+const autoZoom=()=>{const sl=shortLand();svg.classList.toggle('zl',sl);if(zoomUser===null)setZoom(ZQ.matches&&innerWidth<375||sl)};addEventListener('resize',autoZoom);try{if(window.parent!==window)parent.addEventListener('resize',autoZoom)}catch(_){}ZQ.addEventListener?ZQ.addEventListener('change',autoZoom):ZQ.addListener(autoZoom);
 // tell the app our height
-const post=()=>{if(window.parent!==window)parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)};addEventListener('load',post);addEventListener('resize',post);setTimeout(post,300);
+const post=()=>{if(window.parent!==window)parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)};addEventListener('load',post);addEventListener('resize',post);setTimeout(post,300);autoZoom();
 </script></body></html>
