@@ -37,6 +37,7 @@ summary span.t{flex:1}summary small{display:block;color:var(--muted);font-weight
 .muted{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
 @media(min-width:900px){.tabs{flex-wrap:wrap;overflow:visible}}@media(max-width:560px){.body{padding:0 14px 14px}main{padding:18px 14px 40px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.cimg{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:16px;margin:0 0 12px;background:#f3eefc}
 </style></head><body>
 <header class="top"><span class="mark" aria-hidden="true">♪</span><div><b>NISMCAA Music Academy</b><small>INTERMEDIATE &amp; ADVANCED</small></div></header>
 <main>
@@ -55,6 +56,8 @@ summary span.t{flex:1}summary small{display:block;color:var(--muted);font-weight
 const C=window.NMA_COURSES,K='nma-courses-preview',root=document.getElementById('course'),tabs=document.getElementById('tabs');
 let st={};try{st=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}};
+const IMG={};C.forEach((c,i)=>{IMG[c.id+'/intermediate']=i*2+1;IMG[c.id+'/advanced']=i*2+2});
+const img=(c,l)=>{const n=String(IMG[c.id+'/'+l]).padStart(2,'0');return `<img class="cimg" src="images/courses/courses_img_${n}.jpg" alt="Children learning ${esc(c.name)} at ${l} level" loading="lazy" decoding="async" width="1600" height="900">`};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let cur='guitar',lvl='intermediate';
 const h=(location.hash||'').slice(1).split('/');if(C.some(c=>c.id===h[0])){cur=h[0];if(h[1]==='advanced')lvl='advanced'}
@@ -63,10 +66,10 @@ function draw(){
  const c=C.find(x=>x.id===cur);drawTabs();history.replaceState(null,'','#'+cur+'/'+lvl);
  let html=`<h2>${c.icon} ${esc(c.name)}</h2><div class="lv" role="group" aria-label="Level"><button data-l="intermediate" class="${lvl==='intermediate'?'sel':''}" aria-pressed="${lvl==='intermediate'}">Intermediate</button><button data-l="advanced" class="${lvl==='advanced'?'sel':''}" aria-pressed="${lvl==='advanced'}">Advanced</button></div>`;
  const L=c[lvl];
- if(!L){html+=`<section class="panel"><span class="pill">Intermediate · in the Academy</span><h3 style="margin-top:10px">${esc(c.name)} intermediate is already available</h3><p>${esc(c.note)}</p><a class="primary" href="${c.intermediateLink}">Open Intermediate Piano</a></section>`;root.innerHTML=html;return}
+ if(!L){html+=`<section class="panel">${img(c,lvl)}<span class="pill">Intermediate · in the Academy</span><h3 style="margin-top:10px">${esc(c.name)} intermediate is already available</h3><p>${esc(c.note)}</p><a class="primary" href="${c.intermediateLink}">Open Intermediate Piano</a></section>`;root.innerHTML=html;return}
  const key=cur+'-'+lvl,done=st[key]||{};
  const n=Object.keys(done).filter(k=>done[k]).length;
- html+=`<section class="panel"><span class="pill">${lvl==='intermediate'?'Intermediate':'Advanced'} · ${L.lessons.length} lessons · ${n} done</span><h3 style="margin-top:10px">${esc(L.title)}</h3><div class="ready"><strong>Ready for this stage?</strong> ${esc(L.ready)}</div>${c.play?`<a class="primary" href="https://academy.nismcaa.com/#play/${c.play}">Practice on the virtual ${c.id==='theory'?'piano':esc(c.name.split(' ')[0].toLowerCase())}</a>`:''}</section><ol class="lessons">`;
+ html+=`<section class="panel">${img(c,lvl)}<span class="pill">${lvl==='intermediate'?'Intermediate':'Advanced'} · ${L.lessons.length} lessons · ${n} done</span><h3 style="margin-top:10px">${esc(L.title)}</h3><div class="ready"><strong>Ready for this stage?</strong> ${esc(L.ready)}</div>${c.play?`<a class="primary" href="https://academy.nismcaa.com/#play/${c.play}">Practice on the virtual ${c.id==='theory'?'piano':esc(c.name.split(' ')[0].toLowerCase())}</a>`:''}</section><ol class="lessons">`;
  L.lessons.forEach((l,i)=>{html+=`<li><details class="${done[i]?'done':''}"><summary><span class="num">${done[i]?'✓':i+1}</span><span class="t"><strong>${esc(l[0])}</strong><small>${esc(l[1])}</small></span></summary><div class="body"><ol>${l[2].map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="practice"><strong>Practice:</strong> ${esc(l[3])}</div><div class="row"><button data-d="${i}">${done[i]?'Mark as not done':'Mark lesson done'}</button></div></div></details></li>`});
  html+=`</ol><section class="panel" style="margin-top:16px"><h2>Check your learning</h2><p class="muted">${L.quiz.length} questions. Choose one answer for each.</p><form id="quiz">`;
  L.quiz.forEach((q,i)=>{html+=`<fieldset class="q" style="border:0;margin:0"><legend><strong>${i+1}. ${esc(q[0])}</strong></legend>${q[1].map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}<div class="fb" aria-live="polite"></div></fieldset>`});
