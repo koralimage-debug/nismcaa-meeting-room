@@ -100,13 +100,16 @@ footer{background:linear-gradient(160deg,#1a0a2e,#3b1760);color:#e9dcf7;margin-t
 const API='https://nismcaa-payments.onrender.com/poll/sotd';
 const DEADLINE_FALLBACK='2027-11-01T23:59:59-04:00'; // server value (env SOTD_DEADLINE) wins
 const SCHOOLS=[
- {id:'dansol',name:'Dansol High School',editions:['1st'],photo:'images/sotd/dansol.jpg'},
- {id:'inglewood',name:'Inglewood Academy, Ikorodu',editions:['2nd'],photo:'images/sotd/inglewood.jpg'},
- {id:'ronik',name:'Ronik Comprehensive',editions:['3rd'],photo:'images/sotd/ronik.jpg'},
- {id:'honeyland',name:'Honeyland College',editions:['4th','5th','6th','9th (joint)'],photo:'images/sotd/p5_9h.jpg'},
- {id:'imperial',name:'Imperial Light College',editions:['7th'],photo:'images/sotd/imperial.jpg'},
- {id:'platform',name:'Platform School',editions:['8th'],photo:'images/sotd/platform.jpg'},
- {id:'lagoon',name:'Lagoon School',editions:['9th (joint)'],photo:'images/sotd/lagoon.jpg'}];
+ {id:'dansol',name:'Dansol High School',editions:['1st'],photo:'images/sotd/e1_dansol.jpg'},
+ {id:'inglewood',name:'Inglewood Academy, Ikorodu',editions:['2nd'],photo:'images/sotd/e2_inglewood.jpg'},
+ {id:'ronik',name:'Ronik Comprehensive',editions:['3rd'],photo:'images/sotd/e3_ronik.jpg'},
+ {id:'honeyland4',name:'Honeyland College (4th Edition)',editions:['4th'],photo:'images/sotd/e4_honeyland.jpg'},
+ {id:'honeyland5',name:'Honeyland College (5th Edition)',editions:['5th'],photo:'images/sotd/e5_honeyland.jpg'},
+ {id:'honeyland6',name:'Honeyland College (6th Edition)',editions:['6th'],photo:'images/sotd/e6_honeyland.jpg'},
+ {id:'imperial',name:'Imperial Light College',editions:['7th'],photo:'images/sotd/e7_imperial.jpg'},
+ {id:'platform',name:'Platform School',editions:['8th'],photo:'images/sotd/e8_platform.jpg'},
+ {id:'honeyland9',name:'Honeyland College (9th Edition)',editions:['9th (joint)'],photo:'images/sotd/e9_honeyland.jpg'},
+ {id:'lagoon',name:'Lagoon School',editions:['9th (joint)'],photo:'images/sotd/e9_lagoon.jpg'}];
 /* ===== end config ===== */
 const $=s=>document.querySelector(s),g=$('#grid'),NAME=id=>(SCHOOLS.find(s=>s.id==id)||{}).name||id;let lastSig='',lastLead=null,busy=false,fails=0,paused=false,deadline=DEADLINE_FALLBACK,open=true,online=false;
 let tok=localStorage.getItem('sotd_token');if(!tok){tok=Array.from(crypto.getRandomValues(new Uint8Array(18)),b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem('sotd_token',tok)}
@@ -119,7 +122,7 @@ const btns=()=>document.querySelectorAll('.vote');
 function offline(){online=false;btns().forEach(b=>b.disabled=true);$('#msg').innerHTML='Voting is temporarily unavailable. <button type="button" id="retry">Try again</button>';$('#retry').onclick=load}
 function show(d){online=true;if(d.deadline)deadline=d.deadline;open=d.open!==false;tick();
  const v=d.voted||localStorage.getItem('sotd_voted');if(d.voted)localStorage.setItem('sotd_voted',d.voted);
- if(d.results){const sig=d.results.map(r=>r.id+':'+r.votes).join(',')+'|'+open;const same=sig===lastSig;lastSig=sig;document.body.classList.add('shown');if(v||!open)document.body.classList.add('voted');
+ if(d.results){{const m={};d.results.forEach(r=>m[r.id]=r);const T=SCHOOLS.reduce((t,x)=>t+((m[x.id]||{}).votes||0),0);d.results=SCHOOLS.map(x=>{const v=(m[x.id]||{}).votes||0;return{id:x.id,votes:v,pct:T?Math.round(v*100/T):0}})}const sig=d.results.map(r=>r.id+':'+r.votes).join(',')+'|'+open;const same=sig===lastSig;lastSig=sig;document.body.classList.add('shown');if(v||!open)document.body.classList.add('voted');
   if(!same){d.results.forEach(r=>{const c=$('#c-'+r.id);if(!c)return;c.querySelector('.n').textContent=`${r.votes} vote${r.votes==1?'':'s'} · ${r.pct}%`;c.querySelector('.bar i').style.width=r.pct+'%'});
   const top=d.results.reduce((a,b)=>Math.max(a,b.votes),0),L=top?d.results.filter(r=>r.votes===top):[];
   const k=!open?'Winner':!top?'Live results':L.length>1?'Tied for the lead':'Currently leading';
