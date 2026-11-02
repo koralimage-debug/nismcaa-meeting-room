@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>NISMCAA School of the Decade</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;overflow-x:hidden}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f7f3fb;color:#24123a;line-height:1.45}
+header{background:linear-gradient(160deg,#3b1760,#5B2A86 60%,#7a3fae);color:#fff;text-align:center;padding:28px 16px 24px}
+header .k{color:#D4A537;font-weight:700;letter-spacing:.12em;font-size:13px;text-transform:uppercase}
+h1{font-family:Georgia,serif;font-size:30px;margin:6px 0 8px;line-height:1.15}h1 span{color:#D4A537}
+header p{margin:0 auto;max-width:560px;font-size:16px;opacity:.95}
+.cd{display:flex;justify-content:center;gap:8px;margin-top:16px}.cd div{background:rgba(255,255,255,.12);border:1px solid #D4A537;border-radius:10px;padding:8px 0;width:68px}
+.cd b{display:block;font-size:22px;color:#D4A537}.cd small{font-size:12px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}@media(min-width:980px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 18px rgba(59,23,96,.12);border-top:4px solid #D4A537;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#eee}
+.ill{aspect-ratio:3/2;background:radial-gradient(circle at 50% 40%,#7a3fae,#3b1760);display:flex;align-items:center;justify-content:center;color:#D4A537;font-family:Georgia,serif;font-size:56px}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h2{margin:0;font-size:20px;color:#3b1760}.ed{display:flex;flex-wrap:wrap;gap:6px}.ed span{background:#f3e8c9;color:#6b4b00;border-radius:999px;padding:3px 10px;font-size:13px;font-weight:600}
+.vote{margin-top:auto;min-height:52px;border:0;border-radius:12px;background:linear-gradient(#e2b649,#c99520);color:#24123a;font-size:18px;font-weight:800;cursor:pointer}
+.vote:disabled{opacity:.55;cursor:default}.bar{height:12px;background:#eee;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#5B2A86,#D4A537);width:0;transition:width .8s}
+.res{display:none;font-size:14px;font-weight:600;color:#5B2A86}.voted .res{display:block}.mine{outline:3px solid #D4A537}
+#msg{text-align:center;font-weight:700;color:#5B2A86;min-height:22px;margin:4px 0 12px}
+section.rules{background:#fff;border-radius:16px;padding:18px;margin-top:24px;border-left:5px solid #5B2A86}section.rules h3{margin-top:0;color:#3b1760}
+footer{text-align:center;padding:24px 16px;color:#5B2A86;font-size:14px}a{color:#5B2A86}
+#admin{display:none;background:#fff;border-radius:16px;padding:16px;margin-top:24px}#admin input{width:100%;padding:10px;font-size:16px;margin:6px 0}#admin table{width:100%;border-collapse:collapse}#admin td{padding:6px;border-bottom:1px solid #eee}
+</style></head><body>
+<header><div class="k">NISMCAA Music Competition</div><h1>School of the <span>Decade</span></h1>
+<p>Every school that has won the NISMCAA Music Competition is in the running. Vote for your favorite. The school with the most votes is crowned NISMCAA School of the Decade.</p>
+<div class="cd" id="cd"></div><div id="dl" style="margin-top:8px;font-size:14px"></div></header>
+<main><div id="msg"></div><div class="grid" id="grid"></div>
+<section class="rules"><h3>Award rules</h3><ul>
+<li>Candidates are the winning schools of the 1st to 9th editions of the NISMCAA Music Competition. Schools that won more than once appear once.</li>
+<li>One vote per person. Duplicate or automated votes are removed.</li>
+<li>Voting closes at the deadline shown above. The school with the most valid votes wins the NISMCAA School of the Decade award.</li>
+<li>Voting is free. NISMCAA's decision on vote validity is final.</li></ul>
+<p>Questions? Email <a href="mailto:info@nismcaa.com">info@nismcaa.com</a>. Learn more at <a href="https://academy.nismcaa.com">academy.nismcaa.com</a>.</p></section>
+<section id="admin"><h3>Admin: vote counts</h3><input id="tok" type="password" placeholder="Admin token" autocomplete="off"><button class="vote" id="ab" style="width:100%">Show counts</button><div id="ao"></div></section>
+</main><footer>© NISMCAA · <a href="mailto:info@nismcaa.com">info@nismcaa.com</a></footer>
+<script>
+/* ===== CONFIG: swap photos here (null = illustrated card). Tiana: replace paths with corrected photos. ===== */
+const API='https://nismcaa-payments.onrender.com/poll/sotd';
+const DEADLINE_FALLBACK='2026-12-12T23:59:59-05:00'; // server value (env SOTD_DEADLINE) wins
+const SCHOOLS=[
+ {id:'dansol',name:'Dansol High School',editions:['1st'],photo:'images/sotd/p5_1.jpg'},
+ {id:'inglewood',name:'Inglewood Academy, Ikorodu',editions:['2nd'],photo:'images/sotd/p5_2.jpg'},
+ {id:'ronik',name:'Ronik Comprehensive',editions:['3rd'],photo:'images/sotd/p5_3.jpg'},
+ {id:'honeyland',name:'Honeyland College',editions:['4th','5th','6th','9th (joint)'],photo:'images/sotd/p5_9h.jpg'},
+ {id:'imperial',name:'Imperial Light College',editions:['7th'],photo:'images/sotd/p5_7.jpg'},
+ {id:'platform',name:'Platform School',editions:['8th'],photo:'images/sotd/p5_8.jpg'},
+ {id:'lagoon',name:'Lagoon School',editions:['9th (joint)'],photo:'images/sotd/p5_9l.jpg'}];
+/* ===== end config ===== */
+const $=s=>document.querySelector(s),g=$('#grid');let deadline=DEADLINE_FALLBACK,open=true;
+let tok=localStorage.getItem('sotd_token');if(!tok){tok=Array.from(crypto.getRandomValues(new Uint8Array(18)),b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem('sotd_token',tok)}
+const mine=localStorage.getItem('sotd_voted');
+SCHOOLS.forEach(s=>{const c=document.createElement('article');c.className='card';c.id='c-'+s.id;
+ const ill=`<div class="ill" role="img" aria-label="${s.name}">♪</div>`;
+ c.innerHTML=(s.photo?`<img src="${s.photo}" alt="${s.name} students" loading="lazy" onerror="this.outerHTML='${ill.replace(/"/g,'&quot;')}'">`:ill)+
+ `<div class="body"><h2>${s.name}</h2><div class="ed">${s.editions.map(e=>`<span>${e.replace(' (joint)','')} Edition${e.includes('joint')?' (joint)':''}</span>`).join('')}</div>
+ <div class="res"><span class="n">0 votes · 0%</span><div class="bar"><i></i></div></div><button class="vote" data-id="${s.id}">Vote</button></div>`;g.appendChild(c)});
+function show(d,voted){if(d.deadline)deadline=d.deadline;open=d.open!==false;
+ if(voted||!open)document.body.classList.add('voted');
+ (d.results||[]).forEach(r=>{const c=$('#c-'+r.id);if(!c)return;c.querySelector('.n').textContent=`${r.votes} vote${r.votes==1?'':'s'} · ${r.pct}%`;c.querySelector('.bar i').style.width=r.pct+'%'});
+ const v=localStorage.getItem('sotd_voted');document.querySelectorAll('.vote').forEach(b=>{if(v||!open){b.disabled=true;b.textContent=b.dataset.id===v?'Your vote ✓':(open?'Voted':'Voting closed')}});
+ if(v)$('#c-'+v)?.classList.add('mine');tick()}
+fetch(API).then(r=>r.json()).then(d=>show(d,!!mine)).catch(()=>{$('#msg').textContent='Live results are loading. Please refresh in a moment.'});
+g.addEventListener('click',async e=>{const b=e.target.closest('.vote');if(!b||b.disabled)return;
+ document.querySelectorAll('.vote').forEach(x=>x.disabled=true);$('#msg').textContent='Saving your vote…';
+ try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({school:b.dataset.id,token:tok})});const d=await r.json();
+  if(r.ok){localStorage.setItem('sotd_voted',b.dataset.id);$('#msg').textContent='Thank you! Your vote is counted.'}
+  else{if(r.status===409)localStorage.setItem('sotd_voted',localStorage.getItem('sotd_voted')||'x');$('#msg').textContent=d.error||'Sorry, something went wrong.'}
+  show(d,true)}catch{$('#msg').textContent='Could not reach the server. Please try again.';document.querySelectorAll('.vote').forEach(x=>x.disabled=false)}});
+function tick(){const ms=Date.parse(deadline)-Date.now(),c=$('#cd');
+ $('#dl').textContent='Voting closes '+new Date(deadline).toLocaleString('en-US',{dateStyle:'long',timeStyle:'short',timeZone:'America/New_York'})+' ET';
+ if(ms<=0){c.innerHTML='<div style="width:auto;padding:8px 14px"><b>Voting closed</b></div>';return}
+ const u=[[86400e3,'days'],[3600e3,'hours'],[60e3,'min'],[1e3,'sec']];let r=ms;c.innerHTML=u.map(([m,l])=>{const n=Math.floor(r/m);r-=n*m;return`<div><b>${n}</b><small>${l}</small></div>`}).join('')}
+setInterval(tick,1000);tick();
+if(location.hash==='#admin'){$('#admin').style.display='block';$('#ab').onclick=async()=>{const r=await fetch(API+'/admin',{headers:{Authorization:'Bearer '+$('#tok').value}});
+ if(!r.ok){$('#ao').textContent='Wrong token.';return}const d=await r.json();
+ $('#ao').innerHTML=`<p>Total: <b>${d.total}</b> · unique IPs: ${d.uniqueIps}</p><table>`+d.results.slice().sort((a,b)=>b.votes-a.votes).map(x=>`<tr><td>${SCHOOLS.find(s=>s.id==x.id).name}</td><td>${x.votes}</td><td>${x.pct}%</td></tr>`).join('')+'</table>'}}
+</script></body></html>
