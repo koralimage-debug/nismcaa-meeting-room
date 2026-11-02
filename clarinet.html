@@ -10,7 +10,7 @@ main{max-width:760px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-ins
 @media (min-width:700px){.wrap{grid-template-columns:minmax(300px,400px) 1fr;align-items:start}}
 .stage{margin-top:6px;background:#2b2b2b;border-radius:18px;padding:4px;position:relative}
 #cl{display:block;width:100%;height:auto;margin:0 auto;touch-action:manipulation}
-#nd{position:absolute;right:8px;top:8px;background:rgba(15,28,51,.88);border:2px solid var(--gold);border-radius:12px;padding:2px 8px;text-align:center;min-width:84px;pointer-events:none}
+#nd{position:absolute;left:8px;top:8px;background:rgba(15,28,51,.88);border:2px solid var(--gold);border-radius:12px;padding:2px 8px;text-align:center;min-width:84px;pointer-events:none}
 #nn{font-size:1.5rem;font-weight:900;color:var(--gold);line-height:1.1}#nf{font-size:.66rem;color:#dfe6f5;min-height:2.2em}
 .lab,.lab *{pointer-events:none}.lab line{stroke:#fff6cf;stroke-width:2}.lab circle{fill:#fff6cf}
 .lab text{font:800 19px -apple-system,sans-serif;fill:#fff;stroke:#111;stroke-width:5px;paint-order:stroke}
@@ -46,8 +46,8 @@ button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}
 <line x1="240" y1="600" x2="300" y2="600"/><circle cx="240" cy="600" r="4"/><text x="304" y="594">Tone</text><text x="304" y="616">holes</text>
 <line x1="226" y1="1010" x2="290" y2="1010"/><circle cx="226" cy="1010" r="4"/><text x="294" y="1004">Lower</text><text x="294" y="1026">joint</text>
 <line x1="240" y1="1360" x2="300" y2="1360"/><circle cx="240" cy="1360" r="4"/><text x="304" y="1367">Bell</text>
-<text x="8" y="452">Register</text><text x="8" y="474">key (back)</text>
-<text x="8" y="640">Thumb</text><text x="8" y="662">hole (back)</text>
+<text x="8" y="478">Register</text><text x="8" y="500">key (back)</text>
+<text x="8" y="626">Thumb</text><text x="8" y="648">hole (back)</text>
 </g>
 <g id="keys"></g>
 </svg></div>
@@ -68,10 +68,10 @@ const KEYS=[{id:'R',x:150,y:500,lab:'R',name:'Register key (on the back)'},{id:'
 const N=[['G3',55,'T123456'],['A3',57,'T12345'],['C4',60,'T123'],['D4',62,'T12'],['E4',64,'T1'],['F4',65,'T'],['G4',67,''],['A4',69,'A'],['B♭4',70,'AR'],['D5',74,'RT123456'],['E5',76,'RT12345'],['G5',79,'RT123']];
 const NM=['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'],nm=m=>NM[m%12]+(Math.floor(m/12)-1);
 const norm=s=>s.split('').sort().join(''),BYF={};N.forEach(n=>BYF[norm(n[2])]=n);
-const fingerText=f=>{if(!f)return 'all open';const p=[];if(f.includes('R'))p.push('register key');if(f.includes('A'))p.push('A key');if(f.includes('T'))p.push('thumb');const h=f.replace(/[RAT]/g,'');if(h)p.push('holes '+h.split('').join('-'));return p.join(' + ')};
+const fingerText=f=>{if(!f)return 'all open';const p=[];if(f.includes('R'))p.push('register key');if(f.includes('A'))p.push('A key');if(f.includes('T'))p.push('thumb');const h=f.replace(/[RAT]/g,'');if(h)p.push((h.length>1?'holes ':'hole ')+h.split('').join('-'));return p.join(' + ')};
 const svgNS='http://www.w3.org/2000/svg',KG=$('keys'),kel={};let down=new Set();
 KEYS.forEach(k=>{const g=document.createElementNS(svgNS,'g');g.setAttribute('class','hole');g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-pressed','false');g.setAttribute('aria-label',k.name);
- g.innerHTML=`<circle class="hit" cx="${k.x}" cy="${k.y}" r="26"/><circle class="ring" cx="${k.x}" cy="${k.y}" r="18"/><text x="${k.x}" y="${k.y+5}">${k.lab}</text>`;
+ g.innerHTML=`<circle class="hit" cx="${k.x}" cy="${k.y}" r="24"/><circle class="ring" cx="${k.x}" cy="${k.y}" r="18"/><text x="${k.x}" y="${k.y+5}">${k.lab}</text>`;
  g.addEventListener('pointerdown',e=>{e.preventDefault();toggle(k.id)});g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(k.id)}});KG.appendChild(g);kel[k.id]=g});
 function showF(f){down=new Set(f.split(''));KEYS.forEach(k=>{const on=down.has(k.id);kel[k.id].classList.toggle('down',on);kel[k.id].setAttribute('aria-pressed',on)})}
 const btn={};N.forEach(n=>{const b=document.createElement('button');b.type='button';b.className='nb'+(n[2].includes('R')&&!n[2].includes('A')?' cl2':'');b.innerHTML=n[0]+'<small>sounds '+nm(n[1]-2)+'</small>';b.setAttribute('aria-label','Written '+n[0]+', sounds '+nm(n[1]-2)+', fingering '+fingerText(n[2]));$('grid').appendChild(b);btn[n[0]]=b;
@@ -110,7 +110,7 @@ let tt=null;function toggle(id){if(down.has(id))down.delete(id);else down.add(id
 $('clr').onclick=()=>{stopAll();showF('');$('nn').textContent='–';$('nf').textContent='ready';$('status').textContent='All keys uncovered. Tap all open for written G4.'};
 $('calm').onclick=()=>{const on=document.body.classList.toggle('calm');$('calm').setAttribute('aria-pressed',on)};
 // ---- Learn to play
-const L=[{h:'Step 1 of 5: Hold the clarinet',t:'<ul><li>Your <b>left hand</b> goes on top (upper joint), your <b>right hand</b> on the bottom (lower joint).</li><li>Rest the clarinet on your <b>right thumb</b>, under the thumb rest on the back.</li><li>Your left thumb covers the <b>thumb hole</b> on the back and can roll up to press the <b>register key</b>.</li><li>Hold the bell near your knees, with the clarinet angled about 30–40 degrees away from your body.</li></ul>',demo:'T',check:null},
+const L=[{h:'Step 1 of 5: Hold the clarinet',t:'<ul><li>Your <b>left hand</b> goes on top (upper joint), your <b>right hand</b> on the bottom (lower joint).</li><li>Rest the clarinet on your <b>right thumb</b>, under the thumb rest on the back.</li><li>Your left thumb covers the <b>thumb hole</b> on the back and can roll up to press the <b>register key</b>.</li><li>Hold the bell near your knees, with the clarinet angled about 30–40 degrees away from your body.</li></ul>',demo:null,check:null},
 {h:'Step 2 of 5: Make a good embouchure',t:'<ul><li>Wet the reed. Cover your bottom teeth with your bottom lip, and rest the reed on it.</li><li>Put your top teeth gently on top of the mouthpiece, about half an inch from the tip.</li><li>Firm the corners of your mouth, keep your chin flat (no bunching), and seal all around.</li><li>Breathe from low in your belly and blow a steady, warm stream of air. Practice on the mouthpiece and barrel alone first.</li></ul>Ask your teacher to check your embouchure in person. This app cannot hear you.',demo:null,check:null},
 {h:'Step 3 of 5: Your first notes',t:'Open G is the easiest note: no fingers down. Then add your left thumb for F, and your left first finger for E. Play <b>G4, F4, E4</b> in order.',demo:'',check:['G4','F4','E4']},
 {h:'Step 4 of 5: Fingers down',t:'Keep adding left-hand fingers. Thumb + 1 + 2 is D, and thumb + 1 + 2 + 3 is C. Cover the holes with the soft pads of your fingers so no air leaks. Play <b>E4, D4, C4</b>.',demo:'T12',check:['E4','D4','C4']},
