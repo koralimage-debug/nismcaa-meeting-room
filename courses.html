@@ -48,7 +48,7 @@ summary span.t{flex:1}summary small{display:block;color:var(--muted);font-weight
 <div id="course"></div>
 <p class="muted">These are NISMCAA courses. Practice with a teacher where you can, and stop and rest if anything hurts.</p>
 </main>
-<footer>© NISMCAA Music Academy</footer>
+<footer>© NISMCAA Music Academy · Questions? <a href="mailto:info@nismcaa.com">info@nismcaa.com</a></footer>
 <script src="courses-data.js"></script>
 <script>
 (function(){
@@ -72,7 +72,7 @@ function draw(){
  L.quiz.forEach((q,i)=>{html+=`<fieldset class="q" style="border:0;margin:0"><legend><strong>${i+1}. ${esc(q[0])}</strong></legend>${q[1].map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}<div class="fb" aria-live="polite"></div></fieldset>`});
  html+=`<button class="primary" type="submit">Check answers</button><div class="score" aria-live="polite"></div></form></section>`;
  root.innerHTML=html;
- root.querySelector('#quiz').onsubmit=e=>{e.preventDefault();let s=0;L.quiz.forEach((q,i)=>{const v=e.target.querySelector(`input[name=q${i}]:checked`),fb=e.target.querySelectorAll('.fb')[i];if(!v){fb.className='fb no';fb.textContent='Choose an answer.';return}const ok=+v.value===q[2];if(ok)s++;fb.className='fb '+(ok?'ok':'no');fb.textContent=(ok?'Correct. ':'Not quite. The answer is "'+q[1][q[2]]+'". ')+q[3]});e.target.querySelector('.score').textContent=`You got ${s} of ${L.quiz.length}.`+(s>=4?' Great work!':' Review the lessons and try again.')};
+ root.querySelector('#quiz').onsubmit=e=>{e.preventDefault();let s=0;L.quiz.forEach((q,i)=>{const v=e.target.querySelector(`input[name=q${i}]:checked`),fb=e.target.querySelectorAll('.fb')[i];if(!v){fb.className='fb no';fb.textContent='Choose an answer.';return}const ok=+v.value===q[2];if(ok)s++;fb.className='fb '+(ok?'ok':'no');fb.textContent=(ok?'Correct. ':'Not quite. The answer is "'+q[1][q[2]]+'". ')+q[3]});e.target.querySelector('.score').textContent=`You got ${s} of ${L.quiz.length}.`+(s>=4?' Great work!':s===3?' Good effort! Look back at the lessons you missed and try again.':' Keep going! Review the lessons and try again.')};
 }
 tabs.onclick=e=>{const b=e.target.closest('[data-c]');if(b){cur=b.dataset.c;draw()}};
 root.onclick=e=>{const b=e.target.closest('[data-l]');if(b){lvl=b.dataset.l;draw();return}const d=e.target.closest('[data-d]');if(d){const key=cur+'-'+lvl;st[key]=st[key]||{};const i=d.dataset.d;st[key][i]=!st[key][i];save();const open=i;draw();const det=root.querySelectorAll('details')[open];if(det)det.open=true}};
