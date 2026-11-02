@@ -56,7 +56,7 @@ const C=window.NMA_COURSES,K='nma-courses-preview',root=document.getElementById(
 let st={};try{st=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let cur=C[0].id,lvl='intermediate';
+let cur='guitar',lvl='intermediate';
 const h=(location.hash||'').slice(1).split('/');if(C.some(c=>c.id===h[0])){cur=h[0];if(h[1]==='advanced')lvl='advanced'}
 function drawTabs(){tabs.innerHTML=C.map(c=>`<button role="tab" aria-selected="${c.id===cur}" class="${c.id===cur?'sel':''}" data-c="${c.id}">${c.icon} ${esc(c.name)}</button>`).join('')}
 function draw(){
