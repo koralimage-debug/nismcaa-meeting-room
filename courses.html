@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Intermediate & Advanced Courses · NISMCAA Music Academy (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#182947;--ink:#182947;--muted:#546277;--teal:#007d77;--purple:#7043c1;--yellow:#ffdb67;--bg:#f3f6fa;--line:#dce3ed}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Arial,sans-serif;line-height:1.55}
+h1,h2,h3{font-family:Manrope,Arial,sans-serif}h1{font-size:clamp(1.7rem,5vw,2.4rem);line-height:1.2;margin:8px 0 12px;letter-spacing:-.04rem}h2{font-size:1.35rem;margin:0 0 10px}h3{font-size:1.08rem;margin:0 0 6px}
+a{color:var(--teal)}:focus-visible{outline:3px solid #eead00;outline-offset:3px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);padding:10px 16px;font-weight:700;min-height:44px}
+.top{background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:12px}
+.mark{display:grid;place-items:center;width:42px;height:44px;background:var(--yellow);border-radius:14px;color:var(--navy);font-size:1.6rem;flex-shrink:0}
+.top b{font-family:Manrope;font-size:1.02rem}.top small{display:block;font-size:.65rem;letter-spacing:.09rem;color:#b8c7df}
+main{max-width:1100px;margin:auto;padding:24px 20px 50px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12rem;font-weight:800;color:var(--teal)}
+.members{background:#fff5d5;border:1px solid #ead89e;border-radius:16px;padding:14px 18px;margin:14px 0 22px;display:flex;gap:12px;align-items:flex-start}.members p{margin:0}
+.pill{display:inline-block;border-radius:24px;background:#e2f3ef;padding:4px 12px;font-size:.82rem;color:#006a64;font-weight:700}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;scrollbar-width:thin}.tabs button{white-space:nowrap;flex-shrink:0}
+.tabs .sel,.lv .sel{background:var(--navy);border-color:var(--navy);color:#fff}
+.lv{display:flex;gap:8px;margin:6px 0 18px}.lv button{flex:1;max-width:220px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:16px}
+.ready{background:#e2f3ef;border-radius:12px;padding:12px 14px;margin:10px 0}
+.lessons{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+details{background:#fff;border:1px solid var(--line);border-radius:16px}
+summary{cursor:pointer;padding:14px 16px;display:flex;gap:12px;align-items:center;list-style:none;min-height:44px}summary::-webkit-details-marker{display:none}
+.num{display:grid;place-items:center;min-width:34px;height:34px;border-radius:10px;background:#eae4fa;color:var(--purple);font-weight:800}
+.done .num{background:var(--teal);color:#fff}
+summary span.t{flex:1}summary small{display:block;color:var(--muted);font-weight:400}
+.body{padding:0 16px 16px 62px}.body ol{padding-left:18px;margin:6px 0 10px}.body li{margin:4px 0}
+.practice{background:#fff5d5;border-radius:12px;padding:10px 12px;margin:10px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.primary{background:var(--teal);color:#fff;border-color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;border-radius:12px;padding:10px 16px;font-weight:700;min-height:44px}
+.q{border-top:1px solid var(--line);padding:14px 0}.q:first-of-type{border-top:0}
+.q label{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin:6px 0;min-height:44px;cursor:pointer}
+.q input{width:20px;height:20px;accent-color:var(--teal)}
+.fb{font-size:.92rem;margin-top:6px}.ok{color:#05653a}.no{color:#a12d1f}
+.score{font-weight:800;font-size:1.1rem;margin-top:10px}
+.muted{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
+@media(max-width:560px){.body{padding:0 14px 14px}main{padding:18px 14px 40px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<header class="top"><span class="mark" aria-hidden="true">♪</span><div><b>NISMCAA Music Academy</b><small>INTERMEDIATE &amp; ADVANCED</small></div></header>
+<main>
+<span class="eyebrow">Next stages</span>
+<h1>Intermediate &amp; Advanced courses</h1>
+<p>Keep growing after the beginner books. Each course has 8 lessons, a practice task for every lesson and a short quiz. Choose your instrument and your level.</p>
+<div class="members" role="note"><span aria-hidden="true">⭐</span><p><strong>Members' content preview.</strong> These courses are part of the Intermediate &amp; Advanced plan (coming soon). You are viewing a preview.</p></div>
+<div class="tabs" role="tablist" aria-label="Instrument" id="tabs"></div>
+<div id="course"></div>
+<p class="muted">These are NISMCAA courses. Practice with a teacher where you can, and stop and rest if anything hurts.</p>
+</main>
+<footer>© NISMCAA Music Academy</footer>
+<script src="courses-data.js"></script>
+<script>
+(function(){
+const C=window.NMA_COURSES,K='nma-courses-preview',root=document.getElementById('course'),tabs=document.getElementById('tabs');
+let st={};try{st=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let cur=C[0].id,lvl='intermediate';
+const h=(location.hash||'').slice(1).split('/');if(C.some(c=>c.id===h[0])){cur=h[0];if(h[1]==='advanced')lvl='advanced'}
+function drawTabs(){tabs.innerHTML=C.map(c=>`<button role="tab" aria-selected="${c.id===cur}" class="${c.id===cur?'sel':''}" data-c="${c.id}">${c.icon} ${esc(c.name)}</button>`).join('')}
+function draw(){
+ const c=C.find(x=>x.id===cur);drawTabs();history.replaceState(null,'','#'+cur+'/'+lvl);
+ let html=`<h2>${c.icon} ${esc(c.name)}</h2><div class="lv" role="group" aria-label="Level"><button data-l="intermediate" class="${lvl==='intermediate'?'sel':''}" aria-pressed="${lvl==='intermediate'}">Intermediate</button><button data-l="advanced" class="${lvl==='advanced'?'sel':''}" aria-pressed="${lvl==='advanced'}">Advanced</button></div>`;
+ const L=c[lvl];
+ if(!L){html+=`<section class="panel"><span class="pill">Intermediate · in the Academy</span><h3 style="margin-top:10px">${esc(c.name)} intermediate is already available</h3><p>${esc(c.note)}</p><a class="primary" href="${c.intermediateLink}">Open Intermediate Piano</a></section>`;root.innerHTML=html;return}
+ const key=cur+'-'+lvl,done=st[key]||{};
+ const n=Object.keys(done).filter(k=>done[k]).length;
+ html+=`<section class="panel"><span class="pill">${lvl==='intermediate'?'Intermediate':'Advanced'} · ${L.lessons.length} lessons · ${n} done</span><h3 style="margin-top:10px">${esc(L.title)}</h3><div class="ready"><strong>Ready for this stage?</strong> ${esc(L.ready)}</div>${c.play?`<a class="primary" href="https://academy.nismcaa.com/#play/${c.play}">Practice on the virtual ${c.id==='theory'?'piano':esc(c.name.split(' ')[0].toLowerCase())}</a>`:''}</section><ol class="lessons">`;
+ L.lessons.forEach((l,i)=>{html+=`<li><details class="${done[i]?'done':''}"><summary><span class="num">${done[i]?'✓':i+1}</span><span class="t"><strong>${esc(l[0])}</strong><small>${esc(l[1])}</small></span></summary><div class="body"><ol>${l[2].map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="practice"><strong>Practice:</strong> ${esc(l[3])}</div><div class="row"><button data-d="${i}">${done[i]?'Mark as not done':'Mark lesson done'}</button></div></div></details></li>`});
+ html+=`</ol><section class="panel" style="margin-top:16px"><h2>Check your learning</h2><p class="muted">${L.quiz.length} questions. Choose one answer for each.</p><form id="quiz">`;
+ L.quiz.forEach((q,i)=>{html+=`<fieldset class="q" style="border:0;margin:0"><legend><strong>${i+1}. ${esc(q[0])}</strong></legend>${q[1].map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}<div class="fb" aria-live="polite"></div></fieldset>`});
+ html+=`<button class="primary" type="submit">Check answers</button><div class="score" aria-live="polite"></div></form></section>`;
+ root.innerHTML=html;
+ root.querySelector('#quiz').onsubmit=e=>{e.preventDefault();let s=0;L.quiz.forEach((q,i)=>{const v=e.target.querySelector(`input[name=q${i}]:checked`),fb=e.target.querySelectorAll('.fb')[i];if(!v){fb.className='fb no';fb.textContent='Choose an answer.';return}const ok=+v.value===q[2];if(ok)s++;fb.className='fb '+(ok?'ok':'no');fb.textContent=(ok?'Correct. ':'Not quite. The answer is "'+q[1][q[2]]+'". ')+q[3]});e.target.querySelector('.score').textContent=`You got ${s} of ${L.quiz.length}.`+(s>=4?' Great work!':' Review the lessons and try again.')};
+}
+tabs.onclick=e=>{const b=e.target.closest('[data-c]');if(b){cur=b.dataset.c;draw()}};
+root.onclick=e=>{const b=e.target.closest('[data-l]');if(b){lvl=b.dataset.l;draw();return}const d=e.target.closest('[data-d]');if(d){const key=cur+'-'+lvl;st[key]=st[key]||{};const i=d.dataset.d;st[key][i]=!st[key][i];save();const open=i;draw();const det=root.querySelectorAll('details')[open];if(det)det.open=true}};
+draw();
+})();
+</script></body></html>
