@@ -35,6 +35,11 @@ table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;
 dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dialog::backdrop{background:#18294799}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ok{background:#e2f3ef;border-radius:12px;padding:12px}
 .stars{color:#e0a100;letter-spacing:1px}
+.badge{display:inline-block;background:#182947;color:#ffdb67;font-size:.72rem;font-weight:800;border-radius:10px;padding:2px 8px;margin-top:2px}
+.cert{background:#fffdf5;border:10px double #c9a227;border-radius:8px;padding:28px;text-align:center;font-family:Georgia,serif;max-width:720px;margin:14px auto}
+.cert h2{font-family:Georgia,serif;font-size:1.8rem;letter-spacing:.1rem;color:#182947}.cert .nm{font-size:1.7rem;font-style:italic;border-bottom:1px solid #c9a227;display:inline-block;padding:0 20px}
+.sig{font-family:'Brush Script MT',cursive;font-size:1.6rem}.q{margin:10px 0}.q label{display:block;font-weight:400}
+@media print{body *{visibility:hidden}.cert,.cert *{visibility:visible}.cert{position:absolute;top:0;left:0;right:0}}
 [hidden]{display:none!important}
 @media(max-width:760px){.hero{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr}.row{grid-template-columns:1fr}table{font-size:.78rem}.tbl{overflow-x:auto}}
 </style></head><body>
@@ -63,7 +68,7 @@ dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dia
 <div class="step"><svg viewBox="0 0 70 70"><rect x="6" y="18" width="58" height="36" rx="8" fill="#7043c1"/><rect x="6" y="26" width="58" height="7" fill="#182947"/></svg><h3>3. Pay NISMCAA</h3><p class="muted">One secure payment to NISMCAA. The tutor never sees your card.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><path d="M35 8l8 17 18 2-13 12 4 18-17-9-17 9 4-18L9 27l18-2z" fill="#ffdb67" stroke="#e0a100" stroke-width="3"/></svg><h3>4. Learn & review</h3><p class="muted">Join the lesson, then rate your tutor.</p></div></div></div>
 <div class="panel"><h2>For tutors</h2><div class="steps">
-<div class="step"><svg viewBox="0 0 70 70"><circle cx="35" cy="24" r="13" fill="#f1c7a0"/><rect x="15" y="40" width="40" height="24" rx="12" fill="#007d77"/></svg><h3>1. Make a profile</h3><p class="muted">Photo, subjects, levels, languages, time zone, bio.</p></div>
+<div class="step"><svg viewBox="0 0 70 70"><circle cx="35" cy="24" r="13" fill="#f1c7a0"/><rect x="15" y="40" width="40" height="24" rx="12" fill="#007d77"/></svg><h3>1. Profile & certify</h3><p class="muted">Make your profile, pass the subject test and send a short teaching demo. Only NISMCAA Certified tutors are listed.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="26" fill="#ffdb67"/><text x="25" y="46" font-size="30" font-weight="800" fill="#182947">$</text></svg><h3>2. Set your rate</h3><p class="muted">Your price per hour, in your own currency.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="12" width="54" height="48" rx="8" fill="#e2f3ef"/><path d="M20 38l10 10 20-22" stroke="#007d77" stroke-width="7" fill="none" stroke-linecap="round"/></svg><h3>3. Teach</h3><p class="muted">Learners book your open slots.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="20" width="54" height="32" rx="8" fill="#7dcabf"/><circle cx="35" cy="36" r="9" fill="#fff"/></svg><h3>4. Get paid</h3><p class="muted">NISMCAA keeps 20% commission and you keep 80%.</p></div></div>
@@ -78,12 +83,18 @@ dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dia
 <p class="muted" id="jusd"></p>
 <label>Short bio<textarea rows="3"></textarea></label>
 <p><label><input type="checkbox" required style="width:auto;min-height:0"> I agree to NISMCAA tutor rules, ID check and child-safety policy.</label></p>
-<button class="pri">Submit profile (preview)</button></form><div class="ok" id="jok" hidden>Thanks! In the live version, your profile would be reviewed before it appears. (Preview only, nothing was saved.)</div></div></section>
+<button class="pri">Submit profile (preview)</button></form><div id="jok" hidden><h2>Step 2: Certification</h2><p class="muted">Every tutor must be NISMCAA Certified before being listed. Pass mark: <b>70%</b> on the subject test, plus an approved teaching demo (admin review).</p>
+<form id="qf"><div class="panel"><b>Sample subject test (Music Theory example)</b>
+<div class="q">1. How many beats does a whole note get in 4/4?<label><input type="radio" name="a" value="0" style="width:auto;min-height:0"> 2</label><label><input type="radio" name="a" value="1" style="width:auto;min-height:0"> 4</label></div>
+<div class="q">2. Which note is a perfect fifth above C?<label><input type="radio" name="b" value="1" style="width:auto;min-height:0"> G</label><label><input type="radio" name="b" value="0" style="width:auto;min-height:0"> F</label></div>
+<div class="q">3. A learner is struggling. Best first step?<label><input type="radio" name="c" value="1" style="width:auto;min-height:0"> Break the skill into smaller steps</label><label><input type="radio" name="c" value="0" style="width:auto;min-height:0"> Move on faster</label></div>
+<label>Teaching demo video (2 to 5 minutes)<input type="file" accept="video/*"></label></div>
+<button class="pri">Submit test & demo</button></form><div id="qres"></div></div></div></section>
 
 <section id="admin" hidden><div class="panel"><h2>Admin view <span class="muted">(example data)</span></h2>
 <div class="cfg">Commission % <input id="comm" type="number" min="0" max="50" value="20" style="width:90px;display:inline-block"> <i>Set by John: 20%. Change here to test other values.</i></div><br>
 <div class="kpis"><div class="kpi">Bookings<b id="kB"></b></div><div class="kpi">Commission earned<b id="kC"></b></div><div class="kpi">Tutor payouts due<b id="kP"></b></div></div>
-<div class="tbl"><table><thead><tr><th>Date</th><th>Learner</th><th>Tutor</th><th>Paid</th><th>Commission</th><th>Payout</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
+<h3>Certification reviews</h3><div class="tbl"><table><thead><tr><th>Applicant</th><th>Subject</th><th>Test score</th><th>Demo video</th><th>Action</th></tr></thead><tbody id="rv"></tbody></table></div><br><h3>Bookings</h3><div class="tbl"><table><thead><tr><th>Date</th><th>Learner</th><th>Tutor</th><th>Paid</th><th>Commission</th><th>Payout</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
 </main>
 <dialog id="dlg"><div id="dbody"></div></dialog>
 <script>
@@ -98,6 +109,7 @@ const T=[
 {n:"Sofia R.",s:["Spanish","French"],l:["Beginner","Intermediate","Advanced"],lg:["Spanish","French","English"],c:"Spain",tz:"Europe",z:"CET (UTC+1)",r:28,cur:"EUR",rt:4.8,rv:52,b:"Conversation-first language lessons.",q:"Speaking after 3 weeks!"},
 {n:"Marcus J.",s:["Drums","Music Production"],l:["Beginner","Advanced"],lg:["English"],c:"United States",tz:"Americas",z:"ET (UTC-5)",r:40,cur:"USD",rt:4.5,rv:12,b:"Session drummer and beat producer.",q:"Fun and super skilled."},
 {n:"Yuki T.",s:["Violin","Japanese"],l:["Intermediate","Advanced"],lg:["Japanese","English"],c:"Japan",tz:"Asia",z:"JST (UTC+9)",r:4000,cur:"JPY",rt:5.0,rv:9,b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
+T.forEach((t,i)=>t.cert=i!=7);
 const usd=t=>t.r*FX[t.cur],fm=(v,c)=>new Intl.NumberFormat('en',{style:'currency',currency:c,maximumFractionDigits:c=='USD'?2:0}).format(v);
 const av=i=>`<svg class="av" viewBox="0 0 64 64" role="img" aria-label="Example illustrated avatar"><circle cx="32" cy="32" r="32" fill="${C[i%6]}"/><circle cx="32" cy="26" r="12" fill="${S[i%6]}"/><rect x="14" y="40" width="36" height="26" rx="14" fill="${C[(i+3)%6]}"/></svg>`;
 const st=r=>"★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
@@ -106,10 +118,10 @@ fill('fSub',T.flatMap(t=>t.s));fill('fLang',T.flatMap(t=>t.lg));
 const jc=document.getElementById('jc');Object.keys(FX).forEach(k=>jc.add(new Option(k,k)));jc.value='NGN';
 function render(){const g=id=>document.getElementById(id).value;
  const L=T.map((t,i)=>[t,i]).filter(([t])=>(!g('fSub')||t.s.includes(g('fSub')))&&usd(t)<=+g('fPrice')&&(!g('fLang')||t.lg.includes(g('fLang')))&&(!g('fTz')||t.tz==g('fTz'))&&t.rt>=+g('fRate'));
- document.getElementById('list').innerHTML=L.length?L.map(([t,i])=>`<article class="card"><span class="ex">Example profile</span><div class="who">${av(i)}<div><h3>${t.n}</h3><div class="muted">${t.c} · ${t.z}</div><div><span class="stars">${st(t.rt)}</span> ${t.rt} (${t.rv} reviews)</div></div></div>
+ document.getElementById('list').innerHTML=L.length?L.map(([t,i])=>`<article class="card"><span class="ex">Example profile</span><div class="who">${av(i)}<div><h3>${t.n}</h3><div class="muted">${t.c} · ${t.z}</div>${t.cert?'<span class="badge">✔ NISMCAA Certified</span>':'<span class="pill" style="background:#eee;color:#666">Not yet certified</span>'}<div><span class="stars">${st(t.rt)}</span> ${t.rt} (${t.rv} reviews)</div></div></div>
  <div>${t.s.map(x=>`<span class="pill">${x}</span>`).join('')}</div><div class="muted">Levels: ${t.l.join(', ')} · Speaks: ${t.lg.join(', ')}</div><p style="margin:0">${t.b}</p>
  <blockquote class="muted" style="margin:0;border-left:3px solid var(--yellow);padding-left:8px">“${t.q}” <i>(example review)</i></blockquote>
- <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto"><div><span class="price">${fm(t.r,t.cur)}/hr</span><br><span class="muted">≈ ${fm(usd(t),'USD')} USD</span></div><button class="warm" onclick="book(${i})">Book</button></div></article>`).join(''):'<p>No tutors match. Try fewer filters.</p>'}
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto"><div><span class="price">${fm(t.r,t.cur)}/hr</span><br><span class="muted">≈ ${fm(usd(t),'USD')} USD</span></div>${t.cert?`<button class="warm" onclick="book(${i})">Book</button>`:`<button disabled title="Not certified yet">Pending certification</button>`}</div></article>`).join(''):'<p>No tutors match. Try fewer filters.</p>'}
 ['fSub','fPrice','fLang','fTz','fRate'].forEach(i=>document.getElementById(i).onchange=render);render();
 const comm=()=>+document.getElementById('comm').value||0;
 function book(i){const t=T[i],d=document.getElementById('dlg'),days=['Mon','Tue','Wed','Thu','Fri'];
@@ -125,6 +137,13 @@ function admin(){let tot=0,cm=0;document.getElementById('tb').innerHTML=B.map(([
 document.getElementById('comm').oninput=admin;admin();
 function jusdf(){jusd.textContent='≈ '+fm((+jr.value||0)*FX[jc.value],'USD')+' USD per hour (example exchange rate)'}jr.oninput=jc.onchange=jusdf;jusdf();
 jf.onsubmit=e=>{e.preventDefault();jf.hidden=true;jok.hidden=false};
+const R=[["Yuki T. (example)","Violin","90%","Received",1],["Tunde B. (example)","Maths","65%","Received",0],["Chloe D. (example)","Spanish","85%","Received",1]];
+function rev(){rv.innerHTML=R.map((r,k)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} ${parseInt(r[2])>=70?'✅ pass':'❌ below 70%'}</td><td><a href="#" onclick="return false">▶ Watch</a></td><td>${r[5]||`<button ${parseInt(r[2])<70?'disabled':''} class="pri" onclick="R[${k}][5]='Approved, certificate issued';if(${k}==0){T[7].cert=true;render()}rev()">Approve</button> <button onclick="R[${k}][5]='Declined';rev()">Decline</button>`}</td></tr>`).join('')}rev();
+function cert(name,sub){const id='NISMCAA-TUT-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);const d=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+return `<div class="cert"><div style="font-size:2rem">♪</div><div style="letter-spacing:.2rem;font-size:.85rem">NISMCAA MUSIC ACADEMY</div><h2>Certificate of Tutor Certification</h2><p>This certifies that</p><div class="nm">${name}</div><p>has successfully completed the NISMCAA subject assessment and teaching demonstration in</p><p style="font-size:1.3rem"><b>${sub}</b></p><p>and is hereby recognised as a <b>NISMCAA Certified Tutor</b>.</p>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:24px;text-align:left"><div>Date issued: ${d}<br>Certificate ID: ${id}</div><div style="text-align:center"><div class="sig">Olushola John Adebowale</div><div style="border-top:1px solid #182947">Olushola John Adebowale, Founder</div></div></div><p style="font-size:.75rem;color:#777">Preview sample. Not a valid certificate.</p></div><p style="text-align:center"><button onclick="print()">Print / save as PDF</button></p>`}
+qf.onsubmit=e=>{e.preventDefault();const f=new FormData(qf);const sc=Math.round(['a','b','c'].reduce((t,k)=>t+(+f.get(k)||0),0)/3*100);const nm=jf.n.value||'Tutor Name';
+qres.innerHTML=sc>=70?`<div class="ok">Score ${sc}%: passed! Your demo video goes to NISMCAA for admin review. Once approved you get your certificate and badge, and your profile becomes bookable. Certificate preview:</div>`+cert(nm,'Music Theory'):`<div class="ok" style="background:#fde7e1">Score ${sc}%: below the 70% pass mark. You can retake the test after 7 days.</div>`};
 function show(t){document.querySelectorAll('main>section[id]').forEach(s=>s.hidden=s.id!=t);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('sel',b.dataset.t==t))}
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));
 </script>
