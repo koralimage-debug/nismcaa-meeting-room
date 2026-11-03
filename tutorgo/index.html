@@ -151,7 +151,7 @@ ${t.m=='Both'?`<label>Lesson mode</label><div class="durs">${['In person','Virtu
 <p><label style="font-weight:400"><input type="checkbox" ${BK.u18?'checked':''} onchange="BK.u18=this.checked"> The learner is under 18 (I am the parent or guardian booking)</label></p>
 <div class="panel" style="margin:8px 0"><b>Mock checkout · ${BK.min} min</b> <span class="muted">(${fm(t.r,t.cur)}/hr prorated)</span><div class="muted" style="margin-top:6px">${brk(amt,t.c,t.cur)}</div><input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
 <button class="go" onclick="pay()">Pay (preview)</button> <button onclick="dlg.close()">Cancel</button>`}
-const B=[["Oct 26","Parent of Jake (u18)",0,60,"In person"],["Oct 27","Chris Walker",1,120,"Virtual"],["Oct 28","Parent of Noah (u18)",4,60,"Virtual"],["Oct 29","Tyler Brown",2,45,"Virtual"],["Oct 30","Lauren Hayes",5,30,"Virtual"],["Nov 1","Parent of Mia (u18)",6,120,"In person"]];
+const B=[["Oct 26","Parent account (under 18)",0,60,"In person"],["Oct 27","Chris Walker",1,120,"Virtual"],["Oct 28","Parent account (under 18)",4,60,"Virtual"],["Oct 29","Tyler Brown",2,45,"Virtual"],["Oct 30","Lauren Hayes",5,30,"Virtual"],["Nov 1","Parent account (under 18)",6,120,"In person"]];
 function ls(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function myBk(){return ls('nt_bookings',[])}
 setTimeout(drawBk,0);
