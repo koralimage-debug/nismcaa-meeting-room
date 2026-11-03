@@ -49,7 +49,7 @@ table{width:100%;border-collapse:collapse;font-size:.84rem}th,td{text-align:left
 <header class="bar"><img src="icon.svg" alt="NISMCAA Tutor logo"><div class="wm">NISMCAA <span>Tutor</span></div></header>
 
 <section class="scr" id="s-find">
-<div class="hero"><div><h1>Learn anything, with a certified tutor, anywhere</h1><p class="muted">Music, maths, languages, coding and more. In person near you, or virtual on NISMCAA video.</p><button class="go" onclick="document.getElementById('flt').scrollIntoView()">Find a tutor</button> <button class="tl" onclick="tab('profile')">Teach on NISMCAA Tutor</button></div>
+<div class="hero"><div><h1>Learn anything, with a certified tutor, anywhere</h1><p class="muted">Music, math, languages, coding and more. In person near you, or virtual on NISMCAA video.</p><button class="go" onclick="document.getElementById('flt').scrollIntoView()">Find a tutor</button> <button class="tl" onclick="tab('profile')">Teach on NISMCAA Tutor</button></div>
 <svg viewBox="0 0 400 240" aria-label="Illustration: a tutor and a learner connected by a path"><circle cx="200" cy="120" r="92" fill="#ffd34d" opacity=".55"/><rect x="150" y="70" width="100" height="70" rx="12" fill="#16264a"/><rect x="158" y="78" width="84" height="50" rx="6" fill="#bfe8e2"/><circle cx="200" cy="100" r="12" fill="#ff6b4a"/><circle cx="70" cy="160" r="38" fill="#ff6b4a"/><circle cx="70" cy="140" r="15" fill="#8a5a3c"/><rect x="52" y="157" width="36" height="30" rx="13" fill="#fff"/><circle cx="330" cy="160" r="38" fill="#7a4bd1"/><circle cx="330" cy="140" r="15" fill="#f1c7a0"/><rect x="312" y="157" width="36" height="30" rx="13" fill="#ffd34d"/><path d="M108 165Q200 230 292 165" fill="none" stroke="#16264a" stroke-width="3" stroke-dasharray="7 7"/><text x="186" y="208" font-size="26">📍</text><text x="100" y="70" font-size="28">♪</text><text x="280" y="70" font-size="26">📐</text></svg></div>
 <div class="panel" id="flt"><h2>Find your tutor</h2>
 <div class="chips" id="mode"><button data-m="" class="sel">All modes</button><button data-m="In person">📍 In person</button><button data-m="Virtual">💻 Virtual</button><button data-m="Both">✨ Both</button></div>
@@ -72,13 +72,13 @@ table{width:100%;border-collapse:collapse;font-size:.84rem}th,td{text-align:left
 <div class="chips" id="ptabs"><button data-p="join" class="sel">Become a tutor</button><button data-p="admin">Admin view</button></div>
 <div id="p-join"><div class="panel"><h2>Step 1: Your tutor profile</h2><form id="jf">
 <div class="row"><label>Full name<input required name="n"></label><label>Profile photo<input type="file" accept="image/*"></label></div>
-<div class="row"><label>Subjects<input required id="jsub" placeholder="e.g. Piano, Maths"></label><label>Levels<select multiple size="3"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div>
+<div class="row"><label>Subjects<input required id="jsub" placeholder="e.g. Piano, Math"></label><label>Levels<select multiple size="3"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div>
 <div class="row"><label>Languages<input placeholder="e.g. English, Yoruba"></label><label>Country & time zone<input placeholder="e.g. Nigeria · WAT (UTC+1)"></label></div>
 <label>Lesson mode</label><div class="chips" id="jmode"><button type="button" data-m="In person">📍 In person</button><button type="button" data-m="Virtual" class="sel">💻 Virtual</button><button type="button" data-m="Both">✨ Both</button></div>
 <div class="row" id="jloc" hidden><label>City<input placeholder="e.g. Lagos"></label><label>Travel radius (km)<input type="number" value="10" min="1"></label></div>
 <p class="muted" id="jvid">Virtual lessons run on NISMCAA video, built into NISMCAA Tutor.</p>
 <label>Durations you offer</label><div class="durs" id="jdur"></div>
-<div class="row"><label>Hourly rate<input id="jr" type="number" min="1" value="10000"></label><label>Currency<select id="jc"></select></label></div>
+<div class="row"><label>Hourly rate<input id="jr" type="number" min="1" value="25"></label><select id="jc" hidden></select><span class="muted">Rates are set in US dollars (USD) only.</span></div>
 <div class="ok" id="jearn"></div>
 <label>Short bio<textarea rows="3"></textarea></label>
 <p><label style="font-weight:400"><input type="checkbox" required> I agree to NISMCAA Tutor tutor rules, ID check and the child-safety policy.</label></p>
@@ -90,7 +90,7 @@ table{width:100%;border-collapse:collapse;font-size:.84rem}th,td{text-align:left
 <p>3. A learner is struggling. Best first step?<br><label style="font-weight:400"><input type="radio" name="c" value="1"> Break it into smaller steps</label> <label style="font-weight:400"><input type="radio" name="c" value="0"> Move on faster</label></p>
 <label>Teaching demo video (2 to 5 min)<input type="file" accept="video/*"></label></div><br><button class="tl">Submit test & demo</button></form><div id="qres"></div></div></div>
 <div id="p-admin" hidden><div class="panel"><h2>Admin <span class="muted">(example data)</span></h2>
-<div class="cfg">Commission % <input id="comm" type="number" min="0" max="50" value="20" style="width:80px;display:inline-block"> <i>Set by John: 20% of the tutor's lesson price; tutor keeps <span class="kv">80</span>%. Tax is added on top, paid by the learner and set aside (e.g. $50 lesson: learner pays $50 + tax; NISMCAA $10, tutor $40).</i></div>
+<div class="cfg">Commission % <input id="comm" type="number" min="0" max="50" value="20" style="width:80px;display:inline-block"> <i>Set by John: 20% of the tutor's lesson price; tutor keeps <span class="kv">80</span>%. Tax is added on top, paid by the learner and set aside (e.g. $50.00 USD lesson: learner pays $50.00 USD + tax; NISMCAA $10.00 USD, tutor $40.00 USD).</i></div>
 <details class="cfg" style="margin-top:10px"><summary><b>Tax rate per country (configurable, example rates, confirm with an accountant)</b></summary><div id="taxcfg" class="row" style="margin-top:8px"></div></details>
 <div class="kpis"><div class="kpi">Bookings<b id="kB"></b></div><div class="kpi">Paid by learners<b id="kG"></b></div><div class="kpi">Tax set aside<b id="kT"></b></div><div class="kpi">Commission earned<b id="kC"></b></div><div class="kpi">Tutor payouts due<b id="kP"></b></div></div>
 <h3>Certification reviews</h3><div class="tbl"><table><thead><tr><th>Applicant</th><th>Subject</th><th>Test</th><th>Demo</th><th>Action</th></tr></thead><tbody id="rv"></tbody></table></div>
@@ -103,23 +103,24 @@ table{width:100%;border-collapse:collapse;font-size:.84rem}th,td{text-align:left
 <button data-t="bookings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Bookings</button>
 <button data-t="messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 5h16v11H9l-5 4z"/></svg>Messages</button>
 <button data-t="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>Profile</button></nav>
+<p class="muted" style="text-align:center;font-weight:700;margin:8px 0">💵 All prices are in US dollars (USD).</p>
 <dialog id="dlg"><div id="dbody"></div></dialog>
 <script>
-const FX={USD:1,NGN:0.00065,GBP:1.27,EUR:1.08,INR:0.012,BRL:0.18,KES:0.0077,JPY:0.0066};
+const FX={USD:1};
 const TAX={"Nigeria":7.5,"United Kingdom":20,"India":18,"Brazil":5,"Kenya":16,"Spain":21,"United States":0,"Japan":10};
 const C=["#ffd34d","#ff6b4a","#7a4bd1","#00897f","#7dcabf","#f6a6c1"],SK=["#8a5a3c","#f1c7a0","#c68a5e","#5b3a29","#e8b896","#a8704b"],DUR=[30,45,60,90,120];
 const T=[
-{n:"Ada O.",s:["Piano","Music Theory"],l:"Beginner, Intermediate",lg:["English","Yoruba"],c:"Nigeria",tz:"Africa",z:"WAT (UTC+1)",r:12000,cur:"NGN",rt:4.9,rv:38,m:"Both",city:"Lagos",rad:15,d:[30,45,60],b:"Classically trained pianist who makes theory fun.",q:"Patient and clear. My son loves her lessons!"},
-{n:"Liam K.",s:["Maths","Physics"],l:"Intermediate, Advanced",lg:["English"],c:"United Kingdom",tz:"Europe",z:"GMT (UTC+0)",r:22,cur:"GBP",rt:4.8,rv:61,m:"Virtual",d:[60,90,120],b:"Exam prep for GCSE, A-level and SAT maths.",q:"Finally understood calculus."},
-{n:"Priya S.",s:["Coding","Maths"],l:"Beginner, Intermediate",lg:["English","Hindi"],c:"India",tz:"Asia",z:"IST (UTC+5:30)",r:900,cur:"INR",rt:4.7,rv:24,m:"Virtual",d:[30,45,60],b:"Python and Scratch for young coders.",q:"Great with beginners."},
-{n:"Lucas M.",s:["Guitar","Portuguese"],l:"Beginner, Advanced",lg:["Portuguese","English","Spanish"],c:"Brazil",tz:"Americas",z:"BRT (UTC-3)",r:110,cur:"BRL",rt:4.6,rv:17,m:"In person",city:"São Paulo",rad:8,d:[60,90],b:"Bossa nova guitarist and language tutor.",q:"Lessons feel like jam sessions."},
-{n:"Wanjiru N.",s:["Voice","Swahili"],l:"Beginner, Intermediate",lg:["Swahili","English"],c:"Kenya",tz:"Africa",z:"EAT (UTC+3)",r:2500,cur:"KES",rt:4.9,rv:45,m:"Both",city:"Nairobi",rad:12,d:[30,60,90],b:"Choir director who builds confident singers.",q:"My confidence grew so much."},
-{n:"Sofia R.",s:["Spanish","French"],l:"All levels",lg:["Spanish","French","English"],c:"Spain",tz:"Europe",z:"CET (UTC+1)",r:28,cur:"EUR",rt:4.8,rv:52,m:"Virtual",d:[30,45,60,90],b:"Conversation-first language lessons.",q:"Speaking after 3 weeks!"},
+{n:"Ada O.",s:["Piano","Music Theory"],l:"Beginner, Intermediate",lg:["English","Yoruba"],c:"Nigeria",tz:"Africa",z:"WAT (UTC+1)",r:18,cur:"USD",rt:4.9,rv:38,m:"Both",city:"Lagos",rad:15,d:[30,45,60],b:"Classically trained pianist who makes theory fun.",q:"Patient and clear. My son loves her lessons!"},
+{n:"Liam K.",s:["Math","Physics"],l:"Intermediate, Advanced",lg:["English"],c:"United Kingdom",tz:"Europe",z:"GMT (UTC+0)",r:28,cur:"USD",rt:4.8,rv:61,m:"Virtual",d:[60,90,120],b:"Exam prep for GCSE, A-level and SAT math.",q:"Finally understood calculus."},
+{n:"Priya S.",s:["Coding","Math"],l:"Beginner, Intermediate",lg:["English","Hindi"],c:"India",tz:"Asia",z:"IST (UTC+5:30)",r:11,cur:"USD",rt:4.7,rv:24,m:"Virtual",d:[30,45,60],b:"Python and Scratch for young coders.",q:"Great with beginners."},
+{n:"Lucas M.",s:["Guitar","Portuguese"],l:"Beginner, Advanced",lg:["Portuguese","English","Spanish"],c:"Brazil",tz:"Americas",z:"BRT (UTC-3)",r:20,cur:"USD",rt:4.6,rv:17,m:"In person",city:"São Paulo",rad:8,d:[60,90],b:"Bossa nova guitarist and language tutor.",q:"Lessons feel like jam sessions."},
+{n:"Wanjiru N.",s:["Voice","Swahili"],l:"Beginner, Intermediate",lg:["Swahili","English"],c:"Kenya",tz:"Africa",z:"EAT (UTC+3)",r:19,cur:"USD",rt:4.9,rv:45,m:"Both",city:"Nairobi",rad:12,d:[30,60,90],b:"Choir director who builds confident singers.",q:"My confidence grew so much."},
+{n:"Sofia R.",s:["Spanish","French"],l:"All levels",lg:["Spanish","French","English"],c:"Spain",tz:"Europe",z:"CET (UTC+1)",r:30,cur:"USD",rt:4.8,rv:52,m:"Virtual",d:[30,45,60,90],b:"Conversation-first language lessons.",q:"Speaking after 3 weeks!"},
 {n:"Marcus J.",s:["Drums","Music Production"],l:"Beginner, Advanced",lg:["English"],c:"United States",tz:"Americas",z:"ET (UTC-5)",r:40,cur:"USD",rt:4.5,rv:12,m:"In person",city:"Atlanta",rad:20,d:[45,60,120],b:"Session drummer and beat producer.",q:"Fun and super skilled."},
-{n:"Yuki T.",s:["Violin","Japanese"],l:"Intermediate, Advanced",lg:["Japanese","English"],c:"Japan",tz:"Asia",z:"JST (UTC+9)",r:4000,cur:"JPY",rt:5.0,rv:9,m:"Both",city:"Osaka",rad:5,d:[30,60],b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
+{n:"Yuki T.",s:["Violin","Japanese"],l:"Intermediate, Advanced",lg:["Japanese","English"],c:"Japan",tz:"Asia",z:"JST (UTC+9)",r:26,cur:"USD",rt:5.0,rv:9,m:"Both",city:"Osaka",rad:5,d:[30,60],b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
 T.forEach((t,i)=>t.cert=i!=7);
 const $=id=>document.getElementById(id),comm=()=>+$('comm').value||0;
-const fm=(v,c)=>new Intl.NumberFormat('en',{style:'currency',currency:c,maximumFractionDigits:c=='USD'?2:0}).format(v);
+const fm=(v,c)=>'$'+(+v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')+' USD';
 const usd=t=>t.r*FX[t.cur],pr=(rate,min)=>rate*min/60;
 const split=(amt,c)=>{const tx=amt*(TAX[c]||0)/100,n=amt*comm()/100;return{tx,tot:amt+tx,n,tu:amt-n}};
 const brk=(amt,c,cur)=>{const b=split(amt,c);return `Lesson price: ${fm(amt,cur)}<br>+ Tax (${c}, ${TAX[c]||0}%, configurable, paid by learner, set aside): ${fm(b.tx,cur)}<br><b>Learner pays: ${fm(b.tot,cur)}</b><br>NISMCAA ${comm()}%: ${fm(b.n,cur)} · <b>Tutor ${100-comm()}%: ${fm(b.tu,cur)}</b>`};
@@ -131,7 +132,7 @@ let MODE='';
 function render(){const g=id=>$(id).value;const L=T.map((t,i)=>[t,i]).filter(([t])=>(!g('fSub')||t.s.includes(g('fSub')))&&usd(t)<=+g('fPrice')&&(!g('fLang')||t.lg.includes(g('fLang')))&&(!g('fTz')||t.tz==g('fTz'))&&t.rt>=+g('fRate')&&(!g('fDur')||t.d.includes(+g('fDur')))&&(!MODE||t.m==MODE||(MODE!='Both'&&t.m=='Both')));
 $('list').innerHTML=L.length?L.map(([t,i])=>`<article class="card"><span class="ex">Example profile</span><div class="who">${av(i)}<div><h3>${t.n}</h3><div class="muted">${t.c} · ${t.z}</div>${t.cert?'<span class="badge">✔ NISMCAA Certified</span>':'<span class="pill" style="background:#eee;color:#666">Certification pending</span>'} <span class="stars">${st(t.rt)}</span> ${t.rt} (${t.rv})</div></div>
 <div>${t.s.map(x=>`<span class="pill">${x}</span>`).join('')}</div><div>${modeTxt(t)}</div><div class="muted">${t.l} · Speaks ${t.lg.join(', ')} · Offers ${t.d.join('/')} min</div><p style="margin:0">${t.b}</p><div class="muted" style="border-left:3px solid var(--sun);padding-left:8px">“${t.q}” <i>(example review)</i></div>
-<div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto"><div><span class="price">${fm(t.r,t.cur)}/hr</span><br><span class="muted">≈ ${fm(usd(t),'USD')} USD</span></div>${t.cert?`<button class="go" onclick="book(${i})">Book</button>`:'<button disabled>Not bookable yet</button>'}</div></article>`).join(''):'<p>No tutors match. Try fewer filters.</p>'}
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto"><div><span class="price">${fm(t.r,t.cur)}/hr</span></div>${t.cert?`<button class="go" onclick="book(${i})">Book</button>`:'<button disabled>Not bookable yet</button>'}</div></article>`).join(''):'<p>No tutors match. Try fewer filters.</p>'}
 ['fSub','fPrice','fLang','fTz','fRate','fDur'].forEach(i=>$(i).onchange=render);
 $('mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;MODE=b.dataset.m;[...$('mode').children].forEach(x=>x.classList.toggle('sel',x==b));render()};render();
 let BK={};
@@ -144,18 +145,18 @@ ${t.m=='Both'?`<label>Lesson mode</label><div class="durs">${['In person','Virtu
 <p class="muted">Times in your time zone (${Intl.DateTimeFormat().resolvedOptions().timeZone}).</p>
 <div class="slots">${days.flatMap(d=>[d+' 10:00',d+' 16:00']).map(s=>`<button onclick="[...this.parentNode.children].forEach(b=>b.classList.remove('sel'));this.classList.add('sel')">${s}</button>`).join('')}</div>
 <p><label style="font-weight:400"><input type="checkbox"> The learner is under 18 (I am the parent or guardian booking)</label></p>
-<div class="panel" style="margin:8px 0"><b>Mock checkout · ${BK.min} min</b> <span class="muted">(${fm(t.r,t.cur)}/hr prorated, ≈ ${fm(usd(t)*BK.min/60,'USD')})</span><div class="muted" style="margin-top:6px">${brk(amt,t.c,t.cur)}</div><input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
+<div class="panel" style="margin:8px 0"><b>Mock checkout · ${BK.min} min</b> <span class="muted">(${fm(t.r,t.cur)}/hr prorated)</span><div class="muted" style="margin-top:6px">${brk(amt,t.c,t.cur)}</div><input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
 <button class="go" onclick="this.parentNode.innerHTML='<h2>🎉 Booked (preview)</h2><p>Mock checkout only. No payment was taken. A confirmation would come from academy@nismcaa.com.</p><button onclick=dlg.close()>Close</button>'">Pay (mock)</button> <button onclick="dlg.close()">Cancel</button>`}
 const B=[["Oct 26","Parent of Tolu (u18)",0,60,"In person"],["Oct 27","Grace A.",1,120,"Virtual"],["Oct 28","Parent of Ken (u18)",4,60,"Virtual"],["Oct 29","Ravi P.",2,45,"Virtual"],["Oct 30","Ana L.",5,30,"Virtual"],["Nov 1","Parent of Mia (u18)",6,120,"In person"]];
 function admin(){let g=0,tt=0,cm=0,tu=0;$('tb').innerHTML=B.map(([d,l,ti,m,md])=>{const t=T[ti],p=usd(t)*m/60,b=split(p,t.c);g+=b.tot;tt+=b.tx;cm+=b.n;tu+=b.tu;return`<tr><td>${d}</td><td>${l}</td><td>${t.n}</td><td>${md}</td><td>${m}</td><td>${fm(p,'USD')}</td><td>${fm(b.tx,'USD')} (${TAX[t.c]}%)</td><td>${fm(b.tot,'USD')}</td><td>${fm(b.n,'USD')}</td><td>${fm(b.tu,'USD')}</td></tr>`}).join('');
 kB.textContent=B.length;kG.textContent=fm(g,'USD');kT.textContent=fm(tt,'USD');kC.textContent=fm(cm,'USD');kP.textContent=fm(tu,'USD');document.querySelectorAll('.kv').forEach(e=>e.textContent=100-comm());
 $('bk').innerHTML=B.slice(0,3).map(([d,l,ti,m,md])=>{const t=T[ti];return`<div class="panel"><span class="ex" style="position:static">Example</span> <b>${t.s[0]} with ${t.n}</b><div class="muted">${d} · ${m} min · ${md=='Virtual'?'💻 NISMCAA video':'📍 '+t.city}</div>${md=='Virtual'?'<button class="tl" disabled>Join video (opens at lesson time)</button>':'<button disabled>Get directions</button>'} <button disabled>Reschedule</button></div>`}).join('')}
 $('comm').oninput=()=>{admin();earn()};$('taxcfg').innerHTML=Object.keys(TAX).map(c=>`<label>${c} tax %<input type="number" step="0.5" value="${TAX[c]}" oninput="TAX['${c}']=+this.value;admin();earn()"></label>`).join('');admin();
-const R=[["Yuki T. (example)","Violin","90%"],["Tunde B. (example)","Maths","65%"],["Chloe D. (example)","Spanish","85%"]];
+const R=[["Yuki T. (example)","Violin","90%"],["Tunde B. (example)","Math","65%"],["Chloe D. (example)","Spanish","85%"]];
 function rev(){$('rv').innerHTML=R.map((r,k)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} ${parseInt(r[2])>=70?'✅':'❌ below 70%'}</td><td><a href="#" onclick="return false">▶ Watch</a></td><td>${r[3]||`<button class="tl" ${parseInt(r[2])<70?'disabled':''} onclick="R[${k}][3]='Approved, certificate issued';if(${k}==0){T[7].cert=true;render()}rev()">Approve</button> <button onclick="R[${k}][3]='Declined';rev()">Decline</button>`}</td></tr>`).join('')}rev();
-Object.keys(FX).forEach(k=>$('jc').add(new Option(k,k)));$('jc').value='NGN';
+Object.keys(FX).forEach(k=>$('jc').add(new Option(k,k)));$('jc').value='USD';
 let JD=new Set([30,60]);function drawJD(){$('jdur').innerHTML=DUR.map(d=>`<button type="button" class="${JD.has(d)?'sel':''}" onclick="JD.has(${d})?JD.delete(${d}):JD.add(${d});drawJD();earn()">${d} min</button>`).join('')}drawJD();
-function earn(){const r=+$('jr').value||0,c=$('jc').value;$('jearn').innerHTML=`<b>Your earnings (learner pays tax on top):</b> ≈ ${fm(r*FX[c],'USD')} USD/hr<br>`+[...JD].sort((a,b)=>a-b).map(d=>{const a=pr(r,d);return `${d} min: price ${fm(a,c)} → you keep ${fm(a*(100-comm())/100,c)}, NISMCAA ${fm(a*comm()/100,c)}`}).join('<br>')}
+function earn(){const r=+$('jr').value||0,c=$('jc').value;$('jearn').innerHTML=`<b>Your earnings (learner pays tax on top):</b> ${fm(r,'USD')}/hr<br>`+[...JD].sort((a,b)=>a-b).map(d=>{const a=pr(r,d);return `${d} min: price ${fm(a,c)} → you keep ${fm(a*(100-comm())/100,c)}, NISMCAA ${fm(a*comm()/100,c)}`}).join('<br>')}
 $('jr').oninput=$('jc').onchange=earn;earn();
 $('jmode').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('jmode').children].forEach(x=>x.classList.toggle('sel',x==b));$('jloc').hidden=b.dataset.m=='Virtual';$('jvid').hidden=b.dataset.m=='In person'};
 $('jf').onsubmit=e=>{e.preventDefault();$('jf').parentNode.hidden=true;$('jok').hidden=false};
