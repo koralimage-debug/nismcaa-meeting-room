@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NISMCAA Entry Form – Test Preview</title><meta name="robots" content="noindex"><link rel="stylesheet" href="style.css"></head><body>
+<div class="topbar"><b>NISMCAA Entry Form</b><span class="tag">TEST PREVIEW – not live</span><span class="sp"></span>
+<span class="cbar">Country: <select id="csel"></select></span>
+<button class="btn alt sm" id="sample">Fill sample entry</button><button class="btn alt sm" id="print">Save as PDF</button><a class="btn sm" href="admin.html">Admin view</a></div>
+<div class="steps" id="steps"></div>
+<div id="pages"></div>
+<div class="modal" id="paym"><div class="box"><h3 style="margin-top:0">Pay commitment fee (test mode)</h3>
+<p class="note">No real money is charged in this preview. Use test card 4242 4242 4242 4242.</p>
+<label class="f">Amount<input id="pamt" readonly></label><label class="f">Card number<input id="pcard" value="4242 4242 4242 4242"></label>
+<div class="row"><label class="f">Expiry<input id="pexp" value="12/28"></label><label class="f">CVC<input id="pcvc" value="123"></label></div>
+<div class="err" id="perr"></div><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn alt" id="pcancel">Cancel</button><button class="btn" id="pgo">Pay now</button></div></div></div>
+<script src="data.js"></script><script src="form.js"></script></body></html>
