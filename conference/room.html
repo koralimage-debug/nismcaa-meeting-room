@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>NISMCAA Conference Room · demo room</title><link rel="icon" href="../tutor/icon.svg">
+<style>body{margin:0;background:#0f1c36;color:#fff;font-family:'DM Sans',Arial,sans-serif}a{color:#ffdb67}button{font:inherit;cursor:pointer;min-height:44px;border-radius:12px;border:1px solid #ffdb67;background:#22365e;color:#fff;font-weight:700;padding:8px 14px;margin:3px}.gd{background:#ffdb67;color:#182947}
+.prev{background:#ffdb67;color:#182947;text-align:center;font-weight:700;font-size:.8rem;padding:5px}header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 16px;background:#182947}header b span{color:#ffdb67}
+.w{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;padding:14px;max-width:1200px;margin:auto}.box{background:#182947;border-radius:16px;padding:14px}.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.t{background:#33507f;border-radius:12px;aspect-ratio:4/3;display:grid;place-items:center;font-size:.85rem;text-align:center}.t.mu{opacity:.55}
+.p{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #33507f;padding:4px 0;flex-wrap:wrap}@media(max-width:760px){.w{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}}</style></head><body>
+<div class="prev">DEMO ROOM (PREVIEW). Video by Jitsi Meet. Host panel below is a mock; real admit/mute/remove use Jitsi's moderator tools.</div>
+<header><b>NISMCAA <span>Conference Room</span></b><span id="rn" style="font-size:.8rem;opacity:.8"></span><span style="margin-left:auto"></span><a href="./">← Back to Conference Room</a> <a href="https://nismcaa.com/">Back to NISMCAA</a></header>
+<div class="w"><div class="box"><h3 style="margin:0 0 8px">Stage <span id="mode" style="font-size:.8rem;color:#ffdb67"></span></h3><div class="tiles" id="tiles"></div>
+<p><button class="gd" id="jJoin">Join video (Jitsi, new tab)</button><button id="jTools">Open board, chat, polls &amp; files</button><button id="jBoard">Teaching Board</button><button id="jWeb">Toggle webinar mode</button><button id="jBrand">Show renter logo</button></p>
+<div id="brand" style="display:none;background:#fff;color:#182947;border-radius:10px;padding:8px;font-weight:800">🏷️ YOUR LOGO HERE · Renter branding (mock)</div></div>
+<div class="box"><h3 style="margin:0">Host controls (mock)</h3><p style="font-size:.8rem;opacity:.8">In the real call, use Jitsi's Security → Lobby and the participant menu.</p>
+<h4 style="margin:6px 0">Lobby</h4><div id="lob"></div><h4 style="margin:10px 0 4px">In the room</h4><div id="ppl"></div>
+<button id="muteAll">Mute everyone</button><button id="lockB" >Lock room</button><button id="brk">Breakout rooms (2 groups)</button><div id="brkOut" style="font-size:.85rem"></div><div id="log" style="font-size:.8rem;color:#ffdb67;margin-top:6px"></div></div></div>
+<script>
+const $=i=>document.getElementById(i),room=(new URLSearchParams(location.search).get('room')||'NISMCAA-Conf-demo').replace(/[^\w-]/g,'');$('rn').textContent='Room: '+room;
+let lob=['Ada (Lagos School Board)','Mark (Press)','Grace (NGO)'],ppl=[{n:'You (host)',m:false,h:1},{n:'Tunde',m:false},{n:'Sarah',m:true},{n:'Femi',m:false}],locked=false,web=false;
+const log=t=>$('log').textContent=t;
+function draw(){$('lob').innerHTML=lob.map((n,i)=>`<div class="p">${n}<span><button data-a="${i}">Admit</button><button data-d="${i}">Deny</button></span></div>`).join('')||'<i>Lobby empty</i>';
+$('ppl').innerHTML=ppl.map((p,i)=>`<div class="p">${p.n}${p.m?' 🔇':' 🎙️'}<span>${p.h?'':`<button data-m="${i}">${p.m?'Unmute':'Mute'}</button><button data-r="${i}">Remove</button>`}</span></div>`).join('');
+$('tiles').innerHTML=ppl.map(p=>`<div class="t ${p.m?'mu':''}">👤<br>${p.n}${p.m?' 🔇':''}</div>`).join('');$('mode').textContent=web?'· Webinar mode: audience view only':'';
+document.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const n=lob.splice(+b.dataset.a,1)[0];ppl.push({n,m:true});log('Admitted '+n);draw()});
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{log('Denied '+lob.splice(+b.dataset.d,1)[0]);draw()});
+document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const p=ppl[+b.dataset.m];p.m=!p.m;log((p.m?'Muted ':'Unmuted ')+p.n);draw()});
+document.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{log('Removed '+ppl.splice(+b.dataset.r,1)[0].n);draw()})}
+$('muteAll').onclick=()=>{ppl.forEach(p=>{if(!p.h)p.m=true});log('Muted everyone');draw()};
+$('lockB').onclick=()=>{locked=!locked;$('lockB').textContent=locked?'Unlock room':'Lock room';log(locked?'Room locked':'Room unlocked')};
+$('brk').onclick=()=>{const g=ppl.filter(p=>!p.h);$('brkOut').innerHTML='Group A: '+g.filter((_,i)=>i%2==0).map(p=>p.n).join(', ')+'<br>Group B: '+g.filter((_,i)=>i%2).map(p=>p.n).join(', ')+' <button id="brkEnd">Bring everyone back</button>';$('brkEnd').onclick=()=>{$('brkOut').innerHTML='';log('Breakouts closed')};log('Breakouts opened (mock)')};
+$('jJoin').onclick=()=>window.open('https://meet.jit.si/'+room,'_blank','noopener');
+$('jTools').onclick=()=>location.href='../tutor/room.html?room='+room+'&tool=chat';$('jBoard').onclick=()=>location.href='../tutor/board.html';
+$('jWeb').onclick=()=>{web=!web;log(web?'Webinar mode on (mock)':'Webinar mode off');draw()};$('jBrand').onclick=()=>{const s=$('brand').style;s.display=s.display=='none'?'block':'none'};
+draw();</script><script src="../tutor/reactions.js"></script></body></html>
