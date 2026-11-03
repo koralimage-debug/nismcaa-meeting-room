@@ -44,3 +44,11 @@ table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px
 .illus{margin:0 0 14px}
 .ftr a{color:inherit}
 @media(max-width:640px){.topbar{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding:8px 10px}.topbar>b{display:none}.topbar .sp{display:none}.topbar .btn.sm{white-space:nowrap;padding:6px 8px;font-size:12.5px}.cbar{white-space:nowrap}.cbar .lbl{display:none}.tag{white-space:nowrap}.ftr{flex-direction:column;gap:4px}}
+
+@font-face{font-family:"NISSig";src:url(fonts/DancingScript.ttf) format("truetype");font-display:swap}
+.sigfont{font-family:"NISSig","Brush Script MT","Segoe Script",cursive!important}
+input.sigfont{font-size:26px!important;padding:4px 10px!important}
+.sigbox{border:1px dashed #9aa4b1;border-radius:8px;padding:12px;margin:6px 0 10px}
+.sigline{font-size:30px;min-height:44px;border-bottom:2px solid #0b2a5b;padding:2px 6px}.lbl2{font-size:15px}
+input.ro{background:#eef0f3!important;color:#333}
+@media print{.sigbox{border:1px solid #333}.sigline{border-color:#000}}
