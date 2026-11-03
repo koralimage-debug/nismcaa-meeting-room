@@ -82,7 +82,7 @@ footer{background:linear-gradient(160deg,#1a0a2e,#3b1760);color:#e9dcf7;margin-t
 .lead .crown{font-size:26px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}.lead img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #D4A537;flex:none}
 .lead small{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f2cd67}.lead b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:19px;line-height:1.2;color:#fff}
 .sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-</style></head><body>
+.lbed{font-weight:600;color:#6b4b00;white-space:nowrap}.also{margin:6px 0 0;font-size:13px;color:#5c4000}</style></head><body>
 <header><div class="side l" aria-hidden="true"><img src="images/sotd/dansol.jpg" alt=""><img src="images/sotd/platform.jpg" alt=""></div><div class="side r" aria-hidden="true"><img src="images/sotd/lagoon.jpg" alt=""><img src="images/sotd/imperial.jpg" alt=""></div><div class="hin"><img src="images/sotd/logo.png" alt="NISMCAA logo" width="112" height="112"><div class="k">NISMCAA Music Competition</div><h1>School of the <span>Decade</span></h1><div class="lead" id="lead"><span class="crown" aria-hidden="true">👑</span><img id="leadimg" alt="" hidden><div><small id="leadk">Live results</small><b id="leadn">Loading…</b></div></div>
 <p>Every school that has won the NISMCAA Music Competition is in the running. Vote for your favorite. The school with the most votes is crowned NISMCAA School of the Decade.</p>
 <div class="cd" id="cd"></div><div id="dl"></div></div><div class="hstrip" aria-hidden="true"><img src="images/sotd/dansol.jpg" alt=""><img src="images/sotd/ronik.jpg" alt=""><img src="images/sotd/imperial.jpg" alt=""><img src="images/sotd/platform.jpg" alt=""></div></header>
@@ -103,20 +103,20 @@ const SCHOOLS=[
  {id:'dansol',name:'Dansol High School',editions:['1st'],photo:'images/sotd/e1_dansol.jpg'},
  {id:'inglewood',name:'Inglewood Academy, Ikorodu',editions:['2nd'],photo:'images/sotd/e2_inglewood.jpg'},
  {id:'ronik',name:'Ronik Comprehensive',editions:['3rd'],photo:'images/sotd/e3_ronik.jpg'},
- {id:'honeyland4',name:'Honeyland College (4th Edition)',editions:['4th'],photo:'images/sotd/e4_honeyland.jpg'},
- {id:'honeyland5',name:'Honeyland College (5th Edition)',editions:['5th'],photo:'images/sotd/e5_honeyland.jpg'},
- {id:'honeyland6',name:'Honeyland College (6th Edition)',editions:['6th'],photo:'images/sotd/e6_honeyland.jpg'},
- {id:'imperial',name:'Imperial Light College',editions:['7th'],photo:'images/sotd/e7_imperial.jpg'},
+ {id:'honeyland4',name:'Honeyland College',editions:['4th'],photo:'images/sotd/e4_honeyland.jpg'},
+ {id:'honeyland5',name:'Honeyland College',editions:['5th'],photo:'images/sotd/e5_honeyland.jpg'},
+ {id:'honeyland6',name:'Honeyland College',editions:['6th'],photo:'images/sotd/e6_honeyland.jpg'},
+ {id:'imperial',name:'Imperial Lights College',editions:['7th'],photo:'images/sotd/e7_imperial.jpg'},
  {id:'platform',name:'Platform School',editions:['8th'],photo:'images/sotd/e8_platform.jpg'},
- {id:'honeyland9',name:'Honeyland College (9th Edition)',editions:['9th (joint)'],photo:'images/sotd/e9_honeyland.jpg'},
+ {id:'honeyland9',name:'Honeyland College',editions:['9th (joint)'],photo:'images/sotd/e9_honeyland.jpg'},
  {id:'lagoon',name:'Lagoon School',editions:['9th (joint)'],photo:'images/sotd/e9_lagoon.jpg'}];
 /* ===== end config ===== */
-const $=s=>document.querySelector(s),g=$('#grid'),NAME=id=>(SCHOOLS.find(s=>s.id==id)||{}).name||id;let lastSig='',lastLead=null,busy=false,fails=0,paused=false,deadline=DEADLINE_FALLBACK,open=true,online=false;
+const EDL=e=>`${e.replace(' (joint)','')} Edition${e.includes('joint')?' (joint)':''}`,ALLW={honeyland4:1,honeyland5:1,honeyland6:1,honeyland9:1},ALSO=s=>ALLW[s.id]?`<p class="also">Honeyland College won the 4th, 5th and 6th Editions and shared the 9th (joint).</p>`:'',EDS=id=>{const s=SCHOOLS.find(x=>x.id==id);return s?s.editions.map(EDL).join(', '):''};const $=s=>document.querySelector(s),g=$('#grid'),NAME=id=>{const x=SCHOOLS.find(s=>s.id==id);return x?(ALLW[x.id]?`${x.name} (${EDS(id)})`:x.name):id},BASEN=id=>(SCHOOLS.find(s=>s.id==id)||{}).name||id;let lastSig='',lastLead=null,busy=false,fails=0,paused=false,deadline=DEADLINE_FALLBACK,open=true,online=false;
 let tok=localStorage.getItem('sotd_token');if(!tok){tok=Array.from(crypto.getRandomValues(new Uint8Array(18)),b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem('sotd_token',tok)}
 SCHOOLS.forEach(s=>{const c=document.createElement('article');c.className='card';c.id='c-'+s.id;
- const ill=`<div class="ill" role="img" aria-label="${s.name}">♪</div>`;
- c.innerHTML=(s.photo?`<img src="${s.photo}" alt="${s.name} students" loading="lazy" onerror="this.outerHTML='${ill.replace(/"/g,'&quot;')}'">`:ill)+
- `<div class="body"><h3>${s.name}</h3><div class="ed">${s.editions.map(e=>`<span>${e.replace(' (joint)','')} Edition${e.includes('joint')?' (joint)':''}</span>`).join('')}</div>
+ const ill=`<div class="ill" role="img" aria-label="${s.name}, ${s.editions.map(EDL).join(', ')}">♪</div>`;
+ c.innerHTML=(s.photo?`<img src="${s.photo}" alt="${s.name} students, ${s.editions.map(EDL).join(', ')}" loading="lazy" onerror="this.outerHTML='${ill.replace(/"/g,'&quot;')}'">`:ill)+
+ `<div class="body"><h3>${s.name}</h3><div class="ed">${s.editions.map(e=>`<span>${EDL(e)}</span>`).join('')}</div>${ALSO(s)}
  <div class="res"><span class="n"></span><div class="bar"><i></i></div></div><button class="vote" data-id="${s.id}" disabled>Vote</button></div>`;g.appendChild(c)});
 const btns=()=>document.querySelectorAll('.vote');
 function offline(){online=false;btns().forEach(b=>b.disabled=true);$('#msg').innerHTML='Voting is temporarily unavailable. <button type="button" id="retry">Try again</button>';$('#retry').onclick=load}
@@ -130,7 +130,7 @@ function show(d){online=true;if(d.deadline)deadline=d.deadline;open=d.open!==fal
   const li=$('#leadimg'),ph=L.length===1&&(SCHOOLS.find(x=>x.id===L[0].id)||{}).photo;if(ph){li.src=ph;li.hidden=false}else li.hidden=true;
   setShare(!top?SHARE_TEXT:`${L.length>1?'Tied for the lead':'Currently leading'}: ${L.map(r=>NAME(r.id)).join(' & ')}. Vote for your school! NISMCAA School of the Decade 🏆`);
   $('#board').style.display='block';$('#board h2').innerHTML=open?'<span class="live"><i></i>Live results</span>Leaderboard':'Final results';
-  $('#lb').innerHTML=d.results.slice().sort((a,b)=>b.votes-a.votes).map((r,i)=>`<li><div class="r"><span>${i+1}. ${NAME(r.id)}</span><span>${r.pct}%</span></div><div class="bar"><i style="width:${r.pct}%"></i></div></li>`).join('')}}
+  $('#lb').innerHTML=d.results.slice().sort((a,b)=>b.votes-a.votes).map((r,i)=>`<li><div class="r"><span>${i+1}. ${BASEN(r.id)} <small class="lbed">· ${EDS(r.id)}</small></span><span>${r.pct}%</span></div><div class="bar"><i style="width:${r.pct}%"></i></div></li>`).join('')}}
  if(!open){const w=d.winners||[];const W=$('#win');W.style.display='block';W.innerHTML=w.length?`Voting closed. NISMCAA School of the Decade:<b>${w.map(NAME).join(' and ')}</b>`:'Voting closed.'}
  btns().forEach(b=>{if(!open){b.disabled=true;b.textContent='Voting closed'}else if(v){b.disabled=true;b.textContent=b.dataset.id===v?'Your vote ✓':'Voted'}else{b.disabled=false;b.textContent='Vote'}});
  if(v)$('#c-'+v)?.classList.add('mine');

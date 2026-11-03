@@ -15,3 +15,4 @@ h2{font-family:Pacifico,cursive;font-weight:400;color:#0d5c3a;font-size:1.7rem;m
 .b:focus-visible,.vote:focus-visible,.toc a:focus-visible{outline:3px solid #ffbf00;outline-offset:2px}
 footer{text-align:center;padding:28px 16px;background:#0a4a2f;color:#fff;border-top:6px solid #d4af37}footer a{color:#ffd966;display:inline-block;min-height:44px;line-height:44px}footer .small{color:#cfe}
 .back{text-align:center}.back a{display:inline-block;min-height:44px;line-height:44px;color:#0d5c3a;font-weight:700}
+.also{font-weight:600;color:#6a1b9a;font-size:.9rem}
