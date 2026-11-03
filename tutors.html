@@ -78,7 +78,7 @@ button:disabled{opacity:.45;cursor:not-allowed}[hidden]{display:none!important}
 <section id="join" hidden><div class="panel"><h2>Become a tutor</h2><form id="jf">
 <div class="row"><label>Full name<input required name="n"></label><label>Profile photo<input type="file" accept="image/*"></label></div>
 <div class="row"><label>Subjects (comma separated)<input required placeholder="e.g. Piano, Math"></label><label>Levels<select multiple size="3"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div>
-<div class="row"><label>Languages<input placeholder="e.g. English, Yoruba"></label><label>Country & time zone<input placeholder="e.g. Nigeria · WAT (UTC+1)"></label></div>
+<div class="row"><label>Languages<input placeholder="e.g. English, Spanish"></label><label>State & time zone<input placeholder="e.g. Georgia · ET (UTC-5)"></label></div>
 <div class="row"><label>Hourly rate<input id="jr" type="number" min="1" value="25"></label><select id="jc" hidden></select><span class="muted">Rates are set in US dollars (USD) only.</span></div>
 <p class="muted" id="jusd"></p><div class="ok" id="jearn"></div>
 <label>Short bio<textarea rows="3"></textarea></label>
@@ -93,7 +93,7 @@ button:disabled{opacity:.45;cursor:not-allowed}[hidden]{display:none!important}
 
 <section id="admin" hidden><div class="panel"><h2>Admin view <span class="muted">(example data)</span></h2>
 <div class="cfg">Commission % <input id="comm" type="number" min="0" max="50" value="20" style="width:90px;display:inline-block"> <i>Set by John: 20%. Change here to test other values.</i></div><br>
-<details class="cfg" style="margin-bottom:12px"><summary><b>Tax rate per country (configurable, example rates, confirm with an accountant)</b></summary><div id="taxcfg" class="row" style="margin-top:8px"></div></details>
+<details class="cfg" style="margin-bottom:12px"><summary><b>Tax rate per US state (configurable, example rates, confirm with an accountant)</b></summary><div id="taxcfg" class="row" style="margin-top:8px"></div></details>
 <div class="kpis" style="grid-template-columns:repeat(5,1fr)"><div class="kpi">Bookings<b id="kB"></b></div><div class="kpi">Paid by learners<b id="kG"></b></div><div class="kpi">Tax set aside<b id="kT"></b></div><div class="kpi">Commission earned<b id="kC"></b></div><div class="kpi">Tutor payouts due<b id="kP"></b></div></div>
 <h3>Certification reviews</h3><div class="tbl"><table><thead><tr><th>Applicant</th><th>Subject</th><th>Test score</th><th>Demo video</th><th>Action</th></tr></thead><tbody id="rv"></tbody></table></div><br><h3>Bookings</h3><div class="tbl"><table><thead><tr><th>Date</th><th>Learner</th><th>Tutor</th><th>Lesson</th><th>Tax (on top)</th><th>Paid</th><th>NISMCAA</th><th>Tutor payout</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
 </main>
@@ -103,16 +103,16 @@ button:disabled{opacity:.45;cursor:not-allowed}[hidden]{display:none!important}
 const FX={USD:1};
 const C=["#ffdb67","#ff7a59","#7043c1","#007d77","#7dcabf","#f6a6c1"],S=["#8a5a3c","#f1c7a0","#c68a5e","#5b3a29","#e8b896","#a8704b"];
 const T=[
-{n:"Ada O.",s:["Piano","Music Theory"],l:["Beginner","Intermediate"],lg:["English","Yoruba"],c:"Nigeria",tz:"Africa",z:"WAT (UTC+1)",r:18,cur:"USD",rt:4.9,rv:38,b:"Classically trained pianist who makes theory fun for kids and adults.",q:"Patient and clear. My son loves her lessons!"},
-{n:"Liam K.",s:["Math","Physics"],l:["Intermediate","Advanced"],lg:["English"],c:"United Kingdom",tz:"Europe",z:"GMT (UTC+0)",r:28,cur:"USD",rt:4.8,rv:61,b:"Exam prep specialist for GCSE, A-level and SAT math.",q:"Finally understood calculus."},
-{n:"Priya S.",s:["Coding","Math"],l:["Beginner","Intermediate"],lg:["English","Hindi"],c:"India",tz:"Asia",z:"IST (UTC+5:30)",r:11,cur:"USD",rt:4.7,rv:24,b:"Teaches Python and Scratch to young coders.",q:"Great with beginners."},
-{n:"Lucas M.",s:["Guitar","Portuguese"],l:["Beginner","Advanced"],lg:["Portuguese","English","Spanish"],c:"Brazil",tz:"Americas",z:"BRT (UTC-3)",r:20,cur:"USD",rt:4.6,rv:17,b:"Bossa nova guitarist and language tutor.",q:"Lessons feel like jam sessions."},
-{n:"Wanjiru N.",s:["Voice","Swahili"],l:["Beginner","Intermediate"],lg:["Swahili","English"],c:"Kenya",tz:"Africa",z:"EAT (UTC+3)",r:19,cur:"USD",rt:4.9,rv:45,b:"Choir director who builds confident singers.",q:"My confidence grew so much."},
-{n:"Sofia R.",s:["Spanish","French"],l:["Beginner","Intermediate","Advanced"],lg:["Spanish","French","English"],c:"Spain",tz:"Europe",z:"CET (UTC+1)",r:30,cur:"USD",rt:4.8,rv:52,b:"Conversation-first language lessons.",q:"Speaking after 3 weeks!"},
-{n:"Marcus J.",s:["Drums","Music Production"],l:["Beginner","Advanced"],lg:["English"],c:"United States",tz:"Americas",z:"ET (UTC-5)",r:40,cur:"USD",rt:4.5,rv:12,b:"Session drummer and beat producer.",q:"Fun and super skilled."},
-{n:"Yuki T.",s:["Violin","Japanese"],l:["Intermediate","Advanced"],lg:["Japanese","English"],c:"Japan",tz:"Asia",z:"JST (UTC+9)",r:26,cur:"USD",rt:5.0,rv:9,b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
+{n:"Emily Carter",s:["Piano","Music Theory"],l:["Beginner","Intermediate"],lg:["English","Spanish"],c:"Georgia",tz:"Americas",z:"ET (UTC-5)",r:18,cur:"USD",rt:4.9,rv:38,b:"Classically trained pianist who makes theory fun for kids and adults.",q:"Patient and clear. My son loves her lessons!"},
+{n:"Michael Johnson",s:["Math","Physics"],l:["Intermediate","Advanced"],lg:["English"],c:"New York",tz:"Americas",z:"ET (UTC-5)",r:28,cur:"USD",rt:4.8,rv:61,b:"Exam prep specialist for SAT, ACT and AP math.",q:"Finally understood calculus."},
+{n:"Ashley Brooks",s:["Coding","Math"],l:["Beginner","Intermediate"],lg:["English","Spanish"],c:"California",tz:"Americas",z:"PT (UTC-8)",r:11,cur:"USD",rt:4.7,rv:24,b:"Teaches Python and Scratch to young coders.",q:"Great with beginners."},
+{n:"David Miller",s:["Guitar","Ukulele"],l:["Beginner","Advanced"],lg:["English","Spanish"],c:"Texas",tz:"Americas",z:"CT (UTC-6)",r:20,cur:"USD",rt:4.6,rv:17,b:"Guitarist and ukulele teacher.",q:"Lessons feel like jam sessions."},
+{n:"Jessica Taylor",s:["Voice","Songwriting"],l:["Beginner","Intermediate"],lg:["English"],c:"Illinois",tz:"Americas",z:"CT (UTC-6)",r:19,cur:"USD",rt:4.9,rv:45,b:"Choir director who builds confident singers.",q:"My confidence grew so much."},
+{n:"Sarah Mitchell",s:["Spanish","French"],l:["Beginner","Intermediate","Advanced"],lg:["Spanish","French","English"],c:"Florida",tz:"Americas",z:"ET (UTC-5)",r:30,cur:"USD",rt:4.8,rv:52,b:"Conversation-first language lessons.",q:"Speaking after 3 weeks!"},
+{n:"Ryan Anderson",s:["Drums","Music Production"],l:["Beginner","Advanced"],lg:["English"],c:"North Carolina",tz:"Americas",z:"ET (UTC-5)",r:40,cur:"USD",rt:4.5,rv:12,b:"Session drummer and beat producer.",q:"Fun and super skilled."},
+{n:"Megan Davis",s:["Violin","Viola"],l:["Intermediate","Advanced"],lg:["English"],c:"Washington",tz:"Americas",z:"PT (UTC-8)",r:26,cur:"USD",rt:5.0,rv:9,b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
 T.forEach((t,i)=>t.cert=i!=7);
-const TAX={"Nigeria":7.5,"United Kingdom":20,"India":18,"Brazil":5,"Kenya":16,"Spain":21,"United States":0,"Japan":10};
+const TAX={"Georgia":4,"New York":4,"California":7.25,"Texas":6.25,"Illinois":6.25,"Florida":6,"North Carolina":4.75,"Washington":6.5};
 const split=(amt,c)=>{const tx=amt*(TAX[c]||0)/100,n=amt*comm()/100;return{tx,tot:amt+tx,n,tu:amt-n}};
 const brk=(amt,c,cur)=>{const b=split(amt,c);return `Lesson price: ${fm(amt,cur)}<br>+ Tax (${c}, ${TAX[c]||0}%, configurable, paid by learner, set aside): ${fm(b.tx,cur)}<br><b>Learner pays: ${fm(b.tot,cur)}</b><br>Lesson price split → NISMCAA ${comm()}%: ${fm(b.n,cur)}<br><b>Tutor ${100-comm()}%: ${fm(b.tu,cur)}</b>`};
 const usd=t=>t.r*FX[t.cur],fm=(v,c)=>'$'+(+v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')+' USD';
@@ -136,14 +136,14 @@ function book(i){const t=T[i],d=document.getElementById('dlg'),days=['Mon','Tue'
  <div class="panel" style="margin:10px 0"><b>Mock checkout</b><br>1-hour lesson: ${fm(t.r,t.cur)}<br><div class="muted" style="margin-top:6px">Paid to NISMCAA. Tax is added on top for the learner; the lesson price is split 20/80:<br>${brk(t.r,t.c,t.cur)}</div>
  <input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
  <button class="pri" onclick="this.parentNode.innerHTML='<h2>🎉 Booked (preview)</h2><p><b>Preview: no real payment taken.</b> This was a demo checkout. A confirmation would go from academy@nismcaa.com.</p><button onclick=\\'dlg.close()\\'>Close</button>'">Pay (mock)</button> <button onclick="dlg.close()">Cancel</button>`;d.showModal()}
-const B=[["Oct 26","Parent of Tolu (u18)",0,1],["Oct 27","Grace A.",1,2],["Oct 28","Parent of Ken (u18)",4,1],["Oct 29","Ravi P.",2,1.5],["Oct 30","Ana L.",5,1],["Nov 1","Parent of Mia (u18)",6,2]];
+const B=[["Oct 26","Parent of Jake (u18)",0,1],["Oct 27","Chris Walker",1,2],["Oct 28","Parent of Noah (u18)",4,1],["Oct 29","Tyler Brown",2,1.5],["Oct 30","Lauren Hayes",5,1],["Nov 1","Parent of Mia (u18)",6,2]];
 function admin(){let tot=0,cm=0,g=0,tt=0;document.getElementById('tb').innerHTML=B.map(([d,l,ti,h])=>{const p=usd(T[ti])*h,b=split(p,T[ti].c);g+=b.tot;tt+=b.tx;cm+=b.n;tot+=b.tu;return`<tr><td>${d}</td><td>${l}</td><td>${T[ti].n}</td><td>${fm(p,'USD')}</td><td>${fm(b.tx,'USD')} (${TAX[T[ti].c]}%)</td><td>${fm(b.tot,'USD')}</td><td>${fm(b.n,'USD')}</td><td>${fm(b.tu,'USD')}</td></tr>`}).join('');
  kB.textContent=B.length;kC.textContent=fm(cm,'USD');kP.textContent=fm(tot,'USD');kG.textContent=fm(g,'USD');kT.textContent=fm(tt,'USD');document.querySelectorAll('.cv').forEach(e=>e.textContent=comm());document.querySelectorAll(".kv").forEach(e=>e.textContent=100-comm())}
 document.getElementById('comm').oninput=()=>{admin();jusdf()};
-taxcfg.innerHTML=Object.keys(TAX).map(c=>`<label>${c} tax %<input type=number step=0.5 value=${TAX[c]} oninput="TAX['${c}']=+this.value;admin();jusdf()"></label>`).join('');admin();
-function jusdf(){jusd.textContent=fm(+jr.value||0,'USD')+' per hour';jearn.innerHTML='<b>Your earnings per hour (learner pays tax on top):</b><br>'+brk(+jr.value||0,'Nigeria',jc.value)}jr.oninput=jc.onchange=jusdf;jusdf();
+taxcfg.innerHTML=Object.keys(TAX).map(c=>`<label>${c} sales tax %<input type=number step=0.5 value=${TAX[c]} oninput="TAX['${c}']=+this.value;admin();jusdf()"></label>`).join('');admin();
+function jusdf(){jusd.textContent=fm(+jr.value||0,'USD')+' per hour';jearn.innerHTML='<b>Your earnings per hour (learner pays tax on top):</b><br>'+brk(+jr.value||0,'Georgia',jc.value)}jr.oninput=jc.onchange=jusdf;jusdf();
 jf.onsubmit=e=>{e.preventDefault();jf.hidden=true;jok.hidden=false};
-const R=[["Yuki T. (example)","Violin","90%","Received",1],["Tunde B. (example)","Math","65%","Received",0],["Chloe D. (example)","Spanish","85%","Received",1]];
+const R=[["Megan Davis (example)","Violin","90%","Received",1],["Brandon Scott (example)","Math","65%","Received",0],["Hannah Cooper (example)","Spanish","85%","Received",1]];
 function rev(){rv.innerHTML=R.map((r,k)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} ${parseInt(r[2])>=70?'✅ pass':'❌ below 70%'}</td><td><button onclick="alert('Example teaching demo for '+R[${k}][0]+'. Real demo videos play here once tutors upload them.')">▶ Watch</button></td><td>${r[5]||`<button ${parseInt(r[2])<70?'disabled':''} class="pri" onclick="R[${k}][5]='Approved, certificate issued';if(${k}==0){T[7].cert=true;render()}rev()">Approve</button> <button onclick="R[${k}][5]='Declined';rev()">Decline</button>`}</td></tr>`).join('')}rev();
 function cert(name,sub){const id='NISMCAA-TUT-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);const d=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 return `<div class="cert"><div style="font-size:2rem">♪</div><div style="letter-spacing:.2rem;font-size:.85rem">NISMCAA MUSIC ACADEMY</div><h2>Certificate of Tutor Certification</h2><p>This certifies that</p><div class="nm">${name}</div><p>has successfully completed the NISMCAA subject assessment and teaching demonstration in</p><p style="font-size:1.3rem"><b>${sub}</b></p><p>and is hereby recognised as a <b>NISMCAA Certified Tutor</b>.</p>

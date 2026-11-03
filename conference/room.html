@@ -13,7 +13,7 @@
 <button id="muteAll">Mute everyone</button><button id="lockB" >Lock room</button><button id="brk">Breakout rooms (2 groups)</button><div id="brkOut" style="font-size:.85rem"></div><div id="log" style="font-size:.8rem;color:#ffdb67;margin-top:6px"></div></div></div>
 <script>
 const $=i=>document.getElementById(i),room=(new URLSearchParams(location.search).get('room')||'NISMCAA-Conf-demo').replace(/[^\w-]/g,'');$('rn').textContent='Room: '+room;
-let lob=['Ada (Lagos School Board)','Mark (Press)','Grace (NGO)'],ppl=[{n:'You (host)',m:false,h:1},{n:'Tunde',m:false},{n:'Sarah',m:true},{n:'Femi',m:false}],locked=false,web=false;
+let lob=['Emily (Atlanta School Board)','Mark (Press)','Grace (Nonprofit)'],ppl=[{n:'You (host)',m:false,h:1},{n:'Michael',m:false},{n:'Sarah',m:true},{n:'David',m:false}],locked=false,web=false;
 const log=t=>$('log').textContent=t;
 function draw(){$('lob').innerHTML=lob.map((n,i)=>`<div class="p">${n}<span><button data-a="${i}">Admit</button><button data-d="${i}">Deny</button></span></div>`).join('')||'<i>Lobby empty</i>';
 $('ppl').innerHTML=ppl.map((p,i)=>`<div class="p">${p.n}${p.m?' 🔇':' 🎙️'}<span>${p.h?'':`<button data-m="${i}">${p.m?'Unmute':'Mute'}</button><button data-r="${i}">Remove</button>`}</span></div>`).join('');
