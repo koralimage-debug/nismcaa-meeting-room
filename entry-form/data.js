@@ -44,5 +44,9 @@ const CATS=[["grp","School group music","music"],["ind","Individual student musi
 function feeFor(c,cat){const C=COUNTRIES[c];if(cat==="grp"||cat==="sgrp")return C.feeGroup;if(cat==="ind"||cat==="sind")return C.feeInd;return 0}
 function money(c,n){const C=COUNTRIES[c];return C.sym?C.sym+n.toLocaleString("en-US"):"$"+n}
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))}};
-function logAct(type,detail,country){const a=LS.get("nis_act",[]);a.unshift({t:new Date().toISOString(),type,detail,country:country||""});LS.set("nis_act",a.slice(0,500))}
+// Launch switch: set TEST_MODE=false to remove the TEST tag, "Fill sample entry" and other test-only items.
+const TEST_MODE=true;
+const API=new URLSearchParams(location.search).get("api")||"https://nismcaa-payments.onrender.com";
+function logAct(type,detail,country){try{fetch(API+"/entry/api/act",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type,detail,country:country||""}),keepalive:true}).catch(()=>{})}catch(e){}}
+if(!TEST_MODE)document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll(".test-only").forEach(e=>e.remove()));
 function esc(s){return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
