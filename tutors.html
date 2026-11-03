@@ -73,7 +73,7 @@ button:disabled{opacity:.45;cursor:not-allowed}[hidden]{display:none!important}
 <div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="12" width="54" height="48" rx="8" fill="#e2f3ef"/><path d="M20 38l10 10 20-22" stroke="#007d77" stroke-width="7" fill="none" stroke-linecap="round"/></svg><h3>3. Teach</h3><p class="muted">Learners book your open slots.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="20" width="54" height="32" rx="8" fill="#7dcabf"/><circle cx="35" cy="36" r="9" fill="#fff"/></svg><h3>4. Get paid</h3><p class="muted">NISMCAA keeps 20% of your price and you keep 80%. Tax is added on top and paid by the learner.</p></div></div>
 <div class="cfg" style="margin-top:14px"><b>Commission:</b> <span class="cv"></span>% of each booking. of the tutor's lesson price. Tutors keep <span class="kv"></span>%. Tax is added on top at checkout, paid by the learner and set aside separately (e.g. $50.00 USD lesson: learner pays $50.00 USD + tax; NISMCAA $10.00 USD, tutor $40.00 USD).</div></div>
-<p>Questions? Email <a href="mailto:academy@nismcaa.com">academy@nismcaa.com</a>.</p></section>
+<p>Questions? Email <a href="mailto:tutor@nismcaa.com">tutor@nismcaa.com</a>.</p></section>
 
 <section id="join" hidden><div class="panel"><h2>Become a tutor</h2><form id="jf">
 <div class="row"><label>Full name<input required name="n"></label><label>Profile photo<input type="file" accept="image/*"></label></div>
@@ -135,7 +135,7 @@ function book(i){const t=T[i],d=document.getElementById('dlg'),days=['Mon','Tue'
  <p><label><input type="checkbox" id="u18" style="width:auto;min-height:0"> The learner is under 18 (I am the parent or guardian booking)</label></p>
  <div class="panel" style="margin:10px 0"><b>Mock checkout</b><br>1-hour lesson: ${fm(t.r,t.cur)}<br><div class="muted" style="margin-top:6px">Paid to NISMCAA. Tax is added on top for the learner; the lesson price is split 20/80:<br>${brk(t.r,t.c,t.cur)}</div>
  <input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
- <button class="pri" onclick="this.parentNode.innerHTML='<h2>🎉 Booked (preview)</h2><p><b>Preview: no real payment taken.</b> This was a demo checkout. A confirmation would go from academy@nismcaa.com.</p><button onclick=\\'dlg.close()\\'>Close</button>'">Pay (mock)</button> <button onclick="dlg.close()">Cancel</button>`;d.showModal()}
+ <button class="pri" onclick="this.parentNode.innerHTML='<h2>🎉 Booked (preview)</h2><p><b>Preview: no real payment taken.</b> This was a demo checkout. A confirmation would go from tutor@nismcaa.com.</p><button onclick=\\'dlg.close()\\'>Close</button>'">Pay (mock)</button> <button onclick="dlg.close()">Cancel</button>`;d.showModal()}
 const B=[["Oct 26","Parent of Jake (u18)",0,1],["Oct 27","Chris Walker",1,2],["Oct 28","Parent of Noah (u18)",4,1],["Oct 29","Tyler Brown",2,1.5],["Oct 30","Lauren Hayes",5,1],["Nov 1","Parent of Mia (u18)",6,2]];
 function admin(){let tot=0,cm=0,g=0,tt=0;document.getElementById('tb').innerHTML=B.map(([d,l,ti,h])=>{const p=usd(T[ti])*h,b=split(p,T[ti].c);g+=b.tot;tt+=b.tx;cm+=b.n;tot+=b.tu;return`<tr><td>${d}</td><td>${l}</td><td>${T[ti].n}</td><td>${fm(p,'USD')}</td><td>${fm(b.tx,'USD')} (${TAX[T[ti].c]}%)</td><td>${fm(b.tot,'USD')}</td><td>${fm(b.n,'USD')}</td><td>${fm(b.tu,'USD')}</td></tr>`}).join('');
  kB.textContent=B.length;kC.textContent=fm(cm,'USD');kP.textContent=fm(tot,'USD');kG.textContent=fm(g,'USD');kT.textContent=fm(tt,'USD');document.querySelectorAll('.cv').forEach(e=>e.textContent=comm());document.querySelectorAll(".kv").forEach(e=>e.textContent=100-comm())}
@@ -153,5 +153,5 @@ qres.innerHTML=sc>=70?`<div class="ok">Score ${sc}%: passed! Your demo video goe
 function show(t){document.querySelectorAll('main>section[id]').forEach(s=>s.hidden=s.id!=t);document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('sel',b.dataset.t==t))}
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));
 </script>
-<footer style="text-align:center;padding:20px" class="muted">Contact: <a href="mailto:academy@nismcaa.com">academy@nismcaa.com</a> · NISMCAA Music Academy · <a href="tutor/">Open the NISMCAA Tutor app</a> · <a href="conference/">Rent the NISMCAA Virtual Conference Room</a> · Preview</footer>
+<footer style="text-align:center;padding:20px" class="muted">Contact: <a href="mailto:tutor@nismcaa.com">tutor@nismcaa.com</a> · NISMCAA Music Academy · <a href="tutor/">Open the NISMCAA Tutor app (tutor.nismcaa.com)</a> · <a href="conference/">Rent the NISMCAA Virtual Conference Room</a> · Preview</footer>
 </body></html>
