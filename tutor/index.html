@@ -1,0 +1,171 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">
+<title>NISMCAA Tutor (preview)</title><meta name="theme-color" content="#ff6b4a"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--go:#ff6b4a;--navy:#16264a;--sun:#ffd34d;--teal:#00897f;--plum:#7a4bd1;--cream:#fff4ec;--muted:#5a6478;--line:#ece2da}
+*{box-sizing:border-box}html,body{margin:0;background:var(--cream);color:var(--navy);font-family:'DM Sans',Arial,sans-serif;line-height:1.5}
+h1,h2,h3{font-family:Manrope,Arial,sans-serif;margin:0 0 6px}h1{font-size:1.6rem;line-height:1.2}h2{font-size:1.2rem}h3{font-size:1rem}
+a{color:var(--teal)}:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+button,select,input,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--navy);padding:9px 14px;font-weight:700;min-height:44px}
+button:disabled{opacity:.45;cursor:not-allowed}.go{background:var(--go);border-color:var(--go);color:#fff}.tl{background:var(--teal);border-color:var(--teal);color:#fff}
+select,input,textarea{border:1px solid var(--line);border-radius:12px;padding:9px;min-height:42px;width:100%;background:#fff}
+input[type=checkbox],input[type=radio]{width:auto;min-height:0}
+.app{max-width:1100px;margin:auto;min-height:100vh;padding-bottom:90px}
+.prev{background:var(--sun);text-align:center;font-weight:700;font-size:.78rem;padding:5px}
+.bar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar img{width:38px;height:38px}.wm{font-family:Manrope;font-weight:800;font-size:1.25rem}.wm span{color:var(--go)}.wm small{display:block;font-family:'DM Sans';font-weight:500;font-size:.68rem;letter-spacing:.12rem;color:var(--muted);margin-top:-4px}
+.scr{padding:16px}.hero{background:linear-gradient(135deg,#ffe1d3,#fff1c2 55%,#efe6ff);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:center}.hero svg{width:100%;height:auto}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;margin:14px 0}
+.filters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.filters label{font-size:.74rem;font-weight:700}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0}.chips button{white-space:nowrap;border-radius:20px;min-height:38px}.chips .sel{background:var(--navy);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:6px;position:relative}
+.ex{position:absolute;top:10px;right:10px;background:#ffe1d3;color:#a8361b;font-size:.66rem;font-weight:800;border-radius:10px;padding:2px 8px;text-transform:uppercase}
+.who{display:flex;gap:10px;align-items:center}.av{width:60px;height:60px;border-radius:50%;flex-shrink:0}
+.pill{display:inline-block;border-radius:20px;background:#e0f4f1;padding:2px 9px;font-size:.74rem;color:#006b63;font-weight:700;margin:2px 2px 0 0}.pm{background:#efe6ff;color:#5a2fb0}.pp{background:#ffe1d3;color:#a8361b}
+.badge{display:inline-block;background:var(--navy);color:var(--sun);font-size:.7rem;font-weight:800;border-radius:10px;padding:2px 8px}
+.muted{color:var(--muted);font-size:.86rem}.price{font-family:Manrope;font-weight:800;font-size:1.1rem}.stars{color:#e0a100}
+.safe{background:#efe6ff;border-left:6px solid var(--plum);border-radius:14px;padding:12px 14px;margin:14px 0}
+.cfg{background:#fff6d6;border:2px dashed #e0b400;border-radius:14px;padding:10px 14px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.tabbar button{flex:1;max-width:180px;border:none;border-radius:0;background:none;display:flex;flex-direction:column;align-items:center;font-size:.74rem;padding:8px 0;color:var(--muted)}.tabbar button svg{width:24px;height:24px}.tabbar .sel{color:var(--go)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{background:var(--cream);border-radius:16px;padding:12px;text-align:center;font-size:.86rem}.step b{display:block;font-size:1.6rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{font-size:.84rem;font-weight:700}
+.slots,.durs{display:flex;flex-wrap:wrap;gap:8px}.slots .sel,.durs .sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+dialog{border:none;border-radius:22px;max-width:520px;width:94%;padding:18px;max-height:90vh}dialog::backdrop{background:#16264a99}
+table{width:100%;border-collapse:collapse;font-size:.84rem}th,td{text-align:left;padding:7px;border-bottom:1px solid var(--line)}.tbl{overflow-x:auto}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}.kpi{background:var(--cream);border-radius:14px;padding:10px;font-size:.8rem}.kpi b{font-family:Manrope;font-size:1.2rem;display:block}
+.ok{background:#e0f4f1;border-radius:12px;padding:10px}.msg{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.bubble{background:var(--cream);border-radius:14px;padding:8px 12px;margin:6px 0;max-width:80%}.me{background:#ffe1d3;margin-left:auto}
+.cert{background:#fffdf5;border:10px double #c9a227;border-radius:8px;padding:24px;text-align:center;font-family:Georgia,serif;margin:12px auto;max-width:720px}.cert h2{font-family:Georgia,serif;font-size:1.6rem}.cert .nm{font-size:1.6rem;font-style:italic;border-bottom:1px solid #c9a227;display:inline-block;padding:0 18px}.sig{font-family:'Brush Script MT',cursive;font-size:1.5rem}
+.splash{position:fixed;inset:0;background:var(--go);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99;color:#fff;transition:opacity .5s}.splash img{width:120px;animation:pop .8s}.splash .wm{color:#fff;font-size:2rem;margin-top:14px}.splash .wm span{color:var(--sun)}@keyframes pop{from{transform:scale(.6);opacity:0}}
+[hidden]{display:none!important}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}}
+@media print{body *{visibility:hidden}.cert,.cert *{visibility:visible}.cert{position:absolute;top:0;left:0;right:0}}
+</style></head><body>
+<div class="splash" id="splash"><img src="icon.svg" alt=""><div class="wm">NISMCAA <span>Tutor</span></div><div>Learn with certified tutors</div></div>
+<div class="app">
+<div class="prev">PREVIEW / TEST APP ONLY. Nothing is live, and no real payments are taken.</div>
+<header class="bar"><img src="icon.svg" alt="NISMCAA Tutor logo"><div class="wm">NISMCAA <span>Tutor</span></div></header>
+
+<section class="scr" id="s-find">
+<div class="hero"><div><h1>Learn anything, with a certified tutor, anywhere</h1><p class="muted">Music, maths, languages, coding and more. In person near you, or virtual on NISMCAA video.</p><button class="go" onclick="document.getElementById('flt').scrollIntoView()">Find a tutor</button> <button class="tl" onclick="tab('profile')">Teach on NISMCAA Tutor</button></div>
+<svg viewBox="0 0 400 240" aria-label="Illustration: a tutor and a learner connected by a path"><circle cx="200" cy="120" r="92" fill="#ffd34d" opacity=".55"/><rect x="150" y="70" width="100" height="70" rx="12" fill="#16264a"/><rect x="158" y="78" width="84" height="50" rx="6" fill="#bfe8e2"/><circle cx="200" cy="100" r="12" fill="#ff6b4a"/><circle cx="70" cy="160" r="38" fill="#ff6b4a"/><circle cx="70" cy="140" r="15" fill="#8a5a3c"/><rect x="52" y="157" width="36" height="30" rx="13" fill="#fff"/><circle cx="330" cy="160" r="38" fill="#7a4bd1"/><circle cx="330" cy="140" r="15" fill="#f1c7a0"/><rect x="312" y="157" width="36" height="30" rx="13" fill="#ffd34d"/><path d="M108 165Q200 230 292 165" fill="none" stroke="#16264a" stroke-width="3" stroke-dasharray="7 7"/><text x="186" y="208" font-size="26">📍</text><text x="100" y="70" font-size="28">♪</text><text x="280" y="70" font-size="26">📐</text></svg></div>
+<div class="panel" id="flt"><h2>Find your tutor</h2>
+<div class="chips" id="mode"><button data-m="" class="sel">All modes</button><button data-m="In person">📍 In person</button><button data-m="Virtual">💻 Virtual</button><button data-m="Both">✨ Both</button></div>
+<div class="filters"><label>Subject<select id="fSub"><option value="">Any</option></select></label><label>Max USD/hr<select id="fPrice"><option value="999">Any</option><option value="15">$15</option><option value="25">$25</option><option value="40">$40</option></select></label><label>Language<select id="fLang"><option value="">Any</option></select></label><label>Time zone<select id="fTz"><option value="">Any</option><option>Africa</option><option>Americas</option><option>Europe</option><option>Asia</option></select></label><label>Rating<select id="fRate"><option value="0">Any</option><option value="4.5">4.5★+</option><option value="4.8">4.8★+</option></select></label><label>Duration<select id="fDur"><option value="">Any</option><option>30</option><option>45</option><option>60</option><option>90</option><option>120</option></select></label></div></div>
+<p class="muted">All tutors below are <b>example profiles</b> for this preview, not real people. Only <b>NISMCAA Certified</b> tutors can be booked.</p>
+<div class="grid" id="list"></div>
+<div class="safe"><b>Child safety:</b> learners under 18 book through a parent or guardian account. The parent or guardian books, pays, receives all messages and can join any lesson. In-person lessons for under-18s need a parent or guardian present.</div>
+<div class="panel"><h2>How NISMCAA Tutor works</h2><h3>For learners</h3><div class="steps"><div class="step"><b>🔎</b>Browse and filter by subject, mode, price, language, time zone, rating</div><div class="step"><b>⏱️</b>Pick 30, 45, 60, 90 or 120 minutes and a time slot</div><div class="step"><b>💳</b>Pay NISMCAA the lesson price plus tax on top</div><div class="step"><b>⭐</b>Learn in person or on NISMCAA video, then review</div></div>
+<h3 style="margin-top:12px">For tutors</h3><div class="steps"><div class="step"><b>🧑‍🏫</b>Create your profile, mode, city/radius and durations</div><div class="step"><b>🎓</b>Pass the subject test (70%) and send a teaching demo for review</div><div class="step"><b>🏅</b>Get your NISMCAA certificate and badge, then you are listed</div><div class="step"><b>💰</b>Keep 80% of your lesson price; NISMCAA keeps 20%. Tax is paid by the learner on top</div></div></div>
+</section>
+
+<section class="scr" id="s-bookings" hidden><h2>My bookings <span class="muted">(example)</span></h2><div id="bk"></div></section>
+
+<section class="scr" id="s-messages" hidden><h2>Messages <span class="muted">(example)</span></h2>
+<div class="panel"><div class="msg"><svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#ffd34d"/><circle cx="32" cy="26" r="12" fill="#8a5a3c"/><rect x="14" y="40" width="36" height="26" rx="14" fill="#ff6b4a"/></svg><div><b>Ada O.</b> <span class="ex" style="position:static">Example</span><div class="muted">Piano · Thu 16:00 · 💻 NISMCAA video</div></div></div>
+<div class="bubble">Hi! Looking forward to our lesson. Please have a keyboard ready 🎹</div><div class="bubble me">Great, see you Thursday!</div>
+<p class="muted">Messages stay inside NISMCAA Tutor. For under-18 learners, the parent or guardian receives every message.</p></div></section>
+
+<section class="scr" id="s-profile" hidden>
+<div class="chips" id="ptabs"><button data-p="join" class="sel">Become a tutor</button><button data-p="admin">Admin view</button></div>
+<div id="p-join"><div class="panel"><h2>Step 1: Your tutor profile</h2><form id="jf">
+<div class="row"><label>Full name<input required name="n"></label><label>Profile photo<input type="file" accept="image/*"></label></div>
+<div class="row"><label>Subjects<input required id="jsub" placeholder="e.g. Piano, Maths"></label><label>Levels<select multiple size="3"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div>
+<div class="row"><label>Languages<input placeholder="e.g. English, Yoruba"></label><label>Country & time zone<input placeholder="e.g. Nigeria · WAT (UTC+1)"></label></div>
+<label>Lesson mode</label><div class="chips" id="jmode"><button type="button" data-m="In person">📍 In person</button><button type="button" data-m="Virtual" class="sel">💻 Virtual</button><button type="button" data-m="Both">✨ Both</button></div>
+<div class="row" id="jloc" hidden><label>City<input placeholder="e.g. Lagos"></label><label>Travel radius (km)<input type="number" value="10" min="1"></label></div>
+<p class="muted" id="jvid">Virtual lessons run on NISMCAA video, built into NISMCAA Tutor.</p>
+<label>Durations you offer</label><div class="durs" id="jdur"></div>
+<div class="row"><label>Hourly rate<input id="jr" type="number" min="1" value="10000"></label><label>Currency<select id="jc"></select></label></div>
+<div class="ok" id="jearn"></div>
+<label>Short bio<textarea rows="3"></textarea></label>
+<p><label style="font-weight:400"><input type="checkbox" required> I agree to NISMCAA Tutor tutor rules, ID check and the child-safety policy.</label></p>
+<button class="go">Continue to certification</button></form></div>
+<div class="panel" id="jok" hidden><h2>Step 2: Get NISMCAA Certified</h2><p class="muted">Pass mark <b>70%</b> on the subject test, plus a teaching demo video approved by an admin. Only certified tutors are listed.</p>
+<form id="qf"><div><b>Sample subject test (Music Theory example)</b>
+<p>1. Beats in a whole note (4/4)?<br><label style="font-weight:400"><input type="radio" name="a" value="0"> 2</label> <label style="font-weight:400"><input type="radio" name="a" value="1"> 4</label></p>
+<p>2. Perfect fifth above C?<br><label style="font-weight:400"><input type="radio" name="b" value="1"> G</label> <label style="font-weight:400"><input type="radio" name="b" value="0"> F</label></p>
+<p>3. A learner is struggling. Best first step?<br><label style="font-weight:400"><input type="radio" name="c" value="1"> Break it into smaller steps</label> <label style="font-weight:400"><input type="radio" name="c" value="0"> Move on faster</label></p>
+<label>Teaching demo video (2 to 5 min)<input type="file" accept="video/*"></label></div><br><button class="tl">Submit test & demo</button></form><div id="qres"></div></div></div>
+<div id="p-admin" hidden><div class="panel"><h2>Admin <span class="muted">(example data)</span></h2>
+<div class="cfg">Commission % <input id="comm" type="number" min="0" max="50" value="20" style="width:80px;display:inline-block"> <i>Set by John: 20% of the tutor's lesson price; tutor keeps <span class="kv">80</span>%. Tax is added on top, paid by the learner and set aside (e.g. $50 lesson: learner pays $50 + tax; NISMCAA $10, tutor $40).</i></div>
+<details class="cfg" style="margin-top:10px"><summary><b>Tax rate per country (configurable, example rates, confirm with an accountant)</b></summary><div id="taxcfg" class="row" style="margin-top:8px"></div></details>
+<div class="kpis"><div class="kpi">Bookings<b id="kB"></b></div><div class="kpi">Paid by learners<b id="kG"></b></div><div class="kpi">Tax set aside<b id="kT"></b></div><div class="kpi">Commission earned<b id="kC"></b></div><div class="kpi">Tutor payouts due<b id="kP"></b></div></div>
+<h3>Certification reviews</h3><div class="tbl"><table><thead><tr><th>Applicant</th><th>Subject</th><th>Test</th><th>Demo</th><th>Action</th></tr></thead><tbody id="rv"></tbody></table></div>
+<h3 style="margin-top:14px">Bookings</h3><div class="tbl"><table><thead><tr><th>Date</th><th>Learner</th><th>Tutor</th><th>Mode</th><th>Min</th><th>Lesson</th><th>Tax (on top)</th><th>Paid</th><th>NISMCAA</th><th>Tutor payout</th></tr></thead><tbody id="tb"></tbody></table></div></div></div>
+</section>
+<p class="muted" style="text-align:center">Contact: <a href="mailto:academy@nismcaa.com">academy@nismcaa.com</a> · NISMCAA Tutor · Preview</p>
+</div>
+<nav class="tabbar" aria-label="App tabs">
+<button data-t="find" class="sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Find</button>
+<button data-t="bookings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Bookings</button>
+<button data-t="messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 5h16v11H9l-5 4z"/></svg>Messages</button>
+<button data-t="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>Profile</button></nav>
+<dialog id="dlg"><div id="dbody"></div></dialog>
+<script>
+const FX={USD:1,NGN:0.00065,GBP:1.27,EUR:1.08,INR:0.012,BRL:0.18,KES:0.0077,JPY:0.0066};
+const TAX={"Nigeria":7.5,"United Kingdom":20,"India":18,"Brazil":5,"Kenya":16,"Spain":21,"United States":0,"Japan":10};
+const C=["#ffd34d","#ff6b4a","#7a4bd1","#00897f","#7dcabf","#f6a6c1"],SK=["#8a5a3c","#f1c7a0","#c68a5e","#5b3a29","#e8b896","#a8704b"],DUR=[30,45,60,90,120];
+const T=[
+{n:"Ada O.",s:["Piano","Music Theory"],l:"Beginner, Intermediate",lg:["English","Yoruba"],c:"Nigeria",tz:"Africa",z:"WAT (UTC+1)",r:12000,cur:"NGN",rt:4.9,rv:38,m:"Both",city:"Lagos",rad:15,d:[30,45,60],b:"Classically trained pianist who makes theory fun.",q:"Patient and clear. My son loves her lessons!"},
+{n:"Liam K.",s:["Maths","Physics"],l:"Intermediate, Advanced",lg:["English"],c:"United Kingdom",tz:"Europe",z:"GMT (UTC+0)",r:22,cur:"GBP",rt:4.8,rv:61,m:"Virtual",d:[60,90,120],b:"Exam prep for GCSE, A-level and SAT maths.",q:"Finally understood calculus."},
+{n:"Priya S.",s:["Coding","Maths"],l:"Beginner, Intermediate",lg:["English","Hindi"],c:"India",tz:"Asia",z:"IST (UTC+5:30)",r:900,cur:"INR",rt:4.7,rv:24,m:"Virtual",d:[30,45,60],b:"Python and Scratch for young coders.",q:"Great with beginners."},
+{n:"Lucas M.",s:["Guitar","Portuguese"],l:"Beginner, Advanced",lg:["Portuguese","English","Spanish"],c:"Brazil",tz:"Americas",z:"BRT (UTC-3)",r:110,cur:"BRL",rt:4.6,rv:17,m:"In person",city:"São Paulo",rad:8,d:[60,90],b:"Bossa nova guitarist and language tutor.",q:"Lessons feel like jam sessions."},
+{n:"Wanjiru N.",s:["Voice","Swahili"],l:"Beginner, Intermediate",lg:["Swahili","English"],c:"Kenya",tz:"Africa",z:"EAT (UTC+3)",r:2500,cur:"KES",rt:4.9,rv:45,m:"Both",city:"Nairobi",rad:12,d:[30,60,90],b:"Choir director who builds confident singers.",q:"My confidence grew so much."},
+{n:"Sofia R.",s:["Spanish","French"],l:"All levels",lg:["Spanish","French","English"],c:"Spain",tz:"Europe",z:"CET (UTC+1)",r:28,cur:"EUR",rt:4.8,rv:52,m:"Virtual",d:[30,45,60,90],b:"Conversation-first language lessons.",q:"Speaking after 3 weeks!"},
+{n:"Marcus J.",s:["Drums","Music Production"],l:"Beginner, Advanced",lg:["English"],c:"United States",tz:"Americas",z:"ET (UTC-5)",r:40,cur:"USD",rt:4.5,rv:12,m:"In person",city:"Atlanta",rad:20,d:[45,60,120],b:"Session drummer and beat producer.",q:"Fun and super skilled."},
+{n:"Yuki T.",s:["Violin","Japanese"],l:"Intermediate, Advanced",lg:["Japanese","English"],c:"Japan",tz:"Asia",z:"JST (UTC+9)",r:4000,cur:"JPY",rt:5.0,rv:9,m:"Both",city:"Osaka",rad:5,d:[30,60],b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
+T.forEach((t,i)=>t.cert=i!=7);
+const $=id=>document.getElementById(id),comm=()=>+$('comm').value||0;
+const fm=(v,c)=>new Intl.NumberFormat('en',{style:'currency',currency:c,maximumFractionDigits:c=='USD'?2:0}).format(v);
+const usd=t=>t.r*FX[t.cur],pr=(rate,min)=>rate*min/60;
+const split=(amt,c)=>{const tx=amt*(TAX[c]||0)/100,n=amt*comm()/100;return{tx,tot:amt+tx,n,tu:amt-n}};
+const brk=(amt,c,cur)=>{const b=split(amt,c);return `Lesson price: ${fm(amt,cur)}<br>+ Tax (${c}, ${TAX[c]||0}%, configurable, paid by learner, set aside): ${fm(b.tx,cur)}<br><b>Learner pays: ${fm(b.tot,cur)}</b><br>NISMCAA ${comm()}%: ${fm(b.n,cur)} · <b>Tutor ${100-comm()}%: ${fm(b.tu,cur)}</b>`};
+const av=i=>`<svg class="av" viewBox="0 0 64 64" role="img" aria-label="Example illustrated avatar"><circle cx="32" cy="32" r="32" fill="${C[i%6]}"/><circle cx="32" cy="26" r="12" fill="${SK[i%6]}"/><rect x="14" y="40" width="36" height="26" rx="14" fill="${C[(i+3)%6]}"/></svg>`;
+const st=r=>"★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
+const modeTxt=t=>(t.m!='Virtual'?`<span class="pill pp">📍 In person · ${t.city}, within ${t.rad} km</span>`:'')+(t.m!='In person'?`<span class="pill pm">💻 Virtual · NISMCAA video</span>`:'');
+function fill(id,a){[...new Set(a)].sort().forEach(v=>$(id).add(new Option(v,v)))}fill('fSub',T.flatMap(t=>t.s));fill('fLang',T.flatMap(t=>t.lg));
+let MODE='';
+function render(){const g=id=>$(id).value;const L=T.map((t,i)=>[t,i]).filter(([t])=>(!g('fSub')||t.s.includes(g('fSub')))&&usd(t)<=+g('fPrice')&&(!g('fLang')||t.lg.includes(g('fLang')))&&(!g('fTz')||t.tz==g('fTz'))&&t.rt>=+g('fRate')&&(!g('fDur')||t.d.includes(+g('fDur')))&&(!MODE||t.m==MODE||(MODE!='Both'&&t.m=='Both')));
+$('list').innerHTML=L.length?L.map(([t,i])=>`<article class="card"><span class="ex">Example profile</span><div class="who">${av(i)}<div><h3>${t.n}</h3><div class="muted">${t.c} · ${t.z}</div>${t.cert?'<span class="badge">✔ NISMCAA Certified</span>':'<span class="pill" style="background:#eee;color:#666">Certification pending</span>'} <span class="stars">${st(t.rt)}</span> ${t.rt} (${t.rv})</div></div>
+<div>${t.s.map(x=>`<span class="pill">${x}</span>`).join('')}</div><div>${modeTxt(t)}</div><div class="muted">${t.l} · Speaks ${t.lg.join(', ')} · Offers ${t.d.join('/')} min</div><p style="margin:0">${t.b}</p><div class="muted" style="border-left:3px solid var(--sun);padding-left:8px">“${t.q}” <i>(example review)</i></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto"><div><span class="price">${fm(t.r,t.cur)}/hr</span><br><span class="muted">≈ ${fm(usd(t),'USD')} USD</span></div>${t.cert?`<button class="go" onclick="book(${i})">Book</button>`:'<button disabled>Not bookable yet</button>'}</div></article>`).join(''):'<p>No tutors match. Try fewer filters.</p>'}
+['fSub','fPrice','fLang','fTz','fRate','fDur'].forEach(i=>$(i).onchange=render);
+$('mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;MODE=b.dataset.m;[...$('mode').children].forEach(x=>x.classList.toggle('sel',x==b));render()};render();
+let BK={};
+function book(i){const t=T[i];BK={i,min:t.d.includes(60)?60:t.d[0],mode:t.m=='Both'?'Virtual':t.m};drawBook();$('dlg').showModal()}
+function drawBook(){const t=T[BK.i],amt=pr(t.r,BK.min),days=['Mon','Tue','Wed','Thu','Fri'];
+$('dbody').innerHTML=`<h2>Book ${t.n} <span class="ex" style="position:static">Example</span></h2>
+${t.m=='Both'?`<label>Lesson mode</label><div class="durs">${['In person','Virtual'].map(m=>`<button class="${BK.mode==m?'sel':''}" onclick="BK.mode='${m}';drawBook()">${m=='Virtual'?'💻':'📍'} ${m}</button>`).join('')}</div>`:''}
+<p class="muted">${BK.mode=='Virtual'?'💻 Lesson on NISMCAA video. You get a join link in Bookings.':`📍 In person in ${t.city}, within ${t.rad} km of the tutor. Under-18s need a parent or guardian present.`}</p>
+<label>Duration</label><div class="durs">${DUR.map(d=>`<button ${t.d.includes(d)?'':'disabled'} class="${BK.min==d?'sel':''}" onclick="BK.min=${d};drawBook()">${d} min</button>`).join('')}</div>
+<p class="muted">Times in your time zone (${Intl.DateTimeFormat().resolvedOptions().timeZone}).</p>
+<div class="slots">${days.flatMap(d=>[d+' 10:00',d+' 16:00']).map(s=>`<button onclick="[...this.parentNode.children].forEach(b=>b.classList.remove('sel'));this.classList.add('sel')">${s}</button>`).join('')}</div>
+<p><label style="font-weight:400"><input type="checkbox"> The learner is under 18 (I am the parent or guardian booking)</label></p>
+<div class="panel" style="margin:8px 0"><b>Mock checkout · ${BK.min} min</b> <span class="muted">(${fm(t.r,t.cur)}/hr prorated, ≈ ${fm(usd(t)*BK.min/60,'USD')})</span><div class="muted" style="margin-top:6px">${brk(amt,t.c,t.cur)}</div><input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
+<button class="go" onclick="this.parentNode.innerHTML='<h2>🎉 Booked (preview)</h2><p>Mock checkout only. No payment was taken. A confirmation would come from academy@nismcaa.com.</p><button onclick=dlg.close()>Close</button>'">Pay (mock)</button> <button onclick="dlg.close()">Cancel</button>`}
+const B=[["Oct 26","Parent of Tolu (u18)",0,60,"In person"],["Oct 27","Grace A.",1,120,"Virtual"],["Oct 28","Parent of Ken (u18)",4,60,"Virtual"],["Oct 29","Ravi P.",2,45,"Virtual"],["Oct 30","Ana L.",5,30,"Virtual"],["Nov 1","Parent of Mia (u18)",6,120,"In person"]];
+function admin(){let g=0,tt=0,cm=0,tu=0;$('tb').innerHTML=B.map(([d,l,ti,m,md])=>{const t=T[ti],p=usd(t)*m/60,b=split(p,t.c);g+=b.tot;tt+=b.tx;cm+=b.n;tu+=b.tu;return`<tr><td>${d}</td><td>${l}</td><td>${t.n}</td><td>${md}</td><td>${m}</td><td>${fm(p,'USD')}</td><td>${fm(b.tx,'USD')} (${TAX[t.c]}%)</td><td>${fm(b.tot,'USD')}</td><td>${fm(b.n,'USD')}</td><td>${fm(b.tu,'USD')}</td></tr>`}).join('');
+kB.textContent=B.length;kG.textContent=fm(g,'USD');kT.textContent=fm(tt,'USD');kC.textContent=fm(cm,'USD');kP.textContent=fm(tu,'USD');document.querySelectorAll('.kv').forEach(e=>e.textContent=100-comm());
+$('bk').innerHTML=B.slice(0,3).map(([d,l,ti,m,md])=>{const t=T[ti];return`<div class="panel"><span class="ex" style="position:static">Example</span> <b>${t.s[0]} with ${t.n}</b><div class="muted">${d} · ${m} min · ${md=='Virtual'?'💻 NISMCAA video':'📍 '+t.city}</div>${md=='Virtual'?'<button class="tl" disabled>Join video (opens at lesson time)</button>':'<button disabled>Get directions</button>'} <button disabled>Reschedule</button></div>`}).join('')}
+$('comm').oninput=()=>{admin();earn()};$('taxcfg').innerHTML=Object.keys(TAX).map(c=>`<label>${c} tax %<input type="number" step="0.5" value="${TAX[c]}" oninput="TAX['${c}']=+this.value;admin();earn()"></label>`).join('');admin();
+const R=[["Yuki T. (example)","Violin","90%"],["Tunde B. (example)","Maths","65%"],["Chloe D. (example)","Spanish","85%"]];
+function rev(){$('rv').innerHTML=R.map((r,k)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} ${parseInt(r[2])>=70?'✅':'❌ below 70%'}</td><td><a href="#" onclick="return false">▶ Watch</a></td><td>${r[3]||`<button class="tl" ${parseInt(r[2])<70?'disabled':''} onclick="R[${k}][3]='Approved, certificate issued';if(${k}==0){T[7].cert=true;render()}rev()">Approve</button> <button onclick="R[${k}][3]='Declined';rev()">Decline</button>`}</td></tr>`).join('')}rev();
+Object.keys(FX).forEach(k=>$('jc').add(new Option(k,k)));$('jc').value='NGN';
+let JD=new Set([30,60]);function drawJD(){$('jdur').innerHTML=DUR.map(d=>`<button type="button" class="${JD.has(d)?'sel':''}" onclick="JD.has(${d})?JD.delete(${d}):JD.add(${d});drawJD();earn()">${d} min</button>`).join('')}drawJD();
+function earn(){const r=+$('jr').value||0,c=$('jc').value;$('jearn').innerHTML=`<b>Your earnings (learner pays tax on top):</b> ≈ ${fm(r*FX[c],'USD')} USD/hr<br>`+[...JD].sort((a,b)=>a-b).map(d=>{const a=pr(r,d);return `${d} min: price ${fm(a,c)} → you keep ${fm(a*(100-comm())/100,c)}, NISMCAA ${fm(a*comm()/100,c)}`}).join('<br>')}
+$('jr').oninput=$('jc').onchange=earn;earn();
+$('jmode').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('jmode').children].forEach(x=>x.classList.toggle('sel',x==b));$('jloc').hidden=b.dataset.m=='Virtual';$('jvid').hidden=b.dataset.m=='In person'};
+$('jf').onsubmit=e=>{e.preventDefault();$('jf').parentNode.hidden=true;$('jok').hidden=false};
+function cert(name,sub){const id='NISMCAA-TUTOR-'+new Date().getFullYear()+'-'+(Math.floor(Math.random()*9000)+1000),d=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+return `<div class="cert"><img src="icon.svg" alt="" width="56"><div style="letter-spacing:.2rem;font-size:.82rem">NISMCAA TUTOR</div><h2>Certificate of Tutor Certification</h2><p>This certifies that</p><div class="nm">${name}</div><p>has successfully completed the NISMCAA subject assessment and teaching demonstration in</p><p style="font-size:1.25rem"><b>${sub}</b></p><p>and is hereby recognised as a <b>NISMCAA Certified Tutor</b>.</p><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:20px;text-align:left"><div>Date issued: ${d}<br>Certificate ID: ${id}</div><div style="text-align:center"><div class="sig">Olushola John Adebowale</div><div style="border-top:1px solid #16264a">Olushola John Adebowale, Founder</div></div></div><p style="font-size:.72rem;color:#777">Preview sample. Not a valid certificate.</p></div><p style="text-align:center"><button onclick="print()">Print / save as PDF</button></p>`}
+$('qf').onsubmit=e=>{e.preventDefault();const f=new FormData($('qf')),sc=Math.round(['a','b','c'].reduce((s,k)=>s+(+f.get(k)||0),0)/3*100),nm=$('jf').n.value||'Tutor Name';
+$('qres').innerHTML=sc>=70?`<div class="ok">Score ${sc}%: passed! Your demo goes to admin review. Once approved you get your certificate and badge and become bookable. Certificate preview:</div>`+cert(nm,($('jsub').value.split(',')[0]||'Music Theory').trim()):`<div class="ok" style="background:#ffe1d3">Score ${sc}%: below the 70% pass mark. Retake after 7 days.</div>`};
+$('ptabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('ptabs').children].forEach(x=>x.classList.toggle('sel',x==b));$('p-join').hidden=b.dataset.p!='join';$('p-admin').hidden=b.dataset.p!='admin'};
+function tab(t){document.querySelectorAll('section.scr').forEach(s=>s.hidden=s.id!='s-'+t);document.querySelectorAll('.tabbar button').forEach(b=>b.classList.toggle('sel',b.dataset.t==t));scrollTo(0,0)}
+document.querySelectorAll('.tabbar button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
+setTimeout(()=>{$('splash').style.opacity=0;setTimeout(()=>$('splash').remove(),500)},1100);
+if('serviceWorker' in navigator&&location.protocol=='https:')navigator.serviceWorker.register('sw.js');
+</script></body></html>
