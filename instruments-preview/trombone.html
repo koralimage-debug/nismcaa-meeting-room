@@ -1,216 +1,157 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Trombone · NISMCAA Academy</title><style>
-:root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5}*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--cream);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-header{padding:4px 12px;border-bottom:3px solid var(--gold);display:flex;align-items:center;gap:8px}h1{margin:0;font-size:1.15rem;color:var(--gold);line-height:1.2}.hl{flex:1;min-width:0}
-#sub{margin:0;font-size:.78rem;font-weight:700;color:#dfe6f5;line-height:1.25}.clef{font-family:"Noto Music","Segoe UI Symbol","Apple Symbols",serif;font-size:1.35rem;line-height:1;margin-right:4px}
-#size{display:flex;align-items:flex-end;gap:4px;flex:none}#size svg{height:40px;width:auto;display:block}#size p{margin:0;font-size:.75rem;font-weight:800;color:var(--gold);line-height:1.2;text-align:left}
-#epl{display:none;position:absolute;left:2px;bottom:4px;background:rgba(15,28,51,.9);border:1.5px solid var(--gold);border-radius:8px;padding:1px 5px;font-size:.75rem;font-weight:800;color:var(--gold);pointer-events:none;line-height:1.2}
-h2{font-size:.95rem;color:var(--gold);margin:10px 2px 6px;font-weight:800}
-main{max-width:900px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-inset-bottom))}
-#status{background:#0f1c33;border:2px solid var(--gold);border-radius:12px;padding:5px 10px;font-size:.82rem;font-weight:700;color:var(--gold);line-height:1.25;height:calc(3.75em + 14px);overflow:hidden;display:flex;align-items:center}
-.wrap{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:12px;align-items:start}
-.stage{margin-top:6px;background:linear-gradient(#25221f,#3a3532 50%,#5a4f4b);border-radius:18px;padding:4px;position:relative;overflow:hidden}
-#ce{display:block;width:100%;height:auto;margin:0 auto;touch-action:manipulation}
-#nd{position:absolute;right:8px;top:8px;background:rgba(15,28,51,.88);border:2px solid var(--gold);border-radius:12px;padding:2px 8px;text-align:center;min-width:84px;pointer-events:none}
-#nn{font-size:1.5rem;font-weight:900;color:var(--gold);line-height:1.1}#nf{font-size:.75rem;color:#dfe6f5;min-height:2.2em}
-.lab,.lab *,.dot,.dl,#ring{pointer-events:none}.lab line{stroke:#fff6cf;stroke-width:2.5}.lab circle{fill:#fff6cf}
-.lab text{font:800 30px -apple-system,sans-serif;fill:#fff;stroke:#111;stroke-width:6px;paint-order:stroke}.lab text.sm{font-size:28px}
-.dot{fill:rgba(255,230,140,.25);stroke:#fff3c4;stroke-width:2.5}.dot.down{fill:#ffd75a;stroke:#fff}.dot.lwant{stroke:#7cff8a;stroke-width:5}
-.dl{font:900 22px sans-serif;fill:#fff;stroke:#111;stroke-width:5px;paint-order:stroke;text-anchor:middle}
-.zone{fill:transparent;touch-action:none;cursor:pointer}
-.str{stroke:#ffd75a;stroke-width:3.5;opacity:0}.str.on{opacity:.95}
-#ring{fill:none;stroke:#7cff8a;stroke-width:6;opacity:0}#ring.on{opacity:1}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-.hd,#fb{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.hd{font-size:.75rem;font-weight:800;color:#dfe6f5;text-align:center;margin-bottom:4px}
-.nb{min-height:52px;padding:2px 1px;border-radius:12px;border:0;background:linear-gradient(#f7f8fb,#c9ced8);color:#14213d;font:inherit;font-weight:900;font-size:1rem;line-height:1.1;box-shadow:0 3px 0 #8d94a3;touch-action:none;cursor:pointer}
-.nb small{display:block;font-size:.75rem;font-weight:600;letter-spacing:-.2px}.nb.op{background:linear-gradient(#ffe9a8,#e8c062)}
-.nb.on{transform:translateY(2px);background:linear-gradient(#ffe89a,#ffd24a)}.nb.next{outline:4px solid #7cff8a;outline-offset:-2px}
-.ctl{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}
-button.t{font:inherit;font-weight:700;font-size:.85rem;min-height:48px;border-radius:12px;border:2px solid var(--gold);background:transparent;color:var(--gold);padding:2px 6px;cursor:pointer}
+:root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5;--green:#7cff8a}*{box-sizing:border-box}
+html,body{margin:0;background:var(--navy);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#bar{display:flex;align-items:center;gap:6px;height:52px;padding:0 max(8px,env(safe-area-inset-right)) 0 max(8px,env(safe-area-inset-left));border-bottom:3px solid var(--gold)}
+.bk{display:inline-flex;align-items:center;min-height:44px;color:var(--gold);font-weight:800;font-size:.85rem;text-decoration:underline;white-space:nowrap}
+h1{margin:0;font-size:1.05rem;color:var(--gold);white-space:nowrap;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+button.t{font:inherit;font-weight:800;font-size:.8rem;min-height:44px;min-width:44px;border-radius:12px;border:2px solid var(--gold);background:transparent;color:var(--gold);padding:2px 8px;cursor:pointer;white-space:nowrap}
 button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}button.t:disabled{opacity:.45}
-#learn{margin-top:10px;background:#0f1c33;border:2px solid var(--gold);border-radius:14px;padding:8px 10px}
-#learn h2{margin:0 0 4px}#lt{font-size:.88rem;line-height:1.45;margin:0}#lt ul{margin:4px 0 0;padding-left:20px}
-#lf{min-height:2.8em;font-weight:800;color:#7cff8a;font-size:.88rem;margin-top:6px}.lrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
-.tip{font-size:.78rem;opacity:.88;margin-top:10px;line-height:1.4}.foot{font-size:.78rem;text-align:center;margin-top:14px;color:#dfe6f5}
-#strip{display:none}
-@media (max-width:699px){
-.wrap{grid-template-columns:auto 1fr;gap:8px}
-.stage{height:var(--ph,330px);padding:2px}#ce{height:100%;width:auto}.lab,#nd,.dl{display:none}#epl{display:block}
-.right h2{margin:6px 0 4px;font-size:.85rem}.nb{min-height:48px;font-size:.92rem}
-.ctl{grid-template-columns:1fr 1fr}
-#strip{display:block;margin-top:6px;background:#0f1c33;border:2px solid #7cff8a;border-radius:12px;padding:4px 8px}
-#st1{font-size:.8rem;font-weight:800;color:var(--gold)}#st2{font-size:.8rem;font-weight:800;color:#7cff8a;height:2.5em;overflow:hidden;line-height:1.25}
-#strip .lrow{margin-top:4px}#strip button.t{min-height:44px;font-size:.8rem}
-#learn .lrow{grid-template-columns:repeat(2,1fr)}}
-
-.bk{display:inline-flex;align-items:center;min-height:44px;color:var(--gold);font-weight:800;font-size:.9rem;text-decoration:underline;padding:0 2px}
-
-.stage{background:linear-gradient(#1d2333,#2b3247 55%,#3a4058)}
-.hd,#fb{grid-template-columns:repeat(3,1fr)}
-#slide{transition:transform .22s cubic-bezier(.3,.7,.3,1)}body.calm #slide{transition:transform .4s ease}
-.pm{pointer-events:none}.pm text{font:900 26px sans-serif;fill:#fff;stroke:#111;stroke-width:5px;paint-order:stroke;text-anchor:middle}.pm line{stroke:#fff3c4;stroke-width:3}
-.pm .cur text{fill:#7cff8a}.pm .cur line{stroke:#7cff8a;stroke-width:6}.pm .want line{stroke:#7cff8a;stroke-width:6;stroke-dasharray:8 6}
-.wv{fill:none;stroke:#ffe9a8;stroke-width:5;opacity:0;pointer-events:none}
-#waves.on .wv{animation:wave 0.9s ease-out infinite}#waves.on .wv:nth-child(2){animation-delay:.3s}#waves.on .wv:nth-child(3){animation-delay:.6s}
-body.calm #waves.on .wv{animation-duration:1.6s}
-@keyframes wave{0%{opacity:.9;transform:translateY(0) scale(.7)}100%{opacity:0;transform:translateY(-55px) scale(1.3)}}
-#waves .wv{transform-origin:170px 40px;transform-box:view-box}
-.nb{min-height:44px}
-@media (max-width:699px){.nb{min-height:44px;font-size:.9rem}}
-</style></head><body><header><div class="hl"><h1><span class="clef" aria-hidden="true">𝄢</span>Trombone</h1><p id="sub">Move the slide · buzz your lips</p></div><div id="size" role="img" aria-label="Size: a trombone is about 9 feet of tubing folded into about 3 and a half feet; a trumpet is about 2 feet long."><svg viewBox="0 0 70 50" aria-hidden="true"><line x1="0" y1="49" x2="70" y2="49" stroke="#dfe6f5" stroke-width="1"/><g fill="#dfe6f5"><circle cx="14" cy="12" r="4"/><path d="M10 17h8l1 15h-10z"/><rect x="10" y="32" width="2.6" height="17"/><rect x="15.4" y="32" width="2.6" height="17"/></g><g fill="#e2ad3c"><rect x="17" y="12" width="20" height="1.6"/><rect x="17" y="15" width="20" height="1.6"/><path d="M22 10 l-6 -4 v12z"/></g><g fill="#dfe6f5"><circle cx="54" cy="12" r="4"/><path d="M50 17h8l1 15h-10z"/><rect x="50" y="32" width="2.6" height="17"/><rect x="55.4" y="32" width="2.6" height="17"/></g><g fill="#ffdb67"><rect x="57" y="12" width="8" height="2"/><path d="M64 9 l5 -2 v10 l-5 -2z"/></g></svg><p>Trombone ≈ 3½ ft<br>Trumpet ≈ 2 ft</p></div></header><main>
-<a class="bk" href="https://academy.nismcaa.com" target="_top">← Back to NISMCAA Music Academy</a>
-<div id="status" aria-live="polite">Press and hold a note button, or tap a slide position number on the trombone.</div>
-<div id="strip" aria-label="Lesson controls"><div id="st1"></div><div id="st2" aria-hidden="true"></div><div class="lrow"><button class="t" id="sb" type="button">◀ Back</button><button class="t" id="ss" type="button">👀 Show me</button><button class="t" id="sy" type="button">🙋 Your turn</button><button class="t" id="sn" type="button">Next ▶</button></div></div>
-<div class="wrap" id="wrap"><div class="stage" id="stage"><div id="epl" aria-hidden="true">Slide: 1 to 7</div><div id="nd" aria-hidden="true"><div id="nn">–</div><div id="nf">ready</div></div>
-<svg id="ce" viewBox="-200 -230 902 1380" role="group" aria-label="Trombone illustration with labeled parts and a playable slide">
-<defs>
-<linearGradient id="br" x1="0" x2="1"><stop offset="0" stop-color="#8a5a12"/><stop offset=".35" stop-color="#ffe7a0"/><stop offset=".6" stop-color="#e2ad3c"/><stop offset="1" stop-color="#7a4c0c"/></linearGradient>
-<linearGradient id="brh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a12"/><stop offset=".4" stop-color="#ffe7a0"/><stop offset=".65" stop-color="#e2ad3c"/><stop offset="1" stop-color="#7a4c0c"/></linearGradient>
+#stage{position:relative;height:var(--sh,80vh);overflow:hidden;background:radial-gradient(ellipse at 60% 40%,#33405f,#141c2e 75%)}
+#inst{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
+#hud{position:absolute;left:max(8px,env(safe-area-inset-left));top:6px;pointer-events:none;background:rgba(15,28,51,.82);border:2px solid var(--gold);border-radius:12px;padding:3px 10px;max-width:min(62%,420px)}
+#nn{font-size:1.4rem;font-weight:900;color:var(--gold);line-height:1.1}#hint{font-size:.8rem;font-weight:700;color:#dfe6f5;line-height:1.25}
+#turn{display:none;position:absolute;right:8px;top:6px;pointer-events:none;background:var(--gold);color:var(--navy);font-weight:900;font-size:.8rem;border-radius:999px;padding:6px 10px}
+body.portrait #turn{display:block}
+#turn span{display:inline-block;animation:tilt 2.4s ease-in-out infinite}@keyframes tilt{0%,60%,100%{transform:rotate(0)}30%{transform:rotate(90deg)}}
+#lesson{position:absolute;left:50%;transform:translateX(-50%);bottom:6px;pointer-events:none;background:rgba(15,28,51,.88);border:2px solid var(--green);border-radius:12px;padding:3px 10px;font-size:.85rem;font-weight:800;color:var(--green);display:none;max-width:92%;text-align:center}
+#lesson.on{display:block}
+main{max-width:900px;margin:0 auto;padding:10px 10px calc(30px + env(safe-area-inset-bottom))}
+#learn{background:#0f1c33;border:2px solid var(--gold);border-radius:14px;padding:8px 10px}
+#learn h2{margin:0 0 4px;font-size:.95rem;color:var(--gold)}#lt{font-size:.88rem;line-height:1.45}#lt ul{margin:4px 0 0;padding-left:20px}
+#lf{min-height:2.6em;font-weight:800;color:var(--green);font-size:.88rem;margin-top:6px}.lrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+@media(max-width:520px){.lrow{grid-template-columns:repeat(2,1fr)}}
+.xrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tip{font-size:.8rem;opacity:.9;margin-top:10px;line-height:1.45}.foot{font-size:.8rem;text-align:center;margin-top:14px;color:#dfe6f5}
+.foot a{color:#dfe6f5;display:inline-flex;min-height:44px;align-items:center}
+.vib{animation:vib .05s linear infinite alternate}@keyframes vib{from{transform:translateY(-2px)}to{transform:translateY(2px)}}
+body.calm .vib{animation-duration:.12s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:420px){.bk .lg{display:none}}
+</style></head><body>
+<div id="bar"><a class="bk" href="https://academy.nismcaa.com" target="_top">← <span class="lg">Back to&nbsp;</span>NISMCAA Music Academy</a><h1>Trombone</h1><button class="t" id="calm" type="button" aria-pressed="false" aria-label="Calm mode">🌙</button><button class="t" id="full" type="button" aria-label="Full screen">⛶</button></div>
+<div id="stage"><svg id="inst" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet" role="application" aria-label="Trombone. Hold a buzz pad or the bell to blow, and drag the slide to change the note.">
+<defs><linearGradient id="br" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a12"/><stop offset=".35" stop-color="#ffe7a0"/><stop offset=".6" stop-color="#e2ad3c"/><stop offset="1" stop-color="#7a4c0c"/></linearGradient>
+<linearGradient id="brv" x1="0" x2="1"><stop offset="0" stop-color="#8a5a12"/><stop offset=".4" stop-color="#ffe7a0"/><stop offset=".65" stop-color="#e2ad3c"/><stop offset="1" stop-color="#7a4c0c"/></linearGradient>
 <radialGradient id="bellin" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3a2506"/><stop offset=".6" stop-color="#a06a18"/><stop offset="1" stop-color="#ffe9a8"/></radialGradient>
-<linearGradient id="ag" x1="0" x2="1"><stop offset="0" stop-color="#9aa0a8"/><stop offset=".45" stop-color="#ffffff"/><stop offset="1" stop-color="#8a9098"/></linearGradient>
-<filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="6" dy="10" stdDeviation="9" flood-opacity=".55"/></filter></defs>
-<g filter="url(#sh)">
-<path d="M65,48 C110,62 150,120 160,300 L160,985 L180,985 L180,300 C190,120 230,62 275,48 Z" fill="url(#br)" stroke="#5a3a08" stroke-width="2"/>
-<ellipse cx="170" cy="46" rx="106" ry="20" fill="url(#bellin)" stroke="#6a4408" stroke-width="3"/>
-<path d="M160,980 C160,1080 260,1080 260,980 L260,830 C260,805 280,795 300,795 L360,795 L360,815 L300,815 C285,815 280,822 280,835 L280,980 C280,1110 140,1110 140,980 Z" fill="url(#br)" stroke="#5a3a08" stroke-width="2"/>
-<rect x="352" y="230" width="16" height="575" fill="url(#ag)"/><rect x="292" y="230" width="16" height="640" fill="url(#ag)"/>
-<path d="M290,860 L310,860 L314,890 Q322,905 322,925 L278,925 Q278,905 286,890Z" fill="url(#ag)" stroke="#555" stroke-width="1.5"/>
-<rect x="176" y="812" width="118" height="12" rx="5" fill="url(#brh)" stroke="#5a3a08"/><rect x="176" y="560" width="10" height="10" fill="none"/>
-<rect x="176" y="380" width="120" height="10" rx="4" fill="url(#brh)" stroke="#5a3a08" opacity=".0"/>
+<linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9aa0a8"/><stop offset=".45" stop-color="#fff"/><stop offset="1" stop-color="#8a9098"/></linearGradient>
+<filter id="sh"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".55"/></filter></defs>
+<g id="rot"><g filter="url(#sh)">
+<path d="M560,100 L230,100 C150,100 150,190 230,190 L250,190 L250,170 L232,170 C182,170 182,120 232,120 L560,120Z" fill="url(#br)" stroke="#5a3a08" stroke-width="2"/>
+<path d="M556,100 C640,96 700,60 760,4 L760,216 C700,160 640,124 556,120Z" fill="url(#br)" stroke="#5a3a08" stroke-width="2"/>
+<ellipse cx="760" cy="110" rx="22" ry="106" fill="url(#bellin)" stroke="#6a4408" stroke-width="3"/>
+<path d="M250,170 C290,170 300,200 300,232 L280,232 C280,205 272,190 250,190Z" fill="url(#br)" stroke="#5a3a08" stroke-width="2"/>
+<rect x="200" y="233" width="412" height="14" fill="url(#ag)"/><rect x="236" y="313" width="376" height="14" fill="url(#ag)"/>
+<path d="M150,228 L196,234 L196,246 L150,252 Q140,240 150,228Z" fill="url(#ag)" stroke="#555" stroke-width="1.5"/>
+<rect x="232" y="232" width="10" height="96" rx="4" fill="url(#brv)" stroke="#5a3a08"/>
 </g>
+<g id="waves" pointer-events="none"><path class="wv" d="M790,40 Q830,110 790,180"/><path class="wv" d="M790,40 Q830,110 790,180"/><path class="wv" d="M790,40 Q830,110 790,180"/></g>
 <g id="slide"><g filter="url(#sh)">
-<rect x="289" y="200" width="22" height="560" rx="4" fill="url(#br)" stroke="#5a3a08" stroke-width="1.5"/>
-<rect x="349" y="200" width="22" height="560" rx="4" fill="url(#br)" stroke="#5a3a08" stroke-width="1.5"/>
-<path d="M289,202 L289,190 A41,41 0 0 1 371,190 L371,202 L349,202 L349,192 A19,19 0 0 0 311,192 L311,202Z" fill="url(#br)" stroke="#5a3a08" stroke-width="1.5"/>
-<circle cx="372" cy="180" r="6" fill="url(#ag)"/>
-<rect x="300" y="694" width="60" height="12" rx="5" fill="url(#brh)" stroke="#5a3a08"/>
-<rect x="284" y="752" width="32" height="14" rx="3" fill="url(#brh)"/><rect x="344" y="752" width="32" height="14" rx="3" fill="url(#brh)"/>
-</g></g><g id="waves" aria-hidden="true"><path class="wv" d="M110,30 Q170,0 230,30"/><path class="wv" d="M110,30 Q170,0 230,30"/><path class="wv" d="M110,30 Q170,0 230,30"/></g>
-<g class="pm" id="pms"><g id="pm1"><line x1="398" y1="700" x2="420" y2="700"/><text x="440" y="709">1</text></g><g id="pm2"><line x1="398" y1="640" x2="420" y2="640"/><text x="440" y="649">2</text></g><g id="pm3"><line x1="398" y1="580" x2="420" y2="580"/><text x="440" y="589">3</text></g><g id="pm4"><line x1="398" y1="520" x2="420" y2="520"/><text x="440" y="529">4</text></g><g id="pm5"><line x1="398" y1="460" x2="420" y2="460"/><text x="440" y="469">5</text></g><g id="pm6"><line x1="398" y1="400" x2="420" y2="400"/><text x="440" y="409">6</text></g><g id="pm7"><line x1="398" y1="340" x2="420" y2="340"/><text x="440" y="349">7</text></g></g>
-<rect class="zone" id="zone" x="280" y="300" width="190" height="470"/>
-<circle id="ring" cx="240" cy="818" r="60"/>
-<g class="lab">
-<line x1="80" y1="50" x2="10" y2="80"/><circle cx="80" cy="50" r="5"/><text x="2" y="90" text-anchor="end">Bell</text><text x="2" y="118" text-anchor="end" class="sm">(sound out)</text>
-<line x1="372" y1="180" x2="520" y2="300"/><circle cx="372" cy="180" r="5"/><text x="528" y="300">Water key</text>
-<line x1="360" y1="700" x2="520" y2="640"/><circle cx="360" cy="700" r="5"/><text x="528" y="640">Slide brace</text><text x="528" y="670" class="sm">(right hand)</text>
-<line x1="371" y1="560" x2="520" y2="480"/><circle cx="371" cy="560" r="5"/><text x="528" y="470">Slide</text><text x="528" y="500" class="sm">(7 positions)</text>
-<line x1="200" y1="818" x2="10" y2="760"/><circle cx="200" cy="818" r="5"/><text x="2" y="760" text-anchor="end">Bell brace</text><text x="2" y="788" text-anchor="end" class="sm">(left hand)</text>
-<line x1="300" y1="905" x2="520" y2="940"/><circle cx="300" cy="905" r="5"/><text x="528" y="950">Mouthpiece</text><text x="528" y="978" class="sm">(buzz here)</text>
-<line x1="210" y1="1060" x2="10" y2="1040"/><circle cx="210" cy="1060" r="5"/><text x="2" y="1048" text-anchor="end">Tuning slide</text>
-</g></svg></div>
-<div class="right"><h2 id="nh">Note buttons: press and hold</h2>
-<div class="hd" aria-hidden="true"><span>Low buzz</span><span>Middle</span><span>High buzz</span></div>
-<div id="fb" role="group" aria-labelledby="nh"></div>
-<div class="ctl"><button class="t" id="buzz" type="button">👄 Buzz: Middle</button><button class="t" id="glide" type="button">〰 Slide glide</button><button class="t" id="scale" type="button">▶ B♭ major scale</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm</button></div>
-</div></div>
-<section id="learn" aria-labelledby="lh"><h2 id="lh"></h2><div id="lt"></div><div id="lf" aria-live="polite"></div>
-<div class="lrow"><button class="t" id="lb" type="button">◀ Back</button><button class="t" id="ls" type="button">👀 Show me</button><button class="t" id="ly" type="button">🙋 Your turn</button><button class="t" id="ln" type="button">Next ▶</button></div></section>
-<p class="tip">A trombone has no keys or valves. You change the note two ways: by moving the slide, and by how you buzz your lips. The slide has 7 positions. Position 1 is all the way in, and each position farther out makes the note a half step lower. Buzzing your lips tighter and faster makes a higher note in the same position.</p>
-<p class="tip">On the trombone picture, tap a slide position number from 1 to 7 to play it with the buzz you picked (low, middle or high). On a computer, use the keyboard: keys 1 to 7 for low buzz, Q W E R T Y U for middle buzz and A S D F G H J for high buzz (positions 1 to 7).</p>
-<p class="foot">academy@nismcaa.com | (470) 739-0021</p>
-</main>
-<script>
-const $=id=>document.getElementById(id),st=$('status');
-const NAMES=['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'];const nm=m=>NAMES[m%12]+(Math.floor(m/12)-1);
-const PART=[{n:'Low buzz',m:46},{n:'Middle buzz',m:53},{n:'High buzz',m:58}],PY=p=>700-(p-1)*60,STEP=45;
-const note=(c,p)=>PART[c].m-(p-1),PN=p=>'position '+p;
-const FB=$('fb'),btn={};for(let p=1;p<=7;p++)PART.forEach((P,c)=>{const m=note(c,p),b=document.createElement('button');b.type='button';b.className='nb'+(p===1?' op':'');b.dataset.c=c;b.dataset.p=p;b.innerHTML=nm(m)+'<small>Pos '+p+'</small>';b.setAttribute('aria-label',nm(m)+', '+P.n+', slide '+PN(p));FB.appendChild(b);btn[c+'_'+p]=b});
-// ---- audio (synthesised trombone)
-let ctx,bus,muted=false,soundChosen=false,parentOn=null,buzz=1;window.__plays=[];
-function getCtx(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();const comp=ctx.createDynamicsCompressor();bus=ctx.createGain();bus.gain.value=muted?0:.85;
- const f=ctx.createBiquadFilter();f.type='peaking';f.frequency.value=520;f.Q.value=1;f.gain.value=4;const f2=ctx.createBiquadFilter();f2.type='peaking';f2.frequency.value=1300;f2.Q.value=1.4;f2.gain.value=3;
- const rv=ctx.createConvolver(),n=Math.floor(ctx.sampleRate*1.2),ir=ctx.createBuffer(2,n,ctx.sampleRate);for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3.5)}rv.buffer=ir;const wet=ctx.createGain();wet.gain.value=.15;
- bus.connect(f);f.connect(f2);f2.connect(comp);f2.connect(rv);rv.connect(wet);wet.connect(comp);comp.connect(ctx.destination)}
- if(ctx.state!='running')ctx.resume();return ctx}
+<rect x="250" y="229" width="352" height="22" rx="4" fill="url(#br)" stroke="#5a3a08" stroke-width="1.5"/><rect x="250" y="309" width="352" height="22" rx="4" fill="url(#br)" stroke="#5a3a08" stroke-width="1.5"/>
+<path d="M600,229 L612,229 A51,51 0 0 1 612,331 L600,331 L600,309 L610,309 A29,29 0 0 0 610,251 L600,251Z" fill="url(#br)" stroke="#5a3a08" stroke-width="1.5"/>
+<rect x="283" y="240" width="14" height="80" rx="5" fill="url(#brv)" stroke="#5a3a08"/><rect x="274" y="262" width="32" height="36" rx="10" fill="#e8c062" stroke="#5a3a08" stroke-width="2"/>
+<circle cx="640" cy="336" r="6" fill="url(#ag)"/></g>
+<text x="290" y="214" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffdb67" text-anchor="middle">⟷ drag</text></g>
+<g id="pms"><g id="pm1"><line x1="290" y1="350" x2="290" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="290" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">1</text></g><g id="pm2"><line x1="345" y1="350" x2="345" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="345" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">2</text></g><g id="pm3"><line x1="400" y1="350" x2="400" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="400" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">3</text></g><g id="pm4"><line x1="455" y1="350" x2="455" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="455" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">4</text></g><g id="pm5"><line x1="510" y1="350" x2="510" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="510" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">5</text></g><g id="pm6"><line x1="565" y1="350" x2="565" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="565" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">6</text></g><g id="pm7"><line x1="620" y1="350" x2="620" y2="368" stroke="#fff3c4" stroke-width="4"/><text x="620" y="394" font-family="sans-serif" font-weight="900" font-size="24" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke" text-anchor="middle">7</text></g></g><g id="row0"><rect x="14" y="296" width="128" height="66" rx="16" fill="#f3d27a" stroke="#ffdb67" stroke-width="3"/><g class="pt" data-c="78 329"><text x="78" y="326" font-family="sans-serif" font-weight="900" font-size="22" fill="#182947" text-anchor="middle">Low</text><text x="78" y="350" font-family="sans-serif" font-weight="700" font-size="16" fill="#182947" text-anchor="middle">buzz</text></g></g><g id="row1"><rect x="14" y="226" width="128" height="66" rx="16" fill="#ffe39a" stroke="#ffdb67" stroke-width="3"/><g class="pt" data-c="78 259"><text x="78" y="256" font-family="sans-serif" font-weight="900" font-size="22" fill="#182947" text-anchor="middle">Middle</text><text x="78" y="280" font-family="sans-serif" font-weight="700" font-size="16" fill="#182947" text-anchor="middle">buzz</text></g></g><g id="row2"><rect x="14" y="156" width="128" height="66" rx="16" fill="#fff0bf" stroke="#ffdb67" stroke-width="3"/><g class="pt" data-c="78 189"><text x="78" y="186" font-family="sans-serif" font-weight="900" font-size="22" fill="#182947" text-anchor="middle">High</text><text x="78" y="210" font-family="sans-serif" font-weight="700" font-size="16" fill="#182947" text-anchor="middle">buzz</text></g></g>
+<rect id="sz" x="236" y="205" width="764" height="150" fill="transparent"/>
+</g></svg><div id="hud" aria-live="polite"><div id="nn">Trombone</div><div id="hint"></div></div><div id="turn" aria-hidden="true"><span>📱</span> Turn your phone sideways</div><div id="lesson" aria-hidden="true"></div></div>
+<main><section id="learn" aria-labelledby="lh"><h2 id="lh"></h2><div id="lt"></div><div id="lf" aria-live="polite"></div>
+<div class="lrow"><button class="t" id="lb" type="button">◀ Back</button><button class="t" id="ls" type="button">👀 Show me</button><button class="t" id="ly" type="button">🙋 Your turn</button><button class="t" id="ln" type="button">Next ▶</button></div>
+<div class="xrow"><button class="t" id="scale" type="button"></button></div></section>
+<p class="tip">A trombone has no keys or valves. You change the note by moving the slide and by how you buzz your lips. The slide has 7 positions: 1 is all the way in, and each position out is a half step lower. A trombone has about 9 feet of tubing folded into about 3½ feet.</p>
+<p class="tip">How to play on the screen: hold a buzz pad or the bell to blow, and drag the slide with another finger. Glide the slide while blowing for the famous trombone slide sound. Turn your phone sideways for the biggest trombone. On a computer: hold the space bar to blow, keys 1 to 7 move the slide, and the up and down arrows change the buzz.</p>
+<p class="foot"><a href="mailto:academy@nismcaa.com">academy@nismcaa.com</a>&nbsp;|&nbsp;<a href="tel:+14707390021">(470) 739-0021</a></p></main>
+<script>const VBL='0 0 1000 400';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+let ctx,bus,muted=false,soundChosen=false,parentOn=null;window.__plays=[];
+function getCtx(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();bus=ctx.createGain();bus.gain.value=muted?0:.9;setupBus(ctx,bus)}if(ctx.state!='running')ctx.resume();return ctx}
 ['touchstart','pointerdown','keydown'].forEach(t=>addEventListener(t,()=>getCtx(),{capture:true,passive:true}));
-addEventListener('message',e=>{if(e.origin!==location.origin||!e.data||e.data.type!=='nma-sound')return;muted=!e.data.on;soundChosen=!!e.data.chosen;parentOn=!!e.data.on;if(!soundChosen)muted=false;if(bus)bus.gain.value=muted?0:.85;if(muted)stopAll()});
-const hz=m=>440*Math.pow(2,(m-69)/12),lvl=()=>document.body.classList.contains('calm')?.2:.36;
-function horn(m){const t=ctx.currentTime,f=hz(m),L=lvl();
- const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(f*.97,t);o.frequency.exponentialRampToValueAtTime(f,t+.06);
- const o2=ctx.createOscillator();o2.type='square';o2.frequency.value=f;o2.detune.value=-4;
- const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=5;lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(f*.004,t+.9);lfo.connect(lg);lg.connect(o.frequency);lg.connect(o2.frequency);
- const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.Q.value=1.5;lp.frequency.setValueAtTime(f*1.5,t);lp.frequency.linearRampToValueAtTime(Math.min(f*7,4200),t+.07);lp.frequency.linearRampToValueAtTime(Math.min(f*5,3500),t+.3);
- const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(L,t+.05);g.gain.linearRampToValueAtTime(L*.75,t+.25);
- const og=ctx.createGain();og.gain.value=.3;o2.connect(og);og.connect(lp);o.connect(lp);lp.connect(g);g.connect(bus);[o,o2,lfo].forEach(x=>x.start(t));return{g,src:[o,o2,lfo],o:[o,o2],lp,rel:.08}}
-const voices={};
-function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){st.textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
-let curP=1;function slideTo(p){curP=p;$('slide').setAttribute('transform','translate(0 '+(-(p-1)*STEP)+')');document.querySelectorAll('.pm g').forEach(g=>g.classList.toggle('cur',g.id==='pm'+p))}
-function waves(){$('waves').classList.toggle('on',Object.keys(voices).length>0)}
-function show(c,p,on){if(on)slideTo(p);const b=btn[c+'_'+p];b&&b.classList.toggle('on',on)}
-function start(id,c,p){stop(id);const m=note(c,p);$('nn').textContent=nm(m);$('nf').textContent='Pos '+p+' · '+PART[c].n;show(c,p,true);judge(c,p);
- if(!permit())return;getCtx();window.__plays.push(m);const v=horn(m);v.c=c;v.p=p;voices[id]=v;waves();
- st.textContent=nm(m)+': slide in '+PN(p)+', '+PART[c].n.toLowerCase()+'. Keep holding to keep blowing.'}
-function stop(id){const v=voices[id];if(!v)return;delete voices[id];show(v.c,v.p,false);const t=ctx.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(0,t,v.rel/3);v.src.forEach(x=>{try{x.stop(t+.5)}catch(_){}});waves()}
-function stopAll(){stopGlide();$('ring').classList.remove('on');Object.keys(voices).forEach(stop);document.querySelectorAll('.nb.on').forEach(e=>e.classList.remove('on'));waves()}
-const act={};
-function rel(e){if(!e.isTrusted)return;const id=act[e.pointerId];if(id===undefined)return;delete act[e.pointerId];stop(id)}
-FB.addEventListener('pointerdown',e=>{const b=e.target.closest('.nb');if(!b)return;e.preventDefault();try{b.releasePointerCapture(e.pointerId)}catch(_){}const id='p'+e.pointerId;act[e.pointerId]=id;start(id,+b.dataset.c,+b.dataset.p)});
-const svg=$('ce');function svgPt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
-$('zone').addEventListener('pointerdown',e=>{const pt=svgPt(e);let p=Math.round((700-pt.y)/STEP)+1;p=Math.max(1,Math.min(7,p));e.preventDefault();const id='p'+e.pointerId;act[e.pointerId]=id;start(id,buzz,p)});
-['pointerup','pointercancel','pointerleave'].forEach(t=>{FB.addEventListener(t,rel,true);$('zone').addEventListener(t,rel)});
-addEventListener('pointerup',rel);
-document.addEventListener('contextmenu',e=>e.preventDefault());
-const KM={};['1234567','qwertyu','asdfghj'].forEach((r,c)=>[...r].forEach((k,i)=>KM[k]=[c,i+1]));
-addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey)return;const v=KM[e.key.toLowerCase()];if(!v)return;start('k'+e.key.toLowerCase(),v[0],v[1])});
-addEventListener('keyup',e=>stop('k'+e.key.toLowerCase()));
-const BZ=['Low','Middle','High'];$('buzz').onclick=()=>{buzz=(buzz+1)%3;$('buzz').textContent='👄 Buzz: '+BZ[buzz];st.textContent='Picture taps now use a '+BZ[buzz].toLowerCase()+' buzz. Tap a slide number from 1 to 7.'};
+addEventListener('message',e=>{if(e.origin!==location.origin||!e.data||e.data.type!=='nma-sound')return;muted=!e.data.on;soundChosen=!!e.data.chosen;parentOn=!!e.data.on;if(!soundChosen)muted=false;if(bus)bus.gain.value=muted?0:.9;if(muted)quiet()});
+function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){$('hint').textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
+const hz=m=>440*Math.pow(2,(m-69)/12),calm=()=>document.body.classList.contains('calm');
 $('calm').onclick=()=>{const on=document.body.classList.toggle('calm');$('calm').setAttribute('aria-pressed',on)};
-// glissando: the famous trombone slide sound
-let gl=null;function stopGlide(){if(!gl)return;clearTimeout(gl.t);const v=gl.v;gl=null;$('glide').textContent='〰 Slide glide';if(v){const t=ctx.currentTime;v.g.gain.setTargetAtTime(0,t,.03);v.src.forEach(x=>{try{x.stop(t+.3)}catch(_){}})}delete voices.glide;waves();slideTo(1)}
-$('glide').onclick=()=>{if(gl){stopGlide();st.textContent='Glide stopped.';return}stopScale();lessonStop();if(!permit())return;getCtx();const v=horn(note(1,1));voices.glide=v;gl={v};waves();$('glide').textContent='■ Stop the glide';
- const t=ctx.currentTime,down=1.4;v.o.forEach(o=>{o.frequency.cancelScheduledValues(t);o.frequency.setValueAtTime(hz(note(1,1)),t+.06);o.frequency.exponentialRampToValueAtTime(hz(note(1,7)),t+.06+down);o.frequency.exponentialRampToValueAtTime(hz(note(1,1)),t+.06+2*down)});
- st.textContent='Slide glide: one long breath while the slide moves from position 1 out to 7 and back. Only the trombone can do this!';
- let i=0;const seq=[1,2,3,4,5,6,7,6,5,4,3,2,1];const mv=()=>{if(!gl)return;slideTo(seq[i]);i++;if(i<seq.length)gl.t=setTimeout(mv,2*down*1000/seq.length);else gl.t=setTimeout(()=>{stopGlide();st.textContent='That was a glissando. Try it slowly with the note buttons too.'},250)};
- document.body.classList.add('glid');mv()};
-function clearNext(){document.querySelectorAll('.next,.want').forEach(b=>b.classList.remove('next','want'))}
-const SC=[[0,1],[1,6],[1,4],[1,3],[1,1],[2,4],[2,2],[2,1]],SEQ=SC.concat(SC.slice(0,-1).reverse());let timer=null;
-function stopScale(){if(timer){clearTimeout(timer);timer=null}stop('demo');clearNext();$('scale').textContent='▶ B♭ major scale'}
-$('scale').onclick=()=>{if(timer){stopScale();st.textContent='Scale stopped.';return}stopGlide();lessonStop();getCtx();let i=0;$('scale').textContent='■ Stop the scale';
- const step=()=>{stop('demo');clearNext();if(i>=SEQ.length){timer=null;$('scale').textContent='▶ B♭ major scale';st.textContent='That was the B♭ major scale: B♭ C D E♭ F G A B♭. Now try it yourself.';return}
-  const[c,p]=SEQ[i++];btn[c+'_'+p].classList.add('next');start('demo',c,p);st.textContent='B♭ major scale, note '+i+' of '+SEQ.length+': '+nm(note(c,p))+' ('+PN(p)+', '+PART[c].n.toLowerCase()+')';timer=setTimeout(()=>{stop('demo');timer=setTimeout(step,70)},620)};step()};
-// ---- Learn to play
-const Bb=[0,1],F=[1,1],G=[2,4],Eb=[1,3],D=[1,4],C=[1,6];
-const L1=[Bb,Bb,F,F,G,G,F,Eb,Eb,D,D,C,C,Bb],L2=[F,F,Eb,Eb,D,D,C];
-const LES=[
- {h:'Step 1 of 5: Hold the trombone',t:'<ul><li>Stand or sit up tall. The bell points forward, over your left shoulder.</li><li>Your <b>left hand</b> holds all the weight: wrap your fingers around the bell brace, with your first finger resting on the mouthpiece tube.</li><li>Your <b>right hand</b> holds the slide brace lightly with your thumb and first two fingers, like holding a pencil.</li><li>Lock the slide when you carry it, so it does not fall off.</li></ul>',show:'The green ring shows the bell brace. Your left hand holds the trombone here.',ring:[240,818,70],turn:'Hold your trombone like this for 10 slow counts. Tap Your turn again to check it off.',check:1,st:'Left hand holds the weight, right hand moves the slide.'},
- {h:'Step 2 of 5: Buzz your lips',t:'<ul><li>Close your lips like saying "mmm".</li><li>Blow air through them so they buzz like a bee. That buzz is the sound of the trombone.</li><li>Practice the buzz on the mouthpiece alone first.</li><li>A slow, loose buzz gives a low note. A faster, tighter buzz gives a higher note.</li></ul>',show:'Listen: this is a long note with a steady buzz. The waves show the sound leaving the bell.',buzz:1,turn:'Buzz on your mouthpiece for 4 slow counts, rest, then do it 3 more times. Tap Your turn again to check it off.',check:1,st:'Loose lips, steady air, buzz like a bee.'},
- {h:'Step 3 of 5: Your first notes',t:'Keep the slide in <b>1st position</b> (all the way in). Play a low buzz for <b>B♭</b>, then buzz a little tighter for <b>F</b>. Same slide, two different notes!',seq:[Bb,Bb,F,F,Bb],dur:1100,st:'Position 1: low B♭, then F.'},
- {h:'Step 4 of 5: Move the slide',t:'With a middle buzz, move the slide out one position at a time. Each position is a half step lower: F in 1st, E in 2nd, E♭ in 3rd, D in 4th, D♭ in 5th and C in 6th. Move your whole arm, not just your wrist.',seq:[[1,1],[1,2],[1,3],[1,4],[1,5],[1,6]],dur:1000,st:'Middle buzz: positions 1 to 6.'},
- {h:'Step 5 of 5: Play Twinkle',t:'"Twinkle Twinkle Little Star" in B♭. Follow the green note. B♭ is a low buzz in 1st position, F is 1st position, G is a high buzz in 4th position, E♭ is 3rd, D is 4th and C is 6th position.',seq:L1.concat(L2,L2,L1),dur:560,st:'Twinkle Twinkle Little Star: follow the green note.'}];
-let L=0,lwant=-1,lt=null,rt=null;const lf=$('lf');
-const say=s=>{lf.textContent=s;$('st2').textContent=s};
-function lessonStop(){clearTimeout(lt);lt=null;clearTimeout(rt);$('ring').classList.remove('on');stop('lesson');stop('lbz');lwant=-1;clearNext();['ls','ss'].forEach(i=>$(i).textContent='👀 Show me')}
-function nm2(c,p){return nm(note(c,p))}
-function want(c,p){clearNext();btn[c+'_'+p].classList.add('next');$('pm'+p).classList.add('want');inView(btn[c+'_'+p])}
-function inView(b){const r=b.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)b.scrollIntoView({block:'nearest'})}
-function lessonShow(){const x=LES[L];lessonStop();['lb','sb'].forEach(i=>$(i).disabled=L===0);['ln','sn'].forEach(i=>$(i).disabled=L===LES.length-1);$('lh').textContent=x.h;$('lt').innerHTML=x.t;$('st1').textContent=x.h;say(x.st)}
-function back(){if(L>0){L--;lessonShow()}}function next(){if(L<LES.length-1){L++;lessonShow()}}
-function showMe(){const x=LES[L];if(lt){lessonStop();say('Stopped.');return}stopScale();stopGlide();lessonStop();
- if(!x.seq){say(x.show);if(x.ring){const r=$('ring');r.setAttribute('cx',x.ring[0]);r.setAttribute('cy',x.ring[1]);r.setAttribute('r',x.ring[2]);r.classList.add('on');rt=setTimeout(()=>r.classList.remove('on'),3500)}
-  if(x.buzz){getCtx();start('lbz',0,1);rt=setTimeout(()=>stop('lbz'),2200)}return}
- getCtx();let i=0;['ls','ss'].forEach(id=>$(id).textContent='■ Stop');
- const step=()=>{stop('lesson');clearNext();if(i>=x.seq.length){lt=null;['ls','ss'].forEach(id=>$(id).textContent='👀 Show me');say('Now tap Your turn and try it yourself.');return}
-  const[c,p]=x.seq[i];want(c,p);start('lesson',c,p);
-  say(nm2(c,p)+' ('+PN(p)+', '+PART[c].n.toLowerCase()+')'+(x.seq.length>8?'. Note '+(i+1)+' of '+x.seq.length:''));i++;
-  lt=setTimeout(()=>{stop('lesson');lt=setTimeout(step,90)},x.dur)};step()}
-function yourTurn(){const x=LES[L];lessonStop();stopScale();stopGlide();
- if(x.check){say(x.done?'✓ Checked off! Tap Next when you are ready.':x.turn);x.done=1;return}
- lwant=0;want(...x.seq[0]);say('Your turn: play '+nm2(...x.seq[0])+' (green). Play each note, then let go.')}
-$('lb').onclick=$('sb').onclick=back;$('ln').onclick=$('sn').onclick=next;$('ls').onclick=$('ss').onclick=showMe;$('ly').onclick=$('sy').onclick=yourTurn;
-function judge(c,p){if(lwant<0)return;const x=LES[L],[wc,wp]=x.seq[lwant];
- if(c===wc&&p===wp){lwant++;if(lwant>=x.seq.length){lwant=-1;clearNext();say('✓ Great job! You played it all. '+(L<LES.length-1?'Tap Next for the next step.':'You finished all the lessons!'));return}
-  want(...x.seq[lwant]);const[nc,np]=x.seq[lwant];say('✓ Yes! Next: '+nm2(nc,np)+' ('+PN(np)+', '+PART[nc].n.toLowerCase()+'). '+(lwant+1)+' of '+x.seq.length)}
- else say('Not quite. That was '+nm2(c,p)+'. Try '+nm2(wc,wp)+': '+PN(wp)+', '+PART[wc].n.toLowerCase()+' (green).')}
-slideTo(1);lessonShow();
-function quiet(){stopScale();lessonStop();stopAll()}
-['blur','pagehide'].forEach(t=>addEventListener(t,quiet));document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet()});
-const NARROW=matchMedia('(max-width:699px)');
-function fit(){const sg=$('stage'),w=$('wrap');if(!NARROW.matches){svg.setAttribute('viewBox','-200 -230 902 1380');sg.style.removeProperty('--ph');return}
- svg.setAttribute('viewBox','55 -230 410 1350');let vh=innerHeight;try{if(window.parent!==window)vh=parent.innerHeight-120}catch(_){}
- const top=w.getBoundingClientRect().top+scrollY+6;let ph=Math.max(260,vh-top-8);const W=document.documentElement.clientWidth-16-8-200;
- ph=Math.min(ph,Math.max(80,W)*1350/410+4);sg.style.setProperty('--ph',Math.round(ph)+'px');post()}
+$('full').onclick=()=>{const d=document.documentElement;if(d.requestFullscreen&&document.fullscreenEnabled){(document.fullscreenElement?document.exitFullscreen():d.requestFullscreen()).catch(()=>{})}else if(window.parent!==window){top.location.href=location.pathname}else{$('hint').textContent='Turn your phone sideways and the instrument fills the screen.'}};
+const svg=$('inst');function svgPt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform($('rot').getScreenCTM().inverse())}
+let portrait=false;
+function fit(){let vw=innerWidth,vh=innerHeight;try{if(window.parent!==window){vh=Math.min(parent.innerHeight,screen.height||9999);vw=parent.innerWidth}}catch(_){}
+ portrait=vh>vw*1.1;document.body.classList.toggle('portrait',portrait);
+ const sh=Math.max(260,vh-52-(window.parent!==window&&!portrait?0:0));document.documentElement.style.setProperty('--sh',sh+'px');
+ if(portrait){svg.setAttribute('viewBox',window.VBP||'0 0 400 1000');$('rot').setAttribute('transform','translate(400 0) rotate(90)')}else{svg.setAttribute('viewBox',VBL);$('rot').removeAttribute('transform')}
+ window.onFit&&onFit(portrait);post()}
 const post=()=>{if(window.parent!==window)parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)};
-addEventListener('resize',fit);addEventListener('load',fit);fit();setTimeout(post,300);
+addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,200));addEventListener('load',fit);document.addEventListener('contextmenu',e=>e.preventDefault());
+function quiet(){try{stopAllSound()}catch(_){}}
+['blur','pagehide'].forEach(t=>addEventListener(t,quiet));document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet()});
+
+const stage=$('stage');
+const NAMES=['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'],nm=m=>NAMES[(m%12+12)%12]+(Math.floor(m/12)-1);
+const PART=[{n:'Low',m:46},{n:'Middle',m:53},{n:'High',m:58}],ST=55,HX=290,BZ=[296,226,156];
+document.head.insertAdjacentHTML('beforeend','<style>.wv{fill:none;stroke:#ffe9a8;stroke-width:6;opacity:0}#waves.on .wv{animation:wave .9s ease-out infinite}#waves.on .wv:nth-child(2){animation-delay:.3s}#waves.on .wv:nth-child(3){animation-delay:.6s}@keyframes wave{0%{opacity:.9;transform:translateX(0)}100%{opacity:0;transform:translateX(90px)}}#pms .cur line{stroke:#7cff8a;stroke-width:8}#pms .cur text{fill:#7cff8a}.wantp line{stroke:#7cff8a!important;stroke-width:8;stroke-dasharray:6 4}.wantr rect{stroke:#7cff8a;stroke-width:8}.onr rect{fill:#ffd24a}</style>');
+function setupBus(c,b){const comp=c.createDynamicsCompressor();const f=c.createBiquadFilter();f.type='peaking';f.frequency.value=520;f.Q.value=1;f.gain.value=4;
+ const rv=c.createConvolver(),n=Math.floor(c.sampleRate*1.2),ir=c.createBuffer(2,n,c.sampleRate);for(let k=0;k<2;k++){const d=ir.getChannelData(k);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3.5)}rv.buffer=ir;const wet=c.createGain();wet.gain.value=.15;
+ b.connect(f);f.connect(comp);f.connect(rv);rv.connect(wet);wet.connect(comp);comp.connect(c.destination)}
+let d=0,buzz=1,voice=null;const blowers={};
+const posF=()=>d/ST+1,posR=()=>Math.max(1,Math.min(7,Math.round(posF()))),curM=()=>PART[buzz].m-(posF()-1);
+function slideDraw(){$('slide').setAttribute('transform','translate('+d.toFixed(1)+' 0)');document.querySelectorAll('#pms g').forEach(g=>g.classList.toggle('cur',g.id==='pm'+posR()));hud()}
+function hud(){const m=PART[buzz].m-(posR()-1);$('nn').textContent=nm(m);$('hint').textContent='Position '+posR()+' · '+PART[buzz].n+' buzz'+(voice?'':' · hold a buzz pad or the bell to blow')}
+function rowsDraw(){[0,1,2].forEach(c=>$('row'+c).classList.toggle('onr',!!voice&&c===buzz))}
+function retune(){if(!voice)return;const t=ctx.currentTime,f=hz(curM());voice.o.forEach(o=>o.frequency.setTargetAtTime(f,t,.025))}
+function blowStart(){if(voice){retune();return}if(!permit())return;getCtx();const t=ctx.currentTime,f=hz(curM()),L=calm()?.2:.36;
+ const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(f*.97,t);o.frequency.setTargetAtTime(f,t,.02);const o2=ctx.createOscillator();o2.type='square';o2.frequency.value=f;o2.detune.value=-4;
+ const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.Q.value=1.5;lp.frequency.setValueAtTime(300,t);lp.frequency.linearRampToValueAtTime(2600,t+.08);lp.frequency.linearRampToValueAtTime(1900,t+.3);
+ const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(L,t+.05);g.gain.linearRampToValueAtTime(L*.75,t+.25);const og=ctx.createGain();og.gain.value=.3;o2.connect(og);og.connect(lp);o.connect(lp);lp.connect(g);g.connect(bus);o.start(t);o2.start(t);
+ voice={o:[o,o2],g};window.__plays.push(Math.round(curM()));$('waves').classList.add('on');rowsDraw();hud();judge([buzz,posR()])}
+function blowStop(){if(!voice||Object.keys(blowers).length)return;const v=voice;voice=null;const t=ctx.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(0,t,.03);v.o.forEach(o=>{try{o.stop(t+.3)}catch(_){}});$('waves').classList.remove('on');rowsDraw();hud()}
+function stopAllSound(){for(const k in blowers)delete blowers[k];blowStop()}
+let tw=null;function slideTo(p,ms){cancelAnimationFrame(tw);const a=d,b=(p-1)*ST,t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/(ms||140));d=a+(b-a)*(1-Math.pow(1-k,3));slideDraw();retune();if(k<1)tw=requestAnimationFrame(f)};tw=requestAnimationFrame(f)}
+function rowAt(y){return y<223?2:y<296?1:0}
+const P={};
+svg.addEventListener('pointerdown',e=>{e.preventDefault();try{svg.setPointerCapture(e.pointerId)}catch(_){}const p=svgPt(e);
+ if(p.x<150&&p.y>150&&p.y<366){buzz=rowAt(p.y);P[e.pointerId]={t:'b',pad:1};blowers[e.pointerId]=1;blowStart();rowsDraw();hud()}
+ else if(p.x>540&&p.x<800&&p.y<225){P[e.pointerId]={t:'b'};blowers[e.pointerId]=1;blowStart()}
+ else if(p.x>=236&&p.y>205&&p.y<370){cancelAnimationFrame(tw);P[e.pointerId]={t:'s',x:p.x,d0:d}}});
+svg.addEventListener('pointermove',e=>{const s=P[e.pointerId];if(!s)return;const p=svgPt(e);
+ if(s.t==='s'){d=Math.max(0,Math.min(6*ST,s.d0+(p.x-s.x)));slideDraw();retune()}
+ else if(s.pad&&p.x<170){const c=rowAt(p.y);if(c!==buzz){buzz=c;retune();rowsDraw();hud();if(voice)judge([buzz,posR()])}}});
+function up(e){const s=P[e.pointerId];if(!s)return;delete P[e.pointerId];if(s.t==='b'){delete blowers[e.pointerId];blowStop()}else{slideTo(posR(),120);if(voice)setTimeout(()=>judge([buzz,posR()]),130)}}
+['pointerup','pointercancel'].forEach(t=>svg.addEventListener(t,up));
+addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey)return;if(e.key>='1'&&e.key<='7'){slideTo(+e.key,160)}else if(e.key==='ArrowUp'){buzz=Math.min(2,buzz+1);retune();hud()}else if(e.key==='ArrowDown'){buzz=Math.max(0,buzz-1);retune();hud()}else if(e.key===' '){e.preventDefault();blowers.k=1;blowStart()}});
+addEventListener('keyup',e=>{if(e.key===' '){delete blowers.k;blowStop()}});
+const label=([c,p])=>nm(PART[c].m-(p-1))+' (position '+p+', '+PART[c].n.toLowerCase()+' buzz)',same=(a,b)=>a[0]===b[0]&&a[1]===b[1];
+function clearWant(){document.querySelectorAll('.wantp,.wantr').forEach(x=>x.classList.remove('wantp','wantr'))}
+function showWant([c,p]){clearWant();$('pm'+p).classList.add('wantp');$('row'+c).classList.add('wantr')}
+let dT=null;function demoPlay([c,p]){clearTimeout(dT);buzz=c;slideTo(p,180);blowers.demo=1;setTimeout(blowStart,190);dT=setTimeout(()=>{delete blowers.demo;blowStop()},Math.max(300,(LES[L].dur||560)-120))}
+function demoStop(){clearTimeout(dT);delete blowers.demo;blowStop()}
+const SC=[[0,1],[1,6],[1,4],[1,3],[1,1],[2,4],[2,2],[2,1]],SCN='▶ B♭ major scale',SCDONE='That was the B♭ major scale: B♭ C D E♭ F G A B♭.';
+const Bb=[0,1],F=[1,1],G=[2,4],Eb=[1,3],D=[1,4],C=[1,6],L1=[Bb,Bb,F,F,G,G,F,Eb,Eb,D,D,C,C,Bb],L2=[F,F,Eb,Eb,D,D,C];
+const LES=[
+ {h:'Step 1 of 5: Hold the trombone',t:'<ul><li>Stand or sit up tall. The bell points forward, over your left shoulder.</li><li>Your <b>left hand</b> holds all the weight at the bell brace, first finger resting by the mouthpiece.</li><li>Your <b>right hand</b> holds the slide brace lightly, like holding a pencil.</li><li>On the screen: the gold handle on the slide is where your right hand goes.</li></ul>',show:'Watch the slide move all the way out to position 7 and back in to 1.',demo(){slideTo(7,1400);lt=setTimeout(()=>{slideTo(1,1400);lt=null},1700)},turn:'Hold your trombone like this for 10 slow counts. Tap Your turn again to check it off.',check:1,st:'Left hand holds the weight, right hand moves the slide.'},
+ {h:'Step 2 of 5: Buzz your lips',t:'<ul><li>Close your lips like saying "mmm" and blow so they buzz like a bee.</li><li>A loose buzz gives a low note; a tighter buzz gives a higher one.</li><li>On the screen: hold a buzz pad (Low, Middle, High) or the bell to blow. Slide your finger up and down the pads to change the buzz.</li></ul>',show:'Listen: low, middle and high buzz, all in position 1.',demo(){let i=0;const go=()=>{if(i<3){demoPlay([i,1]);i++;lt=setTimeout(go,900)}else lt=null};go()},turn:'Buzz on your mouthpiece for 4 slow counts, rest, and do it 3 more times. Tap Your turn again to check it off.',check:1,st:'Loose lips, steady air, buzz like a bee.'},
+ {h:'Step 3 of 5: Your first notes',t:'Keep the slide in <b>position 1</b> (all the way in). Hold the <b>Low</b> pad for B♭, then the <b>Middle</b> pad for F. Same slide, two notes!',seq:[Bb,Bb,F,F,Bb],dur:1000,st:'Position 1: low B♭, then F.'},
+ {h:'Step 4 of 5: Move the slide',t:'Hold the <b>Middle</b> pad with one finger and drag the slide with another. Each position out is a half step lower: F (1), E (2), E♭ (3), D (4), D♭ (5), C (6). Let go of the slide and it settles on the nearest position.',seq:[[1,1],[1,2],[1,3],[1,4],[1,5],[1,6]],dur:1000,st:'Middle buzz: positions 1 to 6.'},
+ {h:'Step 5 of 5: Play Twinkle',t:'"Twinkle Twinkle Little Star" in B♭. Move the slide to the green number and blow on the green pad.',seq:L1.concat(L2,L2,L1),dur:600,st:'Twinkle Twinkle Little Star: follow the green.'}];
+$('scale').textContent=SCN;slideDraw();window.VBP='0 -120 400 1120';window.onFit=pt=>document.querySelectorAll('.pt').forEach(g=>pt?g.setAttribute('transform','rotate(-90 '+g.dataset.c+')'):g.removeAttribute('transform'));
+
+let L=0,lwant=-1,lt=null;const lf=$('lf');
+const say=s=>{lf.textContent=s;const b=$('lesson');b.textContent=s;b.classList.toggle('on',!!s&&lwant>=0)};
+function lessonStop(){clearTimeout(lt);lt=null;lwant=-1;clearWant();$('ls').textContent='👀 Show me';$('lesson').classList.remove('on');demoStop&&demoStop()}
+function lessonShow(){const x=LES[L];lessonStop();$('lb').disabled=L===0;$('ln').disabled=L===LES.length-1;$('lh').textContent=x.h;$('lt').innerHTML=x.t;lf.textContent=x.st}
+$('lb').onclick=()=>{if(L>0){L--;lessonShow()}};$('ln').onclick=()=>{if(L<LES.length-1){L++;lessonShow()}};
+$('ls').onclick=()=>{const x=LES[L];if(lt){lessonStop();lf.textContent='Stopped.';return}lessonStop();stopScale();
+ if(!x.seq){lf.textContent=x.show;x.demo&&x.demo();return}
+ getCtx();let i=0;$('ls').textContent='■ Stop';stage.scrollIntoView({block:'start',behavior:'smooth'});
+ const step=()=>{clearWant();if(i>=x.seq.length){lt=null;$('ls').textContent='👀 Show me';lf.textContent='Now tap Your turn and try it yourself.';$('lesson').classList.remove('on');return}
+  const n=x.seq[i];showWant(n);demoPlay(n);const s=label(n)+(x.seq.length>8?' · '+(i+1)+' of '+x.seq.length:'');lf.textContent=s;$('lesson').textContent=s;$('lesson').classList.add('on');i++;lt=setTimeout(step,x.dur)};step()};
+$('ly').onclick=()=>{const x=LES[L];lessonStop();stopScale();
+ if(x.check){lf.textContent=x.done?'✓ Checked off! Tap Next when you are ready.':x.turn;x.done=1;return}
+ lwant=0;showWant(x.seq[0]);stage.scrollIntoView({block:'start',behavior:'smooth'});say('Your turn: play '+label(x.seq[0])+' (green).')};
+function judge(n){if(lwant<0)return;const x=LES[L],w=x.seq[lwant];
+ if(same(n,w)){lwant++;if(lwant>=x.seq.length){lwant=-1;clearWant();say('✓ Great job! You played it all. '+(L<LES.length-1?'Tap Next below for the next step.':'You finished all the lessons!'));setTimeout(()=>$('lesson').classList.remove('on'),2500);return}
+  showWant(x.seq[lwant]);say('✓ Yes! Next: '+label(x.seq[lwant])+' · '+(lwant+1)+' of '+x.seq.length)}
+ else say('Not quite. That was '+label(n)+'. Try '+label(w)+' (green).')}
+let timer=null;function stopScale(){if(timer){clearTimeout(timer);timer=null;demoStop&&demoStop();clearWant();$('scale').textContent=SCN}}
+$('scale').onclick=()=>{if(timer){stopScale();return}lessonStop();getCtx();let i=0;$('scale').textContent='■ Stop the scale';const SEQ=SC.concat(SC.slice(0,-1).reverse());stage.scrollIntoView({block:'start',behavior:'smooth'});
+ const step=()=>{clearWant();if(i>=SEQ.length){timer=null;demoStop&&demoStop();$('scale').textContent=SCN;$('hint').textContent=SCDONE;return}const n=SEQ[i++];showWant(n);demoPlay(n);$('hint').textContent='Scale '+i+' of '+SEQ.length+': '+label(n);timer=setTimeout(step,560)};step()};
+lessonShow();fit();setTimeout(fit,300);
 </script></body></html>

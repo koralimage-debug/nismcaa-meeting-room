@@ -1,217 +1,154 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Bass Guitar · NISMCAA Academy</title><style>
-:root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5}*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--navy);color:var(--cream);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-header{padding:4px 12px;border-bottom:3px solid var(--gold);display:flex;align-items:center;gap:8px}h1{margin:0;font-size:1.15rem;color:var(--gold);line-height:1.2}.hl{flex:1;min-width:0}
-#sub{margin:0;font-size:.78rem;font-weight:700;color:#dfe6f5;line-height:1.25}.clef{font-family:"Noto Music","Segoe UI Symbol","Apple Symbols",serif;font-size:1.35rem;line-height:1;margin-right:4px}
-#size{display:flex;align-items:flex-end;gap:4px;flex:none}#size svg{height:40px;width:auto;display:block}#size p{margin:0;font-size:.75rem;font-weight:800;color:var(--gold);line-height:1.2;text-align:left}
-#epl{display:none;position:absolute;left:2px;bottom:4px;background:rgba(15,28,51,.9);border:1.5px solid var(--gold);border-radius:8px;padding:1px 5px;font-size:.75rem;font-weight:800;color:var(--gold);pointer-events:none;line-height:1.2}
-h2{font-size:.95rem;color:var(--gold);margin:10px 2px 6px;font-weight:800}
-main{max-width:900px;margin:0 auto;padding:6px 8px calc(90px + env(safe-area-inset-bottom))}
-#status{background:#0f1c33;border:2px solid var(--gold);border-radius:12px;padding:5px 10px;font-size:.82rem;font-weight:700;color:var(--gold);line-height:1.25;height:calc(3.75em + 14px);overflow:hidden;display:flex;align-items:center}
-.wrap{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:12px;align-items:start}
-.stage{margin-top:6px;background:linear-gradient(#25221f,#3a3532 50%,#5a4f4b);border-radius:18px;padding:4px;position:relative;overflow:hidden}
-#ce{display:block;width:100%;height:auto;margin:0 auto;touch-action:manipulation}
-#nd{position:absolute;right:8px;top:8px;background:rgba(15,28,51,.88);border:2px solid var(--gold);border-radius:12px;padding:2px 8px;text-align:center;min-width:84px;pointer-events:none}
-#nn{font-size:1.5rem;font-weight:900;color:var(--gold);line-height:1.1}#nf{font-size:.75rem;color:#dfe6f5;min-height:2.2em}
-.lab,.lab *,.dot,.dl,#ring{pointer-events:none}.lab line{stroke:#fff6cf;stroke-width:2.5}.lab circle{fill:#fff6cf}
-.lab text{font:800 30px -apple-system,sans-serif;fill:#fff;stroke:#111;stroke-width:6px;paint-order:stroke}.lab text.sm{font-size:28px}
-.dot{fill:rgba(255,230,140,.25);stroke:#fff3c4;stroke-width:2.5}.dot.down{fill:#ffd75a;stroke:#fff}.dot.lwant{stroke:#7cff8a;stroke-width:5}
-.dl{font:900 22px sans-serif;fill:#fff;stroke:#111;stroke-width:5px;paint-order:stroke;text-anchor:middle}
-.zone{fill:transparent;touch-action:none;cursor:pointer}
-.str{stroke:#ffd75a;stroke-width:3.5;opacity:0}.str.on{opacity:.95}
-#ring{fill:none;stroke:#7cff8a;stroke-width:6;opacity:0}#ring.on{opacity:1}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-.hd,#fb{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.hd{font-size:.75rem;font-weight:800;color:#dfe6f5;text-align:center;margin-bottom:4px}
-.nb{min-height:52px;padding:2px 1px;border-radius:12px;border:0;background:linear-gradient(#f7f8fb,#c9ced8);color:#14213d;font:inherit;font-weight:900;font-size:1rem;line-height:1.1;box-shadow:0 3px 0 #8d94a3;touch-action:none;cursor:pointer}
-.nb small{display:block;font-size:.75rem;font-weight:600;letter-spacing:-.2px}.nb.op{background:linear-gradient(#ffe9a8,#e8c062)}
-.nb.on{transform:translateY(2px);background:linear-gradient(#ffe89a,#ffd24a)}.nb.next{outline:4px solid #7cff8a;outline-offset:-2px}
-.ctl{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}
-button.t{font:inherit;font-weight:700;font-size:.85rem;min-height:48px;border-radius:12px;border:2px solid var(--gold);background:transparent;color:var(--gold);padding:2px 6px;cursor:pointer}
+:root{--navy:#182947;--gold:#ffdb67;--cream:#fffdf5;--green:#7cff8a}*{box-sizing:border-box}
+html,body{margin:0;background:var(--navy);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#bar{display:flex;align-items:center;gap:6px;height:52px;padding:0 max(8px,env(safe-area-inset-right)) 0 max(8px,env(safe-area-inset-left));border-bottom:3px solid var(--gold)}
+.bk{display:inline-flex;align-items:center;min-height:44px;color:var(--gold);font-weight:800;font-size:.85rem;text-decoration:underline;white-space:nowrap}
+h1{margin:0;font-size:1.05rem;color:var(--gold);white-space:nowrap;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+button.t{font:inherit;font-weight:800;font-size:.8rem;min-height:44px;min-width:44px;border-radius:12px;border:2px solid var(--gold);background:transparent;color:var(--gold);padding:2px 8px;cursor:pointer;white-space:nowrap}
 button.t[aria-pressed=true]{background:var(--gold);color:var(--navy)}button.t:disabled{opacity:.45}
-#learn{margin-top:10px;background:#0f1c33;border:2px solid var(--gold);border-radius:14px;padding:8px 10px}
-#learn h2{margin:0 0 4px}#lt{font-size:.88rem;line-height:1.45;margin:0}#lt ul{margin:4px 0 0;padding-left:20px}
-#lf{min-height:2.8em;font-weight:800;color:#7cff8a;font-size:.88rem;margin-top:6px}.lrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
-.tip{font-size:.78rem;opacity:.88;margin-top:10px;line-height:1.4}.foot{font-size:.78rem;text-align:center;margin-top:14px;color:#dfe6f5}
-#strip{display:none}
-@media (max-width:699px){
-.wrap{grid-template-columns:auto 1fr;gap:8px}
-.stage{height:var(--ph,330px);padding:2px}#ce{height:100%;width:auto}.lab,#nd,.dl{display:none}#epl{display:block}
-.right h2{margin:6px 0 4px;font-size:.85rem}.nb{min-height:48px;font-size:.92rem}
-.ctl{grid-template-columns:1fr 1fr}
-#strip{display:block;margin-top:6px;background:#0f1c33;border:2px solid #7cff8a;border-radius:12px;padding:4px 8px}
-#st1{font-size:.8rem;font-weight:800;color:var(--gold)}#st2{font-size:.8rem;font-weight:800;color:#7cff8a;height:2.5em;overflow:hidden;line-height:1.25}
-#strip .lrow{margin-top:4px}#strip button.t{min-height:44px;font-size:.8rem}
-#learn .lrow{grid-template-columns:repeat(2,1fr)}}
-
-.bk{display:inline-flex;align-items:center;min-height:44px;color:var(--gold);font-weight:800;font-size:.9rem;text-decoration:underline;padding:0 2px}
-
-.stage{background:linear-gradient(#1d2333,#2b3247 55%,#3a4058)}
-.str{stroke:#ffd75a;stroke-width:4}.str.on{opacity:.95;animation:vib .06s linear infinite alternate}
-@keyframes vib{from{transform:translateX(-1.6px)}to{transform:translateX(1.6px)}}
-#pk{pointer-events:none;opacity:0}#pk.on{opacity:1}#pkm{animation:flick .32s ease-out 1}
-body.calm #pkm{animation:none}
-@keyframes flick{0%{transform:translate(-34px,-10px)}55%{transform:translate(10px,4px)}100%{transform:translate(0,0)}}
-</style></head><body><header><div class="hl"><h1><span class="clef" aria-hidden="true">𝄢</span>Bass Guitar</h1><p id="sub">4 strings · the low notes of the band</p></div><div id="size" role="img" aria-label="Size: a bass guitar is about 46 inches long; a regular guitar is about 40 inches long."><svg viewBox="0 0 70 50" aria-hidden="true"><line x1="0" y1="49" x2="70" y2="49" stroke="#dfe6f5" stroke-width="1"/><g fill="#dfe6f5"><circle cx="16" cy="10" r="4"/><path d="M12 15h8l1 16h-10z"/><rect x="12" y="31" width="2.6" height="18"/><rect x="17.4" y="31" width="2.6" height="18"/></g><g transform="rotate(-38 22 26)"><ellipse cx="22" cy="30" rx="6" ry="7" fill="#d9822b"/><rect x="21" y="3" width="2" height="22" fill="#5a3322"/></g><g fill="#dfe6f5"><circle cx="52" cy="10" r="4"/><path d="M48 15h8l1 16h-10z"/><rect x="48" y="31" width="2.6" height="18"/><rect x="53.4" y="31" width="2.6" height="18"/></g><g transform="rotate(-38 58 28)"><ellipse cx="58" cy="31" rx="5" ry="6" fill="#ffdb67"/><rect x="57.2" y="12" width="1.6" height="15" fill="#5a3322"/></g></svg><p>Bass ≈ 46 in<br>Guitar ≈ 40 in</p></div></header><main>
-<a class="bk" href="https://academy.nismcaa.com" target="_top">← Back to NISMCAA Music Academy</a>
-<div id="status" aria-live="polite">Press and hold a note button, or tap a string on the bass between the pickups to pluck it.</div>
-<div id="strip" aria-label="Lesson controls"><div id="st1"></div><div id="st2" aria-hidden="true"></div><div class="lrow"><button class="t" id="sb" type="button">◀ Back</button><button class="t" id="ss" type="button">👀 Show me</button><button class="t" id="sy" type="button">🙋 Your turn</button><button class="t" id="sn" type="button">Next ▶</button></div></div>
-<div class="wrap" id="wrap"><div class="stage" id="stage"><div id="epl" aria-hidden="true">↑ Frets · ↓ Pluck</div><div id="nd" aria-hidden="true"><div id="nn">–</div><div id="nf">ready</div></div>
-<svg id="ce" viewBox="-200 0 902 1536" role="group" aria-label="Bass guitar illustration with labeled parts and playable strings">
-<defs>
-<radialGradient id="burst" cx=".5" cy=".55" r=".62"><stop offset="0" stop-color="#f6c55a"/><stop offset=".45" stop-color="#d9822b"/><stop offset=".78" stop-color="#7a2e12"/><stop offset="1" stop-color="#1c0b05"/></radialGradient>
-<linearGradient id="wood" x1="0" x2="1"><stop offset="0" stop-color="#3a2015"/><stop offset=".5" stop-color="#5a3322"/><stop offset="1" stop-color="#341b10"/></linearGradient>
-<linearGradient id="maple" x1="0" x2="1"><stop offset="0" stop-color="#d9b077"/><stop offset=".5" stop-color="#f0cf96"/><stop offset="1" stop-color="#c99a5e"/></linearGradient>
-<linearGradient id="ch" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fafafa"/><stop offset=".5" stop-color="#9da3ad"/><stop offset="1" stop-color="#e8e8e8"/></linearGradient>
-<linearGradient id="fr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#8d929a"/></linearGradient>
-<linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="#8a8f96"/><stop offset=".5" stop-color="#f4f4f4"/><stop offset="1" stop-color="#7d828a"/></linearGradient>
-<linearGradient id="gl" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient>
-<filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="6" dy="10" stdDeviation="10" flood-opacity=".55"/></filter></defs>
-<g filter="url(#sh)">
-<path d="M196,20 Q251,4 306,20 L300,170 Q296,196 276,204 L226,204 Q206,196 202,170Z" fill="url(#maple)" stroke="#8a6338" stroke-width="2"/>
-<text x="251" y="104" text-anchor="middle" font="700 15px serif" style="font:italic 700 17px Georgia,serif" fill="#3a2015">NISMCAA</text>
-<path d="M226,200 L276,200 L283,860 L219,860Z" fill="url(#maple)"/>
-<path d="M90,820 C60,860 64,960 112,1010 C70,1070 40,1180 70,1290 C100,1420 200,1490 300,1478 C400,1466 452,1390 446,1290 C440,1190 400,1110 380,1060 C400,990 430,930 440,850 C446,790 420,760 398,790 C380,820 360,880 330,900 L172,900 C150,860 140,760 116,770 C100,776 96,800 90,820Z" fill="url(#burst)" stroke="#120703" stroke-width="3"/>
-<path d="M90,820 C60,860 64,960 112,1010 C70,1070 40,1180 70,1290 C90,1360 140,1420 200,1450 C120,1300 120,1000 172,900 C150,860 140,760 116,770 C100,776 96,800 90,820Z" fill="url(#gl)"/>
-<path d="M168,880 L334,880 C362,900 372,960 352,1010 C340,1050 350,1100 384,1150 C404,1190 396,1230 370,1250 L320,1262 L320,1220 L182,1220 C140,1200 120,1150 128,1080 C134,1010 150,930 168,880Z" fill="#f4efe6" stroke="#bdb5a6" stroke-width="2" opacity=".96"/>
-</g>
-<path d="M226,200 L276,200 L283,860 L219,860Z" fill="url(#wood)" stroke="#1d0f08" stroke-width="2"/>
-<rect x="224" y="196" width="54" height="8" rx="2" fill="#f1ead8"/>
-<line x1="225.7" y1="261.7" x2="276.4" y2="261.7" stroke="url(#fr)" stroke-width="4"/><line x1="225.3" y1="320.0" x2="276.7" y2="320.0" stroke="url(#fr)" stroke-width="4"/><line x1="224.9" y1="375.0" x2="277.1" y2="375.0" stroke="url(#fr)" stroke-width="4"/><line x1="224.6" y1="426.9" x2="277.4" y2="426.9" stroke="url(#fr)" stroke-width="4"/><line x1="224.2" y1="475.9" x2="277.8" y2="475.9" stroke="url(#fr)" stroke-width="4"/><line x1="223.9" y1="522.2" x2="278.1" y2="522.2" stroke="url(#fr)" stroke-width="4"/><line x1="223.6" y1="565.8" x2="278.4" y2="565.8" stroke="url(#fr)" stroke-width="4"/><line x1="223.2" y1="607.0" x2="278.8" y2="607.0" stroke="url(#fr)" stroke-width="4"/><line x1="222.8" y1="645.9" x2="279.1" y2="645.9" stroke="url(#fr)" stroke-width="4"/><line x1="222.5" y1="682.6" x2="279.5" y2="682.6" stroke="url(#fr)" stroke-width="4"/><line x1="222.2" y1="717.3" x2="279.9" y2="717.3" stroke="url(#fr)" stroke-width="4"/><line x1="221.8" y1="750.0" x2="280.2" y2="750.0" stroke="url(#fr)" stroke-width="4"/><line x1="221.4" y1="780.9" x2="280.6" y2="780.9" stroke="url(#fr)" stroke-width="4"/><line x1="221.1" y1="810.0" x2="280.9" y2="810.0" stroke="url(#fr)" stroke-width="4"/><line x1="220.8" y1="837.5" x2="281.2" y2="837.5" stroke="url(#fr)" stroke-width="4"/><line x1="220.4" y1="863.5" x2="281.6" y2="863.5" stroke="url(#fr)" stroke-width="4"/><line x1="220.1" y1="888.0" x2="281.9" y2="888.0" stroke="url(#fr)" stroke-width="4"/><line x1="219.7" y1="911.1" x2="282.3" y2="911.1" stroke="url(#fr)" stroke-width="4"/><line x1="219.3" y1="932.9" x2="282.6" y2="932.9" stroke="url(#fr)" stroke-width="4"/><line x1="219.0" y1="953.5" x2="283.0" y2="953.5" stroke="url(#fr)" stroke-width="4"/><circle cx="251" cy="339.5" r="5" fill="#efe9dc"/><circle cx="251" cy="443.4" r="5" fill="#efe9dc"/><circle cx="251" cy="536.0" r="5" fill="#efe9dc"/><circle cx="251" cy="618.5" r="5" fill="#efe9dc"/><circle cx="251" cy="815.8" r="5" fill="#efe9dc"/><circle cx="251" cy="867.7" r="5" fill="#efe9dc"/><circle cx="251" cy="914.0" r="5" fill="#efe9dc"/><circle cx="238" cy="725.6" r="5" fill="#efe9dc"/><circle cx="264" cy="725.6" r="5" fill="#efe9dc"/>
-<rect x="210" y="1000" width="82" height="46" rx="8" fill="#151515"/><rect x="214" y="1160" width="82" height="40" rx="8" fill="#151515"/>
-<circle cx="230" cy="1023" r="3.5" fill="#888"/><circle cx="234" cy="1180" r="3.5" fill="#888"/><circle cx="244" cy="1023" r="3.5" fill="#888"/><circle cx="248" cy="1180" r="3.5" fill="#888"/><circle cx="258" cy="1023" r="3.5" fill="#888"/><circle cx="262" cy="1180" r="3.5" fill="#888"/><circle cx="272" cy="1023" r="3.5" fill="#888"/><circle cx="276" cy="1180" r="3.5" fill="#888"/>
-<rect x="196" y="1282" width="110" height="40" rx="5" fill="url(#ch)" stroke="#666" stroke-width="2"/>
-<rect x="214" y="1288" width="12" height="18" rx="3" fill="#bfc4cb" stroke="#555"/><rect x="235" y="1288" width="12" height="18" rx="3" fill="#bfc4cb" stroke="#555"/><rect x="256" y="1288" width="12" height="18" rx="3" fill="#bfc4cb" stroke="#555"/><rect x="277" y="1288" width="12" height="18" rx="3" fill="#bfc4cb" stroke="#555"/>
-<g><circle cx="340" cy="1240" r="18" fill="#111" stroke="#c9b37a" stroke-width="3"/><circle cx="340" cy="1232" r="2.5" fill="#fff"/></g><g><circle cx="372" cy="1290" r="18" fill="#111" stroke="#c9b37a" stroke-width="3"/><circle cx="372" cy="1282" r="2.5" fill="#fff"/></g><g><circle cx="356" cy="1350" r="18" fill="#111" stroke="#c9b37a" stroke-width="3"/><circle cx="356" cy="1342" r="2.5" fill="#fff"/></g>
-<rect x="335" y="1395" width="30" height="16" rx="5" fill="url(#ch)"/>
-<line x1="236" y1="200" x2="222" y2="60" stroke="url(#sg)" stroke-width="5"/><line x1="246" y1="200" x2="222" y2="130" stroke="url(#sg)" stroke-width="4.2"/><line x1="256" y1="200" x2="280" y2="130" stroke="url(#sg)" stroke-width="3.4"/><line x1="266" y1="200" x2="280" y2="60" stroke="url(#sg)" stroke-width="2.8"/><g><rect x="160" y="48" width="44" height="24" rx="11" fill="url(#ch)" stroke="#555" stroke-width="1.5"/><circle cx="222" cy="60" r="11" fill="url(#ch)" stroke="#444" stroke-width="2"/><circle cx="222" cy="60" r="4" fill="#333"/></g><g><rect x="160" y="118" width="44" height="24" rx="11" fill="url(#ch)" stroke="#555" stroke-width="1.5"/><circle cx="222" cy="130" r="11" fill="url(#ch)" stroke="#444" stroke-width="2"/><circle cx="222" cy="130" r="4" fill="#333"/></g><g><rect x="298" y="118" width="44" height="24" rx="11" fill="url(#ch)" stroke="#555" stroke-width="1.5"/><circle cx="280" cy="130" r="11" fill="url(#ch)" stroke="#444" stroke-width="2"/><circle cx="280" cy="130" r="4" fill="#333"/></g><g><rect x="298" y="48" width="44" height="24" rx="11" fill="url(#ch)" stroke="#555" stroke-width="1.5"/><circle cx="280" cy="60" r="11" fill="url(#ch)" stroke="#444" stroke-width="2"/><circle cx="280" cy="60" r="4" fill="#333"/></g><line x1="236" y1="200" x2="220" y2="1300" stroke="url(#sg)" stroke-width="5"/><line x1="246" y1="200" x2="241" y2="1300" stroke="url(#sg)" stroke-width="4.2"/><line x1="256" y1="200" x2="262" y2="1300" stroke="url(#sg)" stroke-width="3.4"/><line x1="266" y1="200" x2="283" y2="1300" stroke="url(#sg)" stroke-width="2.8"/>
-<g id="strs"></g><rect class="zone" id="zone" x="196" y="200" width="110" height="1080"/><g id="dots"></g>
-<circle id="ring" cx="251" cy="1080" r="60"/>
-<g class="lab">
-<line x1="160" y1="60" x2="110" y2="60"/><circle cx="160" cy="60" r="5"/><text x="102" y="68" text-anchor="end">Tuning pegs</text>
-<line x1="226" y1="200" x2="110" y2="200"/><circle cx="226" cy="200" r="5"/><text x="102" y="208" text-anchor="end">Nut</text>
-<line x1="226" y1="375" x2="110" y2="380"/><circle cx="226" cy="375" r="5"/><text x="102" y="372" text-anchor="end">Frets</text><text x="102" y="400" text-anchor="end" class="sm">(fingers press)</text>
-<line x1="251" y1="451" x2="110" y2="560"/><circle cx="251" cy="451" r="5"/><text x="102" y="552" text-anchor="end">Fret dots</text><text x="102" y="580" text-anchor="end" class="sm">(help you find frets)</text>
-<line x1="276" y1="640" x2="440" y2="580"/><circle cx="276" cy="640" r="5"/><text x="448" y="570">Strings</text><text x="448" y="600" class="sm">E A D G</text>
-<line x1="292" y1="1023" x2="460" y2="980"/><circle cx="292" cy="1023" r="5"/><text x="468" y="990">Pickups</text><text x="468" y="1018" class="sm">(to the amp)</text>
-<line x1="251" y1="1100" x2="460" y2="1110"/><circle cx="251" cy="1100" r="5"/><text x="468" y="1120">Pluck here</text>
-<line x1="306" y1="1302" x2="460" y2="1230"/><circle cx="306" cy="1302" r="5"/><text x="468" y="1240">Bridge</text>
-<line x1="372" y1="1290" x2="460" y2="1340"/><circle cx="372" cy="1290" r="5"/><text x="468" y="1350">Knobs</text><text x="468" y="1378" class="sm">(volume, tone)</text>
-<line x1="110" y1="1200" x2="10" y2="1200"/><circle cx="110" cy="1200" r="5"/><text x="2" y="1208" text-anchor="end">Body</text>
-</g><g id="pk" aria-hidden="true"><g id="pkr"><g id="pkm"><path d="M-6,-70 Q-14,-30 -12,-8 Q-10,8 2,10 Q14,10 14,-6 Q14,-30 8,-70Z" fill="#c68a5c" stroke="#5a3322" stroke-width="2.5"/><path d="M-6,-6 q8,-6 14,0" fill="none" stroke="#f3d6c0" stroke-width="3"/></g></g></g></svg></div>
-<div class="right"><h2 id="nh">Note buttons: press and hold</h2>
-<div class="hd" aria-hidden="true"><span>E string</span><span>A string</span><span>D string</span><span>G string</span></div>
-<div id="fb" role="group" aria-labelledby="nh"></div>
-<div class="ctl"><button class="t" id="arco" type="button" aria-pressed="true">☝️ Fingers</button><button class="t" id="pizz" type="button" aria-pressed="false">🔺 Pick</button><button class="t" id="scale" type="button">▶ G major scale</button><button class="t" id="calm" type="button" aria-pressed="false">🌙 Calm</button></div>
-</div></div>
-<section id="learn" aria-labelledby="lh"><h2 id="lh"></h2><div id="lt"></div><div id="lf" aria-live="polite"></div>
-<div class="lrow"><button class="t" id="lb" type="button">◀ Back</button><button class="t" id="ls" type="button">👀 Show me</button><button class="t" id="ly" type="button">🙋 Your turn</button><button class="t" id="ln" type="button">Next ▶</button></div></section>
-<p class="tip">The bass guitar has four strings: E, A, D and G, from lowest to highest. They are tuned like the lowest four strings of a guitar, but one octave lower. Each fret raises the note by a half step. In first position, finger 1 plays fret 1, finger 2 plays fret 2, and so on: one finger per fret.</p>
-<p class="tip">On the bass picture, tap a string between the pickups to play it open, or tap a gold dot on the neck to play that fret. On a computer, use the keyboard: 1 Q W E R for the E string, 2 A S D F for the A string, 3 Z X C V for the D string and 4 U I O P for the G string (open, then frets 1 to 4).</p>
-<p class="foot">academy@nismcaa.com | (470) 739-0021</p>
-</main>
-<script>
-const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',st=$('status');
+#stage{position:relative;height:var(--sh,80vh);overflow:hidden;background:radial-gradient(ellipse at 60% 40%,#33405f,#141c2e 75%)}
+#inst{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
+#hud{position:absolute;left:max(8px,env(safe-area-inset-left));top:6px;pointer-events:none;background:rgba(15,28,51,.82);border:2px solid var(--gold);border-radius:12px;padding:3px 10px;max-width:min(62%,420px)}
+#nn{font-size:1.4rem;font-weight:900;color:var(--gold);line-height:1.1}#hint{font-size:.8rem;font-weight:700;color:#dfe6f5;line-height:1.25}
+#turn{display:none;position:absolute;right:8px;top:6px;pointer-events:none;background:var(--gold);color:var(--navy);font-weight:900;font-size:.8rem;border-radius:999px;padding:6px 10px}
+body.portrait #turn{display:block}
+#turn span{display:inline-block;animation:tilt 2.4s ease-in-out infinite}@keyframes tilt{0%,60%,100%{transform:rotate(0)}30%{transform:rotate(90deg)}}
+#lesson{position:absolute;left:50%;transform:translateX(-50%);bottom:6px;pointer-events:none;background:rgba(15,28,51,.88);border:2px solid var(--green);border-radius:12px;padding:3px 10px;font-size:.85rem;font-weight:800;color:var(--green);display:none;max-width:92%;text-align:center}
+#lesson.on{display:block}
+main{max-width:900px;margin:0 auto;padding:10px 10px calc(30px + env(safe-area-inset-bottom))}
+#learn{background:#0f1c33;border:2px solid var(--gold);border-radius:14px;padding:8px 10px}
+#learn h2{margin:0 0 4px;font-size:.95rem;color:var(--gold)}#lt{font-size:.88rem;line-height:1.45}#lt ul{margin:4px 0 0;padding-left:20px}
+#lf{min-height:2.6em;font-weight:800;color:var(--green);font-size:.88rem;margin-top:6px}.lrow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+@media(max-width:520px){.lrow{grid-template-columns:repeat(2,1fr)}}
+.xrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tip{font-size:.8rem;opacity:.9;margin-top:10px;line-height:1.45}.foot{font-size:.8rem;text-align:center;margin-top:14px;color:#dfe6f5}
+.foot a{color:#dfe6f5;display:inline-flex;min-height:44px;align-items:center}
+.vib{animation:vib .05s linear infinite alternate}@keyframes vib{from{transform:translateY(-2px)}to{transform:translateY(2px)}}
+body.calm .vib{animation-duration:.12s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:420px){.bk .lg{display:none}}
+</style></head><body>
+<div id="bar"><a class="bk" href="https://academy.nismcaa.com" target="_top">← <span class="lg">Back to&nbsp;</span>NISMCAA Music Academy</a><h1>Bass Guitar</h1><button class="t" id="calm" type="button" aria-pressed="false" aria-label="Calm mode">🌙</button><button class="t" id="full" type="button" aria-label="Full screen">⛶</button></div>
+<div id="stage"><svg id="inst" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet" role="application" aria-label="Bass guitar. Press frets on the neck, pluck or swipe across the strings on the body.">
+<defs><radialGradient id="burst" cx=".45" cy=".5" r=".7"><stop offset="0" stop-color="#f6c55a"/><stop offset=".45" stop-color="#d9822b"/><stop offset=".8" stop-color="#7a2e12"/><stop offset="1" stop-color="#1c0b05"/></radialGradient>
+<linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e180e"/><stop offset=".5" stop-color="#4f2c1c"/><stop offset="1" stop-color="#2a150b"/></linearGradient>
+<linearGradient id="maple" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c99a5e"/><stop offset=".5" stop-color="#f0cf96"/><stop offset="1" stop-color="#b98a50"/></linearGradient>
+<linearGradient id="ch" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fafafa"/><stop offset=".5" stop-color="#9da3ad"/><stop offset="1" stop-color="#e8e8e8"/></linearGradient>
+<linearGradient id="fr" x1="0" x2="1"><stop offset="0" stop-color="#8d929a"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#8d929a"/></linearGradient>
+<linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d828a"/><stop offset=".45" stop-color="#f6f6f6"/><stop offset="1" stop-color="#6d727a"/></linearGradient>
+<filter id="sh"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-opacity=".6"/></filter></defs>
+<g id="rot">
+<g filter="url(#sh)"><path d="M700,20 C780,-10 860,30 900,60 C960,20 1040,0 1060,40 L1060,380 C1040,420 960,400 900,360 C860,390 780,420 700,390 C660,360 680,300 700,280 L700,140 C680,110 660,50 700,20Z" fill="url(#burst)" stroke="#120703" stroke-width="3"/>
+<path d="M0,40 Q50,20 96,80 L96,340 Q50,400 0,380Z" fill="url(#maple)" stroke="#8a6338" stroke-width="2"/></g>
+<path d="M730,70 L1000,70 L1000,350 L730,350 Q712,210 730,70Z" fill="#f4efe6" opacity=".95"/>
+<rect x="96" y="88" width="660" height="244" fill="url(#wood)" stroke="#1d0f08" stroke-width="2"/>
+<rect x="90" y="86" width="10" height="248" rx="2" fill="#f1ead8"/><rect x="181.6" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="265.2" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="344.2" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="418.7" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="489.0" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="555.4" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="618.0" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="677.2" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><rect x="733.0" y="88" width="6" height="244" rx="2" fill="url(#fr)"/><circle cx="307.7" cy="210" r="9" fill="#efe9dc" opacity=".9"/><circle cx="456.8" cy="210" r="9" fill="#efe9dc" opacity=".9"/><circle cx="589.7" cy="210" r="9" fill="#efe9dc" opacity=".9"/><circle cx="708.1" cy="210" r="9" fill="#efe9dc" opacity=".9"/>
+<rect x="800" y="92" width="44" height="236" rx="10" fill="#141414"/><rect x="900" y="92" width="40" height="236" rx="10" fill="#141414"/>
+<circle cx="822" cy="120" r="5" fill="#888"/><circle cx="920" cy="120" r="5" fill="#888"/><circle cx="822" cy="180" r="5" fill="#888"/><circle cx="920" cy="180" r="5" fill="#888"/><circle cx="822" cy="240" r="5" fill="#888"/><circle cx="920" cy="240" r="5" fill="#888"/><circle cx="822" cy="300" r="5" fill="#888"/><circle cx="920" cy="300" r="5" fill="#888"/>
+<rect x="960" y="96" width="40" height="228" rx="6" fill="url(#ch)" stroke="#666" stroke-width="2"/><g><rect x="19" y="0" width="22" height="34" rx="9" fill="url(#ch)" stroke="#555"/><circle cx="30" cy="60" r="9" fill="url(#ch)" stroke="#444" stroke-width="2"/></g><g><rect x="51" y="0" width="22" height="34" rx="9" fill="url(#ch)" stroke="#555"/><circle cx="62" cy="60" r="9" fill="url(#ch)" stroke="#444" stroke-width="2"/></g><g><rect x="19" y="368" width="22" height="34" rx="9" fill="url(#ch)" stroke="#555"/><circle cx="30" cy="360" r="9" fill="url(#ch)" stroke="#444" stroke-width="2"/></g><g><rect x="51" y="368" width="22" height="34" rx="9" fill="url(#ch)" stroke="#555"/><circle cx="62" cy="360" r="9" fill="url(#ch)" stroke="#444" stroke-width="2"/></g>
+<g id="want"></g><g id="marks"></g><g id="s0"><line x1="96" y1="120" x2="975" y2="120" stroke="#2a2a2a" stroke-width="11" opacity=".5" transform="translate(0 3)"/><line class="sl" x1="96" y1="120" x2="975" y2="120" stroke="#c9cdd3" stroke-width="9"/><line x1="96" y1="118.2" x2="975" y2="118.2" stroke="#fff" stroke-width="3.0" opacity=".75"/></g><g id="s1"><line x1="96" y1="180" x2="975" y2="180" stroke="#2a2a2a" stroke-width="9.5" opacity=".5" transform="translate(0 3)"/><line class="sl" x1="96" y1="180" x2="975" y2="180" stroke="#c9cdd3" stroke-width="7.5"/><line x1="96" y1="178.5" x2="975" y2="178.5" stroke="#fff" stroke-width="2.5" opacity=".75"/></g><g id="s2"><line x1="96" y1="240" x2="975" y2="240" stroke="#2a2a2a" stroke-width="8" opacity=".5" transform="translate(0 3)"/><line class="sl" x1="96" y1="240" x2="975" y2="240" stroke="#c9cdd3" stroke-width="6"/><line x1="96" y1="238.8" x2="975" y2="238.8" stroke="#fff" stroke-width="2.0" opacity=".75"/></g><g id="s3"><line x1="96" y1="300" x2="975" y2="300" stroke="#2a2a2a" stroke-width="6.8" opacity=".5" transform="translate(0 3)"/><line class="sl" x1="96" y1="300" x2="975" y2="300" stroke="#c9cdd3" stroke-width="4.8"/><line x1="96" y1="299.0" x2="975" y2="299.0" stroke="#fff" stroke-width="1.6" opacity=".75"/></g>
+<rect x="752" y="80" width="40" height="260" rx="14" fill="rgba(255,219,103,.10)" stroke="rgba(255,219,103,.55)" stroke-width="2" stroke-dasharray="8 8"/>
+<text x="140.3" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">1</text><text x="226.4" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">2</text><text x="307.7" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">3</text><text x="384.4" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">4</text><text x="456.8" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">5</text><text x="525.2" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">6</text><text x="589.7" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">7</text><text x="650.6" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">8</text><text x="708.1" y="362" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle">9</text><text x="748.0" y="380" font-family="sans-serif" font-weight="800" font-size="24" fill="#ffdb67" text-anchor="middle" style="font-size:20px">pluck · strum →</text>
+</g></svg><div id="hud" aria-live="polite"><div id="nn">Bass Guitar</div><div id="hint"></div></div><div id="turn" aria-hidden="true"><span>📱</span> Turn your phone sideways</div><div id="lesson" aria-hidden="true"></div></div>
+<main><section id="learn" aria-labelledby="lh"><h2 id="lh"></h2><div id="lt"></div><div id="lf" aria-live="polite"></div>
+<div class="lrow"><button class="t" id="lb" type="button">◀ Back</button><button class="t" id="ls" type="button">👀 Show me</button><button class="t" id="ly" type="button">🙋 Your turn</button><button class="t" id="ln" type="button">Next ▶</button></div>
+<div class="xrow"><button class="t" id="scale" type="button"></button></div></section>
+<p class="tip">The bass guitar has four strings: E, A, D and G, from lowest to highest, one octave lower than a guitar's lowest four. It is about 46 inches long. Each fret raises the note by a half step.</p>
+<p class="tip">How to play on the screen: press a fret on the neck with one finger and pluck that string on the body with another, just like a real bass. Swipe up or down across the strings to strum. Use several fingers at once. Turn your phone sideways for the biggest bass. On a computer: 1 Q W E R for the E string, 2 A S D F for A, 3 Z X C V for D, 4 U I O P for G.</p>
+<p class="foot"><a href="mailto:academy@nismcaa.com">academy@nismcaa.com</a>&nbsp;|&nbsp;<a href="tel:+14707390021">(470) 739-0021</a></p></main>
+<script>const VBL='0 0 1000 400';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
-const NAMES=['C','C♯','D','E♭','E','F','F♯','G','G♯','A','B♭','B'];const nm=m=>NAMES[m%12]+(Math.floor(m/12)-1);
-const STR=[{n:'E',m:28,x0:236,x1:220},{n:'A',m:33,x0:246,x1:241},{n:'D',m:38,x0:256,x1:262},{n:'G',m:43,x0:266,x1:283}];
-const NUT=200,BR=1300,FBE=870,BY=1100,FING=[0,1,2,3,4],FN=['Open','Fret 1','Fret 2','Fret 3','Fret 4'];
-const sx=(s,y)=>s.x0+(s.x1-s.x0)*(y-NUT)/(BR-NUT),fr=n=>NUT+(BR-NUT)*(1-Math.pow(2,-n/12)),fy=k=>fr(k)-11;
-const T=[];STR.forEach((s,si)=>{el('line',{class:'str',id:'s'+si,x1:s.x0,y1:NUT,x2:s.x1,y2:BR},$('strs'));
- for(let k=0;k<5;k++){const y=k?fy(k):BY,x=sx(s,y);T.push({si,k,x,y});if(k)el('circle',{class:'dot',id:'d'+si+k,cx:x,cy:y,r:8},$('dots'))}});
-const FB=$('fb'),btn={};for(let k=0;k<5;k++)STR.forEach((s,si)=>{const m=s.m+FING[k],b=document.createElement('button');b.type='button';b.className='nb'+(k?'':' op');b.dataset.s=si;b.dataset.k=k;b.innerHTML=nm(m)+'<small>'+FN[k]+'</small>';b.setAttribute('aria-label',nm(m)+', '+s.n+' string, '+FN[k]);FB.appendChild(b);btn[si+'_'+k]=b});
-// ---- audio (synthesised electric bass)
-let ctx,bus,muted=false,soundChosen=false,parentOn=null,mode='arco';window.__plays=[];
-function getCtx(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();const comp=ctx.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=4;bus=ctx.createGain();bus.gain.value=muted?0:.9;
- const lo=ctx.createBiquadFilter();lo.type='lowshelf';lo.frequency.value=120;lo.gain.value=5;const mid=ctx.createBiquadFilter();mid.type='peaking';mid.frequency.value=800;mid.Q.value=1;mid.gain.value=2;
- bus.connect(lo);lo.connect(mid);mid.connect(comp);comp.connect(ctx.destination)}
- if(ctx.state!='running')ctx.resume();return ctx}
+let ctx,bus,muted=false,soundChosen=false,parentOn=null;window.__plays=[];
+function getCtx(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();bus=ctx.createGain();bus.gain.value=muted?0:.9;setupBus(ctx,bus)}if(ctx.state!='running')ctx.resume();return ctx}
 ['touchstart','pointerdown','keydown'].forEach(t=>addEventListener(t,()=>getCtx(),{capture:true,passive:true}));
-addEventListener('message',e=>{if(e.origin!==location.origin||!e.data||e.data.type!=='nma-sound')return;muted=!e.data.on;soundChosen=!!e.data.chosen;parentOn=!!e.data.on;if(!soundChosen)muted=false;if(bus)bus.gain.value=muted?0:.9;if(muted)stopAll()});
-const hz=m=>440*Math.pow(2,(m-69)/12),lvl=()=>document.body.classList.contains('calm')?.3:.55;
-function bass(m){const t=ctx.currentTime,f=hz(m),L=lvl(),pick=mode==='pizz';
- const o=ctx.createOscillator();o.type='sawtooth';o.frequency.value=f;const o2=ctx.createOscillator();o2.type='sine';o2.frequency.value=f;const o3=ctx.createOscillator();o3.type='triangle';o3.frequency.value=f*2;o3.detune.value=3;
- const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.Q.value=pick?3:1.2;const top=pick?f*24:f*9;lp.frequency.setValueAtTime(Math.min(top,6000),t);lp.frequency.exponentialRampToValueAtTime(f*(pick?4:2.2),t+(pick?.5:.35));
- const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(L,t+.006);g.gain.exponentialRampToValueAtTime(L*.45,t+.3);g.gain.exponentialRampToValueAtTime(L*.08,t+4);
- const a=ctx.createGain();a.gain.value=.35;const b=ctx.createGain();b.gain.value=1;const c=ctx.createGain();c.gain.value=.15;o.connect(a);o2.connect(b);o3.connect(c);[a,c].forEach(x=>x.connect(lp));lp.connect(g);b.connect(g);g.connect(bus);
- [o,o2,o3].forEach(x=>{x.start(t);x.stop(t+4.2)});return{g,src:[o,o2,o3],rel:.09}}
-const voices={};
-function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){st.textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
-const pkEl=$('pk'),pkR=$('pkr'),pkM=$('pkm');let pkT=null;
-function pluckAt(si){clearTimeout(pkT);const x=sx(STR[si],BY);pkR.setAttribute('transform','translate('+x.toFixed(1)+' '+BY+')');pkEl.classList.add('on');pkM.style.animation='none';void pkM.getBoundingClientRect();pkM.style.animation=''}
-function pkCheck(){clearTimeout(pkT);pkT=setTimeout(()=>{if(!Object.keys(voices).length)pkEl.classList.remove('on')},500)}
-function show(si,k,on){if(on)pluckAt(si);else pkCheck();const b=btn[si+'_'+k];b&&b.classList.toggle('on',on);$('s'+si).classList.toggle('on',on);const d=$('d'+si+k);d&&d.classList.toggle('down',on)}
-function start(id,si,k){stop(id);const m=STR[si].m+FING[k];$('nn').textContent=nm(m);$('nf').textContent=STR[si].n+' string · '+FN[k];show(si,k,true);judge(si,k);
- if(!permit()){pkCheck();return}getCtx();window.__plays.push(m);const v=bass(m);v.si=si;v.k=k;voices[id]=v;
- st.textContent=nm(m)+' on the '+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open string')+(mode==='arco'?'. Plucked with your fingers. Let go to stop it.':'. Played with a pick. Let go to stop it.')}
-function stop(id){const v=voices[id];if(!v)return;delete voices[id];show(v.si,v.k,false);const t=ctx.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(0,t,v.rel/3);v.src.forEach(x=>{try{x.stop(t+.5)}catch(_){}})}
-function stopAll(){pkEl.classList.remove('on');$('ring').classList.remove('on');Object.keys(voices).forEach(stop);document.querySelectorAll('.nb.on,.dot.down,.str.on').forEach(e=>e.classList.remove('on','down'))}
-const act={};
-function rel(e){if(!e.isTrusted)return;const id=act[e.pointerId];if(id===undefined)return;delete act[e.pointerId];stop(id)}
-FB.addEventListener('pointerdown',e=>{const b=e.target.closest('.nb');if(!b)return;e.preventDefault();try{b.releasePointerCapture(e.pointerId)}catch(_){}const id='p'+e.pointerId;act[e.pointerId]=id;start(id,+b.dataset.s,+b.dataset.k)});
-const svg=$('ce');function svgPt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
-$('zone').addEventListener('pointerdown',e=>{const p=svgPt(e);let best=null,bd=1e9;
- if(p.y>FBE){for(const t of T)if(!t.k){const d=Math.abs(p.x-sx(STR[t.si],p.y));if(d<bd){bd=d;best=t}}}
- else for(const t of T){if(!t.k)continue;const dx=(p.x-t.x)*2.5,dy=p.y-t.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=t}}
- if(!best)return;e.preventDefault();const id='p'+e.pointerId;act[e.pointerId]=id;start(id,best.si,best.k)});
-['pointerup','pointercancel','pointerleave'].forEach(t=>{FB.addEventListener(t,rel,true);$('zone').addEventListener(t,rel)});
-addEventListener('pointerup',rel);
-document.addEventListener('contextmenu',e=>e.preventDefault());
-const KM={};[['1','q','w','e','r'],['2','a','s','d','f'],['3','z','x','c','v'],['4','u','i','o','p']].forEach((r,si)=>r.forEach((c,k)=>KM[c]=[si,k]));
-addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey)return;const v=KM[e.key.toLowerCase()];if(!v)return;start('k'+e.key.toLowerCase(),v[0],v[1])});
-addEventListener('keyup',e=>stop('k'+e.key.toLowerCase()));
-function setMode(m){mode=m;$('arco').setAttribute('aria-pressed',m==='arco');$('pizz').setAttribute('aria-pressed',m==='pizz');stopAll();st.textContent=m==='arco'?'Fingers: a warm, round sound, like most bass players use.':'Pick: a brighter, punchier sound for rock songs.'}
-$('arco').onclick=()=>setMode('arco');$('pizz').onclick=()=>setMode('pizz');
+addEventListener('message',e=>{if(e.origin!==location.origin||!e.data||e.data.type!=='nma-sound')return;muted=!e.data.on;soundChosen=!!e.data.chosen;parentOn=!!e.data.on;if(!soundChosen)muted=false;if(bus)bus.gain.value=muted?0:.9;if(muted)quiet()});
+function permit(){if(parentOn===false&&!soundChosen&&window.parent!==window){parent.postMessage({type:'nma-sound-on'},location.origin);parentOn=true;soundChosen=true}if(muted){$('hint').textContent='Sound is off. Turn it on with the Sound button at the top of the app.';return false}return true}
+const hz=m=>440*Math.pow(2,(m-69)/12),calm=()=>document.body.classList.contains('calm');
 $('calm').onclick=()=>{const on=document.body.classList.toggle('calm');$('calm').setAttribute('aria-pressed',on)};
-function clearNext(){document.querySelectorAll('.next,.lwant').forEach(b=>b.classList.remove('next','lwant'))}
-// G major scale: G (E3) A B C (A string) D E F# (D string) G (open G) and back
-const SC=[[0,3],[1,0],[1,2],[1,3],[2,0],[2,2],[2,4],[3,0]],SEQ=SC.concat(SC.slice(0,-1).reverse());let timer=null;
-function stopScale(){if(timer){clearTimeout(timer);timer=null}stop('demo');clearNext();$('scale').textContent='▶ G major scale'}
-$('scale').onclick=()=>{if(timer){stopScale();st.textContent='Scale stopped.';return}lessonStop();getCtx();let i=0;$('scale').textContent='■ Stop the scale';
- const step=()=>{stop('demo');clearNext();if(i>=SEQ.length){timer=null;$('scale').textContent='▶ G major scale';st.textContent='That was the G major scale: G A B C D E F♯ G. Now try it yourself.';return}
-  const[si,k]=SEQ[i++];btn[si+'_'+k].classList.add('next');start('demo',si,k);st.textContent='G major scale, note '+i+' of '+SEQ.length+': '+nm(STR[si].m+FING[k])+' ('+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open')+')';timer=setTimeout(()=>{stop('demo');timer=setTimeout(step,60)},480)};step()};
-// ---- Learn to play
-const G=[0,3],Dn=[2,0],E=[2,2],C3=[1,3],B=[1,2],A=[1,0];
-const L1=[G,G,Dn,Dn,E,E,Dn,C3,C3,B,B,A,A,G],L2=[Dn,Dn,C3,C3,B,B,A];
-const LES=[
- {h:'Step 1 of 5: Hold the bass',t:'<ul><li>Sit up tall, or stand with the strap on your left shoulder.</li><li>Rest the body on your right leg, with the neck pointing up and to your left.</li><li>The thickest string, <b>E</b>, is closest to your face.</li><li>Your left thumb sits behind the neck. Your fingers curve over the frets like holding a ball.</li></ul>',show:'The green ring shows where your right hand rests, on the pickup, with your thumb on it.',ring:[251,1023,70],turn:'Hold your bass like this for 10 slow counts. Tap Your turn again to check it off.',check:1,st:'Body on your right leg, E string on top.'},
- {h:'Step 2 of 5: Pluck with two fingers',t:'<ul><li>Rest your right thumb on the top pickup.</li><li>Pluck with your index finger, then your middle finger, taking turns: 1, 2, 1, 2.</li><li>Pull the string toward you, so your finger lands on the next string. This is called a <b>rest stroke</b>.</li><li>Keep the plucking soft and even.</li></ul>',show:'Watch the finger: it pulls across the string and comes to rest on the next string.',pick:1,turn:'Pluck the open A string 8 times, taking turns with your index and middle fingers. Tap Your turn again to check it off.',check:1,st:'Index, middle, index, middle.'},
- {h:'Step 3 of 5: Play the open strings',t:'Pluck each open string twice, from the lowest to the highest: E, A, D, G. Say the name as you play it. Let each note ring for its full count.',seq:[[0,0],[0,0],[1,0],[1,0],[2,0],[2,0],[3,0],[3,0]],dur:900,st:'E, A, D, G: two plucks each.'},
- {h:'Step 4 of 5: One finger per fret',t:'On the A string, press just behind each fret with the tip of your finger. Open A, then fret 1 is B♭ (finger 1), fret 2 is B (finger 2), fret 3 is C (finger 3) and fret 4 is C♯ (finger 4).',seq:[[1,0],[1,1],[1,2],[1,3],[1,4]],dur:800,st:'A string: open, then frets 1, 2, 3, 4.'},
- {h:'Step 5 of 5: Play Twinkle',t:'"Twinkle Twinkle Little Star" in G. Follow the green note. G is fret 3 on the E string, D is the open D string, E is fret 2 on D, C is fret 3 on A, B is fret 2 on A and A is the open A string.',seq:L1.concat(L2,L2,L1),dur:480,st:'Twinkle Twinkle Little Star: follow the green note.'}];
-let L=0,lwant=-1,lt=null,rt=null;const lf=$('lf');
-const say=s=>{lf.textContent=s;$('st2').textContent=s};
-function lessonStop(){clearTimeout(lt);lt=null;clearTimeout(rt);$('ring').classList.remove('on');stop('lesson');lwant=-1;clearNext();['ls','ss'].forEach(i=>$(i).textContent='👀 Show me');pkCheck()}
-function nm2(si,k){return nm(STR[si].m+FING[k])}
-function want(si,k){clearNext();btn[si+'_'+k].classList.add('next');const d=$('d'+si+k);d&&d.classList.add('lwant');inView(btn[si+'_'+k])}
-function inView(b){const r=b.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)b.scrollIntoView({block:'nearest'})}
-function lessonShow(){const x=LES[L];lessonStop();['lb','sb'].forEach(i=>$(i).disabled=L===0);['ln','sn'].forEach(i=>$(i).disabled=L===LES.length-1);$('lh').textContent=x.h;$('lt').innerHTML=x.t;$('st1').textContent=x.h;say(x.st)}
-function back(){if(L>0){L--;lessonShow()}}function next(){if(L<LES.length-1){L++;lessonShow()}}
-function showMe(){const x=LES[L];if(lt){lessonStop();say('Stopped.');return}stopScale();lessonStop();
- if(!x.seq){say(x.show);if(x.ring){const r=$('ring');r.setAttribute('cx',x.ring[0]);r.setAttribute('cy',x.ring[1]);r.setAttribute('r',x.ring[2]);r.classList.add('on');rt=setTimeout(()=>r.classList.remove('on'),3500)}
-  if(x.pick){let n=0;const go=()=>{pluckAt(1);$('s1').classList.add('on');setTimeout(()=>$('s1').classList.remove('on'),250);if(++n<6)rt=setTimeout(go,600);else rt=setTimeout(()=>pkEl.classList.remove('on'),700)};go()}return}
- getCtx();let i=0;['ls','ss'].forEach(id=>$(id).textContent='■ Stop');
- const step=()=>{stop('lesson');clearNext();if(i>=x.seq.length){lt=null;['ls','ss'].forEach(id=>$(id).textContent='👀 Show me');say('Now tap Your turn and try it yourself.');return}
-  const[si,k]=x.seq[i];want(si,k);start('lesson',si,k);
-  say(nm2(si,k)+' ('+STR[si].n+' string, '+(k?FN[k].toLowerCase():'open')+')'+(x.seq.length>8?'. Note '+(i+1)+' of '+x.seq.length:''));i++;
-  lt=setTimeout(()=>{stop('lesson');lt=setTimeout(step,80)},x.dur)};step()}
-function yourTurn(){const x=LES[L];lessonStop();stopScale();
- if(x.check){say(x.done?'✓ Checked off! Tap Next when you are ready.':x.turn);x.done=1;return}
- lwant=0;want(...x.seq[0]);say('Your turn: play '+nm2(...x.seq[0])+' (green). Play each note, then let go.')}
-$('lb').onclick=$('sb').onclick=back;$('ln').onclick=$('sn').onclick=next;$('ls').onclick=$('ss').onclick=showMe;$('ly').onclick=$('sy').onclick=yourTurn;
-function judge(si,k){if(lwant<0)return;const x=LES[L],[ws,wk]=x.seq[lwant];
- if(si===ws&&k===wk){lwant++;if(lwant>=x.seq.length){lwant=-1;clearNext();say('✓ Great job! You played it all. '+(L<LES.length-1?'Tap Next for the next step.':'You finished all the lessons!'));return}
-  want(...x.seq[lwant]);const[ns,nk]=x.seq[lwant];say('✓ Yes! Next: '+nm2(ns,nk)+' ('+STR[ns].n+' string, '+(nk?FN[nk].toLowerCase():'open')+'). '+(lwant+1)+' of '+x.seq.length)}
- else say('Not quite. That was '+nm2(si,k)+'. Try '+nm2(ws,wk)+' on the '+STR[ws].n+' string (green).')}
-lessonShow();
-function quiet(){stopScale();lessonStop();stopAll()}
-['blur','pagehide'].forEach(t=>addEventListener(t,quiet));document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet()});
-const NARROW=matchMedia('(max-width:699px)');
-function fit(){const sg=$('stage'),w=$('wrap');if(!NARROW.matches){svg.setAttribute('viewBox','-200 0 902 1536');sg.style.removeProperty('--ph');return}
- svg.setAttribute('viewBox','40 0 422 1500');let vh=innerHeight;try{if(window.parent!==window)vh=parent.innerHeight-120}catch(_){}
- const top=w.getBoundingClientRect().top+scrollY+6;let ph=Math.max(260,vh-top-8);const W=document.documentElement.clientWidth-16-8-200;
- ph=Math.min(ph,Math.max(80,W)*1500/422+4);sg.style.setProperty('--ph',Math.round(ph)+'px');post()}
+$('full').onclick=()=>{const d=document.documentElement;if(d.requestFullscreen&&document.fullscreenEnabled){(document.fullscreenElement?document.exitFullscreen():d.requestFullscreen()).catch(()=>{})}else if(window.parent!==window){top.location.href=location.pathname}else{$('hint').textContent='Turn your phone sideways and the instrument fills the screen.'}};
+const svg=$('inst');function svgPt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform($('rot').getScreenCTM().inverse())}
+let portrait=false;
+function fit(){let vw=innerWidth,vh=innerHeight;try{if(window.parent!==window){vh=Math.min(parent.innerHeight,screen.height||9999);vw=parent.innerWidth}}catch(_){}
+ portrait=vh>vw*1.1;document.body.classList.toggle('portrait',portrait);
+ const sh=Math.max(260,vh-52-(window.parent!==window&&!portrait?0:0));document.documentElement.style.setProperty('--sh',sh+'px');
+ if(portrait){svg.setAttribute('viewBox',window.VBP||'0 0 400 1000');$('rot').setAttribute('transform','translate(400 0) rotate(90)')}else{svg.setAttribute('viewBox',VBL);$('rot').removeAttribute('transform')}
+ window.onFit&&onFit(portrait);post()}
 const post=()=>{if(window.parent!==window)parent.postMessage({type:'nma-explorer-height',height:document.documentElement.scrollHeight},location.origin)};
-addEventListener('resize',fit);addEventListener('load',fit);fit();setTimeout(post,300);
+addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,200));addEventListener('load',fit);document.addEventListener('contextmenu',e=>e.preventDefault());
+function quiet(){try{stopAllSound()}catch(_){}}
+['blur','pagehide'].forEach(t=>addEventListener(t,quiet));document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet()});
+
+const stage=$('stage');document.querySelector('#bar h1').insertAdjacentHTML('afterend','<button class="t" id="pick" type="button" aria-pressed="false">🔺 Pick</button>');
+const NAMES=['C','C♯','D','E♭','E','F','F♯','G','G♯','A','B♭','B'],nm=m=>NAMES[m%12]+(Math.floor(m/12)-1);
+const STR=[{n:'E',m:28},{n:'A',m:33},{n:'D',m:38},{n:'G',m:43}],SY=[120, 180, 240, 300],NUT=96,NE=736,PX=752;
+const fx=n=>NUT+640*(1-Math.pow(2,-n/12))/(1-Math.pow(2,-9/12));
+let pick=false;$('pick').onclick=()=>{pick=!pick;$('pick').setAttribute('aria-pressed',pick);$('hint').textContent=pick?'Pick: a bright, punchy sound.':'Fingers: a warm, round sound.'};
+function setupBus(c,b){const comp=c.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=4;const lo=c.createBiquadFilter();lo.type='lowshelf';lo.frequency.value=120;lo.gain.value=5;b.connect(lo);lo.connect(comp);comp.connect(c.destination)}
+function bassVoice(m,vel){const t=ctx.currentTime,f=hz(m),L=(calm()?.3:.55)*vel;
+ const o=ctx.createOscillator();o.type='sawtooth';o.frequency.value=f;const o2=ctx.createOscillator();o2.type='sine';o2.frequency.value=f;
+ const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.Q.value=pick?3:1.2;lp.frequency.setValueAtTime(Math.min(pick?f*24:f*9,6000),t);lp.frequency.exponentialRampToValueAtTime(f*(pick?4:2.2),t+(pick?.5:.35));
+ const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(L,t+.006);g.gain.exponentialRampToValueAtTime(L*.45,t+.3);g.gain.exponentialRampToValueAtTime(L*.05,t+4);
+ const a=ctx.createGain();a.gain.value=.35;o.connect(a);a.connect(lp);lp.connect(g);o2.connect(g);g.connect(bus);[o,o2].forEach(x=>{x.start(t);x.stop(t+4.2)});return{g,src:[o,o2]}}
+const ring={},held=[{},{},{},{}];
+function fretOf(si){const k=Object.values(held[si]);return k.length?Math.max(...k):0}
+function vib(si,on){const s=$('s'+si);clearTimeout(s._t);s.classList.toggle('vib',on);if(on)s._t=setTimeout(()=>s.classList.remove('vib'),1800)}
+function mute(si,r){const v=ring[si];if(!v)return;delete ring[si];const t=ctx.currentTime;v.g.gain.cancelScheduledValues(t);v.g.gain.setTargetAtTime(0,t,r||.03);v.src.forEach(x=>{try{x.stop(t+.4)}catch(_){}});vib(si,false)}
+function sound(si,k,vel){const m=STR[si].m+k;$('nn').textContent=nm(m);$('hint').textContent=STR[si].n+' string · '+(k?'fret '+k:'open');judge([si,k]);if(!permit())return;getCtx();mute(si);window.__plays.push(m);ring[si]=bassVoice(m,vel);ring[si].k=k;vib(si,true)}
+function pluck(si){sound(si,fretOf(si),1)}
+function stopAllSound(){[0,1,2,3].forEach(si=>mute(si));held.forEach(h=>{for(const k in h)delete h[k]});$('marks').innerHTML=''}
+function nearStr(y){let b=0,d=1e9;SY.forEach((sy,i)=>{const e=Math.abs(sy-y);if(e<d){d=e;b=i}});return b}
+function fretAt(x){for(let n=1;n<=9;n++)if(x<fx(n))return n;return 9}
+const mk={};function mark(id,si,k){let c=mk[id];if(!c){c=el('circle',{r:22,fill:'rgba(255,215,90,.55)',stroke:'#fff',"stroke-width":3},$('marks'));mk[id]=c}c.setAttribute('cx',(fx(k-1)+fx(k))/2+14);c.setAttribute('cy',SY[si])}
+function unmark(id){mk[id]&&mk[id].remove();delete mk[id]}
+const P={};
+svg.addEventListener('pointerdown',e=>{e.preventDefault();try{svg.setPointerCapture(e.pointerId)}catch(_){}const p=svgPt(e);
+ if(p.x>=NUT&&p.x<NE){const si=nearStr(p.y),k=fretAt(p.x);P[e.pointerId]={t:'f',si,k};held[si][e.pointerId]=k;mark(e.pointerId,si,k);sound(si,k,.55)}
+ else if(p.x>=NE){P[e.pointerId]={t:'p',y:p.y};const si=nearStr(p.y);if(Math.abs(SY[si]-p.y)<32)pluck(si)}});
+svg.addEventListener('pointermove',e=>{const s=P[e.pointerId];if(!s)return;const p=svgPt(e);
+ if(s.t==='f'){if(p.x<NUT||p.x>=NE)return;const si=nearStr(p.y),k=fretAt(p.x);if(si!==s.si||k!==s.k){delete held[s.si][e.pointerId];if(ring[s.si]&&ring[s.si].k===s.k&&si!==s.si)mute(s.si,.05);s.si=si;s.k=k;held[si][e.pointerId]=k;mark(e.pointerId,si,k);sound(si,k,.5)}}
+ else{const a=Math.min(s.y,p.y),b=Math.max(s.y,p.y);const hit=SY.map((y,i)=>[y,i]).filter(([y])=>y>a&&y<=b);if(p.y<s.y)hit.reverse();hit.forEach(([,i],j)=>setTimeout(()=>pluck(i),j*12));s.y=p.y}});
+function up(e){const s=P[e.pointerId];if(!s)return;delete P[e.pointerId];if(s.t==='f'){delete held[s.si][e.pointerId];unmark(e.pointerId);if(ring[s.si]&&ring[s.si].k===s.k&&!Object.keys(held[s.si]).length)mute(s.si,.08)}}
+['pointerup','pointercancel'].forEach(t=>svg.addEventListener(t,up));
+// keyboard: 1 Q W E R... rows per string (open, frets 1-4)
+const KM={};[['1','q','w','e','r'],['2','a','s','d','f'],['3','z','x','c','v'],['4','u','i','o','p']].forEach((r,si)=>r.forEach((c,k)=>KM[c]=[si,k]));
+addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey)return;const v=KM[e.key.toLowerCase()];if(v)sound(v[0],v[1],1)});
+// lesson helpers
+const label=([si,k])=>nm(STR[si].m+k)+' ('+STR[si].n+' string, '+(k?'fret '+k:'open')+')',same=(a,b)=>a[0]===b[0]&&a[1]===b[1];
+function clearWant(){$('want').innerHTML=''}
+function showWant([si,k]){clearWant();if(k)el('circle',{cx:(fx(k-1)+fx(k))/2+14,cy:SY[si],r:26,fill:'none',stroke:'#7cff8a','stroke-width':7},$('want'));el('rect',{x:PX-6,y:SY[si]-16,width:240,height:32,rx:14,fill:'rgba(124,255,138,.35)',stroke:'#7cff8a','stroke-width':4},$('want'))}
+function demoPlay([si,k]){held[si].demo=k;mark('demo',si,k||1);if(!k)unmark('demo');pluck(si);setTimeout(()=>{delete held[si].demo},300)}
+function demoStop(){unmark('demo');[0,1,2,3].forEach(si=>delete held[si].demo)}
+const SC=[[0,3],[1,0],[1,2],[1,3],[2,0],[2,2],[2,4],[3,0]],SCN='▶ G major scale',SCDONE='That was the G major scale: G A B C D E F♯ G.';
+const G=[0,3],Dn=[2,0],E=[2,2],C3=[1,3],B=[1,2],A=[1,0],L1=[G,G,Dn,Dn,E,E,Dn,C3,C3,B,B,A,A,G],L2=[Dn,Dn,C3,C3,B,B,A];
+const LES=[
+ {h:'Step 1 of 5: Hold the bass',t:'<ul><li>Sit up tall, or stand with the strap on your left shoulder.</li><li>Rest the body on your right leg, neck pointing to your left.</li><li>The thickest string, <b>E</b>, is closest to your face (the top string on the screen).</li><li>Your left thumb sits behind the neck, fingers curved over the frets.</li></ul>',show:'Watch the screen: the gold glow is where your right hand plucks, over the pickups.',demo(){showWant([1,0]);setTimeout(clearWant,3000)},turn:'Hold your bass like this for 10 slow counts. Tap Your turn again to check it off.',check:1,st:'Body on your right leg, E string on top.'},
+ {h:'Step 2 of 5: Pluck with two fingers',t:'<ul><li>Rest your right thumb on the pickup.</li><li>Pluck with your index finger, then your middle finger: 1, 2, 1, 2.</li><li>On the screen, touch a string on the body (right side) to pluck it, or swipe across all four strings to strum.</li></ul>',show:'Listen: the A string plucked 4 times, then a strum across all strings.',demo(){let n=0;const go=()=>{if(n<4)pluck(1);else[0,1,2,3].forEach((s,j)=>setTimeout(()=>pluck(s),j*40));if(++n<5)lt=setTimeout(go,550);else lt=null};go()},turn:'Pluck the open A string 8 times, taking turns with two fingers, then swipe across all four. Tap Your turn again to check it off.',check:1,st:'Index, middle, index, middle.'},
+ {h:'Step 3 of 5: Play the open strings',t:'Pluck each open string twice, from lowest to highest: E, A, D, G. Touch the strings on the body; the green glow shows which one.',seq:[[0,0],[0,0],[1,0],[1,0],[2,0],[2,0],[3,0],[3,0]],dur:900,st:'E, A, D, G: two plucks each.'},
+ {h:'Step 4 of 5: Press the frets',t:'Keep one finger pressed on the neck (the green ring) and pluck that string on the body with another finger. Open A, then fret 1 (B♭), fret 2 (B), fret 3 (C), fret 4 (C♯). One finger per fret. A quick tap on the neck also plays the note softly.',seq:[[1,0],[1,1],[1,2],[1,3],[1,4]],dur:900,st:'A string: open, then frets 1, 2, 3, 4.'},
+ {h:'Step 5 of 5: Play Twinkle',t:'"Twinkle Twinkle Little Star" in G. Follow the green ring and glow: press the fret, then pluck the string.',seq:L1.concat(L2,L2,L1),dur:500,st:'Twinkle Twinkle Little Star: follow the green.'}];
+$('hint').textContent='Press frets on the neck. Pluck or swipe the strings on the body.';$('scale').textContent=SCN;window.VBP='0 -70 400 1070';
+
+let L=0,lwant=-1,lt=null;const lf=$('lf');
+const say=s=>{lf.textContent=s;const b=$('lesson');b.textContent=s;b.classList.toggle('on',!!s&&lwant>=0)};
+function lessonStop(){clearTimeout(lt);lt=null;lwant=-1;clearWant();$('ls').textContent='👀 Show me';$('lesson').classList.remove('on');demoStop&&demoStop()}
+function lessonShow(){const x=LES[L];lessonStop();$('lb').disabled=L===0;$('ln').disabled=L===LES.length-1;$('lh').textContent=x.h;$('lt').innerHTML=x.t;lf.textContent=x.st}
+$('lb').onclick=()=>{if(L>0){L--;lessonShow()}};$('ln').onclick=()=>{if(L<LES.length-1){L++;lessonShow()}};
+$('ls').onclick=()=>{const x=LES[L];if(lt){lessonStop();lf.textContent='Stopped.';return}lessonStop();stopScale();
+ if(!x.seq){lf.textContent=x.show;x.demo&&x.demo();return}
+ getCtx();let i=0;$('ls').textContent='■ Stop';stage.scrollIntoView({block:'start',behavior:'smooth'});
+ const step=()=>{clearWant();if(i>=x.seq.length){lt=null;$('ls').textContent='👀 Show me';lf.textContent='Now tap Your turn and try it yourself.';$('lesson').classList.remove('on');return}
+  const n=x.seq[i];showWant(n);demoPlay(n);const s=label(n)+(x.seq.length>8?' · '+(i+1)+' of '+x.seq.length:'');lf.textContent=s;$('lesson').textContent=s;$('lesson').classList.add('on');i++;lt=setTimeout(step,x.dur)};step()};
+$('ly').onclick=()=>{const x=LES[L];lessonStop();stopScale();
+ if(x.check){lf.textContent=x.done?'✓ Checked off! Tap Next when you are ready.':x.turn;x.done=1;return}
+ lwant=0;showWant(x.seq[0]);stage.scrollIntoView({block:'start',behavior:'smooth'});say('Your turn: play '+label(x.seq[0])+' (green).')};
+function judge(n){if(lwant<0)return;const x=LES[L],w=x.seq[lwant];
+ if(same(n,w)){lwant++;if(lwant>=x.seq.length){lwant=-1;clearWant();say('✓ Great job! You played it all. '+(L<LES.length-1?'Tap Next below for the next step.':'You finished all the lessons!'));setTimeout(()=>$('lesson').classList.remove('on'),2500);return}
+  showWant(x.seq[lwant]);say('✓ Yes! Next: '+label(x.seq[lwant])+' · '+(lwant+1)+' of '+x.seq.length)}
+ else say('Not quite. That was '+label(n)+'. Try '+label(w)+' (green).')}
+let timer=null;function stopScale(){if(timer){clearTimeout(timer);timer=null;demoStop&&demoStop();clearWant();$('scale').textContent=SCN}}
+$('scale').onclick=()=>{if(timer){stopScale();return}lessonStop();getCtx();let i=0;$('scale').textContent='■ Stop the scale';const SEQ=SC.concat(SC.slice(0,-1).reverse());stage.scrollIntoView({block:'start',behavior:'smooth'});
+ const step=()=>{clearWant();if(i>=SEQ.length){timer=null;demoStop&&demoStop();$('scale').textContent=SCN;$('hint').textContent=SCDONE;return}const n=SEQ[i++];showWant(n);demoPlay(n);$('hint').textContent='Scale '+i+' of '+SEQ.length+': '+label(n);timer=setTimeout(step,560)};step()};
+lessonShow();fit();setTimeout(fit,300);
 </script></body></html>
