@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>NISMCAA Tutor · Teaching Board (preview)</title>
+<style>html,body{margin:0;height:100%;font-family:Arial,sans-serif;overflow:hidden}body{display:flex;flex-direction:column;background:#182947}
+.tb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px 8px;background:#182947;color:#fff}.tb b{color:#ffdb67}button,select{min-height:40px;border-radius:10px;border:1px solid #ccc;background:#fff;font-weight:700;padding:0 10px;cursor:pointer}button.sel{outline:3px solid #ffdb67}
+.sw{width:34px;padding:0}#cv{flex:1;touch-action:none;display:block;width:100%}.note{color:#b8c7df;font-size:.75rem;padding:2px 8px}a{color:#ffdb67}</style></head><body>
+<div class="tb"><b>NISMCAA Tutor · Teaching Board</b>
+<button id="mode">🖤 Blackboard</button><span id="cols"></span>
+<select id="sz" aria-label="Pen size"><option value="2">Thin</option><option value="5" selected>Medium</option><option value="10">Thick</option><option value="22">Marker</option></select>
+<button id="pen" class="sel">✏️ Pen</button><button id="er">🧽 Eraser</button><button id="tx">🔤 Text</button><button id="un">↶ Undo</button><button id="cl">🗑 Clear</button><button id="png">💾 Save PNG</button><button id="fs">⛶ Full screen</button><a id="back" href="./" target="_top">← Back</a></div>
+<canvas id="cv"></canvas><div class="note" id="note"></div>
+<script>
+const q=new URLSearchParams(location.search),room=q.get('room')||'demo',cv=document.getElementById('cv'),x=cv.getContext('2d');
+let dark=false,col='#16264a',tool='pen',S=[],cur=null;
+const LC=['#16264a','#ff6b4a','#00897f','#7a4bd1','#e0a100','#d62828'],DC=['#ffffff','#ffdb67','#7dcabf','#f6a6c1','#9ad1ff','#ff9f7a'];
+const ch='BroadcastChannel' in window?new BroadcastChannel('nt-board-'+room):null;
+document.getElementById('note').innerHTML=`Room ${room.replace(/[<>&]/g,'')} · <b>Shared live in this preview only between tabs/windows on the same device and browser</b> (BroadcastChannel). Across two different devices, use Jitsi's screen share in Join lesson. Real cross-device sync needs a server (next stage).`;
+function cols(){const c=dark?DC:LC;if(!c.includes(col))col=c[0];document.getElementById('cols').innerHTML=c.map(v=>`<button class="sw ${v==col?'sel':''}" style="background:${v}" aria-label="Color ${v}" onclick="col='${v}';tool=tool=='er'?'pen':tool;cols();tb()"></button>`).join('')}
+function rs(){const r=cv.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;draw()}
+function draw(){x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);x.fillStyle=dark?'#24352b':'#ffffff';x.fillRect(0,0,cv.width,cv.height);x.lineCap=x.lineJoin='round';
+for(const s of S){if(s.t=='text'){x.fillStyle=s.c;x.font=`${s.w*5+12}px Arial`;x.fillText(s.s,s.p[0][0],s.p[0][1]);continue}x.strokeStyle=s.t=='er'?(dark?'#24352b':'#ffffff'):s.c;x.lineWidth=s.t=='er'?s.w*4:s.w;x.beginPath();s.p.forEach(([a,b],i)=>i?x.lineTo(a,b):x.moveTo(a,b));if(s.p.length==1)x.lineTo(s.p[0][0]+.1,s.p[0][1]);x.stroke()}}
+const pt=e=>{const r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
+const send=m=>ch&&ch.postMessage(m);
+cv.onpointerdown=e=>{cv.setPointerCapture(e.pointerId);const w=+sz.value;if(tool=='tx'){const s=prompt('Text to write on the board:');if(s){const o={t:'text',c:col,w,s,p:[pt(e)]};S.push(o);send({a:'add',o});draw()}return}cur={t:tool,c:col,w,p:[pt(e)]};S.push(cur);draw()};
+cv.onpointermove=e=>{if(!cur)return;cur.p.push(pt(e));draw()};
+cv.onpointerup=cv.onpointercancel=()=>{if(cur)send({a:'add',o:cur});cur=null};
+function tb(){['pen','er','tx'].forEach(t=>document.getElementById(t).classList.toggle('sel',tool==t))}
+pen.onclick=()=>{tool='pen';tb()};er.onclick=()=>{tool='er';tb()};tx.onclick=()=>{tool='tx';tb()};
+un.onclick=()=>{S.pop();send({a:'sync',S,dark});draw()};cl.onclick=()=>{if(confirm('Clear the whole board?')){S=[];send({a:'sync',S,dark});draw()}};
+mode.onclick=()=>{dark=!dark;mode.textContent=dark?'🤍 Whiteboard':'🖤 Blackboard';cols();send({a:'sync',S,dark});draw()};
+png.onclick=()=>{const a=document.createElement('a');a.download='NISMCAA-Tutor-board-'+room+'.png';a.href=cv.toDataURL('image/png');a.click()};
+fs.onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.().catch(()=>{});
+if(ch){ch.onmessage=({data:m})=>{if(m.a=='add')S.push(m.o);if(m.a=='sync'){S=m.S;if(dark!=m.dark){dark=m.dark;mode.textContent=dark?'🤍 Whiteboard':'🖤 Blackboard';cols()}}if(m.a=='hello')send({a:'sync',S,dark});draw()};send({a:'hello'})}
+addEventListener('resize',rs);cols();rs();
+</script></body></html>
