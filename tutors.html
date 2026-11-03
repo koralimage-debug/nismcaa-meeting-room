@@ -41,7 +41,7 @@ dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dia
 .sig{font-family:'Brush Script MT',cursive;font-size:1.6rem}.q{margin:10px 0}.q label{display:block;font-weight:400}
 @media print{body *{visibility:hidden}.cert,.cert *{visibility:visible}.cert{position:absolute;top:0;left:0;right:0}}
 [hidden]{display:none!important}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr}.row{grid-template-columns:1fr}table{font-size:.78rem}.tbl{overflow-x:auto}}
+@media(max-width:760px){.kpis{grid-template-columns:1fr 1fr!important}.hero{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr}.row{grid-template-columns:1fr}table{font-size:.78rem}.tbl{overflow-x:auto}}
 </style></head><body>
 <div class="prev">PREVIEW / TEST SITE ONLY. Nothing here is live, and no real payments are taken.</div>
 <header class="top"><span class="mark">♪</span><div><b>NISMCAA Music Academy</b><small>TEACHERS FORUM · FIND A TUTOR</small></div></header>
@@ -71,8 +71,8 @@ dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dia
 <div class="step"><svg viewBox="0 0 70 70"><circle cx="35" cy="24" r="13" fill="#f1c7a0"/><rect x="15" y="40" width="40" height="24" rx="12" fill="#007d77"/></svg><h3>1. Profile & certify</h3><p class="muted">Make your profile, pass the subject test and send a short teaching demo. Only NISMCAA Certified tutors are listed.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="26" fill="#ffdb67"/><text x="25" y="46" font-size="30" font-weight="800" fill="#182947">$</text></svg><h3>2. Set your rate</h3><p class="muted">Your price per hour, in your own currency.</p></div>
 <div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="12" width="54" height="48" rx="8" fill="#e2f3ef"/><path d="M20 38l10 10 20-22" stroke="#007d77" stroke-width="7" fill="none" stroke-linecap="round"/></svg><h3>3. Teach</h3><p class="muted">Learners book your open slots.</p></div>
-<div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="20" width="54" height="32" rx="8" fill="#7dcabf"/><circle cx="35" cy="36" r="9" fill="#fff"/></svg><h3>4. Get paid</h3><p class="muted">NISMCAA keeps 20% commission and you keep 80%.</p></div></div>
-<div class="cfg" style="margin-top:14px"><b>Commission:</b> <span class="cv"></span>% of each booking. Tutors keep <span class="kv"></span>%.</div></div>
+<div class="step"><svg viewBox="0 0 70 70"><rect x="8" y="20" width="54" height="32" rx="8" fill="#7dcabf"/><circle cx="35" cy="36" r="9" fill="#fff"/></svg><h3>4. Get paid</h3><p class="muted">Tax is deducted first, then NISMCAA keeps 20% and you keep 80% of the rest.</p></div></div>
+<div class="cfg" style="margin-top:14px"><b>Commission:</b> <span class="cv"></span>% of each booking. of the amount <b>after tax</b>. Tutors keep <span class="kv"></span>%. Order: learner pays → tax deducted → 20% NISMCAA / 80% tutor.</div></div>
 <p>Questions? Email <a href="mailto:academy@nismcaa.com">academy@nismcaa.com</a>.</p></section>
 
 <section id="join" hidden><div class="panel"><h2>Become a tutor</h2><form id="jf">
@@ -80,7 +80,7 @@ dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dia
 <div class="row"><label>Subjects (comma separated)<input required placeholder="e.g. Piano, Maths"></label><label>Levels<select multiple size="3"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div>
 <div class="row"><label>Languages<input placeholder="e.g. English, Yoruba"></label><label>Country & time zone<input placeholder="e.g. Nigeria · WAT (UTC+1)"></label></div>
 <div class="row"><label>Hourly rate<input id="jr" type="number" min="1" value="10000"></label><label>Currency<select id="jc"></select></label></div>
-<p class="muted" id="jusd"></p>
+<p class="muted" id="jusd"></p><div class="ok" id="jearn"></div>
 <label>Short bio<textarea rows="3"></textarea></label>
 <p><label><input type="checkbox" required style="width:auto;min-height:0"> I agree to NISMCAA tutor rules, ID check and child-safety policy.</label></p>
 <button class="pri">Submit profile (preview)</button></form><div id="jok" hidden><h2>Step 2: Certification</h2><p class="muted">Every tutor must be NISMCAA Certified before being listed. Pass mark: <b>70%</b> on the subject test, plus an approved teaching demo (admin review).</p>
@@ -93,8 +93,9 @@ dialog{border:none;border-radius:20px;max-width:520px;width:94%;padding:20px}dia
 
 <section id="admin" hidden><div class="panel"><h2>Admin view <span class="muted">(example data)</span></h2>
 <div class="cfg">Commission % <input id="comm" type="number" min="0" max="50" value="20" style="width:90px;display:inline-block"> <i>Set by John: 20%. Change here to test other values.</i></div><br>
-<div class="kpis"><div class="kpi">Bookings<b id="kB"></b></div><div class="kpi">Commission earned<b id="kC"></b></div><div class="kpi">Tutor payouts due<b id="kP"></b></div></div>
-<h3>Certification reviews</h3><div class="tbl"><table><thead><tr><th>Applicant</th><th>Subject</th><th>Test score</th><th>Demo video</th><th>Action</th></tr></thead><tbody id="rv"></tbody></table></div><br><h3>Bookings</h3><div class="tbl"><table><thead><tr><th>Date</th><th>Learner</th><th>Tutor</th><th>Paid</th><th>Commission</th><th>Payout</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
+<details class="cfg" style="margin-bottom:12px"><summary><b>Tax rate per country (configurable, example rates, confirm with an accountant)</b></summary><div id="taxcfg" class="row" style="margin-top:8px"></div></details>
+<div class="kpis" style="grid-template-columns:repeat(5,1fr)"><div class="kpi">Bookings<b id="kB"></b></div><div class="kpi">Paid by learners<b id="kG"></b></div><div class="kpi">Tax set aside<b id="kT"></b></div><div class="kpi">Commission earned<b id="kC"></b></div><div class="kpi">Tutor payouts due<b id="kP"></b></div></div>
+<h3>Certification reviews</h3><div class="tbl"><table><thead><tr><th>Applicant</th><th>Subject</th><th>Test score</th><th>Demo video</th><th>Action</th></tr></thead><tbody id="rv"></tbody></table></div><br><h3>Bookings</h3><div class="tbl"><table><thead><tr><th>Date</th><th>Learner</th><th>Tutor</th><th>Paid</th><th>Tax</th><th>NISMCAA</th><th>Tutor payout</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
 </main>
 <dialog id="dlg"><div id="dbody"></div></dialog>
 <script>
@@ -110,6 +111,9 @@ const T=[
 {n:"Marcus J.",s:["Drums","Music Production"],l:["Beginner","Advanced"],lg:["English"],c:"United States",tz:"Americas",z:"ET (UTC-5)",r:40,cur:"USD",rt:4.5,rv:12,b:"Session drummer and beat producer.",q:"Fun and super skilled."},
 {n:"Yuki T.",s:["Violin","Japanese"],l:["Intermediate","Advanced"],lg:["Japanese","English"],c:"Japan",tz:"Asia",z:"JST (UTC+9)",r:4000,cur:"JPY",rt:5.0,rv:9,b:"Suzuki-method violin teacher.",q:"Precise and kind."}];
 T.forEach((t,i)=>t.cert=i!=7);
+const TAX={"Nigeria":7.5,"United Kingdom":20,"India":18,"Brazil":5,"Kenya":16,"Spain":21,"United States":0,"Japan":10};
+const split=(amt,c)=>{const tx=amt*(TAX[c]||0)/100,net=amt-tx,n=net*comm()/100;return{tx,net,n,tu:net-n}};
+const brk=(amt,c,cur)=>{const b=split(amt,c);return `Learner pays: ${fm(amt,cur)}<br>Tax (${c}, ${TAX[c]||0}%, configurable): −${fm(b.tx,cur)}<br>After tax: ${fm(b.net,cur)}<br>NISMCAA ${comm()}%: ${fm(b.n,cur)}<br><b>Tutor ${100-comm()}%: ${fm(b.tu,cur)}</b>`};
 const usd=t=>t.r*FX[t.cur],fm=(v,c)=>new Intl.NumberFormat('en',{style:'currency',currency:c,maximumFractionDigits:c=='USD'?2:0}).format(v);
 const av=i=>`<svg class="av" viewBox="0 0 64 64" role="img" aria-label="Example illustrated avatar"><circle cx="32" cy="32" r="32" fill="${C[i%6]}"/><circle cx="32" cy="26" r="12" fill="${S[i%6]}"/><rect x="14" y="40" width="36" height="26" rx="14" fill="${C[(i+3)%6]}"/></svg>`;
 const st=r=>"★".repeat(Math.round(r))+"☆".repeat(5-Math.round(r));
@@ -128,14 +132,15 @@ function book(i){const t=T[i],d=document.getElementById('dlg'),days=['Mon','Tue'
  document.getElementById('dbody').innerHTML=`<h2>Book ${t.n} <span class="ex" style="position:static">Example</span></h2><p class="muted">Times shown in your time zone (${Intl.DateTimeFormat().resolvedOptions().timeZone}).</p>
  <div class="slots">${days.flatMap(dd=>['10:00','16:00']).map((s,k)=>`<button type="button" onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('sel'));this.classList.add('sel')">${days[k>>1]} ${s}</button>`).join('')}</div>
  <p><label><input type="checkbox" id="u18" style="width:auto;min-height:0"> The learner is under 18 (I am the parent or guardian booking)</label></p>
- <div class="panel" style="margin:10px 0"><b>Mock checkout</b><br>1-hour lesson: ${fm(t.r,t.cur)} (≈ ${fm(usd(t),'USD')})<br><span class="muted">Paid to NISMCAA. NISMCAA keeps ${comm()}% commission and pays the tutor the rest (${100-comm()}%).</span>
+ <div class="panel" style="margin:10px 0"><b>Mock checkout</b><br>1-hour lesson: ${fm(t.r,t.cur)} (≈ ${fm(usd(t),'USD')})<br><div class="muted" style="margin-top:6px">Paid to NISMCAA. Tax comes off first, then the rest is split:<br>${brk(t.r,t.c,t.cur)}</div>
  <input placeholder="Card number (mock, do not enter real details)" disabled style="margin-top:8px"></div>
  <button class="pri" onclick="this.parentNode.innerHTML='<h2>🎉 Booked (preview)</h2><p>This was a mock checkout. No payment was taken. A confirmation would go from academy@nismcaa.com.</p><button onclick=\\'dlg.close()\\'>Close</button>'">Pay (mock)</button> <button onclick="dlg.close()">Cancel</button>`;d.showModal()}
 const B=[["Oct 26","Parent of Tolu (u18)",0,1],["Oct 27","Grace A.",1,2],["Oct 28","Parent of Ken (u18)",4,1],["Oct 29","Ravi P.",2,1.5],["Oct 30","Ana L.",5,1],["Nov 1","Parent of Mia (u18)",6,2]];
-function admin(){let tot=0,cm=0;document.getElementById('tb').innerHTML=B.map(([d,l,ti,h])=>{const p=usd(T[ti])*h,c=p*comm()/100;tot+=p;cm+=c;return`<tr><td>${d}</td><td>${l}</td><td>${T[ti].n}</td><td>${fm(p,'USD')}</td><td>${fm(c,'USD')}</td><td>${fm(p-c,'USD')}</td></tr>`}).join('');
- kB.textContent=B.length;kC.textContent=fm(cm,'USD');kP.textContent=fm(tot-cm,'USD');document.querySelectorAll('.cv').forEach(e=>e.textContent=comm());document.querySelectorAll(".kv").forEach(e=>e.textContent=100-comm())}
-document.getElementById('comm').oninput=admin;admin();
-function jusdf(){jusd.textContent='≈ '+fm((+jr.value||0)*FX[jc.value],'USD')+' USD per hour (example exchange rate)'}jr.oninput=jc.onchange=jusdf;jusdf();
+function admin(){let tot=0,cm=0,g=0,tt=0;document.getElementById('tb').innerHTML=B.map(([d,l,ti,h])=>{const p=usd(T[ti])*h,b=split(p,T[ti].c);g+=p;tt+=b.tx;cm+=b.n;tot+=b.tu;return`<tr><td>${d}</td><td>${l}</td><td>${T[ti].n}</td><td>${fm(p,'USD')}</td><td>${fm(b.tx,'USD')} (${TAX[T[ti].c]}%)</td><td>${fm(b.n,'USD')}</td><td>${fm(b.tu,'USD')}</td></tr>`}).join('');
+ kB.textContent=B.length;kC.textContent=fm(cm,'USD');kP.textContent=fm(tot,'USD');kG.textContent=fm(g,'USD');kT.textContent=fm(tt,'USD');document.querySelectorAll('.cv').forEach(e=>e.textContent=comm());document.querySelectorAll(".kv").forEach(e=>e.textContent=100-comm())}
+document.getElementById('comm').oninput=()=>{admin();jusdf()};
+taxcfg.innerHTML=Object.keys(TAX).map(c=>`<label>${c} tax %<input type=number step=0.5 value=${TAX[c]} oninput="TAX['${c}']=+this.value;admin();jusdf()"></label>`).join('');admin();
+function jusdf(){jusd.textContent='≈ '+fm((+jr.value||0)*FX[jc.value],'USD')+' USD per hour (example exchange rate)';jearn.innerHTML='<b>Your earnings per hour (example, Nigeria tax):</b><br>'+brk(+jr.value||0,'Nigeria',jc.value)}jr.oninput=jc.onchange=jusdf;jusdf();
 jf.onsubmit=e=>{e.preventDefault();jf.hidden=true;jok.hidden=false};
 const R=[["Yuki T. (example)","Violin","90%","Received",1],["Tunde B. (example)","Maths","65%","Received",0],["Chloe D. (example)","Spanish","85%","Received",1]];
 function rev(){rv.innerHTML=R.map((r,k)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} ${parseInt(r[2])>=70?'✅ pass':'❌ below 70%'}</td><td><a href="#" onclick="return false">▶ Watch</a></td><td>${r[5]||`<button ${parseInt(r[2])<70?'disabled':''} class="pri" onclick="R[${k}][5]='Approved, certificate issued';if(${k}==0){T[7].cert=true;render()}rev()">Approve</button> <button onclick="R[${k}][5]='Declined';rev()">Decline</button>`}</td></tr>`).join('')}rev();
