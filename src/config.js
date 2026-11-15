@@ -38,7 +38,7 @@ const MEETING_ZONES = [
 const PLAN_STATUSES = ['Not started', 'In progress', 'Blocked', 'On hold', 'Done'];
 
 // The one business phone number (never use any other).
-const BUSINESS_PHONE = '(470) 739-0021';
+const BUSINESS_PHONE = '(470) 684-4463';
 
 function slug(s) {
   return String(s).toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

@@ -5,7 +5,7 @@ administrator approval, unique volunteer ID and downloadable ID card with QR cod
 and a Meeting Room (call link, chat, notes, action plan, work logs, head remarks).
 
 **Status: built and tested on a test machine only. NOT deployed anywhere. Nothing here touches nismcaa.com.**
-Test data in this folder is fake (`@example.test` e-mails). The only business phone is (470) 739-0021.
+Test data in this folder is fake (`@example.test` e-mails). The only business phone is (470) 684-4463.
 
 * Stack: Node.js 20 or 22, Express 5, SQLite (`better-sqlite3`), server-rendered EJS pages (no front-end framework), mobile friendly.
 * **No e-mail service of any kind.** Own sign-in (e-mail as ID + scrypt-hashed password), no Google/OpenAI login.

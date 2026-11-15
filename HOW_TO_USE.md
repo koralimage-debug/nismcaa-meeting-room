@@ -2,7 +2,7 @@
 
 A plain guide for volunteers and for the two administrators (John and Abisade).
 The Meeting Room is a **volunteer role: no salary and no fees**. Nobody is ever asked to pay.
-The only business phone number is **(470) 739-0021**. The only e-mail is **info@nismcaa.com**.
+The only business phone number is **(470) 684-4463**. The only e-mail is **info@nismcaa.com**.
 The site never sends e-mail, so everything is checked by signing in.
 
 ---
@@ -46,7 +46,7 @@ After approval you get a unique ID such as **NISMCAA-VOL-0001**. Open **My ID ca
 - **Head remarks**: your department head writes remarks about your contribution. You see only your own remarks (My work log and remarks).
 
 ### Forgot your password?
-There is no "forgot password" e-mail. Contact an administrator (info@nismcaa.com or (470) 739-0021). They give you a one-time temporary password, and you choose your own at your next sign-in.
+There is no "forgot password" e-mail. Contact an administrator (info@nismcaa.com or (470) 684-4463). They give you a one-time temporary password, and you choose your own at your next sign-in.
 
 ---
 

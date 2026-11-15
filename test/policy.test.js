@@ -70,20 +70,20 @@ test('header logo and "Back to nismcaa.com" go to https://nismcaa.com; footer ha
   for (const [name, h] of Object.entries(all)) {
     assert.match(h, /<a class="brand" href="https:\/\/nismcaa.com"/, name);
     assert.match(h, /<a class="back" href="https:\/\/nismcaa.com">&larr; Back to nismcaa.com<\/a>/, name);
-    assert.match(h, /4764 Hammermill Road, Tucker, GA 30084, United States/, name); assert.match(h, /info@nismcaa.com/, name); assert.match(h, /\(470\) 739-0021/, name);
+    assert.match(h, /4764 Hammermill Road, Tucker, GA 30084, United States/, name); assert.match(h, /info@nismcaa.com/, name); assert.match(h, /\(470\) 684-4463/, name);
   }
 });
 
-test('only the business phone (470) 739-0021 appears; the old number never does', async () => {
+test('only the business phone (470) 684-4463 appears; the old number never does', async () => {
   const phones = (s) => [...s.matchAll(/\(?\b\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g)].map((m) => m[0]);
   for (const f of own) {
     const t = fs.readFileSync(f, 'utf8');
-    assert.doesNotMatch(t, /0554/, f); assert.doesNotMatch(t, /739-?\s?0554/, f);
-    phones(t).forEach((p) => assert.equal(p, '(470) 739-0021', f + ' has ' + p));
+    assert.doesNotMatch(t, /0554/, f); assert.doesNotMatch(t, /739-?\s?0554/, f); assert.doesNotMatch(t, /739-0021/, f);
+    phones(t).forEach((p) => assert.equal(p, '(470) 684-4463', f + ' has ' + p));
   }
   for (const [name, h] of Object.entries(await crawl())) {
     assert.doesNotMatch(h, /0554/, name);
-    phones(h.replace(/value="[^"]*"/g, '').replace(/\d{3}[\s.-]010[\s.-]0000/g, '')).forEach((p) => assert.equal(p, '(470) 739-0021', name + ' has ' + p));
+    phones(h.replace(/value="[^"]*"/g, '').replace(/\d{3}[\s.-]010[\s.-]0000/g, '')).forEach((p) => assert.equal(p, '(470) 684-4463', name + ' has ' + p));
   }
 });
 
