@@ -11,6 +11,8 @@
  *   NODE_ENV        "production" turns on secure cookies and proxy trust.
  *   ADMIN_EMAILS    comma list of admin e-mails (default: John and Abisade).
  *   TODAY_OVERRIDE  YYYY-MM-DD, TESTING ONLY: pretend today is this date (flags).
+ *   VOLUNTEER_LOOKUP_KEY  shared secret (32+ chars) for GET /internal/volunteers used by nismcaa.com check-in.
+ *                   Missing or short = the internal lookup is switched off.
  */
 const path = require('path');
 
@@ -56,6 +58,7 @@ function loadConfig(env = process.env) {
       .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean),
     adminNames: { 'interschoolmusic@gmail.com': 'John Adebowale', 'abisade@nismcaa.com': 'Abisade Adebowale', 'adebowaleabisolami@gmail.com': 'Abisolami Adebowale' },
     todayOverride: env.TODAY_OVERRIDE || '',
+    volunteerLookupKey: env.VOLUNTEER_LOOKUP_KEY || '',
     displayTz: env.DISPLAY_TZ || 'America/New_York',
     courseFile: path.join(root, 'content', 'COURSE_TEXT.txt'),
     planFile: path.join(root, 'data', 'ACTION_PLAN_10th_Edition.xlsx'),

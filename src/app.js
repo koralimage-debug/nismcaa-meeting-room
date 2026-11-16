@@ -52,6 +52,7 @@ async function createApp(config) {
     next();
   });
   app.get('/healthz', (req, res) => res.type('text/plain').send('ok')); // for the host's health check (no session, no database)
+  require('./internal')(app, ctx); // server-to-server volunteer lookup (shared-secret header, no session)
   if (process.env.ANTHEM_DIR) app.use('/static/audio', express.static(process.env.ANTHEM_DIR)); // demo/testing override
   app.use('/static', express.static(path.join(config.root, 'public'), { maxAge: config.production ? '1h' : 0 }));
   app.get('/favicon.ico', (req, res) => res.redirect(301, '/static/img/logo.png'));

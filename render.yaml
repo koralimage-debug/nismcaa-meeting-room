@@ -35,6 +35,8 @@ services:
         value: /tmp/nismcaa-data    # TEMPORARY on the free plan. Use /var/data with a disk.
       - key: PUBLIC_URL
         sync: false                 # type it in the Render dashboard, e.g. https://meeting.nismcaa.com
+      - key: VOLUNTEER_LOOKUP_KEY
+        sync: false                 # shared secret (32+ chars) for nismcaa.com check-in lookups; same value on nismcaa-payments
     # disk:                         # <-- un-comment for real use (paid)
     #   name: meeting-room-data
     #   mountPath: /var/data
