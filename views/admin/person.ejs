@@ -18,7 +18,7 @@
 </div>
 <div class="card"><h3>Test attempts</h3>
   <table class="tight"><tr><th>Date</th><th>Score</th><th>Child prot.</th><th>Result</th></tr>
-  <% attempts.forEach(function(a){ %><tr><td><%= fmtDateTime(a.created_at) %></td><td><%= a.score === null ? '-' : a.score + '/50' %></td><td><%= a.child_correct === null ? '-' : a.child_correct + '/10' %></td><td><%= a.result === 'pending' ? 'pending key' : a.result %></td></tr><% }) %></table>
+  <% attempts.forEach(function(a){ %><tr><td><%= fmtDateTime(a.created_at) %></td><td><%= a.score === null ? '-' : a.score + '/50' %></td><td><%= a.child_correct === null ? '-' : a.child_correct + '/10' %></td><td><%= a.result === 'pending' ? 'pending key' : (a.result === 'timed_out' ? 'time is up' : (a.result === 'in_progress' ? 'in progress' : a.result)) %></td></tr><% }) %></table>
   <% if (!attempts.length) { %><p class="muted">No attempts yet.</p><% } %>
 </div></div>
 

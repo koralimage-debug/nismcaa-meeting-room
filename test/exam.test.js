@@ -123,6 +123,7 @@ test('below 80% gives no pending entry and allows a retake; 80%+ gives one; ever
 
 test('the test must be fully answered', async () => {
   const c = app.client(); await H.signUp(c, { email: 'partial@example.test' });
+  await c.post('/course/test/start');
   const a = H.answers(40, 10); delete a.q7; delete a.q45;
   const r = await c.post('/course/test', a);
   assert.equal(r.location, '/course/test');
@@ -132,11 +133,12 @@ test('the test must be fully answered', async () => {
 test('answer key is never sent to the browser (page source, JSON, other routes)', async () => {
   const c = app.client(); await H.signUp(c, { email: 'spy@example.test' });
   app.db.prepare("UPDATE questions SET answer_key=''").run();
+  await c.post('/course/test/start');
   const t = await c.get('/course/test');
   assert.equal(t.status, 200);
   assert.doesNotMatch(t.text, /answer_key|answerKey|data-answer|data-correct|\bcorrect\b|checked/i, 'no key hints in the test page');
   // the question form is byte-for-byte the same with and without a key saved in the database
-  const formOf = (h) => h.split('<form method="post" action="/course/test">')[1].split('</form>')[0];
+  const formOf = (h) => h.split('<form method="post" action="/course/test"')[1].split('</form>')[0];
   const noKey = formOf(t.text).replace(/value="[0-9a-f]{48}"/, '');
   app.setFakeKey();
   const withKey = formOf((await c.get('/course/test')).text).replace(/value="[0-9a-f]{48}"/, '');
@@ -190,3 +192,103 @@ test('the course page text matches COURSE_TEXT.txt word for word (lessons, pledg
   // the builder notes are NOT on the page
   assert.doesNotMatch(page.text, /MEETING ROOM SITE NOTE|Removed from the public page/);
 });
+
+test('the default time limit is 20 minutes and is shown before the test starts', async () => {
+  assert.equal(app.config.testTimeLimitMin, 20);
+  const c = app.client(); await H.signUp(c, { email: 'timerintro@example.test' });
+  const intro = await c.get('/course/test');
+  assert.equal(intro.status, 200);
+  assert.match(intro.text, /20 minutes/);
+  assert.match(intro.text, /Start the test/);
+  assert.doesNotMatch(intro.text, /name="q1"/);
+  assert.doesNotMatch(intro.text, /Time left:/);
+});
+
+test('the test timer is stored on the attempt; time out ends it, and a restart reshuffles questions and answers', async () => {
+  const c = app.client(); await H.signUp(c, { email: 'timer@example.test' });
+  const start = await c.post('/course/test/start');
+  assert.equal(start.status, 302);
+  assert.equal(start.location, '/course/test');
+
+  const uid = app.db.prepare('SELECT id FROM users WHERE email=?').get('timer@example.test').id;
+  const a1 = app.db.prepare("SELECT * FROM attempts WHERE user_id=? AND result='in_progress'").get(uid);
+  assert.ok(a1, 'an in-progress attempt is saved when the test starts');
+  assert.ok(a1.started_at);
+  assert.ok(a1.order_json);
+  const order1 = JSON.parse(a1.order_json);
+  assert.equal(order1.questions.length, 50);
+  assert.deepEqual([...order1.questions.slice(0, 40)].sort((x, y) => x - y), Array.from({ length: 40 }, (_, i) => i + 1));
+  assert.deepEqual([...order1.questions.slice(40)].sort((x, y) => x - y), [41, 42, 43, 44, 45, 46, 47, 48, 49, 50]);
+  assert.notDeepEqual(order1.questions, Array.from({ length: 50 }, (_, i) => i + 1), 'question order is shuffled');
+
+  const qOrder = (h) => [...h.matchAll(/id="question-(\d+)"/g)].map((m) => Number(m[1]));
+  const optOrder = (h, n) => {
+    const block = h.split('id="question-' + n + '"')[1].split('</fieldset>')[0];
+    return [...block.matchAll(/value="([A-D])"/g)].map((m) => m[1]);
+  };
+  const formOf = (h) => h.split('<form method="post" action="/course/test"')[1].split('</form>')[0];
+
+  const page1 = await c.get('/course/test');
+  assert.equal(page1.status, 200);
+  assert.match(page1.text, /Time left:/);
+  assert.match(page1.text, /data-ends-at="20\d{2}-/);
+  assert.deepEqual(qOrder(page1.text), order1.questions);
+  const firstQ = order1.questions[0];
+  const storedOpts = order1.options[String(firstQ)] || order1.options[firstQ];
+  assert.deepEqual(optOrder(page1.text, firstQ), storedOpts);
+
+  // Refresh must keep the same start time, the same remaining window, and the same question order.
+  const page2 = await c.get('/course/test');
+  assert.deepEqual(qOrder(page2.text), order1.questions);
+  assert.deepEqual(optOrder(page2.text, firstQ), storedOpts);
+  const a1b = app.db.prepare('SELECT started_at, order_json FROM attempts WHERE id=?').get(a1.id);
+  assert.equal(a1b.started_at, a1.started_at);
+  assert.equal(a1b.order_json, a1.order_json);
+  const ends1 = (page1.text.match(/data-ends-at="([^"]+)"/) || [])[1];
+  const ends2 = (page2.text.match(/data-ends-at="([^"]+)"/) || [])[1];
+  assert.equal(ends1, ends2);
+  assert.equal(
+    formOf(page1.text).replace(/value="[0-9a-f]{48}"/, ''),
+    formOf(page2.text).replace(/value="[0-9a-f]{48}"/, ''),
+  );
+
+  // Time has run out: a late submit is not marked, and the volunteer must restart.
+  const past = new Date(Date.now() - (app.config.testTimeLimitMin * 60 * 1000 + 1000)).toISOString();
+  app.db.prepare('UPDATE attempts SET started_at=? WHERE id=?').run(past, a1.id);
+  const late = await c.post('/course/test', H.answers(40, 10));
+  assert.equal(late.status, 302);
+  assert.equal(late.location, '/course/test');
+  const ended = app.db.prepare('SELECT * FROM attempts WHERE id=?').get(a1.id);
+  assert.equal(ended.result, 'timed_out');
+  assert.equal(ended.passed, 0);
+  assert.equal(ended.score, null);
+  assert.equal(status('timer@example.test'), 'applicant');
+
+  const up = await c.get('/course/test');
+  assert.match(up.text, /Time is up/);
+  assert.match(up.text, /start the test again/i);
+  assert.match(up.text, /new order/i);
+  assert.doesNotMatch(up.text, /name="q1"/);
+  assert.doesNotMatch(up.text, /Time left:/);
+  assert.match((await c.get('/course/test/result')).text, /Time is up/);
+
+  // A new attempt gets a new start time and a new shuffle.
+  await c.post('/course/test/start');
+  const a2 = app.db.prepare("SELECT * FROM attempts WHERE user_id=? AND result='in_progress'").get(uid);
+  assert.ok(a2);
+  assert.notEqual(a2.id, a1.id);
+  assert.notEqual(a2.started_at, past);
+  const order2 = JSON.parse(a2.order_json);
+  assert.notDeepEqual(order2.questions, order1.questions);
+  const optChanged = order1.questions.some((n) => {
+    const o1 = order1.options[String(n)] || order1.options[n];
+    const o2 = order2.options[String(n)] || order2.options[n];
+    return JSON.stringify(o1) !== JSON.stringify(o2);
+  });
+  assert.ok(optChanged, 'answer choices should be reshuffled on a new attempt');
+  const page3 = await c.get('/course/test');
+  assert.deepEqual(qOrder(page3.text), order2.questions);
+  assert.match(page3.text, /Time left:/);
+  assert.doesNotMatch(page3.text, /Time is up/);
+});
+

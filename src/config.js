@@ -40,6 +40,11 @@ const PLAN_STATUSES = ['Not started', 'In progress', 'Blocked', 'On hold', 'Done
 // The one business phone number (never use any other).
 const BUSINESS_PHONE = '(470) 684-4463';
 
+// Default time allowed for one volunteer final-test attempt, in minutes.
+// Admins can change this in Settings (stored as test_time_limit_minutes).
+// Tests may override with the TEST_TIME_LIMIT_MINUTES environment variable.
+const DEFAULT_TEST_TIME_LIMIT_MINUTES = 20;
+
 function slug(s) {
   return String(s).toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
@@ -67,9 +72,14 @@ function loadConfig(env = process.env) {
     quiet: env.QUIET === '1',
     // Per-IP rate limits (tests raise them)
     limits: { signupPerHour: 10, loginPer15Min: 40, claimPer15Min: 10, verifyPerMin: 60 },
+    testTimeLimitMin: (function () {
+      const n = Number(env.TEST_TIME_LIMIT_MINUTES || DEFAULT_TEST_TIME_LIMIT_MINUTES);
+      return Number.isFinite(n) && n > 0 ? n : DEFAULT_TEST_TIME_LIMIT_MINUTES;
+    })(),
   };
 }
 
 module.exports = {
   GUEST_KINDS, AUDIENCES, MEETING_ZONES,
-  loadConfig, COUNTRIES, NOT_LISTED, DEPARTMENTS, PLAN_STATUSES, BUSINESS_PHONE, slug };
+  loadConfig, COUNTRIES, NOT_LISTED, DEPARTMENTS, PLAN_STATUSES, BUSINESS_PHONE, slug,
+  DEFAULT_TEST_TIME_LIMIT_MINUTES };
