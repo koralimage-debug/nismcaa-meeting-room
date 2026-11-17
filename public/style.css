@@ -281,7 +281,7 @@ td .flagword.grey { background:#eceef2; color:#505665; font-weight:600; box-shad
   .site-head { top:-66px; }
   .site-head.scrolled .topbar .wrap { padding:8px 12px; } .site-head.scrolled .brand img { width:46px; height:46px; }
   .topbar .wrap { padding:8px 12px; gap:8px; } .back { padding:6px 11px; font-size:.78rem; }
-  nav.main .wrap { padding:6px 8px; } nav.main a, nav.main button.linklike { padding:9px 13px; font-size:.92rem; }
+  nav.main .wrap { padding:6px 8px; flex-wrap:wrap; overflow-x:visible; scroll-snap-type:none; } nav.main a, nav.main button.linklike { padding:9px 13px; font-size:.92rem; }
   main.wrap { padding-top:16px; }
   .two { grid-template-columns:1fr; } .kv { grid-template-columns:1fr; } .kv dt { margin-top:8px; }
   .chatbox { height:56vh; border-radius:16px; } .msg { max-width:94%; }
