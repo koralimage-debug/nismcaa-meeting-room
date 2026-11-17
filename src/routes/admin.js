@@ -2,7 +2,7 @@
 /** Admin area: waiting list, approval, people, ID renewal, answer key, settings, heads, log, exports. */
 const { now, audit, getSetting, setSetting, nextVolunteerId } = require('../db');
 const { COUNTRIES, DEPARTMENTS, NOT_LISTED } = require('../config');
-const { regradePending, keyComplete } = require('./course');
+const { regradePending, keyComplete, testLimitMin } = require('./course');
 const { sendCsv } = require('../csv');
 
 const addYear = (fromMs) => { const d = new Date(fromMs); d.setUTCFullYear(d.getUTCFullYear() + 1); return d.toISOString(); };
@@ -184,7 +184,7 @@ module.exports = function (app, ctx) {
   // ---------------- settings: call links, QR base ----------------
   app.get('/admin/settings', (req, res) => {
     const links = Object.fromEntries(db.prepare('SELECT country, url FROM country_links').all().map((r) => [r.country, r.url]));
-    res.render('admin/settings', { title: 'Settings', main: getSetting(db, 'call_link_main'), links, qr: getSetting(db, 'qr_base_url', config.publicUrl ? config.publicUrl + '/verify/' : '') });
+    res.render('admin/settings', { title: 'Settings', main: getSetting(db, 'call_link_main'), links, qr: getSetting(db, 'qr_base_url', config.publicUrl ? config.publicUrl + '/verify/' : ''), testTimeLimitMin: testLimitMin(db, config) });
   });
   app.post('/admin/settings', (req, res) => {
     const main = String(req.body.main || '').trim();
@@ -193,6 +193,16 @@ module.exports = function (app, ctx) {
     const qr = String(req.body.qr || '').trim();
     if (qr && !isHttps(qr) && !/^http:\/\/localhost[:/]/.test(qr)) bad.push(['QR address', qr]);
     if (bad.length) { req.flash('err', 'These addresses must start with https:// : ' + bad.map((b) => b[0]).join(', ')); return back(res, '/admin/settings'); }
+    let testMin = null;
+    if (Object.prototype.hasOwnProperty.call(req.body, 'test_time_limit_minutes')) {
+      const raw = String(req.body.test_time_limit_minutes || '').trim();
+      const n = Number(raw);
+      if (!raw || !Number.isFinite(n) || n < 1 || n > 180 || !Number.isInteger(n)) {
+        req.flash('err', 'The test time limit must be a whole number of minutes between 1 and 180.');
+        return back(res, '/admin/settings');
+      }
+      testMin = n;
+    }
     setSetting(db, 'call_link_main', main);
     for (const c of COUNTRIES) {
       const v = String(req.body['link_' + c.replace(/ /g, '_')] || '').trim();
@@ -200,7 +210,8 @@ module.exports = function (app, ctx) {
       else db.prepare('DELETE FROM country_links WHERE country=?').run(c);
     }
     setSetting(db, 'qr_base_url', qr);
-    audit(db, 'settings', req.user.id, 'settings', 'call links / QR address updated');
+    if (testMin !== null) setSetting(db, 'test_time_limit_minutes', String(testMin));
+    audit(db, 'settings', req.user.id, 'settings', 'call links / QR address / test time limit updated');
     req.flash('ok', 'Settings saved.'); back(res, '/admin/settings');
   });
 

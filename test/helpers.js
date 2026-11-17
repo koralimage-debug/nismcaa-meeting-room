@@ -115,7 +115,11 @@ function answers(general, child) {
   return a;
 }
 
-const takeTest = (client, general, child) => client.post('/course/test', answers(general, child));
+async function takeTest(client, general, child) {
+  const start = await client.post('/course/test/start');
+  if (start.status !== 302) throw new Error('start test failed: ' + start.status + ' ' + (start.text || '').slice(0, 300));
+  return client.post('/course/test', answers(general, child));
+}
 
 /** Create a signed-in volunteer who passed the test (needs the fake key set) and is waiting for approval. */
 async function waitingVolunteer(app, o = {}) {

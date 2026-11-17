@@ -46,8 +46,9 @@ CREATE TABLE IF NOT EXISTS questions (
 );
 CREATE TABLE IF NOT EXISTS attempts (
   id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, answers TEXT NOT NULL,
-  score INTEGER, child_correct INTEGER, result TEXT NOT NULL,   -- pass | fail | pending
-  passed INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL
+  score INTEGER, child_correct INTEGER, result TEXT NOT NULL,   -- pass | fail | pending | in_progress | timed_out
+  passed INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL,
+  started_at TEXT, order_json TEXT
 );
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 CREATE TABLE IF NOT EXISTS country_links (country TEXT PRIMARY KEY, url TEXT);
@@ -109,7 +110,16 @@ function openDb(config) {
   db.pragma('journal_mode = WAL');
   db.pragma('foreign_keys = ON');
   db.exec(SCHEMA);
+  migrate(db);
   return db;
+}
+
+/** Add columns used by the timed final test on databases created before those columns existed. */
+function migrate(db) {
+  const cols = db.prepare('PRAGMA table_info(attempts)').all().map((c) => c.name);
+  if (!cols.includes('started_at')) db.exec('ALTER TABLE attempts ADD COLUMN started_at TEXT');
+  if (!cols.includes('order_json')) db.exec('ALTER TABLE attempts ADD COLUMN order_json TEXT');
+  db.prepare("UPDATE attempts SET started_at=created_at WHERE started_at IS NULL OR started_at=''").run();
 }
 
 function audit(db, kind, actorId, target, detail) {

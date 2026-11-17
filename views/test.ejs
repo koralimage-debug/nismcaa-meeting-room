@@ -1,16 +1,43 @@
 <%- include('partials/head') %>
 <h1>Final test</h1>
 <%- include('partials/banner', { img: 'banner-course.jpg', alt: 'Volunteers studying together', cap: 'You have learned it. Show it.' }) %>
+<% if (timedOut && !started) { %>
+<div class="card gold test-timeout" role="alert">
+  <p class="test-timeout-title"><strong>Time is up.</strong></p>
+  <p>This attempt has ended because the time ran out before you submitted your answers. You can start the test again. The questions and answer choices will be in a new order.</p>
+  <form method="post" action="/course/test/start">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <p><button class="btn gold big" type="submit">Start the test again <%- include('partials/icon', { n: 'send', size: 20 }) %></button></p>
+  </form>
+</div>
+<% } else if (!started) { %>
 <div class="card gold test-intro">
   <p>50 multiple-choice questions. Pass mark: <strong>40 of 50 (80%)</strong> and <strong>at least 9 of the 10 child-protection questions</strong> (41 to 50). You see your score after each try but not which answers were wrong. You can retake it as often as you need. Every attempt is saved.</p>
+  <p>You have <strong><%= limitMin %> minutes</strong> to finish. A timer will show on the screen. If the time runs out before you submit, this attempt ends and you will need to start again. The questions and answer choices will be in a new order each time.</p>
   <% if (!keyReady) { %><p class="note">Note: the official answer key has not been entered yet. Your answers will be saved and marked as "pending key". They will be marked later.</p><% } %>
-  <% if (last) { %><p class="muted">Your last attempt: <%= last.result === 'pending' ? 'pending key' : (last.score + ' of 50, ' + (last.passed ? 'passed' : 'not passed')) %> (<a href="/course/test/result">see result</a>).</p><% } %>
+  <% if (last) { %><p class="muted">Your last attempt: <%= last.result === 'pending' ? 'pending key' : (last.result === 'timed_out' ? 'time ran out' : (last.score + ' of 50, ' + (last.passed ? 'passed' : 'not passed'))) %> (<a href="/course/test/result">see result</a>).</p><% } %>
+  <form method="post" action="/course/test/start">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <p><button class="btn gold big" type="submit">Start the test (<%= limitMin %> minutes) <%- include('partials/icon', { n: 'send', size: 20 }) %></button></p>
+  </form>
 </div>
-<form method="post" action="/course/test">
+<% } else { %>
+<div class="card gold test-intro">
+  <p>Submit before the time runs out. Pass mark: <strong>40 of 50 (80%)</strong> and <strong>at least 9 of the 10 child-protection questions</strong> (41 to 50). You see your score after each try but not which answers were wrong.</p>
+  <% if (!keyReady) { %><p class="note">Note: the official answer key has not been entered yet. Your answers will be saved and marked as "pending key". They will be marked later.</p><% } %>
+</div>
+<form method="post" action="/course/test" data-ends-at="<%= endsAt %>">
   <input type="hidden" name="_csrf" value="<%= csrf %>">
-  <div class="testbar" id="testbar"><div class="testbar-in"><span id="testbar-label">0 of 50 answered</span><span id="testbar-cp" class="muted"></span></div><div class="bar" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0"><span id="testbar-fill"></span></div></div>
-  <% questions.forEach(function(q){ %>
-    <% if (q.num === 41) { %><div class="cp-banner">Child Protection questions (41 to 50): you need 9 of 10</div><% } %>
+  <div class="testbar" id="testbar">
+    <div class="testbar-in">
+      <span id="testbar-label">0 of 50 answered</span>
+      <span id="test-timer" class="test-timer<%= timeUrgent ? ' urgent' : '' %>" role="timer" aria-live="polite">Time left: <%= timeLeftLabel %></span>
+      <span id="testbar-cp" class="muted"></span>
+    </div>
+    <div class="bar" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0"><span id="testbar-fill"></span></div>
+  </div>
+  <% var cpBannerShown = false; questions.forEach(function(q){ %>
+    <% if (q.childProtection && !cpBannerShown) { cpBannerShown = true; %><div class="cp-banner">Child Protection questions (41 to 50): you need 9 of 10</div><% } %>
     <fieldset class="question" id="question-<%= q.num %>">
       <legend><strong><%= q.num %>.</strong> <%= q.text %></legend>
       <% q.options.forEach(function(o){ %><label class="opt"><input type="radio" name="q<%= q.num %>" value="<%= o.letter %>" required> <strong><%= o.letter %>)</strong> <%= o.text %></label><% }) %>
@@ -18,4 +45,5 @@
   <% }) %>
   <p><button class="btn gold big" type="submit">Submit my answers <%- include('partials/icon', { n: 'send', size: 20 }) %></button></p>
 </form>
+<% } %>
 <%- include('partials/foot') %>

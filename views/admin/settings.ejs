@@ -14,6 +14,10 @@
   <h3>ID card QR address</h3>
   <p class="muted">The QR code on each ID card is this address plus the ID number. Keep the default for this site, or change it later to https://nismcaa.com/id/ once the main site can look up these IDs.</p>
   <label for="qr">QR base address</label><input id="qr" name="qr" type="text" value="<%= qr %>" placeholder="https://meeting.nismcaa.com/verify/">
+  <h3>Final test time limit</h3>
+  <p class="muted">How long a volunteer has to finish the 50-question test, in minutes. If the time runs out before they submit, the attempt ends and they must start again. The questions and answer choices will be in a new order. The default is 20 minutes.</p>
+  <label for="test_time_limit_minutes">Time limit (minutes)</label>
+  <input id="test_time_limit_minutes" name="test_time_limit_minutes" type="number" min="1" max="180" step="1" value="<%= testTimeLimitMin %>">
   <p><button class="btn gold" type="submit">Save settings</button></p>
 </form>
 <%- include('../partials/foot') %>

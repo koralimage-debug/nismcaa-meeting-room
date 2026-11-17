@@ -123,6 +123,33 @@
       form.addEventListener('change', count); count();
     }
 
+    /* 5b. Test countdown. The end time comes from the server, so a page refresh does not reset the clock. */
+    var timerEl = $('#test-timer');
+    var timedForm = timerEl && timerEl.closest('form');
+    if (timerEl && timedForm) {
+      var endsAt = Date.parse(timedForm.getAttribute('data-ends-at') || '');
+      var tick = function () {
+        if (!endsAt) return;
+        var left = Math.max(0, endsAt - Date.now());
+        var sec = Math.ceil(left / 1000);
+        if (sec < 0) sec = 0;
+        var m = Math.floor(sec / 60), s = sec % 60;
+        timerEl.textContent = 'Time left: ' + m + ':' + String(s).padStart(2, '0');
+        timerEl.classList.toggle('urgent', sec <= 120);
+        if (sec <= 0) {
+          timerEl.textContent = 'Time is up';
+          timerEl.classList.add('urgent');
+          timedForm.querySelectorAll('input, button').forEach(function (el) { el.disabled = true; });
+          if (timedForm.getAttribute('data-expired') !== '1') {
+            timedForm.setAttribute('data-expired', '1');
+            window.location.href = '/course/test';
+          }
+        }
+      };
+      tick();
+      setInterval(tick, 250);
+    }
+
     /* 6. ID card: gentle 3D tilt that follows the finger or pointer */
     var tilt = $('#idtilt');
     if (tilt && !reduce) {
