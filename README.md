@@ -120,7 +120,7 @@ See **HOW_TO_USE.md** (volunteers and administrators, in plain words). Short ver
 ## 7. Open items and decisions for John
 
 1. **The answer key is missing.** Until it is entered, nobody can pass. (Admin > Answer key; paste `1:B` lines.)
-2. The **course text says "event-specific ID"** in places, which conflicts with the 1-year card in the spec. Text kept exactly as supplied; please decide.
+2. The volunteer course now states that the ID card is valid for one year from approval and is renewable subject to performance (John confirmed 23 Nov 2026).
 3. The course text keeps the British spellings it was supplied with (e.g. "recognising"). The site's own text is US English.
 4. There is **no pledge/code-of-conduct checkbox** at sign-up. Recommended to add one (child safety).
 5. **Expired ID blocks Meeting Room access** until renewed (decision I made; easy to change).

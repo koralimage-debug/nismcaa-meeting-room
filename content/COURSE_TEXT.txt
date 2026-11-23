@@ -36,7 +36,7 @@ Certificate of participation
 Volunteers who take part in the event will receive a certificate of participation at the end of the event. Submitting an application alone does not qualify for a certificate.
 
 Photograph and volunteer ID
-Upload a clear, recent photograph of yourself for application review and identification. On administrator approval, NISMCAA issues a unique volunteer ID number and a printable card with your name, photograph, NISMCAA logo, and event or program. Your photograph is private unless you separately agree to public directory publication; your card remains private to you and authorized administrators. The card identifies an approved volunteer; it does not grant unrestricted access to students, private records, or restricted event areas. [MEETING ROOM SITE NOTE: on this site the card is valid for 1 year from approval and renewable subject to performance, by John's decision; the sentences about validity during a named event do not apply here.]
+Upload a clear, recent photograph of yourself for application review and identification. On administrator approval, NISMCAA issues a unique volunteer ID number and a printable card with your name, photograph, NISMCAA logo, and event or program. Your photograph is private unless you separately agree to public directory publication; your card remains private to you and authorized administrators. The card identifies an approved volunteer; it does not grant unrestricted access to students, private records, or restricted event areas. The card is valid for one year from approval and is renewable subject to performance.
 
 Application privacy
 Your application and contact details are used to review your suitability and coordinate volunteering. They are available to authorized NISMCAA administrators. Contact details, ID cards and private suitability information are not published.
@@ -330,6 +330,11 @@ Lesson 7: Volunteer Responsibilities and Conduct
 An application does not automatically make you a volunteer. NISMCAA reviews your profile and
 photograph, then confirms your role, responsibilities and schedule. Read and accept the
 Volunteer Terms and Commitment and Loyalty Pledge.
+An NISMCAA administrator approves you after you pass the final test, and only then do you get
+Meeting Room access.
+
+When you sign up, pick the country where you live; an administrator checks it at approval.
+
 Follow the coordinator’s instructions and assigned duties. Treat everyone respectfully, notify the
 coordinator if you cannot attend, report incidents and concerns promptly, and declare conflicts
 of interest.
@@ -341,8 +346,11 @@ official channels.
 Keep participant records private and use approved communication channels. Do not publish
 student photographs, recordings or personal information without authorisation and required
 permissions.
-Approved volunteers receive an event-specific ID. It expires when that event ends and does not
-grant unrestricted access.
+
+Only approved adult volunteers and administrators can read the Meeting Room chat rooms.
+
+Approved volunteers receive a volunteer ID card. It is valid for one year from approval and is
+renewable subject to performance. An ID does not grant unrestricted access.
 
 Remember: Support the event, protect students and follow your assigned responsibilities. Do
 not use volunteering for personal gain.
@@ -458,8 +466,8 @@ resources.
 Volunteers may have opportunities to travel locally and internationally at the organisers’
 expense when selected for an authorised assignment. Travel is an opportunity, not an automatic
 entitlement.
-An ID expires when its named event ends. Another event requires a new application, review and
-event-specific ID.
+Your volunteer ID card is valid for one year from approval and is renewable subject to
+performance.
 Remember: Recognition, support and travel opportunities depend on participation, available
 resources and organisational assignments.
 
