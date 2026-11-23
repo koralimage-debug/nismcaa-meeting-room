@@ -286,7 +286,7 @@ function emailShell({ title, preheader, bodyHtml, footerNote }) {
           <tr>
             <td style="padding:8px 28px 28px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.55;color:#5a6478;">
               <p style="margin:0 0 8px;">${note}</p>
-              <p style="margin:0;">info@nismcaa.com &middot; (470) 684-4463<br>4764 Hammermill Road, Tucker, GA 30084, United States</p>
+              <p style="margin:0;">info@nismcaa.com &middot; (470) 684-4463</p>
             </td>
           </tr>
         </table>

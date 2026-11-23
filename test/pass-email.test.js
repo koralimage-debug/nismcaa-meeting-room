@@ -44,6 +44,10 @@ test('when a volunteer passes, John is e-mailed name, country, scores, date, and
   assert.match(m.html, /#C9A227|#c9a227|#EBCB63/);
   assert.match(m.html, /\/static\/img\/logo\.png/);
   assert.doesNotMatch(m.text + m.html, /password|photo|\.jpg|claim code|Zoho|ChatGPT|OpenAI/i);
+  assert.match(m.html, /info@nismcaa\.com/);
+  assert.match(m.html, /\(470\) 684-4463/);
+  assert.doesNotMatch(m.text + m.html, /Hammermill|Tucker, GA 30084/);
+
 });
 
 test('a failing attempt does not send e-mail, and a later pass sends one notice', async () => {

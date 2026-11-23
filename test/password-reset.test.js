@@ -173,6 +173,9 @@ test('a successful reset ends other sessions and sends a confirmation e-mail', a
   assert.match(html, /Set a new password/);
   assert.match(html, /#C9A227|#c9a227|#EBCB63/);
   assert.match(html, /\/static\/img\/logo\.png/);
+  assert.match(html, /info@nismcaa\.com/);
+  assert.match(html, /\(470\) 684-4463/);
+  assert.doesNotMatch(html + sent[0].text, /Hammermill|Tucker, GA 30084/);
   assert.doesNotMatch(html + sent[0].text, /password-123|white box|Zoho|ChatGPT|OpenAI/i);
 
   const result = await app.client().post('/reset-password', { token, password: 'fresh-password-123', password2: 'fresh-password-123' });
@@ -183,6 +186,9 @@ test('a successful reset ends other sessions and sends a confirmation e-mail', a
   assert.equal(confirm.length, 1);
   assert.match(confirm[0].text, /password for your NISMCAA Meeting Room account was just changed/);
   assert.match(confirm[0].html, /Sign in/);
+  assert.match(confirm[0].html, /info@nismcaa\.com/);
+  assert.match(confirm[0].html, /\(470\) 684-4463/);
+  assert.doesNotMatch((confirm[0].text || '') + (confirm[0].html || ''), /Hammermill|Tucker, GA 30084/);
 });
 
 test('missing mail settings still show the same message and do not throw', async () => {

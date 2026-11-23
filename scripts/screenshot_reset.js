@@ -30,6 +30,6 @@ const { now } = require('../src/db');
   const hash = await sec.hashPassword('correct-horse-battery', config);
   a.db.prepare(
     "INSERT INTO users(email,name,phone,pw_hash,role,status,country_chosen,age_confirmed,created_at) VALUES (?,?,?,?, 'volunteer', 'applicant', ?, 1, ?)"
-  ).run(email, 'Emily Carter', '+1 555 010 0000', hash, 'United States', now());
+  ).run(email, 'Emily Carter', '', hash, 'United States', now());
   process.stdout.write(JSON.stringify({ base, email, outboxPath, dataDir }) + '\n');
 })().catch((e) => { console.error(e); process.exit(1); });
