@@ -72,12 +72,12 @@ test('the browser code only talks to this site (chat polling), nothing external 
   assert.ok(tags.some((t) => /<script src="\/static\/chat.js">/.test(t)), 'chat script is local');
 });
 
-test('header logo and "Back to nismcaa.com" go to https://nismcaa.com; footer has the address and the only phone', async () => {
+test('header logo and "Back to nismcaa.com" go to https://nismcaa.com; footer has the e-mail and the only phone', async () => {
   const all = await crawl(); assert.ok(Object.keys(all).length > 20);
   for (const [name, h] of Object.entries(all)) {
     assert.match(h, /<a class="brand" href="https:\/\/nismcaa.com"/, name);
     assert.match(h, /<a class="back" href="https:\/\/nismcaa.com">&larr; Back to nismcaa.com<\/a>/, name);
-    assert.match(h, /4764 Hammermill Road, Tucker, GA 30084, United States/, name); assert.match(h, /info@nismcaa.com/, name); assert.match(h, /\(470\) 684-4463/, name);
+    assert.doesNotMatch(h, /Hammermill|Tucker, GA 30084/, name); assert.match(h, /info@nismcaa.com/, name); assert.match(h, /\(470\) 684-4463/, name);
   }
 });
 

@@ -81,6 +81,8 @@ test('a reset link is random, at least 32 bytes, stored only as a hash, expires 
   const save = await app.client().post('/reset-password', { token, password: 'new-password-123', password2: 'new-password-123' });
   assert.equal(save.status, 200);
   assert.match(save.text, /Your password is ready/);
+  assert.match(save.text, /Your new password has been saved\./);
+  assert.match(save.text, /You can sign in when you are ready\./);
 
   assert.equal((await H.signIn(app.client(), 'daniel.brooks@example.test', 'old-password-123')).status, 401);
   assert.equal((await H.signIn(app.client(), 'daniel.brooks@example.test', 'new-password-123')).status, 302);
