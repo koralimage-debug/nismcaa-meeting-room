@@ -8,7 +8,7 @@ and a Meeting Room (call link, chat, notes, action plan, work logs, head remarks
 Test data in this folder is fake (`@example.test` e-mails). The only business phone is (470) 684-4463.
 
 * Stack: Node.js 20 or 22, Express 5, SQLite (`better-sqlite3`), server-rendered EJS pages (no front-end framework), mobile friendly.
-* **No e-mail service of any kind.** Own sign-in (e-mail as ID + scrypt-hashed password), no Google/OpenAI login.
+* Own sign-in (e-mail as ID + scrypt-hashed password), no Google/OpenAI login. Optional first-party Zoho SMTP (already used on the other NISMCAA sites) can e-mail the administrator when a volunteer passes; no paid mail vendor is added.
 * Cost: **$0** to build, test and run locally. Hosting costs are in "Deploy on Render" below.
 
 ---
@@ -35,6 +35,11 @@ When both have claimed, the page switches itself off and the code file is delete
 | `NODE_ENV` | `production` turns on `Secure` cookies and proxy trust | development |
 | `ADMIN_EMAILS` | comma list of the administrator e-mails | `interschoolmusic@gmail.com,abisade@nismcaa.com` |
 | `SCRYPT_N` | password-hash cost (tests lower it) | 16384 |
+| `ZOHO_SMTP_USER` | Zoho SMTP username (usually `info@nismcaa.com`) | unset (pass e-mail is skipped) |
+| `ZOHO_SMTP_PASSWORD` | Zoho SMTP password | unset |
+| `ZOHO_SMTP_HOST` | SMTP host | `smtp.zoho.com` |
+| `ZOHO_SMTP_PORT` | SMTP port | 465 |
+| `ADMIN_NOTIFY_EMAIL` | where pass notices are sent | `info@nismcaa.com` |
 
 See `.env.example`.
 
@@ -49,7 +54,7 @@ CSRF, login lockout, session rotation, the pass rule (80% overall AND 9 of 10 on
 (nobody can pass without the key), approval, ID uniqueness (IDs are never reused), country lock, privacy of photos and of the waiting list,
 the public verify page (shows only name, role, country, validity), chat country isolation, notes privacy, action-plan import (Nigeria's 222 tasks,
 per-department counts), behind-schedule flag rules, ID card PNG with a QR code that decodes to the right address, and house rules
-(no old phone number, no outside scripts, no outgoing network calls, US spelling in the site's own text).
+(no old phone number, no outside scripts, no paid mail vendor, US spelling in the site's own text).
 
 The test file `test/fixtures/fake_key.json` is a clearly labeled **FAKE** answer key, used only by tests and the demo.
 The real database starts with an **empty** key.
@@ -74,6 +79,7 @@ Demo admin: `interschoolmusic@gmail.com` / `Demo-Admin-Password-1`; demo volunte
 | `src/security.js` | password hashing (scrypt), sessions, CSRF, rate limits |
 | `src/access.js` | who may see what (every route checks on the server) |
 | `src/content.js` | reads `content/COURSE_TEXT.txt` into course pages and the 50 questions |
+| `src/mail.js` | optional Zoho SMTP notice to the administrator when a volunteer passes |
 | `src/plan.js` | imports `data/ACTION_PLAN_10th_Edition.xlsx`, flag rules, roll-ups |
 | `src/idcard.js` | ID card PNG and PDF, QR code |
 | `src/routes/*.js` | pages: sign-up/in, course/test, admin, meeting room, action plan |
@@ -85,7 +91,7 @@ Key rules:
 * **Photos** are re-encoded to a 600x600 JPEG (metadata removed), stored in the data folder, and served only to the owner and administrators.
 * **Flags**: time used = (today - start) / (deadline - start), limited to 0-100%. Points behind = time used - progress. Red = past deadline or 30+ points behind; amber = 15-29 behind; green = Done; "Not flagged" = no dates or On hold. Same rules as the workbook.
 * **Chat** is plain text, refreshed every 10 seconds, 5 messages per 10 seconds, admins can delete.
-* **Security**: HttpOnly SameSite cookies, CSRF token on every form, 5 failed sign-ins lock that e-mail for 15 minutes, per-address limits on sign-up/sign-in/verify, strict Content-Security-Policy, no outside resources, no analytics, the server makes no outgoing network calls.
+* **Security**: HttpOnly SameSite cookies, CSRF token on every form, 5 failed sign-ins lock that e-mail for 15 minutes, per-address limits on sign-up/sign-in/verify, strict Content-Security-Policy, no outside resources, no analytics, the server makes no outgoing network calls except the optional Zoho SMTP pass notice in `src/mail.js`.
 
 ## 5. Deploy on Render later (NOT done; needs John's yes)
 

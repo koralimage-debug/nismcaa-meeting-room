@@ -3,6 +3,7 @@
 const crypto = require('crypto');
 const { now, audit, getSetting } = require('../db');
 const { DEFAULT_TEST_TIME_LIMIT_MINUTES } = require('../config');
+const mail = require('../mail');
 
 const PASS_PERCENT = 80;      // 40 of 50
 const CHILD_MIN = 9;          // of the 10 child-protection questions (Q41-50)
@@ -43,6 +44,7 @@ function recordAttempt(db, userId, answers, g, attemptId) {
     if (u && u.status === 'applicant') {
       db.prepare("UPDATE users SET status='waiting' WHERE id=?").run(userId);
       audit(db, 'test_passed', userId, userId, `score ${g.score}/50, child protection ${g.child}/10`);
+      mail.queuePassEmail(db, userId, g, now());
     }
   }
 }
@@ -52,6 +54,7 @@ function regradePending(db) {
   if (!keyComplete(db)) return -1;
   const pend = db.prepare("SELECT * FROM attempts WHERE result='pending' ORDER BY id").all();
   const upd = db.prepare('UPDATE attempts SET score=?, child_correct=?, result=?, passed=? WHERE id=?');
+  const justPassed = [];
   db.transaction(() => {
     for (const a of pend) {
       const g = grade(db, JSON.parse(a.answers));
@@ -61,10 +64,18 @@ function regradePending(db) {
         if (u && u.status === 'applicant') {
           db.prepare("UPDATE users SET status='waiting' WHERE id=?").run(a.user_id);
           audit(db, 'test_passed', a.user_id, a.user_id, `regraded: score ${g.score}/50, child protection ${g.child}/10`);
+          justPassed.push({ userId: a.user_id, g });
         }
       }
     }
   })();
+  const seen = new Set();
+  const when = now();
+  for (const row of justPassed) {
+    if (seen.has(row.userId)) continue;
+    seen.add(row.userId);
+    mail.queuePassEmail(db, row.userId, row.g, when);
+  }
   return pend.length;
 }
 

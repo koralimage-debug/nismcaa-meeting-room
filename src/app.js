@@ -11,6 +11,7 @@ const sec = require('./security');
 const access = require('./access');
 const cfg = require('./config');
 const { loadCourse } = require('./content');
+const mail = require('./mail');
 
 function todayStr(config) {
   if (config.todayOverride) return config.todayOverride;
@@ -20,6 +21,7 @@ function todayStr(config) {
 async function createApp(config) {
   const db = openDb(config);
   const seedResult = await seed(db, config);
+  mail.configure({ quiet: config.quiet, publicUrl: config.publicUrl, displayTz: config.displayTz });
   const course = loadCourse(config.courseFile);
   const app = express();
   const sessions = sec.makeSessions(db, config);

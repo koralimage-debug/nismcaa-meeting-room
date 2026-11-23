@@ -1,5 +1,5 @@
 'use strict';
-/** Whole-site rules from the brief: no e-mail, no OpenAI login, no paid service, one phone number, US spelling, links, clean first start. */
+/** Whole-site rules from the brief: no paid/outside e-mail vendor, no OpenAI login, no paid service, one phone number, US spelling, links, clean first start. */
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
@@ -43,14 +43,21 @@ async function crawl() {
   return out;
 }
 
-test('no e-mail service, no OpenAI/ChatGPT login, no paid or outside service in code or dependencies', () => {
+test('no paid e-mail vendor, no OpenAI/ChatGPT login, no paid or outside service in dependencies; mail is first-party Zoho SMTP only', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }).join(' ');
   assert.doesNotMatch(deps, /nodemailer|sendgrid|mailgun|postmark|resend|aws-sdk|ses|twilio|stripe|openai|passport|auth0|firebase|supabase|@sentry/i);
-  const code = own.filter((f) => /\.(js|ejs)$/.test(f)).map((f) => fs.readFileSync(f, 'utf8')).join('\n');
+  const mailFile = path.join(ROOT, 'src', 'mail.js');
+  assert.ok(fs.existsSync(mailFile), 'src/mail.js is the first-party mailer');
+  const mailSrc = fs.readFileSync(mailFile, 'utf8');
+  assert.match(mailSrc, /smtp\.zoho\.com/);
+  assert.doesNotMatch(mailSrc, /nodemailer|sendgrid|mailgun|createTransport/i);
+  assert.match(mailSrc, /require\(['"]tls['"]\)/);
+  const isMail = (f) => path.basename(f) === 'mail.js';
+  const code = own.filter((f) => /\.(js|ejs)$/.test(f) && !isMail(f)).map((f) => fs.readFileSync(f, 'utf8')).join('\n');
   assert.doesNotMatch(code, /createTransport|sendMail|smtp|nodemailer|sendgrid|mailgun|openai|chatgpt|oauth|stripe|paystack/i);
-  const server = own.filter((f) => /[\\/]src[\\/].*\.js$|server\.js$/.test(f)).map((f) => fs.readFileSync(f, 'utf8')).join('\n');
-  assert.doesNotMatch(server, /require\(['"](https?|net|tls|dgram|child_process)['"]\)|\bfetch\(|XMLHttpRequest|axios|WebSocket/, 'the server makes no outbound network calls');
+  const server = own.filter((f) => /[\\/]src[\\/].*\.js$|server\.js$/.test(f) && !isMail(f)).map((f) => fs.readFileSync(f, 'utf8')).join('\n');
+  assert.doesNotMatch(server, /require\(['"](https?|net|tls|dgram|child_process)['"]\)|\bfetch\(|XMLHttpRequest|axios|WebSocket/, 'the server makes no outbound network calls except src/mail.js');
 });
 
 test('the browser code only talks to this site (chat polling), nothing external is loaded', async () => {

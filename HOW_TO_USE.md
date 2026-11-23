@@ -3,7 +3,7 @@
 A plain guide for volunteers and for the two administrators (John and Abisade).
 The Meeting Room is a **volunteer role: no salary and no fees**. Nobody is ever asked to pay.
 The only business phone number is **(470) 684-4463**. The only e-mail is **info@nismcaa.com**.
-The site never sends e-mail, so everything is checked by signing in.
+Volunteers are not sent e-mail; they check their status by signing in. Administrators can receive an e-mail when someone passes (see below).
 
 ---
 
@@ -57,6 +57,9 @@ Your account exists but has no password. The person who runs the server gives ea
 1. Open `/admin/claim`.
 2. Enter **your own** administrator e-mail, your claim code, and choose your own password (10 or more characters).
 3. The code works once. When both of you have claimed, the page switches itself off and the code file is deleted.
+
+### E-mail when a volunteer passes
+When a volunteer passes the course (including when a pending-key attempt is later graded as a pass), you receive an e-mail at **info@nismcaa.com** with their name, country, score, child-protection score, the date, and a link to **Waiting for approval**. Volunteers are still not e-mailed. If mail is not set up on the server, nothing breaks: the person still appears on the approval list as usual.
 
 ### Every day
 1. **Waiting for approval** (red number on the Admin menu). Each person shows name, e-mail, phone, the country they chose, best score, date passed and photo.
