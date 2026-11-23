@@ -121,7 +121,7 @@ See **HOW_TO_USE.md** (volunteers and administrators, in plain words). Short ver
 
 1. **The answer key is missing.** Until it is entered, nobody can pass. (Admin > Answer key; paste `1:B` lines.)
 2. The volunteer course now states that the ID card is valid for one year from approval and is renewable subject to performance (John confirmed 23 Nov 2026).
-3. The course text keeps the British spellings it was supplied with (e.g. "recognising"). The site's own text is US English.
+3. The volunteer course and final-test questions use US spelling, like the rest of the site.
 4. There is **no pledge/code-of-conduct checkbox** at sign-up. Recommended to add one (child safety).
 5. **Expired ID blocks Meeting Room access** until renewed (decision I made; easy to change).
 6. A volunteer sees only their own work-log entries; the head and admins see all.

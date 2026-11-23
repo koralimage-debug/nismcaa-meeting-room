@@ -94,7 +94,7 @@ test('only the business phone (470) 684-4463 appears; the old number never does'
   }
 });
 
-test('US English spelling in the site (views, code, docs; the course text is kept exactly as John supplied it)', () => {
+test('US English spelling in the site (views, code, docs, and course text)', () => {
   const british = /\b(colour|colours|organis\w+|centre|centres|favour\w*|behaviour|programme\w*|licence|recognis\w+|authoris\w+|analyse\w*|catalogue|cheque|travelling|cancelled|enrolment|judgement|neighbour\w*|honour\w*|labour|defence|offence|practise|minimis\w+|summaris\w+|customis\w+|apologis\w+|emphasis(e|ed))\b/i;
   for (const f of own.filter((x) => /\.(ejs|js|css|md)$/.test(x) && !/package/.test(x))) {
     const t = fs.readFileSync(f, 'utf8'); const m = t.match(british);
