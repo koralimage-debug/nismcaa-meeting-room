@@ -56,7 +56,7 @@
 </div></div>
 
 <%- include('partials/split', { img: 'meeting-virtual.jpg', alt: 'Team in a virtual video meeting', icon: 'video', flip: true, kicker: 'For sponsors and vendors', title: 'Join our meetings as a guest', body: 'Working with NISMCAA as a sponsor or a vendor? Ask for guest access and join meetings online.', href: '/guests', label: 'Open the guest area' }) %>
-<%- include('partials/split', { img: 'meeting-room-top.jpg', alt: 'NISMCAA team meeting in front of a world map', icon: 'send', kicker: 'Contact us', title: 'We would love to hear from you', body: 'Write to <a href="mailto:info@nismcaa.com">info@nismcaa.com</a> or call ' + PHONE + '.', href: '/contact', label: 'Contact details' }) %>
+<%- include('partials/split', { img: 'meeting-room-top.jpg', alt: 'NISMCAA team meeting in front of a world map', icon: 'send', kicker: 'Contact us', title: 'We would love to hear from you', body: 'Write to <a href="mailto:info@nismcaa.com">info@nismcaa.com</a> or call <span style="white-space:nowrap">' + PHONE + '</span>.', href: '/contact', label: 'Contact details' }) %>
 <%- include('partials/door') %>
 <%- include('partials/foot', { footBand: true }) %>
 <% } %>
