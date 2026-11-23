@@ -36,7 +36,7 @@ after(async () => { await app.close(); });
 async function crawl() {
   const out = {};
   const get = async (who, p) => { const r = await who.get(p); if (r.status === 200 && /text\/html/.test(r.headers.get('content-type') || '')) out[who === adm.john ? 'A:' + p : 'V:' + p] = r.text; };
-  for (const p of ['/', '/sign-up', '/sign-in', '/course', '/verify/NISMCAA-VOL-0001']) await get(app.client(), p);
+  for (const p of ['/', '/sign-up', '/sign-in', '/forgot-password', '/reset-password', '/course', '/verify/NISMCAA-VOL-0001']) await get(app.client(), p);
   const taskId = app.db.prepare("SELECT id FROM tasks WHERE country='Nigeria' AND row_type='task' LIMIT 1").get().id;
   for (const p of ['/meeting-room', '/meeting-room/chat/general', '/meeting-room/chat/nigeria', '/meeting-room/notes', '/meeting-room/plan/nigeria/all', '/meeting-room/plan/nigeria/technology', '/meeting-room/plan/about', '/meeting-room/id-card', '/meeting-room/task/' + taskId, '/meeting-room/member/' + vol.id]) await get(vol.c, p);
   for (const p of ['/admin', '/admin/pending', '/admin/people', '/admin/key', '/admin/settings', '/admin/heads', '/admin/log', '/meeting-room/plan/global', '/meeting-room/plan/log', '/admin/people/' + vol.id]) await get(adm.john, p);

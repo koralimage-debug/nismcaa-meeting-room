@@ -37,7 +37,7 @@
     <form method="post" action="/sign-out"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="linklike" type="submit">Sign out (<%= user.name.split(' ')[0] %>)</button></form>
   <% } else { %>
     <a href="/meeting-room">Meeting Room</a>
-    <a href="/sign-in" class="<%= path === '/sign-in' ? 'on' : '' %>">Sign in</a>
+    <a href="/sign-in" class="<%= path === '/sign-in' || path === '/forgot-password' || path.startsWith('/reset-password') ? 'on' : '' %>">Sign in</a>
     <a href="/sign-up" class="<%= path === '/sign-up' ? 'on' : '' %>">Sign up</a>
   <% } %>
 <% } %>

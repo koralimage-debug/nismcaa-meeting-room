@@ -1,5 +1,5 @@
 'use strict';
-/** Home, sign-up, sign-in, sign-out, admin claim, password change, private photos, public ID check. */
+/** Home, sign-up, sign-in, sign-out, forgot/reset password, admin claim, password change, private photos, public ID check. */
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -7,6 +7,8 @@ const multer = require('multer');
 const sharp = require('sharp');
 const { now, audit, sha256 } = require('../db');
 const { COUNTRIES, NOT_LISTED } = require('../config');
+const mail = require('../mail');
+const pr = require('../password_reset');
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 2 * 1024 * 1024, files: 1, fields: 20 } });
 
@@ -126,6 +128,89 @@ module.exports = function (app, ctx) {
   });
 
   app.post('/sign-out', (req, res) => { sessions.logout(req, res); res.redirect('/'); });
+
+
+  // ---------------- forgot / reset password ----------------
+  const renderForgot = (res, extra = {}) => res.render('forgot-password', {
+    title: extra.title || 'Forgot your password?', sent: false, message: '', error: null, email: '', ...extra,
+  });
+  const renderReset = (res, extra = {}) => res.render('reset-password', {
+    title: extra.title || 'Set a new password', valid: false, done: false, error: null, message: '', token: '', ...extra,
+  });
+
+  app.get('/forgot-password', (req, res) => renderForgot(res));
+
+  app.post('/forgot-password', async (req, res) => {
+    const email = String(req.body.email || '').trim().toLowerCase().slice(0, 200);
+    const finish = () => renderForgot(res, { sent: true, message: pr.SENT_MSG, email, title: 'Check your e-mail' });
+    if (ctx.limiters.forgot.hit(req.ip || 'x')) {
+      res.status(429); return renderForgot(res, { error: 'Please wait a few minutes before trying again.', email, title: 'Forgot your password?' });
+    }
+    if (!EMAIL_RE.test(email)) {
+      res.status(400); return renderForgot(res, { error: 'Please enter a valid e-mail address.', email });
+    }
+    const limited = ctx.limiters.forgotEmail.hit('email:' + email);
+    const u = pr.resettableUser(db, email);
+    if (u && !limited) {
+      try {
+        const { token } = pr.issue(db, u.id, req.ip || '');
+        const msg = mail.buildResetMessage({ name: u.name, resetUrl: mail.publicBase() + '/reset-password?token=' + token });
+        const r = await mail.send({ to: u.email, ...msg });
+        if (r && r.skipped) { if (!config.quiet) console.warn('reset-email skipped: mail is not configured'); }
+        else if (r && r.ok === false) { if (!config.quiet) console.warn('reset-email error: ' + (r.error || 'send failed')); }
+        else audit(db, 'password_reset_request', u.id, u.email, 'reset link issued');
+      } catch (e) {
+        if (!config.quiet) console.warn('reset-email error: ' + String(e && e.message || e).slice(0, 120));
+      }
+    } else if (u && limited && !config.quiet) {
+      console.warn('reset-email skipped: too many requests for this e-mail');
+    }
+    return finish();
+  });
+
+  app.get('/reset-password', (req, res) => {
+    const token = String(req.query.token || '');
+    const row = pr.findValid(db, token);
+    if (!row) {
+      res.status(400); return renderReset(res, { valid: false, message: pr.INVALID_MSG, title: 'This link has expired' });
+    }
+    renderReset(res, { valid: true, token, title: 'Set a new password' });
+  });
+
+  app.post('/reset-password', async (req, res) => {
+    const token = String(req.body.token || '');
+    if (ctx.limiters.reset.hit(req.ip || 'x')) {
+      res.status(429); return renderReset(res, { valid: false, message: 'Please wait a few minutes before trying again.', title: 'Set a new password' });
+    }
+    const row = pr.findValid(db, token);
+    if (!row) {
+      res.status(400); return renderReset(res, { valid: false, message: pr.INVALID_MSG, title: 'This link has expired' });
+    }
+    const p = sec.passwordProblem(req.body.password);
+    if (p) {
+      res.status(400); return renderReset(res, { valid: true, token, error: p });
+    }
+    if (req.body.password !== req.body.password2) {
+      res.status(400); return renderReset(res, { valid: true, token, error: 'The two new passwords do not match.' });
+    }
+    const hash = await sec.hashPassword(req.body.password, config);
+    const signedInAsUser = !!(req.session && req.session.user_id === row.user_id);
+    db.prepare('UPDATE users SET pw_hash=?, must_change_pw=0 WHERE id=?').run(hash, row.user_id);
+    pr.markUsedForUser(db, row.user_id);
+    sessions.endAllForUser(row.user_id);
+    if (signedInAsUser) sessions.create(res, null);
+    audit(db, 'password_reset', row.user_id, row.email, 'password reset with e-mail link');
+    try {
+      const msg = mail.buildResetDoneMessage({ name: row.name, signInUrl: mail.publicBase() + '/sign-in' });
+      const r = await mail.send({ to: row.email, ...msg });
+      if (r && r.skipped) { if (!config.quiet) console.warn('reset-confirm skipped: mail is not configured'); }
+      else if (r && r.ok === false) { if (!config.quiet) console.warn('reset-confirm error: ' + (r.error || 'send failed')); }
+    } catch (e) {
+      if (!config.quiet) console.warn('reset-confirm error: ' + String(e && e.message || e).slice(0, 120));
+    }
+    renderReset(res, { done: true, valid: true, title: 'Your password is ready' });
+  });
+
 
   // ---------------- one-time admin claim ----------------
   const claimOpen = () => db.prepare('SELECT COUNT(*) c FROM claim_codes WHERE used_at IS NULL').get().c > 0;

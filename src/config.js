@@ -71,7 +71,7 @@ function loadConfig(env = process.env) {
     lockAfter: 5,
     quiet: env.QUIET === '1',
     // Per-IP rate limits (tests raise them)
-    limits: { signupPerHour: 10, loginPer15Min: 40, claimPer15Min: 10, verifyPerMin: 60 },
+    limits: { signupPerHour: 10, loginPer15Min: 40, claimPer15Min: 10, verifyPerMin: 60, forgotPer15Min: 10, forgotEmailPerHour: 3, resetPer15Min: 20 },
     testTimeLimitMin: (function () {
       const n = Number(env.TEST_TIME_LIMIT_MINUTES || DEFAULT_TEST_TIME_LIMIT_MINUTES);
       return Number.isFinite(n) && n > 0 ? n : DEFAULT_TEST_TIME_LIMIT_MINUTES;

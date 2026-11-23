@@ -2,7 +2,7 @@
 /**
  * Security building blocks: password hashing (scrypt), sessions stored in SQLite,
  * CSRF tokens, login lockout and simple in-memory rate limits.
- * No third-party auth service and no e-mail are used anywhere.
+ * No third-party auth service is used. Outbound e-mail, when configured, goes only through src/mail.js.
  */
 const crypto = require('crypto');
 const { promisify } = require('util');

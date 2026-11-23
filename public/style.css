@@ -585,3 +585,16 @@ form.stack .choice-opt input{width:22px;height:22px;flex:none}
 .anthem-bar button{width:auto!important;margin:0!important}
 .anthem-bar .anthem-msg{flex:1 1 100%;text-align:center}
 @media(min-width:600px){.anthem-bar .anthem-msg{flex:0 1 auto}}
+
+/* ---------- Password reset ---------- */
+.forgot-row { margin: 2px 0 0; }
+.forgot-link { font-weight: 700; }
+p.lead { font-size: 1.05rem; line-height: 1.55; color: var(--navy); margin: 0 0 1em; }
+.reset-panel { text-align: center; padding: 28px 22px 24px; }
+.reset-mark { display: inline-grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 50%; font-size: 2rem; font-weight: 700; color: var(--navy); background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 8px 18px -6px rgba(201,162,39,.6); }
+.reset-panel h2 { margin-top: 0; }
+.reset-actions { margin-top: 8px; }
+.reset-actions .btn { min-width: 220px; }
+@media (max-width: 859px) {
+  .reset-actions .btn { width: 100%; min-width: 0; }
+}

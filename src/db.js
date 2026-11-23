@@ -96,6 +96,16 @@ CREATE TABLE IF NOT EXISTS meetings (
   agenda TEXT NOT NULL DEFAULT '', link TEXT NOT NULL, created_by INTEGER, created_at TEXT NOT NULL, updated_at TEXT
 );
 CREATE TABLE IF NOT EXISTS meeting_invites (meeting_id INTEGER NOT NULL, user_id INTEGER NOT NULL, PRIMARY KEY (meeting_id, user_id));
+CREATE TABLE IF NOT EXISTS password_resets (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  token_hash TEXT NOT NULL UNIQUE,
+  created_at TEXT NOT NULL,
+  expires_at TEXT NOT NULL,
+  used_at TEXT,
+  requested_ip TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_password_resets_user ON password_resets(user_id);
 -- never-reused volunteer numbers (AUTOINCREMENT guarantees a number is not handed out twice)
 CREATE TABLE IF NOT EXISTS id_seq (n INTEGER PRIMARY KEY AUTOINCREMENT, issued_at TEXT);
 `;

@@ -125,7 +125,7 @@ See **HOW_TO_USE.md** (volunteers and administrators, in plain words). Short ver
 4. There is **no pledge/code-of-conduct checkbox** at sign-up. Recommended to add one (child safety).
 5. **Expired ID blocks Meeting Room access** until renewed (decision I made; easy to change).
 6. A volunteer sees only their own work-log entries; the head and admins see all.
-7. No "forgot password" e-mail (no e-mail service). An admin resets it and gives a one-time temporary password.
+7. People can reset their own password from **Forgot your password?** on the sign-in page (a one-time link, 60 minutes, sent only if mail is configured). An admin can still set a one-time temporary password.
 8. People who pick "My country isn't listed" are on an interest list; an admin must assign a supported country before they can take the test.
 9. The free Render plan loses data on restart: test only.
 10. Only the two seeded administrators exist; changing who they are means setting `ADMIN_EMAILS` before the first start.

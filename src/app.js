@@ -33,6 +33,9 @@ async function createApp(config) {
       login: sec.makeLimiter(config.limits.loginPer15Min, 15 * 60000),
       claim: sec.makeLimiter(config.limits.claimPer15Min, 15 * 60000),
       verify: sec.makeLimiter(config.limits.verifyPerMin, 60000),
+      forgot: sec.makeLimiter(config.limits.forgotPer15Min, 15 * 60000),
+      forgotEmail: sec.makeLimiter(config.limits.forgotEmailPerHour, 3600000),
+      reset: sec.makeLimiter(config.limits.resetPer15Min, 15 * 60000),
     },
   };
 

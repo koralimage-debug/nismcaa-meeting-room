@@ -2,7 +2,7 @@
 <%- include('partials/authband', { img: 'meeting-in-person.jpg', alt: 'Business meeting with NISMCAA logos on the walls', line: 'Welcome, sponsors and vendors' }) %>
 <h1>Guest sign up</h1>
 <p>For approved sponsors and vendors. New vendor or supplier? <a href="https://nismcaa.com/vendors">Apply first at nismcaa.com/vendors</a>.</p>
-<p>It takes one minute. Your e-mail is your sign-in ID. We never send e-mail from this site, so keep your password safe.</p>
+<p>It takes one minute. Your e-mail is your sign-in ID. Keep your password safe. If you forget it, you can reset it from the sign-in page.</p>
 <% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
 <form class="card stack" method="post" action="/guests/sign-up" novalidate>
   <input type="hidden" name="_csrf" value="<%= csrf %>">

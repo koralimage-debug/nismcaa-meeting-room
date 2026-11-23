@@ -46,7 +46,12 @@ After approval you get a unique ID such as **NISMCAA-VOL-0001**. Open **My ID ca
 - **Head remarks**: your department head writes remarks about your contribution. You see only your own remarks (My work log and remarks).
 
 ### Forgot your password?
-There is no "forgot password" e-mail. Contact an administrator (info@nismcaa.com or (470) 684-4463). They give you a one-time temporary password, and you choose your own at your next sign-in.
+1. On the sign-in page, open **Forgot your password?**
+2. Enter the e-mail you use to sign in. If an account exists for that e-mail, we send a reset link to it. The page always shows the same message, so it never tells a visitor whether an account exists.
+3. Open the link in the e-mail (it expires in 60 minutes and works only once) and choose a new password (10 or more characters).
+4. Sign in with your new password. For your safety, other signed-in sessions are ended.
+
+If mail is not set up on the server, the same message still appears and nothing is sent. You can also ask an administrator (info@nismcaa.com or (470) 684-4463) to set a one-time temporary password.
 
 ---
 
@@ -59,7 +64,7 @@ Your account exists but has no password. The person who runs the server gives ea
 3. The code works once. When both of you have claimed, the page switches itself off and the code file is deleted.
 
 ### E-mail when a volunteer passes
-When a volunteer passes the course (including when a pending-key attempt is later graded as a pass), you receive an e-mail at **info@nismcaa.com** with their name, country, score, child-protection score, the date, and a link to **Waiting for approval**. Volunteers are still not e-mailed. If mail is not set up on the server, nothing breaks: the person still appears on the approval list as usual.
+When a volunteer passes the course (including when a pending-key attempt is later graded as a pass), you receive an e-mail at **info@nismcaa.com** with their name, e-mail, country, score (with the pass mark), child-protection score (with the pass mark), the date and time, and a link to review and approve them. Volunteers are still not e-mailed. If mail is not set up on the server, nothing breaks: the person still appears on the approval list as usual.
 
 ### Every day
 1. **Waiting for approval** (red number on the Admin menu). Each person shows name, e-mail, phone, the country they chose, best score, date passed and photo.

@@ -1,7 +1,7 @@
 <%- include('partials/head') %>
 <%- include('partials/authband', { img: 'volunteers-seating.jpg', alt: 'NISMCAA volunteers welcoming students at an event', line: 'Join our volunteer team' }) %>
 <h1>Sign up to volunteer</h1>
-<p>This form tells us who is taking the test. Your e-mail is your sign-in ID. We never send e-mail from this site, so keep your password safe: an administrator can reset it if you forget it.</p>
+<p>This form tells us who is taking the test. Your e-mail is your sign-in ID. Keep your password safe. If you forget it, you can reset it from the sign-in page.</p>
 <% if (errors.length) { %><ul class="errors"><% errors.forEach(function(e){ %><li><%= e %></li><% }) %></ul><% } %>
 <form class="card stack" method="post" action="/sign-up" enctype="multipart/form-data" novalidate>
   <input type="hidden" name="_csrf" value="<%= csrf %>">
