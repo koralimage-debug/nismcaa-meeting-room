@@ -141,7 +141,7 @@ test('reset works for an administrator and a guest, and an unclaimed admin is no
   await app.client().post('/reset-password', { token: gtok, password: 'guest-password-2', password2: 'guest-password-2' });
   assert.equal((await H.signIn(app.client(), email, 'guest-password-2')).status, 302);
 
-  // Abisade was claimed by H.admins in this same app. Use a fresh unclaimed address via a new isolated app:
+  // Abisolami was claimed by H.admins in this same app. Use a fresh unclaimed address via a new isolated app:
   void adm;
 });
 

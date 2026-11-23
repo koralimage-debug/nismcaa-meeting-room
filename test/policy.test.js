@@ -23,6 +23,7 @@ before(async () => {
   // a first-start snapshot BEFORE any test data
   pages.fresh = {
     users: app.db.prepare('SELECT email, role FROM users ORDER BY email').all(),
+    names: app.db.prepare('SELECT email, name FROM users ORDER BY email').all(),
     tasks: app.db.prepare('SELECT COUNT(*) c FROM tasks').get().c, attempts: app.db.prepare('SELECT COUNT(*) c FROM attempts').get().c,
     messages: app.db.prepare('SELECT COUNT(*) c FROM messages').get().c, notes: app.db.prepare('SELECT COUNT(*) c FROM notes').get().c,
     keys: app.db.prepare("SELECT COUNT(*) c FROM questions WHERE answer_key<>''").get().c, countries: app.db.prepare("SELECT DISTINCT country FROM tasks").all().map((r) => r.country),
@@ -103,13 +104,42 @@ test('US English spelling in the site (views, code, docs, and course text)', () 
 });
 
 test('first start contains only the two admin accounts: no test users, no key, no messages, no notes, no attempts; Nigeria plan only', () => {
-  assert.deepEqual(pages.fresh.users, [{ email: 'abisade@nismcaa.com', role: 'admin' }, { email: 'interschoolmusic@gmail.com', role: 'admin' }]);
+  assert.deepEqual(pages.fresh.users, [{ email: 'adebowaleabisolami@gmail.com', role: 'admin' }, { email: 'interschoolmusic@gmail.com', role: 'admin' }]);
   assert.equal(pages.fresh.tasks, 222 + app.db.prepare("SELECT COUNT(*) c FROM tasks WHERE row_type='phase'").get().c);
   assert.deepEqual(pages.fresh.countries, ['Nigeria']);
   assert.equal(pages.fresh.attempts, 0); assert.equal(pages.fresh.messages, 0); assert.equal(pages.fresh.notes, 0); assert.equal(pages.fresh.keys, 0, 'answer key empty in the production seed');
   assert.deepEqual(pages.fresh.settings, ['call_link_main', 'plan_about', 'plan_proposed']);
   // and the real seed file contains no fake key or demo users
   const dbjs = fs.readFileSync(path.join(ROOT, 'src', 'db.js'), 'utf8'); assert.doesNotMatch(dbjs, /fake|demo|@example/i);
+  assert.deepEqual(pages.fresh.names, [
+    { email: 'adebowaleabisolami@gmail.com', name: 'Abisolami Adebowale' },
+    { email: 'interschoolmusic@gmail.com', name: 'Olushola John Adebowale' },
+  ]);
+});
+
+test('loadConfig reads DATA_DIR from the environment and ignores Abisade in ADMIN_EMAILS', () => {
+  const { loadConfig } = require('../src/config');
+  const fromEnv = loadConfig({ DATA_DIR: '/var/data/nismcaa-data' });
+  assert.equal(fromEnv.dataDir, path.resolve('/var/data/nismcaa-data'));
+  const blank = loadConfig({ DATA_DIR: '   ' });
+  assert.equal(blank.dataDir, path.resolve(path.join(ROOT, 'data_local')));
+  const dropped = loadConfig({ ADMIN_EMAILS: 'interschoolmusic@gmail.com, abisade@nismcaa.com, adebowaleabisolami@gmail.com' });
+  assert.deepEqual(dropped.adminEmails, ['interschoolmusic@gmail.com', 'adebowaleabisolami@gmail.com']);
+  assert.equal(dropped.adminNames['interschoolmusic@gmail.com'], 'Olushola John Adebowale');
+});
+
+test('first start still drops Abisade when ADMIN_EMAILS lists her', async () => {
+  const isolated = await H.startApp({
+    env: { ADMIN_EMAILS: 'interschoolmusic@gmail.com,abisade@nismcaa.com,adebowaleabisolami@gmail.com' },
+  });
+  try {
+    assert.deepEqual(isolated.db.prepare('SELECT email, name FROM users ORDER BY email').all(), [
+      { email: 'adebowaleabisolami@gmail.com', name: 'Abisolami Adebowale' },
+      { email: 'interschoolmusic@gmail.com', name: 'Olushola John Adebowale' },
+    ]);
+  } finally {
+    await isolated.close();
+  }
 });
 
 test('no hard-coded passwords: admin accounts have no password until claimed', () => {

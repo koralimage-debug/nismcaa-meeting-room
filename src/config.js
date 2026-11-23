@@ -4,12 +4,14 @@
  * same code runs on a laptop, in tests, and later on Render.
  *
  *   PORT            web port (default 3000)
- *   DATA_DIR        folder for the SQLite file, photos and the admin claim-code file.
- *                   On Render, point this at a persistent disk (e.g. /var/data).
+ *   DATA_DIR        folder for the SQLite file, photos and the admin claim-code file
+ *                   (read from the environment; local default is ./data_local).
+ *                   On Render, point this at a folder on the persistent disk (e.g. /var/data/nismcaa-data).
  *   PUBLIC_URL      public address of the site, used inside QR codes
  *                   (e.g. https://meeting.nismcaa.com). Empty = use the request's host.
  *   NODE_ENV        "production" turns on secure cookies and proxy trust.
- *   ADMIN_EMAILS    comma list of admin e-mails (default: John and Abisade).
+ *   ADMIN_EMAILS    comma list of admin e-mails (default: Olushola John Adebowale and Abisolami Adebowale).
+ *                   abisade@nismcaa.com is ignored if present.
  *   TODAY_OVERRIDE  YYYY-MM-DD, TESTING ONLY: pretend today is this date (flags).
  */
 const path = require('path');
@@ -54,12 +56,12 @@ function loadConfig(env = process.env) {
   return {
     root,
     port: Number(env.PORT || 3000),
-    dataDir: path.resolve(env.DATA_DIR || path.join(root, 'data_local')),
+    dataDir: path.resolve(String(env.DATA_DIR || '').trim() || path.join(root, 'data_local')),
     publicUrl: (env.PUBLIC_URL || '').replace(/\/+$/, ''),
     production: env.NODE_ENV === 'production',
-    adminEmails: (env.ADMIN_EMAILS || 'interschoolmusic@gmail.com,abisade@nismcaa.com')
-      .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean),
-    adminNames: { 'interschoolmusic@gmail.com': 'Olushola John Adebowale', 'abisade@nismcaa.com': 'Abisade Adebowale', 'adebowaleabisolami@gmail.com': 'Abisolami Adebowale' },
+    adminEmails: (env.ADMIN_EMAILS || 'interschoolmusic@gmail.com,adebowaleabisolami@gmail.com')
+      .split(',').map((s) => s.trim().toLowerCase()).filter((e) => e && e !== 'abisade@nismcaa.com'),
+    adminNames: { 'interschoolmusic@gmail.com': 'Olushola John Adebowale', 'adebowaleabisolami@gmail.com': 'Abisolami Adebowale' },
     todayOverride: env.TODAY_OVERRIDE || '',
     displayTz: env.DISPLAY_TZ || 'America/New_York',
     courseFile: path.join(root, 'content', 'COURSE_TEXT.txt'),

@@ -102,7 +102,7 @@ test('admin accounts exist, have no password until claimed, and the claim page w
   const fresh = await H.startApp();
   try {
     const rows = fresh.db.prepare("SELECT email, role, pw_hash FROM users WHERE role='admin' ORDER BY email").all();
-    assert.deepEqual(rows.map((r) => r.email), ['abisade@nismcaa.com', 'interschoolmusic@gmail.com']);
+    assert.deepEqual(rows.map((r) => r.email), ['adebowaleabisolami@gmail.com', 'interschoolmusic@gmail.com']);
     assert.ok(rows.every((r) => r.pw_hash === null), 'no password is hard-coded');
     const file = require('fs').readFileSync(require('path').join(fresh.dataDir, 'ADMIN_CLAIM_CODES.txt'), 'utf8');
     assert.match(file, /interschoolmusic@gmail.com: [0-9A-F]{5}-[0-9A-F]{5}/);
@@ -111,22 +111,22 @@ test('admin accounts exist, have no password until claimed, and the claim page w
     // cannot sign in before claiming
     assert.equal((await H.signIn(fresh.client(), 'interschoolmusic@gmail.com', 'anything-at-all-1')).status, 401);
     // wrong code
-    assert.equal((await cl.post('/admin/claim', { email: 'abisade@nismcaa.com', code: 'WRONG-CODE0', password: 'Admin-Test-Password-1', password2: 'Admin-Test-Password-1' })).status, 400);
+    assert.equal((await cl.post('/admin/claim', { email: 'adebowaleabisolami@gmail.com', code: 'WRONG-CODE0', password: 'Admin-Test-Password-1', password2: 'Admin-Test-Password-1' })).status, 400);
     // a non-admin e-mail cannot claim
-    assert.equal((await cl.post('/admin/claim', { email: 'someone@example.test', code: fresh.claimCodes['abisade@nismcaa.com'], password: 'Admin-Test-Password-1', password2: 'Admin-Test-Password-1' })).status, 400);
+    assert.equal((await cl.post('/admin/claim', { email: 'someone@example.test', code: fresh.claimCodes['adebowaleabisolami@gmail.com'], password: 'Admin-Test-Password-1', password2: 'Admin-Test-Password-1' })).status, 400);
     // John claims
     const ok = await cl.post('/admin/claim', { email: 'interschoolmusic@gmail.com', code: fresh.claimCodes['interschoolmusic@gmail.com'], password: 'Admin-Test-Password-1', password2: 'Admin-Test-Password-1' });
     assert.equal(ok.status, 302); assert.equal(ok.location, '/admin');
     assert.equal((await cl.get('/admin')).status, 200);
     // the same code does not work twice
     assert.equal((await fresh.client().post('/admin/claim', { email: 'interschoolmusic@gmail.com', code: fresh.claimCodes['interschoolmusic@gmail.com'], password: 'Another-Password-22', password2: 'Another-Password-22' })).status, 400);
-    // Abisade claims -> page switches off, file deleted
+    // Abisolami claims -> page switches off, file deleted
     const ab = fresh.client();
-    assert.equal((await ab.post('/admin/claim', { email: 'abisade@nismcaa.com', code: fresh.claimCodes['abisade@nismcaa.com'], password: 'Admin-Test-Password-2', password2: 'Admin-Test-Password-2' })).status, 302);
+    assert.equal((await ab.post('/admin/claim', { email: 'adebowaleabisolami@gmail.com', code: fresh.claimCodes['adebowaleabisolami@gmail.com'], password: 'Admin-Test-Password-2', password2: 'Admin-Test-Password-2' })).status, 302);
     assert.equal((await fresh.client().get('/admin/claim')).status, 404, 'claim page is disabled after both claimed');
     assert.equal(require('fs').existsSync(require('path').join(fresh.dataDir, 'ADMIN_CLAIM_CODES.txt')), false);
     // admins can sign in normally
-    const s = fresh.client(); assert.equal((await H.signIn(s, 'abisade@nismcaa.com', 'Admin-Test-Password-2')).status, 302);
+    const s = fresh.client(); assert.equal((await H.signIn(s, 'adebowaleabisolami@gmail.com', 'Admin-Test-Password-2')).status, 302);
     assert.equal((await s.get('/admin')).status, 200);
   } finally { await fresh.close(); }
 });

@@ -109,9 +109,9 @@ test('Head seats: all 60 start EMPTY; only an admin can assign; head must be an 
   await adm.john.post('/admin/heads', { country: 'Canada', department: 'Technology', user_id: String(techA.id) });
   assert.equal(app.db.prepare("SELECT user_id FROM heads WHERE country='Canada' AND department='Technology'").get().user_id, techA.id);
   assert.match((await techB.c.get('/meeting-room/plan/canada/technology')).text, /Head seat:<\/strong> Tech Alpha/);
-  await adm.abisade.post('/admin/heads', { country: 'Canada', department: 'Technology', user_id: String(techB.id) });
+  await adm.abisolami.post('/admin/heads', { country: 'Canada', department: 'Technology', user_id: String(techB.id) });
   assert.equal(app.db.prepare("SELECT user_id FROM heads WHERE country='Canada' AND department='Technology'").get().user_id, techB.id);
-  await adm.abisade.post('/admin/heads', { country: 'Canada', department: 'Technology', user_id: '' });
+  await adm.abisolami.post('/admin/heads', { country: 'Canada', department: 'Technology', user_id: '' });
   assert.equal(app.db.prepare("SELECT user_id FROM heads WHERE country='Canada' AND department='Technology'").get().user_id, null);
   assert.equal(seatRows().length, 60, 'no department is ever missing');
   assert.ok(app.db.prepare("SELECT COUNT(*) c FROM audit_log WHERE kind IN ('head_assigned','head_removed')").get().c >= 3);
@@ -159,7 +159,7 @@ test('head remarks: head or admin write; a member sees only their own; head sees
   assert.equal((await other.c.get('/meeting-room/member/' + techB.id)).status, 403);
   assert.equal((await techA.c.get('/meeting-room/member/' + techB.id)).status, 200, 'head sees the department');
   assert.equal((await techA.c.get('/meeting-room/member/' + finance.id)).status, 403, 'head does not see other departments');
-  assert.equal((await adm.abisade.get('/meeting-room/member/' + finance.id)).status, 200);
+  assert.equal((await adm.abisolami.get('/meeting-room/member/' + finance.id)).status, 200);
   // head can also read all work log entries of the department's tasks
   const tid = dbTask('T-RED-35'); await techB.c.post(`/meeting-room/task/${tid}/log`, { body: 'BRAVO-WORK' });
   assert.match((await techA.c.get('/meeting-room/task/' + tid)).text, /BRAVO-WORK/);

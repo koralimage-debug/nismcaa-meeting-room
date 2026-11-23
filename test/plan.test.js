@@ -124,7 +124,7 @@ test('owner updates own status and % only; others (members) cannot edit; admin e
   const page = (await ng2.c.get('/meeting-room/plan/nigeria/technology')).text;
   assert.doesNotMatch(page, new RegExp(`id="u${t.id}"`)); assert.match((await ng.c.get('/meeting-room/plan/nigeria/technology')).text, new RegExp(`id="u${t.id}"`));
   // the change log: who, what, old, new, when
-  const log = (await adm.abisade.get('/meeting-room/plan/log')).text;
+  const log = (await adm.abisolami.get('/meeting-room/plan/log')).text;
   assert.match(log, /Ng Owner/); assert.match(log, /status: &#34;Not started&#34; -&gt; &#34;In progress&#34;/); assert.match(log, /progress: &#34;0&#34; -&gt; &#34;40&#34;/); assert.match(log, /Olushola John Adebowale/); assert.match(log, /deadline:/);
   assert.match(log, /Nigeria \/ Technology \/ #3/);
   const rows = app.db.prepare("SELECT * FROM audit_log WHERE kind='plan_edit'").all(); assert.ok(rows.length >= 6); assert.ok(rows.every((x) => x.created_at && x.actor_id));

@@ -1,6 +1,6 @@
 # How to officially use the NISMCAA Meeting Room
 
-A plain guide for volunteers and for the two administrators (John and Abisade).
+A plain guide for volunteers and for the two administrators (Olushola John Adebowale and Abisolami Adebowale).
 The Meeting Room is a **volunteer role: no salary and no fees**. Nobody is ever asked to pay.
 The only business phone number is **(470) 684-4463**. The only e-mail is **info@nismcaa.com**.
 Volunteers are not sent e-mail; they check their status by signing in. Administrators can receive an e-mail when someone passes (see below).
@@ -55,7 +55,7 @@ If mail is not set up on the server, the same message still appears and nothing 
 
 ---
 
-## For administrators (John and Abisade)
+## For administrators (Olushola John Adebowale and Abisolami Adebowale)
 
 ### First time only: claim your account
 Your account exists but has no password. The person who runs the server gives each of you a **one-time claim code** (shown on the server screen at first start and saved in `ADMIN_CLAIM_CODES.txt` in the data folder).
