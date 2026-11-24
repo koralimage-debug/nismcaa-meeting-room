@@ -8,7 +8,9 @@ const tls = require('tls');
 const crypto = require('crypto');
 
 const INFO = 'info@nismcaa.com';
-const DEFAULT_HOST = 'smtp.zoho.com';
+// Paid Zoho organization accounts on a custom domain (info@nismcaa.com) use smtppro.zoho.com.
+// Personal/free Zoho Mail uses smtp.zoho.com. Override with ZOHO_SMTP_HOST if needed.
+const DEFAULT_HOST = 'smtppro.zoho.com';
 const DEFAULT_PORT = 465;
 const DEFAULT_PUBLIC = 'https://meeting.nismcaa.com';
 
@@ -362,7 +364,7 @@ function buildResetDoneMessage({ name, signInUrl }) {
 }
 
 module.exports = {
-  INFO, configured, configure, send, notifyPassed, queuePassEmail, flush,
-  buildPassMessage, buildResetMessage, buildResetDoneMessage, formatWhen, notifyTo, publicBase, isEmail,
+  INFO, DEFAULT_HOST, DEFAULT_PORT, configured, configure, send, notifyPassed, queuePassEmail, flush,
+  buildPassMessage, buildResetMessage, buildResetDoneMessage, formatWhen, notifyTo, publicBase, isEmail, host, port,
   _setTransport, _reset,
 };

@@ -51,7 +51,7 @@ test('no paid e-mail vendor, no OpenAI/ChatGPT login, no paid or outside service
   const mailFile = path.join(ROOT, 'src', 'mail.js');
   assert.ok(fs.existsSync(mailFile), 'src/mail.js is the first-party mailer');
   const mailSrc = fs.readFileSync(mailFile, 'utf8');
-  assert.match(mailSrc, /smtp\.zoho\.com/);
+  assert.match(mailSrc, /smtppro\.zoho\.com/);
   assert.doesNotMatch(mailSrc, /nodemailer|sendgrid|mailgun|createTransport/i);
   assert.match(mailSrc, /require\(['"]tls['"]\)/);
   const isMail = (f) => path.basename(f) === 'mail.js';
