@@ -5,9 +5,12 @@ const { createApp } = require('./src/app');
 
 (async () => {
   const config = loadConfig();
-  const { app, claimCodes } = await createApp(config);
+  const { app, claimCodes, firstStart } = await createApp(config);
   if (claimCodes) {
-    console.log('\n=== FIRST START: one-time admin claim codes (shown once, also saved in %s/ADMIN_CLAIM_CODES.txt) ===', config.dataDir);
+    const label = firstStart
+      ? '=== FIRST START: one-time admin claim codes (shown once, also saved in %s/ADMIN_CLAIM_CODES.txt) ==='
+      : '=== New administrator claim codes (existing data was kept; also saved in %s/ADMIN_CLAIM_CODES.txt) ===';
+    console.log('\n' + label, config.dataDir);
     for (const [email, code] of Object.entries(claimCodes)) console.log(`  ${email}  ->  ${code}`);
     console.log('  Each admin opens /admin/claim, enters their own e-mail and code, and chooses a password.\n');
   }

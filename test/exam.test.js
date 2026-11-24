@@ -163,7 +163,7 @@ test('the pending list (admins only) shows name, e-mail, country chosen, best sc
   assert.match(page.text, new RegExp(`src="/photos/${v1.id}"`));
   assert.match(page.text, /50 of 50|\d+ of 50/); assert.match(page.text, /Country chosen/);
   // other pages show the same badge in the menu
-  assert.match((await adm.abisolami.get('/admin')).text, new RegExp(`class="badge"[^>]*>${n}<`));
+  assert.match((await adm.abisade.get('/admin')).text, new RegExp(`class="badge"[^>]*>${n}<`));
   // volunteers cannot open it, signed-out people are redirected
   assert.equal((await v1.c.get('/admin/pending')).status, 403);
   assert.equal((await app.client().get('/admin/pending')).status, 302);

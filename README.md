@@ -33,7 +33,7 @@ When both have claimed, the page switches itself off and the code file is delete
 | `DATA_DIR` | folder with `meeting_room.sqlite`, claim-code file | `./data_local` |
 | `PUBLIC_URL` | public address, used inside ID-card QR codes | the visitor's own address |
 | `NODE_ENV` | `production` turns on `Secure` cookies and proxy trust | development |
-| `ADMIN_EMAILS` | comma list of the administrator e-mails | `interschoolmusic@gmail.com,adebowaleabisolami@gmail.com` |
+| `ADMIN_EMAILS` | comma list of the administrator e-mails | `interschoolmusic@gmail.com,abisade@nismcaa.com` |
 | `SCRYPT_N` | password-hash cost (tests lower it) | 16384 |
 | `ZOHO_SMTP_USER` | Zoho SMTP username (usually `info@nismcaa.com`) | unset (pass e-mail is skipped) |
 | `ZOHO_SMTP_PASSWORD` | Zoho SMTP password | unset |
@@ -107,7 +107,7 @@ Prices are what Render showed on Oct 27, 2026; check render.com/pricing before u
 Take the CSV exports (Admin > Dashboard) regularly as your own backup.
 
 Steps when approved: push this folder to a private GitHub repo, Render > New > Blueprint, choose the repo, set `PUBLIC_URL`,
-deploy, read the two claim codes from the Render **Logs** (they are also in `/var/data/ADMIN_CLAIM_CODES.txt`), and have Olushola John Adebowale and Abisolami Adebowale claim their accounts right away.
+deploy, read the two claim codes from the Render **Logs** (they are also in `/var/data/ADMIN_CLAIM_CODES.txt`), and have Olushola John Adebowale, Abisade Adebowale and Abisolami Adebowale claim their accounts right away.
 To use `meeting.nismcaa.com`, add the domain in the Render dashboard; Render then shows the exact DNS record to add where the domain is managed. Nothing was changed at nismcaa.com.
 The "Back to nismcaa.com" link is already in the header.
 

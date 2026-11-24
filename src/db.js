@@ -155,12 +155,12 @@ function nextVolunteerId(db) {
  * First-start seed (production-safe: contains NO answer key, NO passwords, NO test users):
  *  - the 50 questions with an EMPTY answer_key
  *  - empty head seats for every country x department
- *  - the two admin accounts (no password yet) with one-time claim codes
+ *  - the administrator accounts (no password yet) with one-time claim codes
  *  - the Nigeria action plan import (222 tasks)
  * Returns { claimCodes } when admin codes were newly created (so the caller can print them).
  */
 async function seed(db, config, hash) {
-  const result = { claimCodes: null };
+  const result = { claimCodes: null, firstStart: db.prepare('SELECT COUNT(*) c FROM users').get().c === 0 };
   // questions
   if (db.prepare('SELECT COUNT(*) c FROM questions').get().c === 0) {
     const course = loadCourse(config.courseFile);
@@ -183,11 +183,21 @@ async function seed(db, config, hash) {
   if (Object.keys(codes).length) {
     result.claimCodes = codes;
     const file = path.join(config.dataDir, 'ADMIN_CLAIM_CODES.txt');
+    const kept = [];
+    try {
+      if (fs.existsSync(file)) {
+        for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+          const m = line.match(/^([^:\s]+@[^:\s]+):\s*(\S+)\s*$/);
+          if (m && !codes[m[1].toLowerCase()]) kept.push(m[1].toLowerCase() + ': ' + m[2]);
+        }
+      }
+    } catch (e) { /* ignore unreadable existing file and write the new codes */ }
     const body = [
       'NISMCAA Meeting Room: one-time admin claim codes',
       'Open /admin/claim on the site, enter your own e-mail, the code below, and choose your own password.',
-      'Each code works once. Delete this file after both admins have claimed their accounts.',
+      'Each code works once. Delete this file after all admins have claimed their accounts.',
       '',
+      ...kept,
       ...Object.entries(codes).map(([e, c]) => `${e}: ${c}`),
       '',
     ].join('\n');

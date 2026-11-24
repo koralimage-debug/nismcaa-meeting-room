@@ -104,7 +104,7 @@ test('US English spelling in the site (views, code, docs, and course text)', () 
 });
 
 test('first start contains only the two admin accounts: no test users, no key, no messages, no notes, no attempts; Nigeria plan only', () => {
-  assert.deepEqual(pages.fresh.users, [{ email: 'adebowaleabisolami@gmail.com', role: 'admin' }, { email: 'interschoolmusic@gmail.com', role: 'admin' }]);
+  assert.deepEqual(pages.fresh.users, [{ email: 'abisade@nismcaa.com', role: 'admin' }, { email: 'interschoolmusic@gmail.com', role: 'admin' }]);
   assert.equal(pages.fresh.tasks, 222 + app.db.prepare("SELECT COUNT(*) c FROM tasks WHERE row_type='phase'").get().c);
   assert.deepEqual(pages.fresh.countries, ['Nigeria']);
   assert.equal(pages.fresh.attempts, 0); assert.equal(pages.fresh.messages, 0); assert.equal(pages.fresh.notes, 0); assert.equal(pages.fresh.keys, 0, 'answer key empty in the production seed');
@@ -112,33 +112,40 @@ test('first start contains only the two admin accounts: no test users, no key, n
   // and the real seed file contains no fake key or demo users
   const dbjs = fs.readFileSync(path.join(ROOT, 'src', 'db.js'), 'utf8'); assert.doesNotMatch(dbjs, /fake|demo|@example/i);
   assert.deepEqual(pages.fresh.names, [
-    { email: 'adebowaleabisolami@gmail.com', name: 'Abisolami Adebowale' },
+    { email: 'abisade@nismcaa.com', name: 'Abisade Adebowale' },
     { email: 'interschoolmusic@gmail.com', name: 'Olushola John Adebowale' },
   ]);
 });
 
-test('loadConfig reads DATA_DIR from the environment and ignores Abisade in ADMIN_EMAILS', () => {
+test('loadConfig reads DATA_DIR from the environment and always includes Abisade', () => {
   const { loadConfig } = require('../src/config');
   const fromEnv = loadConfig({ DATA_DIR: '/var/data/nismcaa-data' });
   assert.equal(fromEnv.dataDir, path.resolve('/var/data/nismcaa-data'));
   const blank = loadConfig({ DATA_DIR: '   ' });
   assert.equal(blank.dataDir, path.resolve(path.join(ROOT, 'data_local')));
-  const dropped = loadConfig({ ADMIN_EMAILS: 'interschoolmusic@gmail.com, abisade@nismcaa.com, adebowaleabisolami@gmail.com' });
-  assert.deepEqual(dropped.adminEmails, ['interschoolmusic@gmail.com', 'adebowaleabisolami@gmail.com']);
-  assert.equal(dropped.adminNames['interschoolmusic@gmail.com'], 'Olushola John Adebowale');
+  const listed = loadConfig({ ADMIN_EMAILS: 'interschoolmusic@gmail.com, adebowaleabisolami@gmail.com' });
+  assert.deepEqual(listed.adminEmails, ['interschoolmusic@gmail.com', 'adebowaleabisolami@gmail.com', 'abisade@nismcaa.com']);
+  assert.equal(listed.adminNames['interschoolmusic@gmail.com'], 'Olushola John Adebowale');
+  assert.equal(listed.adminNames['abisade@nismcaa.com'], 'Abisade Adebowale');
 });
 
-test('first start still drops Abisade when ADMIN_EMAILS lists her', async () => {
-  const isolated = await H.startApp({
-    env: { ADMIN_EMAILS: 'interschoolmusic@gmail.com,abisade@nismcaa.com,adebowaleabisolami@gmail.com' },
+test('first start still adds Abisade when ADMIN_EMAILS omits her, and keeps existing unused claim codes', async () => {
+  const first = await H.startApp({
+    env: { ADMIN_EMAILS: 'interschoolmusic@gmail.com,adebowaleabisolami@gmail.com' },
   });
   try {
-    assert.deepEqual(isolated.db.prepare('SELECT email, name FROM users ORDER BY email').all(), [
+    assert.deepEqual(first.db.prepare('SELECT email, name FROM users ORDER BY email').all(), [
+      { email: 'abisade@nismcaa.com', name: 'Abisade Adebowale' },
       { email: 'adebowaleabisolami@gmail.com', name: 'Abisolami Adebowale' },
       { email: 'interschoolmusic@gmail.com', name: 'Olushola John Adebowale' },
     ]);
+    const file = path.join(first.dataDir, 'ADMIN_CLAIM_CODES.txt');
+    const text = fs.readFileSync(file, 'utf8');
+    assert.match(text, /abisade@nismcaa.com: [0-9A-F]{5}-[0-9A-F]{5}/);
+    assert.match(text, /adebowaleabisolami@gmail.com: [0-9A-F]{5}-[0-9A-F]{5}/);
+    assert.match(text, /interschoolmusic@gmail.com: [0-9A-F]{5}-[0-9A-F]{5}/);
   } finally {
-    await isolated.close();
+    await first.close();
   }
 });
 

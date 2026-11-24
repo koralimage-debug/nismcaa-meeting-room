@@ -89,10 +89,10 @@ async function signUp(client, o = {}) {
 
 async function signIn(client, email, password) { return client.post('/sign-in', { email, password }); }
 
-/** Claim both admin accounts through /admin/claim and return signed-in clients { john, abisolami }. */
+/** Claim both admin accounts through /admin/claim and return signed-in clients { john, abisade }. */
 async function admins(app) {
   const out = {};
-  for (const [who, email] of [['john', 'interschoolmusic@gmail.com'], ['abisolami', 'adebowaleabisolami@gmail.com']]) {
+  for (const [who, email] of [['john', 'interschoolmusic@gmail.com'], ['abisade', 'abisade@nismcaa.com']]) {
     const c = app.client();
     const r = await c.post('/admin/claim', { email, code: app.claimCodes[email], password: 'Admin-Test-Password-1', password2: 'Admin-Test-Password-1' });
     if (r.status !== 302) throw new Error('claim failed ' + r.status + r.text.slice(0, 300));

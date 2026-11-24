@@ -10,8 +10,8 @@
  *   PUBLIC_URL      public address of the site, used inside QR codes
  *                   (e.g. https://meeting.nismcaa.com). Empty = use the request's host.
  *   NODE_ENV        "production" turns on secure cookies and proxy trust.
- *   ADMIN_EMAILS    comma list of admin e-mails (default: Olushola John Adebowale and Abisolami Adebowale).
- *                   abisade@nismcaa.com is ignored if present.
+ *   ADMIN_EMAILS    comma list of admin e-mails (default: Olushola John Adebowale and Abisade Adebowale).
+ *                   abisade@nismcaa.com is always included, even if omitted from the list.
  *   TODAY_OVERRIDE  YYYY-MM-DD, TESTING ONLY: pretend today is this date (flags).
  */
 const path = require('path');
@@ -51,6 +51,19 @@ function slug(s) {
   return String(s).toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
+
+const DEFAULT_ADMIN_EMAILS = 'interschoolmusic@gmail.com,abisade@nismcaa.com';
+const ALWAYS_ADMIN_EMAILS = ['abisade@nismcaa.com'];
+
+function adminEmailList(env) {
+  const list = (env.ADMIN_EMAILS || DEFAULT_ADMIN_EMAILS)
+    .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  for (const email of ALWAYS_ADMIN_EMAILS) {
+    if (!list.includes(email)) list.push(email);
+  }
+  return list;
+}
+
 function loadConfig(env = process.env) {
   const root = path.join(__dirname, '..');
   return {
@@ -59,9 +72,8 @@ function loadConfig(env = process.env) {
     dataDir: path.resolve(String(env.DATA_DIR || '').trim() || path.join(root, 'data_local')),
     publicUrl: (env.PUBLIC_URL || '').replace(/\/+$/, ''),
     production: env.NODE_ENV === 'production',
-    adminEmails: (env.ADMIN_EMAILS || 'interschoolmusic@gmail.com,adebowaleabisolami@gmail.com')
-      .split(',').map((s) => s.trim().toLowerCase()).filter((e) => e && e !== 'abisade@nismcaa.com'),
-    adminNames: { 'interschoolmusic@gmail.com': 'Olushola John Adebowale', 'adebowaleabisolami@gmail.com': 'Abisolami Adebowale' },
+    adminEmails: adminEmailList(env),
+    adminNames: { 'interschoolmusic@gmail.com': 'Olushola John Adebowale', 'abisade@nismcaa.com': 'Abisade Adebowale', 'adebowaleabisolami@gmail.com': 'Abisolami Adebowale' },
     todayOverride: env.TODAY_OVERRIDE || '',
     displayTz: env.DISPLAY_TZ || 'America/New_York',
     courseFile: path.join(root, 'content', 'COURSE_TEXT.txt'),

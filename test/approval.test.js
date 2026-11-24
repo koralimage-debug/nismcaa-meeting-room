@@ -38,7 +38,7 @@ test('approval gives a unique ID, 1-year validity, placement; volunteer gets Mee
 
 test('admin can correct the chosen country at approval; the correction is logged; volunteer cannot change it afterwards', async () => {
   const v = await H.waitingVolunteer(app, { country: 'United States' });
-  await H.approve(adm.abisolami, v.id, 'United Kingdom', 'Finance & Admin');
+  await H.approve(adm.abisade, v.id, 'United Kingdom', 'Finance & Admin');
   const u = user(v.id);
   assert.equal(u.country_chosen, 'United States'); assert.equal(u.country, 'United Kingdom');
   assert.match(app.db.prepare("SELECT detail FROM audit_log WHERE kind='approve' ORDER BY id DESC").get().detail, /volunteer chose: United States; corrected by admin/);
@@ -100,7 +100,7 @@ test('photos are private: only the owner and admins can open them', async () => 
   assert.match(own.headers.get('cache-control'), /no-store/);
   assert.equal((await b.c.get('/photos/' + a.id)).status, 404, 'another volunteer');
   assert.equal((await app.client().get('/photos/' + a.id)).status, 404, 'signed out');
-  assert.equal((await adm.abisolami.get('/photos/' + a.id)).status, 200, 'admin');
+  assert.equal((await adm.abisade.get('/photos/' + a.id)).status, 200, 'admin');
   // not reachable as a static file
   const file = user(a.id).photo_file;
   for (const p of ['/static/' + file, '/photos/' + file, '/' + file, '/static/../data_local/photos/' + file]) assert.notEqual((await app.client().get(p)).headers.get('content-type'), 'image/jpeg', p);
@@ -179,7 +179,7 @@ test('renew 1 year, decline renewal, end ID: all work and are logged', async () 
   const after = user(v.id);
   const gain = (Date.parse(after.id_expires_at) - Date.parse(before.id_expires_at)) / (365 * 24 * 3600e3);
   assert.ok(gain > 0.99 && gain < 1.01, 'renew adds one year to the end date');
-  await adm.abisolami.post(`/admin/people/${v.id}/decline-renewal`);
+  await adm.abisade.post(`/admin/people/${v.id}/decline-renewal`);
   assert.equal(user(v.id).id_status, 'renewal_declined');
   assert.equal((await v.c.get('/meeting-room/chat/general')).status, 200, 'stays valid until the end date');
   assert.match((await v.c.get('/meeting-room/id-card')).text, /Renewal has been declined/);

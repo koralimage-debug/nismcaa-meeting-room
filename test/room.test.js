@@ -42,7 +42,7 @@ test('country room messages stay in their country; admins see every room; the ge
   assert.ok(j.messages[0].time && j.messages[0].name);
   // admins: all rooms
   for (const room of ['general', 'united-states', 'nigeria', 'canada', 'united-arab-emirates', 'united-kingdom', 'australia']) assert.equal((await adm.john.get('/meeting-room/chat/' + room)).status, 200, room);
-  assert.match((await adm.abisolami.get('/meeting-room/chat/nigeria')).text, /NG-ONLY-MESSAGE/);
+  assert.match((await adm.abisade.get('/meeting-room/chat/nigeria')).text, /NG-ONLY-MESSAGE/);
   assert.equal((await send(adm.john, 'nigeria', 'Admin says hi')).status, 200);
   assert.match((await ng.c.get('/meeting-room/chat/nigeria')).text, /Admin says hi/);
   // general: everyone approved can post and read
@@ -112,7 +112,7 @@ test('notes: private notes are not visible to others; shared notes only to the s
   const ngSee = (await ng.c.get('/meeting-room/notes')).text;
   assert.match(ngSee, /SHARED-NG-TEXT/); assert.doesNotMatch(ngSee, /SHARED-US-TEXT/); assert.doesNotMatch(ngSee, /PRIVATE-US-TEXT/);
   const own = (await us.c.get('/meeting-room/notes')).text; assert.match(own, /PRIVATE-US-TEXT/); assert.match(own, /SHARED-US-TEXT/);
-  const adminSees = (await adm.abisolami.get('/meeting-room/notes')).text;
+  const adminSees = (await adm.abisade.get('/meeting-room/notes')).text;
   for (const t of ['PRIVATE-US-TEXT', 'SHARED-US-TEXT', 'SHARED-NG-TEXT']) assert.match(adminSees, new RegExp(t));
   // only the author (or an admin) can delete
   const n = app.db.prepare("SELECT id FROM notes WHERE title='US shared'").get();

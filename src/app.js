@@ -105,7 +105,7 @@ async function createApp(config) {
     res.status(err.status || 500).render('error', { title: 'Something went wrong', message: 'Sorry, something went wrong on our side. Please try again.' });
   });
 
-  return { app, db, ctx, claimCodes: seedResult.claimCodes, close: () => db.close() };
+  return { app, db, ctx, claimCodes: seedResult.claimCodes, firstStart: !!seedResult.firstStart, close: () => db.close() };
 }
 
 module.exports = { createApp, todayStr };
