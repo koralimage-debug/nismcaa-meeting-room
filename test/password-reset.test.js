@@ -75,8 +75,12 @@ test('a reset link is random, at least 32 bytes, stored only as a hash, expires 
   const form = await app.client().get('/reset-password?token=' + token);
   assert.equal(form.status, 200);
   assert.match(form.text, /Set a new password/);
+  assert.match(form.text, /Choose a password only you will know\./);
+  assert.match(form.text, /Use at least 10 characters\. This link works once\./);
   assert.match(form.text, /name="_csrf"/);
   assert.match(form.text, /name="token"/);
+  assert.match(form.text, /<form[^>]*action="\/reset-password"/);
+  assert.doesNotMatch(form.text, /This reset link is no longer valid\./);
 
   const save = await app.client().post('/reset-password', { token, password: 'new-password-123', password2: 'new-password-123' });
   assert.equal(save.status, 200);
@@ -87,18 +91,33 @@ test('a reset link is random, at least 32 bytes, stored only as a hash, expires 
   assert.equal((await H.signIn(app.client(), 'daniel.brooks@example.test', 'old-password-123')).status, 401);
   assert.equal((await H.signIn(app.client(), 'daniel.brooks@example.test', 'new-password-123')).status, 302);
 
-  assert.equal((await app.client().get('/reset-password?token=' + token)).status, 400);
+  const used = await app.client().get('/reset-password?token=' + token);
+  assert.equal(used.status, 400);
+  assert.match(used.text, /This reset link is no longer valid\./);
+  assert.doesNotMatch(used.text, /<form[^>]*action="\/reset-password"/);
   assert.equal((await app.client().post('/reset-password', { token, password: 'other-password-123', password2: 'other-password-123' })).status, 400);
 });
 
-test('an expired or unknown token is rejected, and short or mismatched passwords are rejected without using the token', async () => {
+function assertInvalidResetPage(page) {
+  assert.equal(page.status, 400);
+  assert.match(page.text, /This reset link is no longer valid\./);
+  assert.match(page.text, /Request a new link when you are ready to choose a new password\./);
+  assert.match(page.text, /href="\/forgot-password"/);
+  assert.doesNotMatch(page.text, /Choose a password only you will know/);
+  assert.doesNotMatch(page.text, /Use at least 10 characters\. This link works once\./);
+  assert.doesNotMatch(page.text, /Set a new password/);
+  assert.doesNotMatch(page.text, /<form[^>]*action="\/reset-password"/);
+  assert.doesNotMatch(page.text, /name="password"/);
+}
+
+test('an expired, missing, or unknown token is rejected, and short or mismatched passwords are rejected without using the token', async () => {
   await H.signUp(app.client(), { name: 'Lauren Price', email: 'lauren.price@example.test', password: 'old-password-123' });
   await app.client().post('/forgot-password', { email: 'lauren.price@example.test' });
   const token = tokenFrom(sent[0]);
   app.db.prepare("UPDATE password_resets SET expires_at=? WHERE token_hash=?").run(new Date(Date.now() - 1000).toISOString(), pr.hashToken(token));
-  const gone = await app.client().get('/reset-password?token=' + token);
-  assert.equal(gone.status, 400);
-  assert.match(gone.text, /This link has expired|not valid or has expired/);
+  assertInvalidResetPage(await app.client().get('/reset-password?token=' + token));
+  assertInvalidResetPage(await app.client().get('/reset-password'));
+  assertInvalidResetPage(await app.client().get('/reset-password?token=not-a-token'));
 
   sent.length = 0;
   await app.client().post('/forgot-password', { email: 'lauren.price@example.test' });
@@ -106,6 +125,8 @@ test('an expired or unknown token is rejected, and short or mismatched passwords
   const short = await app.client().post('/reset-password', { token: fresh, password: 'short', password2: 'short' });
   assert.equal(short.status, 400);
   assert.match(short.text, /at least 10 characters/);
+  assert.match(short.text, /Set a new password/);
+  assert.match(short.text, /<form[^>]*action="\/reset-password"/);
   const mismatch = await app.client().post('/reset-password', { token: fresh, password: 'new-password-123', password2: 'other-password-123' });
   assert.equal(mismatch.status, 400);
   assert.match(mismatch.text, /do not match/);
@@ -114,8 +135,7 @@ test('an expired or unknown token is rejected, and short or mismatched passwords
   assert.equal(ok.status, 200);
   assert.match(ok.text, /Your password is ready/);
 
-  const junk = await app.client().get('/reset-password?token=not-a-token');
-  assert.equal(junk.status, 400);
+  assertInvalidResetPage(await app.client().get('/reset-password?token=' + fresh));
 });
 
 test('reset works for an administrator and a guest, and an unclaimed admin is not e-mailed', async () => {

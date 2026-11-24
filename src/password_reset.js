@@ -8,7 +8,7 @@ const { now, sha256 } = require('./db');
 const TOKEN_BYTES = 32;
 const TTL_MS = 60 * 60 * 1000;
 const SENT_MSG = 'If an account exists for that e-mail, we have sent a reset link. Please check your inbox and your spam folder. The link expires in 60 minutes and can be used only once.';
-const INVALID_MSG = 'This reset link is not valid or has expired. Please request a new one.';
+const INVALID_MSG = 'Request a new link when you are ready to choose a new password.';
 
 function createToken() {
   return crypto.randomBytes(TOKEN_BYTES).toString('hex');

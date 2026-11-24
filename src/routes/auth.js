@@ -172,7 +172,7 @@ module.exports = function (app, ctx) {
     const token = String(req.query.token || '');
     const row = pr.findValid(db, token);
     if (!row) {
-      res.status(400); return renderReset(res, { valid: false, message: pr.INVALID_MSG, title: 'This link has expired' });
+      res.status(400); return renderReset(res, { valid: false, message: pr.INVALID_MSG, title: 'This reset link is no longer valid.' });
     }
     renderReset(res, { valid: true, token, title: 'Set a new password' });
   });
@@ -184,7 +184,7 @@ module.exports = function (app, ctx) {
     }
     const row = pr.findValid(db, token);
     if (!row) {
-      res.status(400); return renderReset(res, { valid: false, message: pr.INVALID_MSG, title: 'This link has expired' });
+      res.status(400); return renderReset(res, { valid: false, message: pr.INVALID_MSG, title: 'This reset link is no longer valid.' });
     }
     const p = sec.passwordProblem(req.body.password);
     if (p) {
