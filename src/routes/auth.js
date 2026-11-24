@@ -180,7 +180,7 @@ module.exports = function (app, ctx) {
   app.post('/reset-password', async (req, res) => {
     const token = String(req.body.token || '');
     if (ctx.limiters.reset.hit(req.ip || 'x')) {
-      res.status(429); return renderReset(res, { valid: false, message: 'Please wait a few minutes before trying again.', title: 'Set a new password' });
+      res.status(429); return renderReset(res, { valid: false, message: 'Please wait a few minutes before trying again.', title: 'This reset link is no longer valid.' });
     }
     const row = pr.findValid(db, token);
     if (!row) {

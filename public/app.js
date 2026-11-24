@@ -10,6 +10,10 @@
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 
   ready(function () {
+    /* Move keyboard and assistive-tech focus to a status heading that asked for it. */
+    var statusHeading = $('h1[tabindex="-1"]');
+    if (statusHeading) statusHeading.focus();
+
     /* 1. Fade/slide in on scroll */
     if (!reduce && 'IntersectionObserver' in window) {
       var targets = $$('main .card, main .grid > *, main .journey .jstep, main .section-title, main .question, main .behind, main .tabs, main .table-wrap, main .note, main .cp-banner, main .course-text h3.lesson, main [data-reveal]');

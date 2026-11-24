@@ -98,10 +98,15 @@ test('a reset link is random, at least 32 bytes, stored only as a hash, expires 
   assert.equal((await app.client().post('/reset-password', { token, password: 'other-password-123', password2: 'other-password-123' })).status, 400);
 });
 
-function assertInvalidResetPage(page) {
-  assert.equal(page.status, 400);
+function assertInvalidResetPage(page, status = 400) {
+  assert.equal(page.status, status);
+  assert.match(page.text, /<title>This reset link is no longer valid\./);
+  assert.match(page.text, /<h1[^>]*tabindex="-1"[^>]*>This reset link is no longer valid\./);
+  assert.match(page.text, /class="card gold stack reset-panel"[^>]*role="alert"/);
   assert.match(page.text, /This reset link is no longer valid\./);
-  assert.match(page.text, /Request a new link when you are ready to choose a new password\./);
+  if (status === 400) {
+    assert.match(page.text, /Request a new link when you are ready to choose a new password\./);
+  }
   assert.match(page.text, /href="\/forgot-password"/);
   assert.doesNotMatch(page.text, /Choose a password only you will know/);
   assert.doesNotMatch(page.text, /Use at least 10 characters\. This link works once\./);
@@ -136,6 +141,23 @@ test('an expired, missing, or unknown token is rejected, and short or mismatched
   assert.match(ok.text, /Your password is ready/);
 
   assertInvalidResetPage(await app.client().get('/reset-password?token=' + fresh));
+
+  const js = await app.client().get('/static/app.js');
+  assert.equal(js.status, 200);
+  assert.match(js.text, /h1\[tabindex="-1"\]/);
+  assert.match(js.text, /statusHeading\.focus\(\)/);
+});
+
+test('a rate-limited reset post uses the same expired-link title as the heading', async () => {
+  const isolated = await H.startApp({ limits: { resetPer15Min: 0 }, env: { PUBLIC_URL: 'https://meeting.nismcaa.com' } });
+  try {
+    const r = await isolated.client().post('/reset-password', { token: 'ab'.repeat(32), password: 'new-password-123', password2: 'new-password-123' });
+    assert.equal(r.status, 429);
+    assert.match(r.text, /Please wait a few minutes before trying again/);
+    assertInvalidResetPage(r, 429);
+  } finally {
+    await isolated.close();
+  }
 });
 
 test('reset works for an administrator and a guest, and an unclaimed admin is not e-mailed', async () => {
