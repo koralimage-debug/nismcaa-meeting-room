@@ -37,7 +37,7 @@ When both have claimed, the page switches itself off and the code file is delete
 | `SCRYPT_N` | password-hash cost (tests lower it) | 16384 |
 | `ZOHO_SMTP_USER` | Zoho SMTP username (usually `info@nismcaa.com`) | unset (pass e-mail is skipped) |
 | `ZOHO_SMTP_PASSWORD` | Zoho SMTP password | unset |
-| `ZOHO_SMTP_HOST` | SMTP host | `smtppro.zoho.com` |
+| `ZOHO_SMTP_HOST` | SMTP host | `smtp.zoho.com` |
 | `ZOHO_SMTP_PORT` | SMTP port | 465 |
 | `ADMIN_NOTIFY_EMAIL` | where pass notices are sent | `info@nismcaa.com` |
 

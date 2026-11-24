@@ -113,15 +113,15 @@ test('a thrown transport error is swallowed so the test flow still finishes', as
   assert.match(flushed[0].error, /boom/);
 });
 
-test('default SMTP host is smtppro.zoho.com for the paid custom-domain mailbox; ZOHO_SMTP_HOST can override it', () => {
+test('default SMTP host is smtp.zoho.com, matching the working payments mailer; ZOHO_SMTP_HOST can override it', () => {
   const orig = process.env.ZOHO_SMTP_HOST;
   try {
     delete process.env.ZOHO_SMTP_HOST;
-    assert.equal(mail.DEFAULT_HOST, 'smtppro.zoho.com');
-    assert.equal(mail.host(), 'smtppro.zoho.com');
-    assert.equal(mail.port(), 465);
-    process.env.ZOHO_SMTP_HOST = 'smtp.zoho.com';
+    assert.equal(mail.DEFAULT_HOST, 'smtp.zoho.com');
     assert.equal(mail.host(), 'smtp.zoho.com');
+    assert.equal(mail.port(), 465);
+    process.env.ZOHO_SMTP_HOST = 'smtppro.zoho.com';
+    assert.equal(mail.host(), 'smtppro.zoho.com');
   } finally {
     if (orig === undefined) delete process.env.ZOHO_SMTP_HOST;
     else process.env.ZOHO_SMTP_HOST = orig;
